@@ -1,0 +1,112 @@
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "F110S3216_Dirac";
+
+M$Information = {
+  Authors      -> {"M. Hirsch"}, 
+  Version      -> "1.0",
+  Date         -> "19. 10. 2022",
+  Institutions -> {"IFIC"},
+  Emails       -> {"mahirsch@ific.uv.es"}
+};
+
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+  F[37] == {
+    ClassName        -> F110,
+    SelfConjugate    -> False,
+    Mass             -> mF,
+    FullName         -> "heavy",
+    Width            -> 0
+  },
+
+  S[105] == {
+    ClassName      -> SQ,
+    Indices        -> {Index[SU2D], Index[Colour]},
+    SelfConjugate  -> False,
+    Mass           -> mSQ,
+    FullName       -> "heavy",
+    QuantumNumbers -> {Y -> 1/6}
+  }
+
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+
+  (* External parameters *)
+
+  (* Internal Parameters *)
+
+ YQ1 == { 
+    ParameterType     -> Internal, 
+    Indices           -> {Index[Generation]},
+    ComplexParameter  -> True
+  },
+
+  mF == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  mSQ == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+
+  lam2 == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  lam3 == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  }
+
+
+};
+
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+gotoBFM={G[a__]->G[a]+GQuantum[a],Wi[a__]->Wi[a]+WiQuantum[a],B[a__]->B[a]+BQuantum[a]};
+
+LF := Block[{mu}, 
+   I*(F110bar.Ga[mu].DC[F110, mu])-mF*F110bar.F110/2
+]/.gotoBFM;
+
+LS := Block[{ii,jj,cc1,cc2,mu},
+  DC[SQbar[ii,cc1],mu] DC[SQ[ii,cc1],mu] - mSQ^2 SQbar[ii,cc1] SQ[ii,cc1]
+  - lam2 SQbar[ii,cc1] SQ[ii,cc1] SQbar[jj,cc2] SQ[jj,cc2]]/.gotoBFM;
+
+LS1 := Block[{ii,jj,cc},
+  - lam3 Phibar[ii] Phi[ii] SQbar[jj,cc] SQ[jj,cc]
+  ];
+
+
+LYuk := Block[{sp1,ii,cc,ff1,ff2,ff3,yuk},
+   yuk = -YQ1[ff1] QL[sp1,ii,ff1,cc].CC[F110bar][sp1] SQbar[ii,cc];
+  yuk+HC[yuk]
+ ];
+
+
+LNP := LF + LS + LS1 + LYuk;
+
+Ltot := LSM + LNP;
+
+
+
+
