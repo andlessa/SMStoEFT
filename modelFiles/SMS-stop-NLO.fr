@@ -1,0 +1,93 @@
+(* ********************************************************* *)
+(* *****                                               ***** *)
+(* *****  FeynRules model file: SM + colored scalars   ***** *)
+(* *****  Author: B. Fuks                              ***** *)
+(* *****                                               ***** *)
+(* ********************************************************* *)
+
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "SMS-stop-NLO";
+M$Information = {
+  Authors      -> {"Benjamin Fuks"},
+  Emails       -> {"benjamin.fuks@iphc.cnrs.fr"},
+  Institutions -> {"IPHC Strasbourg / University of Strasbourg"},
+  Date         -> "11.07.14",
+  Version      -> "1.0",
+  References   -> "C. Degrande, B. Fuks, V. Hirschi, J. Proudom and H.S. Shao, arXiv:1412.XXXX [hep-ph]"
+};
+
+(* Change log *)
+(* 11.07.2014 - v1.0 - version 1 of the model *)
+
+
+(* ************************** *)
+(* *****  Orders        ***** *)
+(* ************************** *)
+M$InteractionOrderHierarchy = { {QCD, 1},  {QED, 2},  {NP,1} };
+M$InteractionOrderLimit     = { {QCD, 99}, {QED, 99}, {NP,99} };
+
+(* ************************** *)
+(* *****     Fields     ***** *)
+(* ************************** *)
+M$ClassesDescription = {
+  S[5] == {
+    ClassName        -> sig3,
+    SelfConjugate    -> False,
+    Indices          -> {Index[Colour]},
+    Mass             -> {m3,400},
+    Width            -> {w3,10},
+    ParticleName     -> "sig3",
+    AntiParticleName -> "sig3~",
+    PDG              -> 9000002,
+    PropagatorLabel  -> "sig3",
+    PropagatorType   -> ScalarDash,
+    PropagatorArrow  -> Forward,
+    QuantumNumbers   -> {Q -> 2/3}
+  },
+
+  F[16] == {
+    ClassName        -> chi,
+    SelfConjugate    -> True,
+    Mass             -> {mchi,50},
+    Width            -> 0,
+    ParticleName     -> "chi",
+    PDG              -> 1000022,
+    PropagatorLabel  -> "chi",
+    PropagatorType   -> Straight,
+    PropagatorArrow  -> None
+  }
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+   gtL == {
+    TeX              -> Superscript[OverTilde[g],L],
+    ParameterType    -> External,
+    ComplexParameter -> False,
+    BlockName        -> NP3GT,
+    Value            -> 0.25,
+    InteractionOrder -> {NP,1},
+    Description      -> "Left-handed neutralino-stop-top coupling"},
+  gtR == {
+    TeX              -> Superscript[OverTilde[g],R],
+    ParameterType    -> External,
+    ComplexParameter -> False,
+    BlockName        -> NP3GT,
+    Value            -> 0.06,
+    InteractionOrder -> {NP,1},
+    Description      -> "Right-handed neutralino-stop-top coupling"}
+};
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+L1 := DC[sig3bar[aa],mu] DC[sig3[aa],mu] - m3^2 sig3bar[aa] sig3[aa];
+
+L2 := i chibar.Ga[mu].del[chi,mu] - (mchi/2) chibar.chi 
+L3 := sig3[cc] tbar[sp1,cc].chi[sp2] (gtL ProjM[sp1,sp2] + gtR ProjP[sp1,sp2]);
+
+LNP := L1 + L2 + L3 + HC[L3];
