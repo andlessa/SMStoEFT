@@ -1,21 +1,19 @@
 (*********************************************************************)
 (*********************************************************************)
-(****** FeynRules model file for Simplified Heavy top-dark scalar model ******)
+(** FeynRules model file for Simplified colored scalar-dark fermion model ******)
 (******                                                         ******)
-(****** Authors: A. Goudelis   , A. Lessa                       ******)
+(****** A. Lessa                       ******)
 (******                                                         ******)
 (****** Feel free to use this model file!                       ******)
 (*********************************************************************)
 (*********************************************************************)
 
-M$ModelName = "SMS-top";
+M$ModelName = "SMS-stop";
 
-M$Information = {Authors -> {"Andreas Goudelis","Andre Lessa"}, 
+M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "18.10.2017",
-                 Institutions -> {"LPTHE Paris / UPMC Paris VI"},
-                 Emails -> {"andreas.goudelis@lpthe.jussieu.fr"}
-};
+                 Date -> "18.03.2023"};
+
 FeynmanGauge = True;
 
 M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
@@ -28,15 +26,8 @@ M$Parameters = {
 (* CalcHEP related parameters *)
   QS    == { TeX->Subscript[Q,s], ParameterType->External, Value->100,  Description->"QCD scale for running quark masses in CalcHEP"},
 
- (* Internal NP parameters*)
-  lam    == { TeX->Subscript[\[Lambda],H], ComplexParameter -> False, ParameterType->Internal, Value->mh^2/(2 vev^2),   InteractionOrder->{QED, 2}, Description->"SM Higgs quartic interaction"},
-  muH    == { TeX->Subscript[\[Mu],H],     ComplexParameter -> False, ParameterType->Internal, Value->Sqrt[vev^2 lam],  Description->"Higgs mass parameter"},
-  mus0   == { TeX->Subscript[\[Mu],s0],ComplexParameter -> False, ParameterType->Internal, Value->Sqrt[ms0^2 + lams0h vev^2],  Description->"Higgs mass parameter"},
-                                                                                                  
  (* External NP parameters*)
-  yHTtR  == { TeX->Subscript[y,HTtR],  ComplexParameter -> False, ParameterType->External, Value->0.00002, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-  lams0h  == { TeX->Subscript[\[Lambda],s0h], ComplexParameter -> False, ParameterType->External, Value->0.02,    InteractionOrder->{NP ,1}, Description->"Dark scalar - Higgs doublet coupling"},
-  lams0   == { TeX->Subscript[\[Lambda],s0],  ComplexParameter -> False, ParameterType->External, Value->0.1,     InteractionOrder->{NP, 1}, Description->"Dark scalar quartic interaction"}
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->0.00002, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"}
 
 };
 
@@ -45,83 +36,36 @@ M$Parameters = {
 (* ************************** *)
 M$ClassesDescription = {
 
-(* The physical Higgs boson *)
-S[1] == { 
-         ClassName -> h, 
-         SelfConjugate-> True, 
-         QuantumNumbers -> {}, 
-         Mass->{mh,  125},  
-         Width->{wh,0.005}, 
-         ParticleName-> "h", 
-         PDG->25, 
-         PropagatorLabel->"h", 
-         PropagatorType->ScalarDash, 
-         PropagatorArrow->None},
-(* Higgs: Goldstones  *)
-S[2] == {
-         ClassName       -> G0,
-         SelfConjugate   -> True,
-         Goldstone       -> Z,
-         Mass            -> {MZ, 91.1876},
-         Width           -> {WZ, 2.4952},
-         PropagatorLabel -> "Go",
-         PropagatorType  -> D,
-         PropagatorArrow -> None,
-         PDG             -> 250,
-         ParticleName    -> "G0",
-         FullName        -> "G0" },
-S[3] == {
-         ClassName        -> GP,
-         SelfConjugate    -> False,
-         Goldstone        -> W,
-         Mass             -> {MW, Internal},
-         QuantumNumbers   -> {Q -> 1},
-         Width            -> {WW, 2.085},
-         PropagatorLabel  -> "GP",
-         PropagatorType   -> D,
-         PropagatorArrow  -> None,
-         PDG              -> 251,
-         ParticleName     -> "G+",
-         AntiParticleName -> "G-",
-         FullName         -> "GP" },
-(* The Higgs doublet *)
-S[22] == { 
-          ClassName -> Phi,  
-          SelfConjugate  -> False, 
-          Unphysical -> True, 
-          Indices -> {Index[SU2D]}, 
-          FlavorIndex -> SU2D, 
-          QuantumNumbers -> {Y -> 1/2}, 
-          Definitions -> { Phi[1] -> -I GP, Phi[2] -> (vev + h + I G0)/Sqrt[2] } },
+
 (* The dark fermion *)
 F[16] == { 
-         ClassName -> DF, 
-         SelfConjugate-> False, 
+         ClassName -> chi, 
+         SelfConjugate-> True, 
          QuantumNumbers -> {}, 
-         Mass->{ms0,  125},  
-         Width->{ws0,0.}, 
-         ParticleName-> "~DF", 
+         Mass->{mchi,  125},  
+         Width->{wChi,0.}, 
+         ParticleName-> "~chi", 
          PDG->5000012, 
-         PropagatorLabel->"DF", 
+         PropagatorLabel->"chi", 
          PropagatorType->Straight, 
-         ParticleName     -> {"~DF" },
+         ParticleName     -> {"~chi" },
          FullName         -> {"Dark fermion"} },
 
-(* stop: Physical *)
-S[4] == { 
-          ClassName        -> HT,
+(* Colored Scalar *)
+S[5] == { 
+          ClassName        -> St,
           Indices          -> {Index[Colour]},
           SelfConjugate    -> False,
           Unphysical       -> False,
-          Mass             -> {mHT, 100.},
-          Width            -> {wHT, 1.},
+          Mass             -> {mS, 400.},
+          Width            -> {wS, 1.},
           QuantumNumbers   -> {Q -> 2/3},
-          PropagatorLabel  -> {"HT"},
+          PropagatorLabel  -> {"St"},
           PropagatorType   -> ScalarDash, 
           PDG              -> {5000002},
-          ParticleName     -> {"~hT" },
-          AntiParticleName -> {"~HT"},
-          FullName         -> {"Heavy stop"} }
+          ParticleName     -> {"~St" },
+          AntiParticleName -> {"~St~"},
+          FullName         -> {"Colored Scalar"} }
 };
 
 (* ************************** *)
@@ -129,22 +73,11 @@ S[4] == {
 (* ************************** *)
 (* gauge kinetic and mass terms *)
 
-LVLL := Block[{mu}, 
-  ExpandIndices[I*DFbar.Ga[mu].DC[DF, mu] + DC[HTbar,mu] DC[HT,mu] -  mHT^2 HTbar HT - (ms0) DFbar.DF]];
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mchi/2) chibar.chi  + DC[Stbar[aa],mu] DC[St[aa],mu] -  mS^2 Stbar[aa] St[aa];
 
-(* Heavy top Yukawa and bare mass terms *)
-LYukawaVLL := Block[{sp,ii,jj,cc,yukVLL,feynmangaugerules},
-  feynmangaugerules = If[Not[FeynmanGauge], {G0|GP|GPbar ->0}, {}];
- 
-  yukVLL = ExpandIndices[- yHTtR (HTbar[cc] DFbar[sp].uR[sp,3,cc]) ];
-  yukVLL+HC[yukVLL]/.feynmangaugerules
- ];
-
-(* Scalar potential *)
-LScalar := Block[{ii,jj,mu,feynmangaugerules}, 
-  feynmangaugerules = If[Not[FeynmanGauge], {G0|GP|GPbar ->0}, {}];
-  ExpandIndices[DC[Phibar[ii],mu] DC[Phi[ii],mu] + muH^2 Phibar[ii] Phi[ii] - lam Phibar[ii] Phi[ii] Phibar[jj] Phi[jj], FlavorExpand->{SU2D,SU2W}]/.feynmangaugerules ];
+(* DM-Scalar-Top coupling *)
+LYDM := -yDM (Stbar[cc] chibar[sp].uR[sp,3,cc]);
 
 
-LNP := LVLL + LYukawaVLL + LScalar;
+LNP := Lkin + LYDM + HC[LYDM];
 
