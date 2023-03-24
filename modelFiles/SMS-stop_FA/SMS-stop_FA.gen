@@ -77,6 +77,11 @@ I*PropagatorDenominator[mom,Sqrt[GaugeXi[U[j1]]] Mass[U[j1]]]
 
 M$GenericCouplings = {
 
+	 (* FF *)
+
+AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2] ] ==
+G[-1][s1 F[j1], s2 F[j2]].{NonCommutative[ChiralityProjector[-1]], NonCommutative[ChiralityProjector[+1]], NonCommutative[DiracSlash[mom1 ], ChiralityProjector[-1] ], NonCommutative[DiracSlash[mom1 ], ChiralityProjector[+1] ], NonCommutative[DiracSlash[mom2 ], ChiralityProjector[-1] ], NonCommutative[DiracSlash[mom2 ], ChiralityProjector[+1] ]},
+
 	 (* FFS *)
 
 AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 S[j3, mom3] ] ==
@@ -86,6 +91,16 @@ G[-1][s1 F[j1], s2 F[j2], s3 S[j3]].{NonCommutative[ChiralityProjector[-1]], Non
 
 AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 V[j3, mom3, {li3}] ] ==
 G[-1][s1 F[j1], s2 F[j2], s3 V[j3]].{NonCommutative[DiracMatrix[li3], ChiralityProjector[-1] ], NonCommutative[DiracMatrix[li3], ChiralityProjector[+1] ]},
+
+	 (* S *)
+
+AnalyticalCoupling[s1 S[j1, mom1] ] ==
+G[+1][s1 S[j1]].{1},
+
+	 (* SS *)
+
+AnalyticalCoupling[s1 S[j1, mom1], s2 S[j2, mom2] ] ==
+G[+1][s1 S[j1], s2 S[j2]].{1, ScalarProduct[mom1,mom2]},
 
 	 (* SSS *)
 
@@ -112,15 +127,30 @@ G[+1][s1 S[j1], s2 S[j2], s3 V[j3], s4 V[j4]].{MetricTensor[li3 ,li4 ]},
 AnalyticalCoupling[s1 S[j1, mom1], s2 U[j2, mom2], s3 U[j3, mom3] ] ==
 G[+1][s1 S[j1], s2 U[j2], s3 U[j3]].{1},
 
+	 (* SV *)
+
+AnalyticalCoupling[s1 S[j1, mom1], s2 V[j2, mom2, {li2}] ] ==
+G[+1][s1 S[j1], s2 V[j2]].{FourVector[mom1, li2]},
+
 	 (* SVV *)
 
 AnalyticalCoupling[s1 S[j1, mom1], s2 V[j2, mom2, {li2}], s3 V[j3, mom3, {li3}] ] ==
 G[+1][s1 S[j1], s2 V[j2], s3 V[j3]].{MetricTensor[li2 ,li3 ]},
 
+	 (* UU *)
+
+AnalyticalCoupling[s1 U[j1, mom1], s2 U[j2, mom2] ] ==
+G[+1][s1 U[j1], s2 U[j2]].{ScalarProduct[mom2,mom2], 1, ScalarProduct[mom1,mom1]},
+
 	 (* UUV *)
 
 AnalyticalCoupling[s1 U[j1, mom1], s2 U[j2, mom2], s3 V[j3, mom3, {li3}] ] ==
 G[+1][s1 U[j1], s2 U[j2], s3 V[j3]].{FourVector[mom2, li3], FourVector[mom3, li3], FourVector[mom1, li3]},
+
+	 (* VV *)
+
+AnalyticalCoupling[s1 V[j1, mom1, {li1}], s2 V[j2, mom2, {li2}] ] ==
+G[+1][s1 V[j1], s2 V[j2]].{FourVector[mom1, li2]FourVector[mom2, li1], MetricTensor[li1 ,li2 ]ScalarProduct[mom1,mom2], MetricTensor[li1 ,li2 ]},
 
 	 (* VVV *)
 
