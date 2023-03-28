@@ -11,7 +11,7 @@ FR$ModelInformation={
   Version -> "1.0",
   Date -> "18.03.2023"};
 
-FR$ClassesTranslation={A -> V[1], Z -> V[2], W -> V[3], G -> V[4], ghA -> U[1], ghZ -> U[2], ghWp -> U[3], ghWm -> U[4], ghG -> U[5], ve -> F[1], vm -> F[2], vt -> F[3], e -> F[4], mu -> F[5], ta -> F[6], u -> F[7], c -> F[8], t -> F[9], d -> F[10], s -> F[11], b -> F[12], H -> S[1], G0 -> S[2], GP -> S[3], chi -> F[13], St -> S[4]};
+FR$ClassesTranslation={A -> V[1], Z -> V[2], W -> V[3], G -> V[4], ghA -> U[1], ghZ -> U[2], ghWp -> U[3], ghWm -> U[4], ghG -> U[5], ve -> F[1], vm -> F[2], vt -> F[3], e -> F[4], mu -> F[5], ta -> F[6], u -> F[7], c -> F[8], t -> F[9], d -> F[10], s -> F[11], b -> F[12], H -> S[1], G0 -> S[2], GP -> S[3], chi -> F[13], ST -> S[4]};
 
 FR$InteractionOrderPerturbativeExpansion={{NP, 0}, {QCD, 0}, {QED, 0}};
 
@@ -142,7 +142,7 @@ F[4] == {
     QuantumNumbers -> {-Q, LeptonNumber},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> Me,
+    Mass -> 0,
     Indices -> {},
     PropagatorLabel -> "e" },
 
@@ -151,7 +151,7 @@ F[5] == {
     QuantumNumbers -> {-Q, LeptonNumber},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> MMU,
+    Mass -> 0,
     Indices -> {},
     PropagatorLabel -> "mu" },
 
@@ -169,7 +169,7 @@ F[7] == {
     QuantumNumbers -> {(2*Q)/3},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> MU,
+    Mass -> 0,
     Indices -> {Index[Colour]},
     PropagatorLabel -> "u" },
 
@@ -178,7 +178,7 @@ F[8] == {
     QuantumNumbers -> {(2*Q)/3},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> MC,
+    Mass -> 0,
     Indices -> {Index[Colour]},
     PropagatorLabel -> "c" },
 
@@ -196,7 +196,7 @@ F[10] == {
     QuantumNumbers -> {-Q/3},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> MD,
+    Mass -> 0,
     Indices -> {Index[Colour]},
     PropagatorLabel -> "d" },
 
@@ -205,7 +205,7 @@ F[11] == {
     QuantumNumbers -> {-Q/3},
     PropagatorType -> Straight,
     PropagatorArrow -> Forward,
-    Mass -> MS,
+    Mass -> 0,
     Indices -> {Index[Colour]},
     PropagatorLabel -> "s" },
 
@@ -257,9 +257,9 @@ S[4] == {
     QuantumNumbers -> {(2*Q)/3},
     PropagatorType -> ScalarDash,
     PropagatorArrow -> Forward,
-    Mass -> mSt,
+    Mass -> mST,
     Indices -> {Index[Colour]},
-    PropagatorLabel -> "St" }
+    PropagatorLabel -> "ST" }
 }
 
 
@@ -282,18 +282,12 @@ GaugeXi[ S[4] ] = GaugeXi[S[5]];
 
 MZ[ ___ ] := MZ;
 MW[ ___ ] := MW;
-Me[ ___ ] := Me;
-MMU[ ___ ] := MMU;
 MTA[ ___ ] := MTA;
-MU[ ___ ] := MU;
-MC[ ___ ] := MC;
 MT[ ___ ] := MT;
-MD[ ___ ] := MD;
-MS[ ___ ] := MS;
 MB[ ___ ] := MB;
 MH[ ___ ] := MH;
 mChi[ ___ ] := mChi;
-mSt[ ___ ] := mSt;
+mST[ ___ ] := mST;
 
 
 TheLabel[ V[4, {__}] ] := TheLabel[V[4]];
@@ -323,369 +317,239 @@ C[ S[3] , -S[3] , S[1] , S[1] ] == {{(-2*I)*lam, 0}},
 
 C[ S[1] , S[1] , S[1] , S[1] ] == {{(-6*I)*lam, 0}},
 
-C[ S[1] , S[1] ] == {{0, (-I)*FR$deltaZ[{H, H}, {{}}]}, {0, (-I)*MH*(2*FR$delta[{MH}, {}] + MH*FR$deltaZ[{H, H}, {{}}])}},
+C[ S[2] , S[2] , S[1] ] == {{(-2*I)*lam*vev, 0}},
 
-C[ S[2] , S[2] , S[1] ] == {{(-2*I)*lam*vev, ((-I/2)*(-2*lam*MH*MW^4*MZ*vev*FR$delta[{aEWM1}, {}] + 2*lam*MH*MW^2*MZ^3*vev*FR$delta[{aEWM1}, {}] + 8*aEWM1*lam*MW^4*MZ*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MW^2*MZ^3*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MH*MW^3*MZ*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW*MZ^3*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW^4*vev*FR$delta[{MZ}, {}] - aEWM1*EL^2*MH*MZ^3*FR$deltat[H] + 4*aEWM1*lam*MH*MW^4*MZ*vev*FR$deltaZ[{G0, G0}, {{}}] - 4*aEWM1*lam*MH*MW^2*MZ^3*vev*FR$deltaZ[{G0, G0}, {{}}] + 2*aEWM1*lam*MH*MW^4*MZ*vev*FR$deltaZ[{H, H}, {{}}] - 2*aEWM1*lam*MH*MW^2*MZ^3*vev*FR$deltaZ[{H, H}, {{}}]))/(aEWM1*MH*MW^2*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -S[3] , S[1] ] == {{(-2*I)*lam*vev, 0}},
 
-C[ S[3] , -S[3] , S[1] ] == {{(-2*I)*lam*vev, ((-I/2)*(-2*lam*MH*MW^4*MZ*vev*FR$delta[{aEWM1}, {}] + 2*lam*MH*MW^2*MZ^3*vev*FR$delta[{aEWM1}, {}] + 8*aEWM1*lam*MW^4*MZ*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MW^2*MZ^3*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MH*MW^3*MZ*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW*MZ^3*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW^4*vev*FR$delta[{MZ}, {}] - aEWM1*EL^2*MH*MZ^3*FR$deltat[H] + 4*aEWM1*lam*MH*MW^4*MZ*vev*FR$deltaZ[{GP, GP}, {{}}] - 4*aEWM1*lam*MH*MW^2*MZ^3*vev*FR$deltaZ[{GP, GP}, {{}}] + 2*aEWM1*lam*MH*MW^4*MZ*vev*FR$deltaZ[{H, H}, {{}}] - 2*aEWM1*lam*MH*MW^2*MZ^3*vev*FR$deltaZ[{H, H}, {{}}]))/(aEWM1*MH*MW^2*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[1] , S[1] , S[1] ] == {{(-6*I)*lam*vev, 0}},
 
-C[ S[1] , S[1] , S[1] ] == {{(-6*I)*lam*vev, (((-3*I)/2)*(-2*lam*MH*MW^4*MZ*vev*FR$delta[{aEWM1}, {}] + 2*lam*MH*MW^2*MZ^3*vev*FR$delta[{aEWM1}, {}] + 8*aEWM1*lam*MW^4*MZ*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MW^2*MZ^3*vev*FR$delta[{MH}, {}] - 8*aEWM1*lam*MH*MW^3*MZ*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW*MZ^3*vev*FR$delta[{MW}, {}] + 4*aEWM1*lam*MH*MW^4*vev*FR$delta[{MZ}, {}] - aEWM1*EL^2*MH*MZ^3*FR$deltat[H] + 6*aEWM1*lam*MH*MW^4*MZ*vev*FR$deltaZ[{H, H}, {{}}] - 6*aEWM1*lam*MH*MW^2*MZ^3*vev*FR$deltaZ[{H, H}, {{}}]))/(aEWM1*MH*MW^2*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -S[3] , V[1] , V[1] ] == {{(2*I)*EL^2, 0}},
 
-C[ S[3] , -S[3] , V[1] , V[1] ] == {{(2*I)*EL^2, (I*EL^2*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 2*aEWM1*cw*sw*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*cw*sw)}},
+C[ S[3] , -S[3] , V[1] ] == {{I*EL, 0}},
 
-C[ S[2] , S[2] ] == {{0, (-I)*FR$deltaZ[{G0, G0}, {{}}]}, {0, ((-I/2)*EL*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*FR$deltat[H])/(MW*(MW - MZ)*(MW + MZ))}},
+C[ -U[1] , U[4] , V[3] ] == {{I*gc12, 0}, {0, 0}},
 
-C[ S[3] , -S[3] , V[1] ] == {{I*EL, ((I/4)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*cw*sw)}},
+C[ -U[1] , U[3] , -V[3] ] == {{I*gc13, 0}, {0, 0}},
 
-C[ S[3] , -S[3] ] == {{0, (-I)*FR$deltaZ[{GP, GP}, {{}}]}, {0, ((-I/2)*EL*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*FR$deltat[H])/(MW*(MW - MZ)*(MW + MZ))}},
+C[ -S[3] , -U[4] , U[1] ] == {{(EL^2*vev)/(2*sw), 0}},
 
-C[ V[1] , V[1] ] == {{0, I*FR$deltaZ[{A, A}, {{}}]}, {0, 0}, {0, (-I)*FR$deltaZ[{A, A}, {{}}]}},
+C[ -U[4] , U[1] , -V[3] ] == {{I*gc15, 0}, {0, 0}},
 
-C[ V[4, {e1x2}] , V[4, {e2x2}] ] == {{0, I*FR$deltaZ[{G, G}, {{}}]*IndexDelta[e1x2, e2x2]}, {0, 0}, {0, (-I)*FR$deltaZ[{G, G}, {{}}]*IndexDelta[e1x2, e2x2]}},
+C[ S[2] , -U[4] , U[4] ] == {{-(EL^2*vev)/(4*sw^2), 0}},
 
-C[ S[4, {e1x1}] , -S[4, {e2x1}] ] == {{0, (-I)*FR$deltaZ[{St, St}, {{}}]*IndexDelta[e1x1, e2x1]}, {0, (-I)*mS^2*FR$deltaZ[{St, St}, {{}}]*IndexDelta[e1x1, e2x1]}},
+C[ S[1] , -U[4] , U[4] ] == {{((-I/4)*EL^2*vev)/sw^2, 0}},
 
-C[ V[3] , -V[3] ] == {{0, I*FR$deltaZ[{W, W}, {{}}]}, {0, I*MW*(2*FR$delta[{MW}, {}] + MW*FR$deltaZ[{W, W}, {{}}])}, {0, (-I)*FR$deltaZ[{W, W}, {{}}]}},
+C[ -U[4] , U[4] , V[1] ] == {{I*gc18, 0}, {0, 0}},
 
-C[ V[2] , V[2] ] == {{0, I*FR$deltaZ[{Z, Z}, {{}}]}, {0, I*MZ*(2*FR$delta[{MZ}, {}] + MZ*FR$deltaZ[{Z, Z}, {{}}])}, {0, (-I)*FR$deltaZ[{Z, Z}, {{}}]}},
+C[ -U[4] , U[4] , V[2] ] == {{I*gc19, 0}, {0, 0}},
 
-C[ -U[1] , U[4] , V[3] ] == {{I*gc20, ((-I/2)*EL*(-FR$delta[{aEWM1}, {}] + aEWM1*FR$deltaZ[{W, W}, {{}}]))/aEWM1}, {0, 0}},
+C[ -S[3] , -U[4] , U[2] ] == {{(EL^2*(cw - sw)*(cw + sw)*vev)/(4*cw*sw^2), 0}},
 
-C[ -U[1] , U[3] , -V[3] ] == {{I*gc21, ((I/2)*EL*(-FR$delta[{aEWM1}, {}] + aEWM1*FR$deltaZ[{W, W}, {{}}]))/aEWM1}, {0, 0}},
+C[ -U[4] , U[2] , -V[3] ] == {{I*gc21, 0}, {0, 0}},
 
-C[ -U[1] , U[1] ] == {{0, ((-I)*MW*(2*MZ*FR$delta[{MW}, {}] - 2*MW*FR$delta[{MZ}, {}]))/MZ^3}, {0, 0}},
+C[ S[3] , -U[3] , U[1] ] == {{-(EL^2*vev)/(2*sw), 0}},
 
-C[ -U[1] , U[2] ] == {{0, ((2*I)*MW^2*MZ*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MW}, {}] - I*MZ^3*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MW}, {}] - (2*I)*MW^3*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MZ}, {}] + I*MW*MZ^2*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MZ}, {}])/(MW*(MW - MZ)*MZ*(MW + MZ))}, {0, 0}},
+C[ -U[3] , U[1] , V[3] ] == {{I*gc23, 0}, {0, 0}},
 
-C[ -S[3] , -U[4] , U[1] ] == {{(EL^2*vev)/(2*sw), (EL^2*(-(MH^2*MW^3*vev*FR$delta[{aEWM1}, {}]) + MH^2*MW*MZ^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*MH^2*MW^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MH^2*MZ^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MW*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*sw*FR$deltat[H] + aEWM1*MH^2*MW^3*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(4*aEWM1*MH^2*MW*(MW - MZ)*(MW + MZ)*sw)}},
+C[ S[2] , -U[3] , U[3] ] == {{(EL^2*vev)/(4*sw^2), 0}},
 
-C[ -U[4] , U[1] , -V[3] ] == {{I*gc25, ((-I/2)*EL*(-FR$delta[{aEWM1}, {}] + aEWM1*FR$deltaZ[{W, W}, {{}}]))/aEWM1}, {0, 0}},
+C[ S[1] , -U[3] , U[3] ] == {{((-I/4)*EL^2*vev)/sw^2, 0}},
 
-C[ -U[4] , U[4] ] == {{0, 0}, {0, ((-I/2)*MW*(4*MH^2*MW^2*FR$delta[{MW}, {}] - 4*MH^2*MZ^2*FR$delta[{MW}, {}] - EL*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*FR$deltat[H]))/(MH^2*(MW - MZ)*(MW + MZ))}},
+C[ -U[3] , U[3] , V[1] ] == {{I*gc26, 0}, {0, 0}},
 
-C[ S[2] , -U[4] , U[4] ] == {{-(EL^2*vev)/(4*sw^2), -(EL^2*(-(MH^2*MW^3*MZ*vev*FR$delta[{aEWM1}, {}]) + MH^2*MW*MZ^3*vev*FR$delta[{aEWM1}, {}] - 2*aEWM1*MH^2*MZ^3*vev*FR$delta[{MW}, {}] + 2*aEWM1*MH^2*MW^3*vev*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ^3*sw^2*FR$deltat[H] + aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{G0, G0}, {{}}]))/(8*aEWM1*MH^2*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ -U[3] , U[3] , V[2] ] == {{I*gc27, 0}, {0, 0}},
 
-C[ S[1] , -U[4] , U[4] ] == {{((-I/4)*EL^2*vev)/sw^2, -(EL^2*((-I)*MH^2*MW^3*MZ*vev*FR$delta[{aEWM1}, {}] + I*MH^2*MW*MZ^3*vev*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MH^2*MZ^3*vev*FR$delta[{MW}, {}] + (2*I)*aEWM1*MH^2*MW^3*vev*FR$delta[{MZ}, {}] - (2*I)*aEWM1*MW*MZ^3*sw^2*FR$deltat[H] + aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{H, H}, {{}}]))/(8*aEWM1*MH^2*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ S[3] , -U[3] , U[2] ] == {{-(EL^2*(cw - sw)*(cw + sw)*vev)/(4*cw*sw^2), 0}},
 
-C[ -U[4] , U[4] , V[1] ] == {{I*gc29, ((I/2)*EL*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}, {0, 0}},
+C[ -U[3] , U[2] , V[3] ] == {{I*gc29, 0}, {0, 0}},
 
-C[ -U[4] , U[4] , V[2] ] == {{I*gc30, ((I/2)*EL*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ S[3] , -U[2] , U[4] ] == {{(EL^2*(cw^2 + sw^2)*vev)/(4*cw*sw^2), 0}},
 
-C[ -S[3] , -U[4] , U[2] ] == {{(EL^2*(cw^2 - sw^2)*vev)/(4*cw*sw^2), (EL^2*(-(cw^2*MH^2*MW^4*vev*FR$delta[{aEWM1}, {}]) + cw^2*MH^2*MW^2*MZ^2*vev*FR$delta[{aEWM1}, {}] + MH^2*MW^4*sw^2*vev*FR$delta[{aEWM1}, {}] - MH^2*MW^2*MZ^2*sw^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw^2*MH^2*MW^3*vev*FR$delta[{MW}, {}] - 4*aEWM1*cw^2*MH^2*MW*MZ^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MH^2*MW^3*sw^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MH^2*MW^2*MZ*vev*FR$delta[{MZ}, {}] + 2*aEWM1*MH^2*MW^2*MZ*sw^2*vev*FR$delta[{MZ}, {}] - 4*aEWM1*cw*MW^2*Sqrt[MW^2/MZ^2]*MZ^2*sw^2*FR$deltat[H] + 2*aEWM1*cw*Sqrt[MW^2/MZ^2]*MZ^4*sw^2*FR$deltat[H] + aEWM1*cw^2*MH^2*MW^4*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw^2*MH^2*MW^2*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW^4*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MH^2*MW^2*MZ^2*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(8*aEWM1*cw*MH^2*MW^2*(MW - MZ)*(MW + MZ)*sw^2)}},
+C[ -U[2] , U[4] , V[3] ] == {{I*gc31, 0}, {0, 0}},
 
-C[ -U[4] , U[2] , -V[3] ] == {{I*gc32, ((-I/2)*cw*EL*(-(MW^3*FR$delta[{aEWM1}, {}]) + MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ^2*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ -S[3] , -U[2] , U[3] ] == {{-(EL^2*(cw^2 + sw^2)*vev)/(4*cw*sw^2), 0}},
 
-C[ S[3] , -U[3] , U[1] ] == {{-(EL^2*vev)/(2*sw), -(EL^2*(-(MH^2*MW^3*vev*FR$delta[{aEWM1}, {}]) + MH^2*MW*MZ^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*MH^2*MW^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MH^2*MZ^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MW*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*sw*FR$deltat[H] + aEWM1*MH^2*MW^3*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(4*aEWM1*MH^2*MW*(MW - MZ)*(MW + MZ)*sw)}},
+C[ -U[2] , U[3] , -V[3] ] == {{I*gc33, 0}, {0, 0}},
 
-C[ -U[3] , U[1] , V[3] ] == {{I*gc34, ((I/2)*EL*(-FR$delta[{aEWM1}, {}] + aEWM1*FR$deltaZ[{W, W}, {{}}]))/aEWM1}, {0, 0}},
+C[ S[1] , -U[2] , U[2] ] == {{((-I/4)*EL^2*(cw^2 + sw^2)^2*vev)/(cw^2*sw^2), 0}},
 
-C[ -U[3] , U[3] ] == {{0, 0}, {0, ((-I/2)*MW*(4*MH^2*MW^2*FR$delta[{MW}, {}] - 4*MH^2*MZ^2*FR$delta[{MW}, {}] - EL*MZ^2*Sqrt[(-MW^2 + MZ^2)/MZ^2]*FR$deltat[H]))/(MH^2*(MW - MZ)*(MW + MZ))}},
+C[ -U[5, {e1x1}] , U[5, {e2x1}] , V[4, {e3x2}] ] == {{gc35*FASUNF[e3x2, e1x1, e2x1], 0}, {0, 0}},
 
-C[ S[2] , -U[3] , U[3] ] == {{(EL^2*vev)/(4*sw^2), (EL^2*(-(MH^2*MW^3*MZ*vev*FR$delta[{aEWM1}, {}]) + MH^2*MW*MZ^3*vev*FR$delta[{aEWM1}, {}] - 2*aEWM1*MH^2*MZ^3*vev*FR$delta[{MW}, {}] + 2*aEWM1*MH^2*MW^3*vev*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ^3*sw^2*FR$deltat[H] + aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{G0, G0}, {{}}]))/(8*aEWM1*MH^2*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] ] == {{-(GS*FASUNF[e1x2, e2x2, e3x2]), 0}},
 
-C[ S[1] , -U[3] , U[3] ] == {{((-I/4)*EL^2*vev)/sw^2, (EL^2*(I*MH^2*MW^3*MZ*vev*FR$delta[{aEWM1}, {}] - I*MH^2*MW*MZ^3*vev*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MH^2*MZ^3*vev*FR$delta[{MW}, {}] - (2*I)*aEWM1*MH^2*MW^3*vev*FR$delta[{MZ}, {}] + (2*I)*aEWM1*MW*MZ^3*sw^2*FR$deltat[H] + aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MH^2*MW^3*MZ*vev*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MH^2*MW*MZ^3*vev*FR$deltaZ[{H, H}, {{}}]))/(8*aEWM1*MH^2*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] , V[4, {e4x2}] ] == {{(-I)*gc37*(FASUNF[e1x2, e3x2, e2x2, e4x2] + FASUNF[e1x2, e4x2, e2x2, e3x2]), 0}, {(-I)*gc37*(FASUNF[e1x2, e2x2, e3x2, e4x2] - FASUNF[e1x2, e4x2, e2x2, e3x2]), 0}, {I*gc37*(FASUNF[e1x2, e2x2, e3x2, e4x2] + FASUNF[e1x2, e3x2, e2x2, e4x2]), 0}},
 
-C[ -U[3] , U[3] , V[1] ] == {{I*gc38, ((-I/2)*EL*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}, {0, 0}},
+C[ -F[12, {e1x2}] , F[9, {e2x2}] , -S[3] ] == {{gc38L*IndexDelta[e1x2, e2x2], 0}, {gc38R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -U[3] , U[3] , V[2] ] == {{I*gc39, ((-I/2)*EL*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ -F[12, {e1x2}] , F[12, {e2x2}] , S[2] ] == {{gc39L*IndexDelta[e1x2, e2x2], 0}, {gc39R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[3] , -U[3] , U[2] ] == {{-(EL^2*(cw^2 - sw^2)*vev)/(4*cw*sw^2), -(EL^2*(-(cw^2*MH^2*MW^4*vev*FR$delta[{aEWM1}, {}]) + cw^2*MH^2*MW^2*MZ^2*vev*FR$delta[{aEWM1}, {}] + MH^2*MW^4*sw^2*vev*FR$delta[{aEWM1}, {}] - MH^2*MW^2*MZ^2*sw^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw^2*MH^2*MW^3*vev*FR$delta[{MW}, {}] - 4*aEWM1*cw^2*MH^2*MW*MZ^2*vev*FR$delta[{MW}, {}] - 2*aEWM1*MH^2*MW^3*sw^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MH^2*MW^2*MZ*vev*FR$delta[{MZ}, {}] + 2*aEWM1*MH^2*MW^2*MZ*sw^2*vev*FR$delta[{MZ}, {}] - 4*aEWM1*cw*MW^2*Sqrt[MW^2/MZ^2]*MZ^2*sw^2*FR$deltat[H] + 2*aEWM1*cw*Sqrt[MW^2/MZ^2]*MZ^4*sw^2*FR$deltat[H] + aEWM1*cw^2*MH^2*MW^4*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw^2*MH^2*MW^2*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW^4*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MH^2*MW^2*MZ^2*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(8*aEWM1*cw*MH^2*MW^2*(MW - MZ)*(MW + MZ)*sw^2)}},
+C[ -F[12, {e1x2}] , F[12, {e2x2}] , S[1] ] == {{I*gc40*IndexDelta[e1x2, e2x2], 0}, {I*gc40*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -U[3] , U[2] , V[3] ] == {{I*gc41, ((I/2)*cw*EL*(-(MW^3*FR$delta[{aEWM1}, {}]) + MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ^2*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ -F[6] , F[3] , -S[3] ] == {{gc41, 0}, {0, 0}},
 
-C[ S[3] , -U[2] , U[4] ] == {{(EL^2*(cw^2 + sw^2)*vev)/(4*cw*sw^2), (EL^2*(-(cw^2*MH^2*MW^4*vev*FR$delta[{aEWM1}, {}]) + cw^2*MH^2*MW^2*MZ^2*vev*FR$delta[{aEWM1}, {}] - MH^2*MW^4*sw^2*vev*FR$delta[{aEWM1}, {}] + MH^2*MW^2*MZ^2*sw^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw^2*MH^2*MW^3*vev*FR$delta[{MW}, {}] - 4*aEWM1*cw^2*MH^2*MW*MZ^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*MH^2*MW^3*sw^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MH^2*MW^2*MZ*vev*FR$delta[{MZ}, {}] - 2*aEWM1*MH^2*MW^2*MZ*sw^2*vev*FR$delta[{MZ}, {}] - 2*aEWM1*cw*Sqrt[MW^2/MZ^2]*MZ^4*sw^2*FR$deltat[H] + aEWM1*cw^2*MH^2*MW^4*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw^2*MH^2*MW^2*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MH^2*MW^4*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW^2*MZ^2*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(8*aEWM1*cw*MH^2*MW^2*(MW - MZ)*(MW + MZ)*sw^2)}},
+C[ -F[6] , F[6] , S[2] ] == {{gc42L, 0}, {gc42R, 0}},
 
-C[ -U[2] , U[4] , V[3] ] == {{I*gc43, ((-I/2)*cw*EL*(-(MW^3*FR$delta[{aEWM1}, {}]) + MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ^2*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ -F[6] , F[6] , S[1] ] == {{I*gc43, 0}, {I*gc43, 0}},
 
-C[ -S[3] , -U[2] , U[3] ] == {{-(EL^2*(cw^2 + sw^2)*vev)/(4*cw*sw^2), -(EL^2*(-(cw^2*MH^2*MW^4*vev*FR$delta[{aEWM1}, {}]) + cw^2*MH^2*MW^2*MZ^2*vev*FR$delta[{aEWM1}, {}] - MH^2*MW^4*sw^2*vev*FR$delta[{aEWM1}, {}] + MH^2*MW^2*MZ^2*sw^2*vev*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw^2*MH^2*MW^3*vev*FR$delta[{MW}, {}] - 4*aEWM1*cw^2*MH^2*MW*MZ^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*MH^2*MW^3*sw^2*vev*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MH^2*MW^2*MZ*vev*FR$delta[{MZ}, {}] - 2*aEWM1*MH^2*MW^2*MZ*sw^2*vev*FR$delta[{MZ}, {}] - 2*aEWM1*cw*Sqrt[MW^2/MZ^2]*MZ^4*sw^2*FR$deltat[H] + aEWM1*cw^2*MH^2*MW^4*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw^2*MH^2*MW^2*MZ^2*vev*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MH^2*MW^4*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MH^2*MW^2*MZ^2*sw^2*vev*FR$deltaZ[{GP, GP}, {{}}]))/(8*aEWM1*cw*MH^2*MW^2*(MW - MZ)*(MW + MZ)*sw^2)}},
+C[ -F[9, {e1x2}] , F[12, {e2x2}] , S[3] ] == {{gc44L*IndexDelta[e1x2, e2x2], 0}, {gc44R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -U[2] , U[3] , -V[3] ] == {{I*gc45, ((I/2)*cw*EL*(-(MW^3*FR$delta[{aEWM1}, {}]) + MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ^2*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
+C[ -F[9, {e1x2}] , F[9, {e2x2}] , S[2] ] == {{gc45L*IndexDelta[e1x2, e2x2], 0}, {gc45R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -U[2] , U[2] ] == {{0, (I*(2*MW*MZ*FR$delta[{MW}, {}] - 2*MW^2*FR$delta[{MZ}, {}]))/MZ^3}, {0, ((-I/2)*MZ*(4*MH^2*MW^3*FR$delta[{MZ}, {}] - 4*MH^2*MW*MZ^2*FR$delta[{MZ}, {}] - EL*MZ^3*Sqrt[(-MW^2 + MZ^2)/MZ^2]*FR$deltat[H]))/(MH^2*MW*(MW - MZ)*(MW + MZ))}},
+C[ -F[9, {e1x2}] , F[9, {e2x2}] , S[1] ] == {{I*gc46*IndexDelta[e1x2, e2x2], 0}, {I*gc46*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[1] , -U[2] , U[2] ] == {{((-I/4)*EL^2*(cw^2 + sw^2)^2*vev)/(cw^2*sw^2), ((-I/8)*EL^2*(-(cw^4*MH^2*MW^4*MZ*vev*FR$delta[{aEWM1}, {}]) + cw^4*MH^2*MW^2*MZ^3*vev*FR$delta[{aEWM1}, {}] - 2*cw^2*MH^2*MW^4*MZ*sw^2*vev*FR$delta[{aEWM1}, {}] + 2*cw^2*MH^2*MW^2*MZ^3*sw^2*vev*FR$delta[{aEWM1}, {}] - MH^2*MW^4*MZ*sw^4*vev*FR$delta[{aEWM1}, {}] + MH^2*MW^2*MZ^3*sw^4*vev*FR$delta[{aEWM1}, {}] + 4*aEWM1*cw^4*MH^2*MW^3*MZ*vev*FR$delta[{MW}, {}] - 6*aEWM1*cw^4*MH^2*MW*MZ^3*vev*FR$delta[{MW}, {}] + 8*aEWM1*cw^2*MH^2*MW^3*MZ*sw^2*vev*FR$delta[{MW}, {}] - 4*aEWM1*cw^2*MH^2*MW*MZ^3*sw^2*vev*FR$delta[{MW}, {}] + 4*aEWM1*MH^2*MW^3*MZ*sw^4*vev*FR$delta[{MW}, {}] + 2*aEWM1*MH^2*MW*MZ^3*sw^4*vev*FR$delta[{MW}, {}] - 2*aEWM1*cw^4*MH^2*MW^4*vev*FR$delta[{MZ}, {}] + 4*aEWM1*cw^4*MH^2*MW^2*MZ^2*vev*FR$delta[{MZ}, {}] - 4*aEWM1*cw^2*MH^2*MW^4*sw^2*vev*FR$delta[{MZ}, {}] - 2*aEWM1*MH^2*MW^4*sw^4*vev*FR$delta[{MZ}, {}] - 4*aEWM1*MH^2*MW^2*MZ^2*sw^4*vev*FR$delta[{MZ}, {}] - 2*aEWM1*cw^2*MZ^5*sw^2*FR$deltat[H] + aEWM1*cw^4*MH^2*MW^4*MZ*vev*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw^4*MH^2*MW^2*MZ^3*vev*FR$deltaZ[{H, H}, {{}}] + 2*aEWM1*cw^2*MH^2*MW^4*MZ*sw^2*vev*FR$deltaZ[{H, H}, {{}}] - 2*aEWM1*cw^2*MH^2*MW^2*MZ^3*sw^2*vev*FR$deltaZ[{H, H}, {{}}] + aEWM1*MH^2*MW^4*MZ*sw^4*vev*FR$deltaZ[{H, H}, {{}}] - aEWM1*MH^2*MW^2*MZ^3*sw^4*vev*FR$deltaZ[{H, H}, {{}}]))/(aEWM1*cw^2*MH^2*MW^2*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ S[2] , -S[3] , V[1] , V[3] ] == {{((-I/2)*EL^2)/sw, 0}},
 
-C[ -U[2] , U[1] ] == {{0, ((2*I)*MW^2*MZ*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MW}, {}] - I*MZ^3*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MW}, {}] - (2*I)*MW^3*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MZ}, {}] + I*MW*MZ^2*Sqrt[-((MW^2*(MW^2 - MZ^2))/MZ^4)]*FR$delta[{MZ}, {}])/(MW*(MW - MZ)*MZ*(MW + MZ))}, {0, 0}},
+C[ -S[3] , S[1] , V[1] , V[3] ] == {{-EL^2/(2*sw), 0}},
 
-C[ F[13] , F[13] ] == {{0, (-I/2)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (I/2)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (-I/2)*mchi*FR$deltaZ[{chi, chi}, {{}}, "L"]}, {0, (-I/2)*mchi*FR$deltaZ[{chi, chi}, {{}}, "R"]}},
+C[ -S[3] , V[1] , V[3] ] == {{-(EL^2*vev)/(2*sw), 0}},
 
-C[ -U[5, {e1x1}] , U[5, {e2x1}] , V[4, {e3x2}] ] == {{gc50*SUNF[e3x2, e1x1, e2x1], -(GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}])*SUNF[e3x2, e1x1, e2x1])/(2*aS)}, {0, 0}},
+C[ S[2] , -S[3] , V[3] ] == {{((-I/2)*EL)/sw, 0}},
 
-C[ S[1] ] == {{0, I*FR$deltat[H]}},
+C[ -S[3] , S[1] , V[3] ] == {{EL/(2*sw), 0}},
 
-C[ V[1] , V[2] ] == {{0, (I/2)*(FR$deltaZ[{A, Z}, {{}}] + FR$deltaZ[{Z, A}, {{}}])}, {0, (I/2)*MZ^2*FR$deltaZ[{Z, A}, {{}}]}, {0, (-I/2)*(FR$deltaZ[{A, Z}, {{}}] + FR$deltaZ[{Z, A}, {{}}])}},
+C[ V[1] , V[3] , -V[3] ] == {{I*EL, 0}},
 
-C[ S[2] , S[1] , S[1] ] == {{0, (-2*I)*lam*vev*FR$deltaZ[{G0, H}, {{}}]}},
+C[ S[2] , S[3] , V[1] , -V[3] ] == {{((-I/2)*EL^2)/sw, 0}},
 
-C[ S[2] , S[1] ] == {{0, (-I/2)*FR$deltaZ[{G0, H}, {{}}]}, {0, 0}},
+C[ S[3] , S[1] , V[1] , -V[3] ] == {{EL^2/(2*sw), 0}},
 
-C[ S[2] , V[1] ] == {{0, (Sqrt[MW^2]*FR$deltaZ[{Z, A}, {{}}])/(2*MW*Sqrt[MZ^(-2)])}, {0, 0}},
+C[ S[3] , V[1] , -V[3] ] == {{(EL^2*vev)/(2*sw), 0}},
 
-C[ S[2] , S[1] , V[1] ] == {{0, (EL*(cw^2 + sw^2)*FR$deltaZ[{Z, A}, {{}}])/(4*cw*sw)}},
+C[ S[2] , S[3] , -V[3] ] == {{((I/2)*EL)/sw, 0}},
 
-C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] ] == {{-(GS*SUNF[e1x2, e2x2, e3x2]), -(GS*(FR$delta[{aS}, {}] + 3*aS*FR$deltaZ[{G, G}, {{}}])*SUNF[e1x2, e2x2, e3x2])/(2*aS)}},
+C[ S[3] , S[1] , -V[3] ] == {{EL/(2*sw), 0}},
 
-C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] , V[4, {e4x2}] ] == {{(-I)*gc58*(SUNF[e1x2, e3x2, e2x2, e4x2] + SUNF[e1x2, e4x2, e2x2, e3x2]), ((-I)*GS^2*(FR$delta[{aS}, {}] + 2*aS*FR$deltaZ[{G, G}, {{}}])*(SUNF[e1x2, e3x2, e2x2, e4x2] + SUNF[e1x2, e4x2, e2x2, e3x2]))/aS}, {(-I)*gc58*(SUNF[e1x2, e2x2, e3x2, e4x2] - SUNF[e1x2, e4x2, e2x2, e3x2]), ((-I)*GS^2*(FR$delta[{aS}, {}] + 2*aS*FR$deltaZ[{G, G}, {{}}])*(SUNF[e1x2, e2x2, e3x2, e4x2] - SUNF[e1x2, e4x2, e2x2, e3x2]))/aS}, {I*gc58*(SUNF[e1x2, e2x2, e3x2, e4x2] + SUNF[e1x2, e3x2, e2x2, e4x2]), (I*GS^2*(FR$delta[{aS}, {}] + 2*aS*FR$deltaZ[{G, G}, {{}}])*(SUNF[e1x2, e2x2, e3x2, e4x2] + SUNF[e1x2, e3x2, e2x2, e4x2]))/aS}},
+C[ S[2] , S[2] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, 0}},
 
-C[ -F[12, {e1x2}] , F[9, {e2x2}] , -S[3] ] == {{gc59L*IndexDelta[e1x2, e2x2], (yb*(-(MB*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MB*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] - 4*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc59R*IndexDelta[e1x2, e2x2], -(yt*(-(MT*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MT*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] - 4*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -S[3] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, 0}},
 
-C[ -F[10, {e1x2}] , F[7, {e2x2}] , -S[3] ] == {{gc60L*IndexDelta[e1x2, e2x2], (ydo*(-(MD*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MD*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] - 4*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc60R*IndexDelta[e1x2, e2x2], -(yup*(-(MU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] - 4*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[1] , S[1] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, 0}},
 
-C[ -F[11, {e1x2}] , F[8, {e2x2}] , -S[3] ] == {{gc61L*IndexDelta[e1x2, e2x2], (ys*(-(MS*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MS*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] - 4*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc61R*IndexDelta[e1x2, e2x2], -(yc*(-(MC*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MC*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] - 4*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[1] , V[3] , -V[3] ] == {{((I/2)*EL^2*vev)/sw^2, 0}},
 
-C[ -F[12, {e1x2}] , F[12, {e2x2}] , S[2] ] == {{gc62L*IndexDelta[e1x2, e2x2], -(yb*(-(MB*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MB*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] - 4*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc62R*IndexDelta[e1x2, e2x2], (yb*(-(MB*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MB*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] - 4*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ V[1] , V[1] , V[3] , -V[3] ] == {{(-2*I)*gc62, 0}, {I*gc62, 0}, {I*gc62, 0}},
 
-C[ -F[10, {e1x2}] , F[10, {e2x2}] , S[2] ] == {{gc63L*IndexDelta[e1x2, e2x2], -(ydo*(-(MD*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MD*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] - 4*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc63R*IndexDelta[e1x2, e2x2], (ydo*(-(MD*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MD*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] - 4*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ V[3] , -V[3] , V[2] ] == {{(I*cw*EL)/sw, 0}},
 
-C[ -F[11, {e1x2}] , F[11, {e2x2}] , S[2] ] == {{gc64L*IndexDelta[e1x2, e2x2], -(ys*(-(MS*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MS*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] - 4*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc64R*IndexDelta[e1x2, e2x2], (ys*(-(MS*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MS*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] - 4*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ V[3] , V[3] , -V[3] , -V[3] ] == {{(-2*I)*gc64, 0}, {I*gc64, 0}, {I*gc64, 0}},
 
-C[ -F[12, {e1x2}] , F[12, {e2x2}] , S[1] ] == {{I*gc65*IndexDelta[e1x2, e2x2], -(yb*((-I)*MB*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MB*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] - (4*I)*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] - I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc65*IndexDelta[e1x2, e2x2], (yb*(I*MB*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MB*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] + (4*I)*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] + I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] - I*aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] + I*aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[3] , F[6] , S[3] ] == {{0, 0}, {gc65R, 0}},
 
-C[ -F[10, {e1x2}] , F[10, {e2x2}] , S[1] ] == {{I*gc66*IndexDelta[e1x2, e2x2], -(ydo*((-I)*MD*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MD*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] - (4*I)*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] - I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc66*IndexDelta[e1x2, e2x2], (ydo*(I*MD*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MD*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] + (4*I)*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] + I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] - I*aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] + I*aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -S[3] , V[1] , V[2] ] == {{(I*EL^2*(cw - sw)*(cw + sw))/(cw*sw), 0}},
 
-C[ -F[11, {e1x2}] , F[11, {e2x2}] , S[1] ] == {{I*gc67*IndexDelta[e1x2, e2x2], -(ys*((-I)*MS*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MS*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] - (4*I)*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"] + I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] - I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc67*IndexDelta[e1x2, e2x2], (ys*(I*MS*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MS*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] + (4*I)*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] + I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"] - I*aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] + I*aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[2] , S[1] , V[2] ] == {{(EL*(cw^2 + sw^2))/(2*cw*sw), 0}},
 
-C[ -F[12, {e1x2}] , F[12, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{b, b}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{b, b}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MB}, {}] + MB*FR$deltaZ[{b, b}, {{}}, "L"] + MB*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MB}, {}] + MB*FR$deltaZ[{b, b}, {{}}, "L"] + MB*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ S[3] , -S[3] , V[2] ] == {{((I/2)*EL*(cw - sw)*(cw + sw))/(cw*sw), 0}},
 
-C[ -F[10, {e1x2}] , F[10, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{d, d}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{d, d}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MD}, {}] + MD*FR$deltaZ[{d, d}, {{}}, "L"] + MD*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MD}, {}] + MD*FR$deltaZ[{d, d}, {{}}, "L"] + MD*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ S[2] , -S[3] , V[3] , V[2] ] == {{((I/2)*EL^2)/cw, 0}},
 
-C[ -F[11, {e1x2}] , F[11, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{s, s}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{s, s}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MS}, {}] + MS*FR$deltaZ[{s, s}, {{}}, "L"] + MS*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MS}, {}] + MS*FR$deltaZ[{s, s}, {{}}, "L"] + MS*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ -S[3] , S[1] , V[3] , V[2] ] == {{EL^2/(2*cw), 0}},
 
-C[ -F[4] , F[1] , -S[3] ] == {{gc71, (ye*(-(Me*MW^3*MZ*FR$delta[{aEWM1}, {}]) + Me*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] - 4*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{ve, ve}, {{}}, "L"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{ve, ve}, {{}}, "L"]))/(2*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}, {0, 0}},
+C[ -S[3] , V[3] , V[2] ] == {{(EL^2*vev)/(2*cw), 0}},
 
-C[ -F[5] , F[2] , -S[3] ] == {{gc72, (ym*(-(MMU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] - 4*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{vm, vm}, {{}}, "L"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{vm, vm}, {{}}, "L"]))/(2*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}, {0, 0}},
+C[ S[2] , S[3] , -V[3] , V[2] ] == {{((I/2)*EL^2)/cw, 0}},
 
-C[ -F[6] , F[3] , -S[3] ] == {{gc73, (ytau*(-(MTA*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] - 4*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{vt, vt}, {{}}, "L"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{vt, vt}, {{}}, "L"]))/(2*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}, {0, 0}},
+C[ S[3] , S[1] , -V[3] , V[2] ] == {{-EL^2/(2*cw), 0}},
 
-C[ -F[4] , F[4] , S[2] ] == {{gc74L, -(ye*(-(Me*MW^3*MZ*FR$delta[{aEWM1}, {}]) + Me*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] - 4*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "L"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc74R, (ye*(-(Me*MW^3*MZ*FR$delta[{aEWM1}, {}]) + Me*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] - 4*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "L"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -V[3] , V[2] ] == {{-(EL^2*vev)/(2*cw), 0}},
 
-C[ -F[5] , F[5] , S[2] ] == {{gc75L, -(ym*(-(MMU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] - 4*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc75R, (ym*(-(MMU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] - 4*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ V[1] , V[3] , -V[3] , V[2] ] == {{(-I)*gc75, 0}, {(-I)*gc75, 0}, {(2*I)*gc75, 0}},
 
-C[ -F[6] , F[6] , S[2] ] == {{gc76L, -(ytau*(-(MTA*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] - 4*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc76R, (ytau*(-(MTA*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] - 4*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[2] , S[2] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2)/(cw^2*sw^2), 0}},
 
-C[ -F[4] , F[4] , S[1] ] == {{I*gc77, -(ye*((-I)*Me*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*Me*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] - (4*I)*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "L"] - I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] + I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] - I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc77, (ye*(I*Me*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*Me*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] + (4*I)*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "L"] + I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] - I*aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] + I*aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[3] , -S[3] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw - sw)^2*(cw + sw)^2)/(cw^2*sw^2), 0}},
 
-C[ -F[5] , F[5] , S[1] ] == {{I*gc78, -(ym*((-I)*MMU*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] - (4*I)*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] - I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] + I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] - I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc78, (ym*(I*MMU*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] + (4*I)*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] + I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] - I*aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] + I*aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[1] , S[1] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2)/(cw^2*sw^2), 0}},
 
-C[ -F[6] , F[6] , S[1] ] == {{I*gc79, -(ytau*((-I)*MTA*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] - (4*I)*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] - I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] + I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] - I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc79, (ytau*(I*MTA*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] + (4*I)*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] + I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] - I*aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] + I*aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(2*Sqrt[2]*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ S[1] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2*vev)/(cw^2*sw^2), 0}},
 
-C[ -F[4] , F[4] ] == {{0, (-I)*FR$deltaZ[{e, e}, {{}}, "L"]}, {0, I*FR$deltaZ[{e, e}, {{}}, "R"]}, {0, (-I/2)*(2*FR$delta[{Me}, {}] + Me*FR$deltaZ[{e, e}, {{}}, "L"] + Me*FR$deltaZ[{e, e}, {{}}, "R"])}, {0, (-I/2)*(2*FR$delta[{Me}, {}] + Me*FR$deltaZ[{e, e}, {{}}, "L"] + Me*FR$deltaZ[{e, e}, {{}}, "R"])}},
+C[ V[3] , -V[3] , V[2] , V[2] ] == {{(-2*I)*gc80, 0}, {I*gc80, 0}, {I*gc80, 0}},
 
-C[ -F[5] , F[5] ] == {{0, (-I)*FR$deltaZ[{mu, mu}, {{}}, "L"]}, {0, I*FR$deltaZ[{mu, mu}, {{}}, "R"]}, {0, (-I/2)*(2*FR$delta[{MMU}, {}] + MMU*FR$deltaZ[{mu, mu}, {{}}, "L"] + MMU*FR$deltaZ[{mu, mu}, {{}}, "R"])}, {0, (-I/2)*(2*FR$delta[{MMU}, {}] + MMU*FR$deltaZ[{mu, mu}, {{}}, "L"] + MMU*FR$deltaZ[{mu, mu}, {{}}, "R"])}},
+C[ -F[4] , F[4] , V[1] ] == {{I*gc81, 0}, {I*gc81, 0}},
 
-C[ -F[6] , F[6] ] == {{0, (-I)*FR$deltaZ[{ta, ta}, {{}}, "L"]}, {0, I*FR$deltaZ[{ta, ta}, {{}}, "R"]}, {0, (-I/2)*(2*FR$delta[{MTA}, {}] + MTA*FR$deltaZ[{ta, ta}, {{}}, "L"] + MTA*FR$deltaZ[{ta, ta}, {{}}, "R"])}, {0, (-I/2)*(2*FR$delta[{MTA}, {}] + MTA*FR$deltaZ[{ta, ta}, {{}}, "L"] + MTA*FR$deltaZ[{ta, ta}, {{}}, "R"])}},
+C[ -F[5] , F[5] , V[1] ] == {{I*gc82, 0}, {I*gc82, 0}},
 
-C[ -F[8, {e1x2}] , F[11, {e2x2}] , S[3] ] == {{gc83L*IndexDelta[e1x2, e2x2], (yc*(-(MC*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MC*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] - 4*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc83R*IndexDelta[e1x2, e2x2], -(ys*(-(MS*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MS*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MS}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MS}, {}] - 4*aEWM1*MS*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MS*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MS*MW^3*FR$delta[{MZ}, {}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MS*MW^3*MZ*FR$deltaZ[{s, s}, {{}}, "R"] - aEWM1*MS*MW*MZ^3*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MS*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[6] , F[6] , V[1] ] == {{I*gc83, 0}, {I*gc83, 0}},
 
-C[ -F[9, {e1x2}] , F[12, {e2x2}] , S[3] ] == {{gc84L*IndexDelta[e1x2, e2x2], (yt*(-(MT*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MT*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] - 4*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc84R*IndexDelta[e1x2, e2x2], -(yb*(-(MB*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MB*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MB}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MB}, {}] - 4*aEWM1*MB*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MB*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MB*MW^3*FR$delta[{MZ}, {}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{b, b}, {{}}, "R"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{b, b}, {{}}, "R"] + aEWM1*MB*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MB*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MB*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[1] ] == {{I*gc84*IndexDelta[e1x2, e2x2], 0}, {I*gc84*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[7, {e1x2}] , F[10, {e2x2}] , S[3] ] == {{gc85L*IndexDelta[e1x2, e2x2], (yup*(-(MU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] - 4*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc85R*IndexDelta[e1x2, e2x2], -(ydo*(-(MD*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MD*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MD}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MD}, {}] - 4*aEWM1*MD*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MD*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MD*MW^3*FR$delta[{MZ}, {}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{d, d}, {{}}, "R"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{d, d}, {{}}, "R"] + aEWM1*MD*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MD*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(2*aEWM1*MD*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[1] ] == {{I*gc85*IndexDelta[e1x2, e2x2], 0}, {I*gc85*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[8, {e1x2}] , F[8, {e2x2}] , S[2] ] == {{gc86L*IndexDelta[e1x2, e2x2], (yc*(-(MC*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MC*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] - 4*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc86R*IndexDelta[e1x2, e2x2], -(yc*(-(MC*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MC*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] - 4*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[1] ] == {{I*gc86*IndexDelta[e1x2, e2x2], 0}, {I*gc86*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[9, {e1x2}] , F[9, {e2x2}] , S[2] ] == {{gc87L*IndexDelta[e1x2, e2x2], (yt*(-(MT*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MT*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] - 4*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc87R*IndexDelta[e1x2, e2x2], -(yt*(-(MT*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MT*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] - 4*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[1] ] == {{I*gc87*IndexDelta[e1x2, e2x2], 0}, {I*gc87*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[7, {e1x2}] , F[7, {e2x2}] , S[2] ] == {{gc88L*IndexDelta[e1x2, e2x2], (yup*(-(MU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] - 4*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}, {gc88R*IndexDelta[e1x2, e2x2], -(yup*(-(MU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] - 4*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[1] ] == {{I*gc88*IndexDelta[e1x2, e2x2], 0}, {I*gc88*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[8, {e1x2}] , F[8, {e2x2}] , S[1] ] == {{I*gc89*IndexDelta[e1x2, e2x2], (yc*(I*MC*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MC*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] + (4*I)*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] + I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] - I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] + I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc89*IndexDelta[e1x2, e2x2], -(yc*((-I)*MC*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MC*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MC}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MC}, {}] - (4*I)*aEWM1*MC*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MC*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MC*MW^3*FR$delta[{MZ}, {}] + aEWM1*MC*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MC*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + I*aEWM1*MC*MW^3*MZ*FR$deltaZ[{c, c}, {{}}, "R"] - I*aEWM1*MC*MW*MZ^3*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MC*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[1] ] == {{I*gc89*IndexDelta[e1x2, e2x2], 0}, {I*gc89*IndexDelta[e1x2, e2x2], 0}},
 
-C[ -F[9, {e1x2}] , F[9, {e2x2}] , S[1] ] == {{I*gc90*IndexDelta[e1x2, e2x2], (yt*(I*MT*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MT*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] + (4*I)*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] + I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"] - I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] + I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc90*IndexDelta[e1x2, e2x2], -(yt*((-I)*MT*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MT*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MT}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MT}, {}] - (4*I)*aEWM1*MT*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MT*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MT*MW^3*FR$delta[{MZ}, {}] + aEWM1*MT*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MT*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"] + I*aEWM1*MT*MW^3*MZ*FR$deltaZ[{t, t}, {{}}, "R"] - I*aEWM1*MT*MW*MZ^3*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MT*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[4, {e3x2}] ] == {{I*gc90*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc90*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[7, {e1x2}] , F[7, {e2x2}] , S[1] ] == {{I*gc91*IndexDelta[e1x2, e2x2], (yup*(I*MU*MW^3*MZ*FR$delta[{aEWM1}, {}] - I*MU*MW*MZ^3*FR$delta[{aEWM1}, {}] - (2*I)*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] + (2*I)*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] + (4*I)*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] - (2*I)*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] - (2*I)*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] + I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"] - I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] + I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}, {I*gc91*IndexDelta[e1x2, e2x2], -(yup*((-I)*MU*MW^3*MZ*FR$delta[{aEWM1}, {}] + I*MU*MW*MZ^3*FR$delta[{aEWM1}, {}] + (2*I)*aEWM1*MW^3*MZ*FR$delta[{MU}, {}] - (2*I)*aEWM1*MW*MZ^3*FR$delta[{MU}, {}] - (4*I)*aEWM1*MU*MW^2*MZ*FR$delta[{MW}, {}] + (2*I)*aEWM1*MU*MZ^3*FR$delta[{MW}, {}] + (2*I)*aEWM1*MU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MU*MW^3*MZ*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MU*MW*MZ^3*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"] + I*aEWM1*MU*MW^3*MZ*FR$deltaZ[{u, u}, {{}}, "R"] - I*aEWM1*MU*MW*MZ^3*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(2*Sqrt[2]*aEWM1*MU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[4, {e3x2}] ] == {{I*gc91*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc91*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[8, {e1x2}] , F[8, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{c, c}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{c, c}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MC}, {}] + MC*FR$deltaZ[{c, c}, {{}}, "L"] + MC*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MC}, {}] + MC*FR$deltaZ[{c, c}, {{}}, "L"] + MC*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[4, {e3x2}] ] == {{I*gc92*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc92*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[9, {e1x2}] , F[9, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{t, t}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{t, t}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[4, {e3x2}] ] == {{I*gc93*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc93*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[7, {e1x2}] , F[7, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{u, u}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{u, u}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MU}, {}] + MU*FR$deltaZ[{u, u}, {{}}, "L"] + MU*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MU}, {}] + MU*FR$deltaZ[{u, u}, {{}}, "L"] + MU*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
+C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[4, {e3x2}] ] == {{I*gc94*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc94*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[1] , F[4] , S[3] ] == {{0, 0}, {gc95R, -(ye*(-(Me*MW^3*MZ*FR$delta[{aEWM1}, {}]) + Me*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{Me}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{Me}, {}] - 4*aEWM1*Me*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*Me*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*Me*MW^3*FR$delta[{MZ}, {}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{e, e}, {{}}, "R"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{e, e}, {{}}, "R"] + aEWM1*Me*MW^3*MZ*FR$deltaZ[{ve, ve}, {{}}, "L"] - aEWM1*Me*MW*MZ^3*FR$deltaZ[{ve, ve}, {{}}, "L"]))/(2*aEWM1*Me*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[4, {e3x2}] ] == {{I*gc95*FASUNT[e3x2, e1x2, e2x2], 0}, {I*gc95*FASUNT[e3x2, e1x2, e2x2], 0}},
 
-C[ -F[2] , F[5] , S[3] ] == {{0, 0}, {gc96R, -(ym*(-(MMU*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MMU*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MMU}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MMU}, {}] - 4*aEWM1*MMU*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MMU*MW^3*FR$delta[{MZ}, {}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{mu, mu}, {{}}, "R"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "R"] + aEWM1*MMU*MW^3*MZ*FR$deltaZ[{vm, vm}, {{}}, "L"] - aEWM1*MMU*MW*MZ^3*FR$deltaZ[{vm, vm}, {{}}, "L"]))/(2*aEWM1*MMU*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[8, {e1x2}] , F[11, {e2x2}] , V[3] ] == {{I*gc96*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ -F[3] , F[6] , S[3] ] == {{0, 0}, {gc97R, -(ytau*(-(MTA*MW^3*MZ*FR$delta[{aEWM1}, {}]) + MTA*MW*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*MW^3*MZ*FR$delta[{MTA}, {}] - 2*aEWM1*MW*MZ^3*FR$delta[{MTA}, {}] - 4*aEWM1*MTA*MW^2*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MTA*MW^3*FR$delta[{MZ}, {}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{ta, ta}, {{}}, "R"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "R"] + aEWM1*MTA*MW^3*MZ*FR$deltaZ[{vt, vt}, {{}}, "L"] - aEWM1*MTA*MW*MZ^3*FR$deltaZ[{vt, vt}, {{}}, "L"]))/(2*aEWM1*MTA*MW*(MW - MZ)*MZ*(MW + MZ))}},
+C[ -F[9, {e1x2}] , F[12, {e2x2}] , V[3] ] == {{I*gc97*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ -F[9, {e1x2}] , F[13] , S[4, {e3x1}] ] == {{I*gc98*IndexDelta[e1x2, e3x1], (-I/2)*(2*FR$delta[{yDM}, {}] + yDM*FR$deltaZ[{St, St}, {{}}] + yDM*FR$deltaZ[{chi, chi}, {{}}, "L"] + yDM*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e3x1]}, {0, 0}},
+C[ -F[7, {e1x2}] , F[10, {e2x2}] , V[3] ] == {{I*gc98*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ F[13] , F[9, {e2x2}] , -S[4, {e3x1}] ] == {{0, 0}, {I*gc99R*IndexDelta[e2x2, e3x1], (-I/2)*(2*FR$delta[{yDM}, {}] + yDM*FR$deltaZ[{St, St}, {{}}] + yDM*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e2x2, e3x1]}},
+C[ -F[12, {e1x2}] , F[9, {e2x2}] , -V[3] ] == {{I*gc99*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ S[4, {e2x1}] , -S[4, {e3x1}] , V[4, {e1x2}] ] == {{I*GS*SUNT[e1x2, e3x1, e2x1], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{St, St}, {{}}])*SUNT[e1x2, e3x1, e2x1])/aS}},
+C[ -F[10, {e1x2}] , F[7, {e2x2}] , -V[3] ] == {{I*gc100*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ S[4, {e3x1}] , -S[4, {e4x1}] , V[4, {e1x2}] , V[4, {e2x2}] ] == {{I*GS^2*(SUNT[e1x2, e2x2, e4x1, e3x1] + SUNT[e2x2, e1x2, e4x1, e3x1]), (I*GS^2*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + aS*FR$deltaZ[{St, St}, {{}}])*(SUNT[e1x2, e2x2, e4x1, e3x1] + SUNT[e2x2, e1x2, e4x1, e3x1]))/aS}},
+C[ -F[11, {e1x2}] , F[8, {e2x2}] , -V[3] ] == {{I*gc101*IndexDelta[e1x2, e2x2], 0}, {0, 0}},
 
-C[ S[2] , -S[3] , V[1] , V[3] ] == {{((-I/2)*EL^2)/sw, ((I/4)*EL^2*(2*cw*MW^2*MZ*FR$delta[{aEWM1}, {}] - 2*cw*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MW}, {}] - 2*aEWM1*cw*MW^2*FR$delta[{MZ}, {}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*sw*FR$deltaZ[{Z, A}, {{}}] - aEWM1*MZ^3*sw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*cw*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[1] , F[4] , V[3] ] == {{I*gc102, 0}, {0, 0}},
 
-C[ -S[3] , S[1] , V[1] , V[3] ] == {{-EL^2/(2*sw), (EL^2*(2*cw*MW^2*MZ*FR$delta[{aEWM1}, {}] - 2*cw*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MW}, {}] - 2*aEWM1*cw*MW^2*FR$delta[{MZ}, {}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{A, A}, {{}}] - I*aEWM1*cw*MW^2*MZ*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*cw*MZ^3*FR$deltaZ[{G0, H}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{H, H}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*sw*FR$deltaZ[{Z, A}, {{}}] - aEWM1*MZ^3*sw*FR$deltaZ[{Z, A}, {{}}]))/(4*aEWM1*cw*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[2] , F[5] , V[3] ] == {{I*gc103, 0}, {0, 0}},
 
-C[ -S[3] , V[1] , V[3] ] == {{-(EL^2*vev)/(2*sw), (EL^2*vev*(cw*MW*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*FR$delta[{MW}, {}] - aEWM1*cw*MW*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW*sw*FR$deltaZ[{Z, A}, {{}}]))/(4*aEWM1*cw*MW*sw)}},
+C[ -F[3] , F[6] , V[3] ] == {{I*gc104, 0}, {0, 0}},
 
-C[ S[2] , -S[3] , V[3] ] == {{((-I/2)*EL)/sw, ((-I/4)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[4] , F[1] , -V[3] ] == {{I*gc105, 0}, {0, 0}},
 
-C[ -S[3] , V[3] ] == {{0, (2*FR$delta[{MW}, {}] + MW*FR$deltaZ[{GP, GP}, {{}}] + MW*FR$deltaZ[{W, W}, {{}}])/2}, {0, 0}},
+C[ -F[5] , F[2] , -V[3] ] == {{I*gc106, 0}, {0, 0}},
 
-C[ -S[3] , S[1] , V[3] ] == {{EL/(2*sw), (EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + I*aEWM1*MW^2*MZ*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*MZ^3*FR$deltaZ[{G0, H}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{H, H}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(4*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[6] , F[3] , -V[3] ] == {{I*gc107, 0}, {0, 0}},
 
-C[ V[1] , V[3] , -V[3] ] == {{I*EL, ((I/2)*EL*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + 2*aEWM1*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}},
+C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[2] ] == {{I*gc108L*IndexDelta[e1x2, e2x2], 0}, {I*gc108R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[2] , S[3] , V[1] , -V[3] ] == {{((-I/2)*EL^2)/sw, ((I/4)*EL^2*(2*cw*MW^2*MZ*FR$delta[{aEWM1}, {}] - 2*cw*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MW}, {}] - 2*aEWM1*cw*MW^2*FR$delta[{MZ}, {}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*sw*FR$deltaZ[{Z, A}, {{}}] - aEWM1*MZ^3*sw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*cw*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[2] ] == {{I*gc109L*IndexDelta[e1x2, e2x2], 0}, {I*gc109R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[3] , S[1] , V[1] , -V[3] ] == {{EL^2/(2*sw), -(EL^2*(2*cw*MW^2*MZ*FR$delta[{aEWM1}, {}] - 2*cw*MZ^3*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MW}, {}] - 2*aEWM1*cw*MW^2*FR$delta[{MZ}, {}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{A, A}, {{}}] + I*aEWM1*cw*MW^2*MZ*FR$deltaZ[{G0, H}, {{}}] - I*aEWM1*cw*MZ^3*FR$deltaZ[{G0, H}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{H, H}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*sw*FR$deltaZ[{Z, A}, {{}}] - aEWM1*MZ^3*sw*FR$deltaZ[{Z, A}, {{}}]))/(4*aEWM1*cw*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[2] ] == {{I*gc110L*IndexDelta[e1x2, e2x2], 0}, {I*gc110R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[3] , V[1] , -V[3] ] == {{(EL^2*vev)/(2*sw), -(EL^2*vev*(cw*MW*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*FR$delta[{MW}, {}] - aEWM1*cw*MW*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw*MW*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW*sw*FR$deltaZ[{Z, A}, {{}}]))/(4*aEWM1*cw*MW*sw)}},
+C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[2] ] == {{I*gc111L*IndexDelta[e1x2, e2x2], 0}, {I*gc111R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[2] , S[3] , -V[3] ] == {{((I/2)*EL)/sw, ((I/4)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[2] ] == {{I*gc112L*IndexDelta[e1x2, e2x2], 0}, {I*gc112R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[3] , -V[3] ] == {{0, (2*FR$delta[{MW}, {}] + MW*FR$deltaZ[{GP, GP}, {{}}] + MW*FR$deltaZ[{W, W}, {{}}])/2}, {0, 0}},
+C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[2] ] == {{I*gc113L*IndexDelta[e1x2, e2x2], 0}, {I*gc113R*IndexDelta[e1x2, e2x2], 0}},
 
-C[ S[3] , S[1] , -V[3] ] == {{EL/(2*sw), (EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] - I*aEWM1*MW^2*MZ*FR$deltaZ[{G0, H}, {{}}] + I*aEWM1*MZ^3*FR$deltaZ[{G0, H}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{H, H}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(4*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}},
+C[ -F[1] , F[1] , V[2] ] == {{I*gc114, 0}, {0, 0}},
 
-C[ S[2] , S[2] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, ((I/2)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ -F[2] , F[2] , V[2] ] == {{I*gc115, 0}, {0, 0}},
 
-C[ S[3] , -S[3] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, ((I/2)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ -F[3] , F[3] , V[2] ] == {{I*gc116, 0}, {0, 0}},
 
-C[ S[1] , S[1] , V[3] , -V[3] ] == {{((I/2)*EL^2)/sw^2, ((I/2)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{H, H}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ -F[4] , F[4] , V[2] ] == {{I*gc117L, 0}, {I*gc117R, 0}},
 
-C[ S[1] , V[3] , -V[3] ] == {{((I/2)*EL^2*vev)/sw^2, ((I/4)*EL^2*vev*(-(MW^3*MZ*FR$delta[{aEWM1}, {}]) + MW*MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^3*FR$delta[{MW}, {}] + 2*aEWM1*MW^3*FR$delta[{MZ}, {}] + aEWM1*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + 2*aEWM1*MW^3*MZ*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*MW*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ -F[5] , F[5] , V[2] ] == {{I*gc118L, 0}, {I*gc118R, 0}},
 
-C[ V[1] , V[1] , V[3] , -V[3] ] == {{(-2*I)*gc119, ((-2*I)*EL^2*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}, {I*gc119, (I*EL^2*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}, {I*gc119, (I*EL^2*(-(sw*FR$delta[{aEWM1}, {}]) + aEWM1*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*FR$deltaZ[{Z, A}, {{}}]))/(aEWM1*sw)}},
+C[ -F[6] , F[6] , V[2] ] == {{I*gc119L, 0}, {I*gc119R, 0}},
 
-C[ S[2] , S[1] , V[3] , -V[3] ] == {{0, ((I/4)*EL^2*FR$deltaZ[{G0, H}, {{}}])/sw^2}},
+C[ -F[9, {e1x2}] , F[13] , S[4, {e3x1}] ] == {{I*gc120*IndexDelta[e1x2, e3x1], 0}, {0, 0}},
 
-C[ V[3] , -V[3] , V[2] ] == {{(I*cw*EL)/sw, ((I/2)*EL*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 2*aEWM1*cw*MW^3*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*cw*MW*MZ^2*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw)}},
+C[ F[13] , F[9, {e2x2}] , -S[4, {e3x1}] ] == {{0, 0}, {I*gc121R*IndexDelta[e2x2, e3x1], 0}},
 
-C[ V[3] , V[3] , -V[3] , -V[3] ] == {{(-2*I)*gc122, ((2*I)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + 2*aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}, {I*gc122, ((-I)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + 2*aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}, {I*gc122, ((-I)*EL^2*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + 2*aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}]))/(aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
+C[ S[4, {e2x1}] , -S[4, {e3x1}] , V[4, {e1x2}] ] == {{I*GS*FASUNT[e1x2, e3x1, e2x1], 0}},
 
-C[ S[3] , -S[3] , V[1] , V[2] ] == {{(I*EL^2*(cw^2 - sw^2))/(cw*sw), ((I/4)*EL^2*(-4*cw^3*MW^3*sw*FR$delta[{aEWM1}, {}] + 4*cw^3*MW*MZ^2*sw*FR$delta[{aEWM1}, {}] + 4*cw*MW^3*sw^3*FR$delta[{aEWM1}, {}] - 4*cw*MW*MZ^2*sw^3*FR$delta[{aEWM1}, {}] - 4*aEWM1*cw^3*MZ^2*sw*FR$delta[{MW}, {}] - 4*aEWM1*cw*MZ^2*sw^3*FR$delta[{MW}, {}] + 4*aEWM1*cw^3*MW*MZ*sw*FR$delta[{MZ}, {}] + 4*aEWM1*cw*MW*MZ*sw^3*FR$delta[{MZ}, {}] + 2*aEWM1*cw^3*MW^3*sw*FR$deltaZ[{A, A}, {{}}] - 2*aEWM1*cw^3*MW*MZ^2*sw*FR$deltaZ[{A, A}, {{}}] - 2*aEWM1*cw*MW^3*sw^3*FR$deltaZ[{A, A}, {{}}] + 2*aEWM1*cw*MW*MZ^2*sw^3*FR$deltaZ[{A, A}, {{}}] + 4*aEWM1*cw^2*MW^3*sw^2*FR$deltaZ[{A, Z}, {{}}] - 4*aEWM1*cw^2*MW*MZ^2*sw^2*FR$deltaZ[{A, Z}, {{}}] + 4*aEWM1*cw^3*MW^3*sw*FR$deltaZ[{GP, GP}, {{}}] - 4*aEWM1*cw^3*MW*MZ^2*sw*FR$deltaZ[{GP, GP}, {{}}] - 4*aEWM1*cw*MW^3*sw^3*FR$deltaZ[{GP, GP}, {{}}] + 4*aEWM1*cw*MW*MZ^2*sw^3*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw^4*MW^3*FR$deltaZ[{Z, A}, {{}}] - aEWM1*cw^4*MW*MZ^2*FR$deltaZ[{Z, A}, {{}}] - 2*aEWM1*cw^2*MW^3*sw^2*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw^2*MW*MZ^2*sw^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*MW^3*sw^4*FR$deltaZ[{Z, A}, {{}}] - aEWM1*MW*MZ^2*sw^4*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw^3*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*cw^3*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*cw*MW^3*sw^3*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw*MW*MZ^2*sw^3*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw^2*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ S[2] , V[2] ] == {{0, (2*Sqrt[MZ^(-2)]*Sqrt[MW^2/MZ^2]*MZ*FR$delta[{MZ}, {}] + Sqrt[MW^2]*FR$deltaZ[{G0, G0}, {{}}] + Sqrt[MW^2]*FR$deltaZ[{Z, Z}, {{}}])/(2*MW*Sqrt[MZ^(-2)])}, {0, 0}},
-
-C[ S[2] , S[1] , V[2] ] == {{(EL*(cw^2 + sw^2))/(2*cw*sw), (EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{H, H}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(4*aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}},
-
-C[ S[3] , -S[3] , V[2] ] == {{((I/2)*EL*(cw^2 - sw^2))/(cw*sw), ((I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{GP, GP}, {{}}] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{GP, GP}, {{}}] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{GP, GP}, {{}}] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}},
-
-C[ S[1] , V[2] ] == {{0, (Sqrt[MW^2]*FR$deltaZ[{G0, H}, {{}}])/(2*MW*Sqrt[MZ^(-2)])}, {0, 0}},
-
-C[ S[2] , S[2] , V[1] , V[2] ] == {{0, ((I/4)*EL^2*(cw^2 + sw^2)^2*FR$deltaZ[{Z, A}, {{}}])/(cw^2*sw^2)}},
-
-C[ S[1] , S[1] , V[1] , V[2] ] == {{0, ((I/4)*EL^2*(cw^2 + sw^2)^2*FR$deltaZ[{Z, A}, {{}}])/(cw^2*sw^2)}},
-
-C[ S[1] , V[1] , V[2] ] == {{0, ((I/4)*EL^2*(cw^2 + sw^2)^2*vev*FR$deltaZ[{Z, A}, {{}}])/(cw^2*sw^2)}},
-
-C[ S[2] , -S[3] , V[3] , V[2] ] == {{((I/2)*EL^2)/cw, ((-I/4)*EL^2*(2*MW*MZ*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MW}, {}] - 2*aEWM1*MW*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW*MZ*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw*MW*MZ*sw)}},
-
-C[ -S[3] , S[1] , V[3] , V[2] ] == {{EL^2/(2*cw), -(EL^2*(2*MW*MZ*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MW}, {}] - 2*aEWM1*MW*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW*MZ*FR$deltaZ[{A, Z}, {{}}] - I*aEWM1*MW*MZ*sw*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{Z, Z}, {{}}]))/(4*aEWM1*cw*MW*MZ*sw)}},
-
-C[ -S[3] , V[3] , V[2] ] == {{(EL^2*vev)/(2*cw), -(EL^2*vev*(MW^2*sw*FR$delta[{aEWM1}, {}] - MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*sw*FR$delta[{MW}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}]))/(4*aEWM1*cw*(MW - MZ)*(MW + MZ)*sw)}},
-
-C[ S[2] , S[3] , -V[3] , V[2] ] == {{((I/2)*EL^2)/cw, ((-I/4)*EL^2*(2*MW*MZ*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MW}, {}] - 2*aEWM1*MW*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW*MZ*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw*MW*MZ*sw)}},
-
-C[ S[3] , S[1] , -V[3] , V[2] ] == {{-EL^2/(2*cw), (EL^2*(2*MW*MZ*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MW}, {}] - 2*aEWM1*MW*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW*MZ*FR$deltaZ[{A, Z}, {{}}] + I*aEWM1*MW*MZ*sw*FR$deltaZ[{G0, H}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW*MZ*sw*FR$deltaZ[{Z, Z}, {{}}]))/(4*aEWM1*cw*MW*MZ*sw)}},
-
-C[ S[3] , -V[3] , V[2] ] == {{-(EL^2*vev)/(2*cw), (EL^2*vev*(MW^2*sw*FR$delta[{aEWM1}, {}] - MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*sw*FR$delta[{MW}, {}] + 2*aEWM1*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{W, W}, {{}}] - aEWM1*MW^2*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}]))/(4*aEWM1*cw*(MW - MZ)*(MW + MZ)*sw)}},
-
-C[ V[1] , V[3] , -V[3] , V[2] ] == {{(-I)*gc137, ((I/2)*EL^2*(-2*cw*MW^3*sw*FR$delta[{aEWM1}, {}] + 2*cw*MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{A, Z}, {{}}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, A}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}, {(-I)*gc137, ((I/2)*EL^2*(-2*cw*MW^3*sw*FR$delta[{aEWM1}, {}] + 2*cw*MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{A, Z}, {{}}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, A}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}, {(2*I)*gc137, ((-I)*EL^2*(-2*cw*MW^3*sw*FR$delta[{aEWM1}, {}] + 2*cw*MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{A, A}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{A, Z}, {{}}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{W, W}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, A}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*cw*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ S[2] , S[2] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2)/(cw^2*sw^2), ((I/2)*EL^2*(cw^2 + sw^2)*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{G0, G0}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{G0, G0}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw^2*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ S[3] , -S[3] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw - sw)^2*(cw + sw)^2)/(cw^2*sw^2), ((I/2)*EL^2*(cw - sw)*(cw + sw)*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{GP, GP}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{GP, GP}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw^2*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ S[1] , S[1] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2)/(cw^2*sw^2), ((I/2)*EL^2*(cw^2 + sw^2)*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{H, H}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw^2*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ S[1] , V[2] , V[2] ] == {{((I/2)*EL^2*(cw^2 + sw^2)^2*vev)/(cw^2*sw^2), ((I/4)*EL^2*(cw^2 + sw^2)*vev*(-(cw^2*MW^3*MZ*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^3*FR$delta[{aEWM1}, {}] - MW^3*MZ*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^3*sw^2*FR$delta[{aEWM1}, {}] + 4*aEWM1*cw^2*MW^2*MZ*FR$delta[{MW}, {}] - 6*aEWM1*cw^2*MZ^3*FR$delta[{MW}, {}] + 4*aEWM1*MW^2*MZ*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^3*sw^2*FR$delta[{MW}, {}] - 2*aEWM1*cw^2*MW^3*FR$delta[{MZ}, {}] + 4*aEWM1*cw^2*MW*MZ^2*FR$delta[{MZ}, {}] - 2*aEWM1*MW^3*sw^2*FR$delta[{MZ}, {}] - 4*aEWM1*MW*MZ^2*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*MZ*FR$deltaZ[{H, H}, {{}}] - aEWM1*cw^2*MW*MZ^3*FR$deltaZ[{H, H}, {{}}] + aEWM1*MW^3*MZ*sw^2*FR$deltaZ[{H, H}, {{}}] - aEWM1*MW*MZ^3*sw^2*FR$deltaZ[{H, H}, {{}}] + 2*aEWM1*cw^2*MW^3*MZ*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*cw^2*MW*MZ^3*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*MW^3*MZ*sw^2*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW*MZ^3*sw^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*cw^2*MW*(MW - MZ)*MZ*(MW + MZ)*sw^2)}},
-
-C[ S[2] , S[1] , V[2] , V[2] ] == {{0, ((I/4)*EL^2*(cw^2 + sw^2)^2*FR$deltaZ[{G0, H}, {{}}])/(cw^2*sw^2)}},
-
-C[ V[3] , -V[3] , V[2] , V[2] ] == {{(-2*I)*gc143, ((-2*I)*cw*EL^2*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}, {I*gc143, (I*cw*EL^2*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}, {I*gc143, (I*cw*EL^2*(-(cw*MW^3*FR$delta[{aEWM1}, {}]) + cw*MW*MZ^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*cw*MW*MZ*FR$delta[{MZ}, {}] + aEWM1*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{W, W}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{W, W}, {{}}] + aEWM1*cw*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}]))/(aEWM1*MW*(MW - MZ)*(MW + MZ)*sw^2)}},
-
-C[ -F[1] , F[1] , V[1] ] == {{0, ((I/4)*EL*(cw^2 + sw^2)*FR$deltaZ[{Z, A}, {{}}])/(cw*sw)}, {0, 0}},
-
-C[ -F[2] , F[2] , V[1] ] == {{0, ((I/4)*EL*(cw^2 + sw^2)*FR$deltaZ[{Z, A}, {{}}])/(cw*sw)}, {0, 0}},
-
-C[ -F[3] , F[3] , V[1] ] == {{0, ((I/4)*EL*(cw^2 + sw^2)*FR$deltaZ[{Z, A}, {{}}])/(cw*sw)}, {0, 0}},
-
-C[ -F[1] , F[1] ] == {{0, (-I)*FR$deltaZ[{ve, ve}, {{}}, "L"]}, {0, 0}, {0, 0}, {0, 0}},
-
-C[ -F[2] , F[2] ] == {{0, (-I)*FR$deltaZ[{vm, vm}, {{}}, "L"]}, {0, 0}, {0, 0}, {0, 0}},
-
-C[ -F[3] , F[3] ] == {{0, (-I)*FR$deltaZ[{vt, vt}, {{}}, "L"]}, {0, 0}, {0, 0}, {0, 0}},
-
-C[ -F[1] , F[4] , V[3] ] == {{I*gc150, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{e, e}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{ve, ve}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{ve, ve}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[2] , F[5] , V[3] ] == {{I*gc151, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{vm, vm}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{vm, vm}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[3] , F[6] , V[3] ] == {{I*gc152, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{vt, vt}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{vt, vt}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[1] , F[1] , V[2] ] == {{I*gc153, ((I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{ve, ve}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{ve, ve}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{ve, ve}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{ve, ve}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[2] , F[2] , V[2] ] == {{I*gc154, ((I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{vm, vm}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{vm, vm}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{vm, vm}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{vm, vm}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[3] , F[3] , V[2] ] == {{I*gc155, ((I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{vt, vt}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{vt, vt}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{vt, vt}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{vt, vt}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[4] , F[4] , V[1] ] == {{I*gc156, ((-I/4)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{e, e}, {{}}, "L"]))/(aEWM1*cw*sw)}, {I*gc156, ((-I/2)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{e, e}, {{}}, "R"]))/(aEWM1*cw)}},
-
-C[ -F[5] , F[5] , V[1] ] == {{I*gc157, ((-I/4)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{mu, mu}, {{}}, "L"]))/(aEWM1*cw*sw)}, {I*gc157, ((-I/2)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(aEWM1*cw)}},
-
-C[ -F[6] , F[6] , V[1] ] == {{I*gc158, ((-I/4)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{ta, ta}, {{}}, "L"]))/(aEWM1*cw*sw)}, {I*gc158, ((-I/2)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(aEWM1*cw)}},
-
-C[ -F[4] , F[4] , V[2] ] == {{I*gc159L, ((-I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{e, e}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{e, e}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{e, e}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{e, e}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc159R, ((-I/2)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{e, e}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{e, e}, {{}}, "R"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[5] , F[5] , V[2] ] == {{I*gc160L, ((-I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{mu, mu}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{mu, mu}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{mu, mu}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{mu, mu}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc160R, ((-I/2)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{mu, mu}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{mu, mu}, {{}}, "R"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[6] , F[6] , V[2] ] == {{I*gc161L, ((-I/4)*EL*(-(cw^2*MW^3*FR$delta[{aEWM1}, {}]) + cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 2*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 2*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 2*aEWM1*cw^2*MW^3*FR$deltaZ[{ta, ta}, {{}}, "L"] - 2*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{ta, ta}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{ta, ta}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{ta, ta}, {{}}, "L"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc161R, ((-I/2)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{ta, ta}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{ta, ta}, {{}}, "R"]))/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[1] ] == {{I*gc162*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-4*cw*sw*FR$delta[{aEWM1}, {}] + 4*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 8*aEWM1*cw*sw*FR$deltaZ[{c, c}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc162*IndexDelta[e1x2, e2x2], ((I/3)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[1] ] == {{I*gc163*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-4*cw*sw*FR$delta[{aEWM1}, {}] + 4*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 8*aEWM1*cw*sw*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc163*IndexDelta[e1x2, e2x2], ((I/3)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[1] ] == {{I*gc164*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-4*cw*sw*FR$delta[{aEWM1}, {}] + 4*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] - aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 8*aEWM1*cw*sw*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc164*IndexDelta[e1x2, e2x2], ((I/3)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[2] ] == {{I*gc165L*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 4*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 4*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{c, c}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{c, c}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{c, c}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{c, c}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc165R*IndexDelta[e1x2, e2x2], ((I/3)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{c, c}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{c, c}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[2] ] == {{I*gc166L*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 4*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 4*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{t, t}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{t, t}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{t, t}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc166R*IndexDelta[e1x2, e2x2], ((I/3)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{t, t}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[2] ] == {{I*gc167L*IndexDelta[e1x2, e2x2], ((I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] + MW^3*sw^2*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] - 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] + 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 4*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 4*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{u, u}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{u, u}, {{}}, "L"] - 2*aEWM1*MW^3*sw^2*FR$deltaZ[{u, u}, {{}}, "L"] + 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc167R*IndexDelta[e1x2, e2x2], ((I/3)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{u, u}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{u, u}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[1] ] == {{I*gc168*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{b, b}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc168*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[1] ] == {{I*gc169*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{d, d}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc169*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[1] ] == {{I*gc170*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-2*cw*sw*FR$delta[{aEWM1}, {}] + 2*aEWM1*cw*sw*FR$deltaZ[{A, A}, {{}}] + 3*aEWM1*cw^2*FR$deltaZ[{Z, A}, {{}}] + aEWM1*sw^2*FR$deltaZ[{Z, A}, {{}}] + 4*aEWM1*cw*sw*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*sw)}, {I*gc170*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(-(cw*FR$delta[{aEWM1}, {}]) + aEWM1*cw*FR$deltaZ[{A, A}, {{}}] - aEWM1*sw*FR$deltaZ[{Z, A}, {{}}] + 2*aEWM1*cw*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw)}},
-
-C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[2] ] == {{I*gc171L*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{b, b}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{b, b}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{b, b}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{b, b}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc171R*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{b, b}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{b, b}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[2] ] == {{I*gc172L*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{d, d}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{d, d}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{d, d}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{d, d}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc172R*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{d, d}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{d, d}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[2] ] == {{I*gc173L*IndexDelta[e1x2, e2x2], ((-I/12)*EL*(-3*cw^2*MW^3*FR$delta[{aEWM1}, {}] + 3*cw^2*MW*MZ^2*FR$delta[{aEWM1}, {}] - MW^3*sw^2*FR$delta[{aEWM1}, {}] + MW*MZ^2*sw^2*FR$delta[{aEWM1}, {}] - 6*aEWM1*cw^2*MZ^2*FR$delta[{MW}, {}] + 2*aEWM1*MZ^2*sw^2*FR$delta[{MW}, {}] + 6*aEWM1*cw^2*MW*MZ*FR$delta[{MZ}, {}] - 2*aEWM1*MW*MZ*sw^2*FR$delta[{MZ}, {}] + 2*aEWM1*cw*MW^3*sw*FR$deltaZ[{A, Z}, {{}}] - 2*aEWM1*cw*MW*MZ^2*sw*FR$deltaZ[{A, Z}, {{}}] + 3*aEWM1*cw^2*MW^3*FR$deltaZ[{Z, Z}, {{}}] - 3*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW^3*sw^2*FR$deltaZ[{Z, Z}, {{}}] - aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{Z, Z}, {{}}] + 6*aEWM1*cw^2*MW^3*FR$deltaZ[{s, s}, {{}}, "L"] - 6*aEWM1*cw^2*MW*MZ^2*FR$deltaZ[{s, s}, {{}}, "L"] + 2*aEWM1*MW^3*sw^2*FR$deltaZ[{s, s}, {{}}, "L"] - 2*aEWM1*MW*MZ^2*sw^2*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ)*sw)}, {I*gc173R*IndexDelta[e1x2, e2x2], ((-I/6)*EL*(MW^3*sw*FR$delta[{aEWM1}, {}] - MW*MZ^2*sw*FR$delta[{aEWM1}, {}] - 2*aEWM1*MZ^2*sw*FR$delta[{MW}, {}] + 2*aEWM1*MW*MZ*sw*FR$delta[{MZ}, {}] + aEWM1*cw*MW^3*FR$deltaZ[{A, Z}, {{}}] - aEWM1*cw*MW*MZ^2*FR$deltaZ[{A, Z}, {{}}] - aEWM1*MW^3*sw*FR$deltaZ[{Z, Z}, {{}}] + aEWM1*MW*MZ^2*sw*FR$deltaZ[{Z, Z}, {{}}] - 2*aEWM1*MW^3*sw*FR$deltaZ[{s, s}, {{}}, "R"] + 2*aEWM1*MW*MZ^2*sw*FR$deltaZ[{s, s}, {{}}, "R"])*IndexDelta[e1x2, e2x2])/(aEWM1*cw*MW*(MW - MZ)*(MW + MZ))}},
-
-C[ -F[8, {e1x2}] , F[8, {e2x2}] , V[4, {e3x2}] ] == {{I*gc174*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{c, c}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc174*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{c, c}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[9, {e1x2}] , F[9, {e2x2}] , V[4, {e3x2}] ] == {{I*gc175*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{t, t}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc175*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{t, t}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[7, {e1x2}] , F[7, {e2x2}] , V[4, {e3x2}] ] == {{I*gc176*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{u, u}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc176*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{u, u}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[12, {e1x2}] , F[12, {e2x2}] , V[4, {e3x2}] ] == {{I*gc177*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{b, b}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc177*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{b, b}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[10, {e1x2}] , F[10, {e2x2}] , V[4, {e3x2}] ] == {{I*gc178*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{d, d}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc178*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{d, d}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[11, {e1x2}] , F[11, {e2x2}] , V[4, {e3x2}] ] == {{I*gc179*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{s, s}, {{}}, "L"])*SUNT[e3x2, e1x2, e2x2])/aS}, {I*gc179*SUNT[e3x2, e1x2, e2x2], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{s, s}, {{}}, "R"])*SUNT[e3x2, e1x2, e2x2])/aS}},
-
-C[ -F[8, {e1x2}] , F[11, {e2x2}] , V[3] ] == {{I*gc180*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[9, {e1x2}] , F[12, {e2x2}] , V[3] ] == {{I*gc181*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[7, {e1x2}] , F[10, {e2x2}] , V[3] ] == {{I*gc182*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[12, {e1x2}] , F[9, {e2x2}] , -V[3] ] == {{I*gc183*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{b, b}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{b, b}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{t, t}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{t, t}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[10, {e1x2}] , F[7, {e2x2}] , -V[3] ] == {{I*gc184*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{d, d}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{d, d}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{u, u}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{u, u}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[11, {e1x2}] , F[8, {e2x2}] , -V[3] ] == {{I*gc185*IndexDelta[e1x2, e2x2], ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{c, c}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{c, c}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{s, s}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{s, s}, {{}}, "L"])*IndexDelta[e1x2, e2x2])/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[4] , F[1] , -V[3] ] == {{I*gc186, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{e, e}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{e, e}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{ve, ve}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{ve, ve}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[5] , F[2] , -V[3] ] == {{I*gc187, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{mu, mu}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{mu, mu}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{vm, vm}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{vm, vm}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}},
-
-C[ -F[6] , F[3] , -V[3] ] == {{I*gc188, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {}]) + MZ^3*FR$delta[{aEWM1}, {}] - 2*aEWM1*MW*MZ*FR$delta[{MW}, {}] + 2*aEWM1*MW^2*FR$delta[{MZ}, {}] + aEWM1*MW^2*MZ*FR$deltaZ[{W, W}, {{}}] - aEWM1*MZ^3*FR$deltaZ[{W, W}, {{}}] + aEWM1*MW^2*MZ*FR$deltaZ[{ta, ta}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{ta, ta}, {{}}, "L"] + aEWM1*MW^2*MZ*FR$deltaZ[{vt, vt}, {{}}, "L"] - aEWM1*MZ^3*FR$deltaZ[{vt, vt}, {{}}, "L"]))/(Sqrt[2]*aEWM1*(MW - MZ)*MZ*(MW + MZ)*sw)}, {0, 0}}
+C[ S[4, {e3x1}] , -S[4, {e4x1}] , V[4, {e1x2}] , V[4, {e2x2}] ] == {{I*GS^2*(FASUNT[e1x2, e2x2, e4x1, e3x1] + FASUNT[e2x2, e1x2, e4x1, e3x1]), 0}}
 
 }
 
@@ -696,117 +560,87 @@ C[ -F[6] , F[3] , -V[3] ] == {{I*gc188, ((I/2)*EL*(-(MW^2*MZ*FR$delta[{aEWM1}, {
 (* FA Couplings *)
 
 M$FACouplings = {
-     gc20 -> -EL,
-     gc21 -> EL,
-     gc25 -> -EL,
-     gc29 -> EL,
-     gc30 -> (cw*EL)/sw,
-     gc32 -> -((cw*EL)/sw),
-     gc34 -> EL,
-     gc38 -> -EL,
-     gc39 -> -((cw*EL)/sw),
-     gc41 -> (cw*EL)/sw,
-     gc43 -> -((cw*EL)/sw),
-     gc45 -> (cw*EL)/sw,
-     gc50 -> -GS,
-     gc58 -> GS^2,
-     gc59L -> yb,
-     gc59R -> -yt,
-     gc60L -> ydo,
-     gc60R -> -yup,
-     gc61L -> ys,
-     gc61R -> -yc,
-     gc62L -> -(yb/Sqrt[2]),
-     gc62R -> yb/Sqrt[2],
-     gc63L -> -(ydo/Sqrt[2]),
-     gc63R -> ydo/Sqrt[2],
-     gc64L -> -(ys/Sqrt[2]),
-     gc64R -> ys/Sqrt[2],
-     gc65 -> -(yb/Sqrt[2]),
-     gc66 -> -(ydo/Sqrt[2]),
-     gc67 -> -(ys/Sqrt[2]),
-     gc71 -> ye,
-     gc72 -> ym,
-     gc73 -> ytau,
-     gc74L -> -(ye/Sqrt[2]),
-     gc74R -> ye/Sqrt[2],
-     gc75L -> -(ym/Sqrt[2]),
-     gc75R -> ym/Sqrt[2],
-     gc76L -> -(ytau/Sqrt[2]),
-     gc76R -> ytau/Sqrt[2],
-     gc77 -> -(ye/Sqrt[2]),
-     gc78 -> -(ym/Sqrt[2]),
-     gc79 -> -(ytau/Sqrt[2]),
-     gc83L -> yc,
-     gc83R -> -ys,
-     gc84L -> yt,
-     gc84R -> -yb,
-     gc85L -> yup,
-     gc85R -> -ydo,
-     gc86L -> yc/Sqrt[2],
-     gc86R -> -(yc/Sqrt[2]),
-     gc87L -> yt/Sqrt[2],
-     gc87R -> -(yt/Sqrt[2]),
-     gc88L -> yup/Sqrt[2],
-     gc88R -> -(yup/Sqrt[2]),
-     gc89 -> -(yc/Sqrt[2]),
-     gc90 -> -(yt/Sqrt[2]),
-     gc91 -> -(yup/Sqrt[2]),
-     gc95R -> -ye,
-     gc96R -> -ym,
-     gc97R -> -ytau,
-     gc98 -> -yDM,
-     gc99R -> -yDM,
-     gc119 -> EL^2,
-     gc122 -> -(EL^2/sw^2),
-     gc137 -> -((cw*EL^2)/sw),
-     gc143 -> (cw^2*EL^2)/sw^2,
-     gc150 -> EL/(Sqrt[2]*sw),
-     gc151 -> EL/(Sqrt[2]*sw),
-     gc152 -> EL/(Sqrt[2]*sw),
-     gc153 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
-     gc154 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
-     gc155 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
-     gc156 -> -EL,
-     gc157 -> -EL,
-     gc158 -> -EL,
-     gc159L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
-     gc159R -> (EL*sw)/cw,
-     gc160L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
-     gc160R -> (EL*sw)/cw,
-     gc161L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
-     gc161R -> (EL*sw)/cw,
-     gc162 -> (2*EL)/3,
-     gc163 -> (2*EL)/3,
-     gc164 -> (2*EL)/3,
-     gc165L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
-     gc165R -> (-2*EL*sw)/(3*cw),
-     gc166L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
-     gc166R -> (-2*EL*sw)/(3*cw),
-     gc167L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
-     gc167R -> (-2*EL*sw)/(3*cw),
-     gc168 -> -EL/3,
-     gc169 -> -EL/3,
-     gc170 -> -EL/3,
-     gc171L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
-     gc171R -> (EL*sw)/(3*cw),
-     gc172L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
-     gc172R -> (EL*sw)/(3*cw),
-     gc173L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
-     gc173R -> (EL*sw)/(3*cw),
-     gc174 -> GS,
-     gc175 -> GS,
-     gc176 -> GS,
-     gc177 -> GS,
-     gc178 -> GS,
-     gc179 -> GS,
-     gc180 -> EL/(Sqrt[2]*sw),
-     gc181 -> EL/(Sqrt[2]*sw),
-     gc182 -> EL/(Sqrt[2]*sw),
-     gc183 -> EL/(Sqrt[2]*sw),
-     gc184 -> EL/(Sqrt[2]*sw),
-     gc185 -> EL/(Sqrt[2]*sw),
-     gc186 -> EL/(Sqrt[2]*sw),
-     gc187 -> EL/(Sqrt[2]*sw),
-     gc188 -> EL/(Sqrt[2]*sw)};
+     gc12 -> -EL,
+     gc13 -> EL,
+     gc15 -> -EL,
+     gc18 -> EL,
+     gc19 -> (cw*EL)/sw,
+     gc21 -> -((cw*EL)/sw),
+     gc23 -> EL,
+     gc26 -> -EL,
+     gc27 -> -((cw*EL)/sw),
+     gc29 -> (cw*EL)/sw,
+     gc31 -> -((cw*EL)/sw),
+     gc33 -> (cw*EL)/sw,
+     gc35 -> -GS,
+     gc37 -> GS^2,
+     gc38L -> yb,
+     gc38R -> -yt,
+     gc39L -> -(yb/Sqrt[2]),
+     gc39R -> yb/Sqrt[2],
+     gc40 -> -(yb/Sqrt[2]),
+     gc41 -> ytau,
+     gc42L -> -(ytau/Sqrt[2]),
+     gc42R -> ytau/Sqrt[2],
+     gc43 -> -(ytau/Sqrt[2]),
+     gc44L -> yt,
+     gc44R -> -yb,
+     gc45L -> yt/Sqrt[2],
+     gc45R -> -(yt/Sqrt[2]),
+     gc46 -> -(yt/Sqrt[2]),
+     gc62 -> EL^2,
+     gc64 -> -(EL^2/sw^2),
+     gc65R -> -ytau,
+     gc75 -> -((cw*EL^2)/sw),
+     gc80 -> (cw^2*EL^2)/sw^2,
+     gc81 -> -EL,
+     gc82 -> -EL,
+     gc83 -> -EL,
+     gc84 -> (2*EL)/3,
+     gc85 -> (2*EL)/3,
+     gc86 -> (2*EL)/3,
+     gc87 -> -EL/3,
+     gc88 -> -EL/3,
+     gc89 -> -EL/3,
+     gc90 -> GS,
+     gc91 -> GS,
+     gc92 -> GS,
+     gc93 -> GS,
+     gc94 -> GS,
+     gc95 -> GS,
+     gc96 -> EL/(Sqrt[2]*sw),
+     gc97 -> EL/(Sqrt[2]*sw),
+     gc98 -> EL/(Sqrt[2]*sw),
+     gc99 -> EL/(Sqrt[2]*sw),
+     gc100 -> EL/(Sqrt[2]*sw),
+     gc101 -> EL/(Sqrt[2]*sw),
+     gc102 -> EL/(Sqrt[2]*sw),
+     gc103 -> EL/(Sqrt[2]*sw),
+     gc104 -> EL/(Sqrt[2]*sw),
+     gc105 -> EL/(Sqrt[2]*sw),
+     gc106 -> EL/(Sqrt[2]*sw),
+     gc107 -> EL/(Sqrt[2]*sw),
+     gc108L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
+     gc108R -> (-2*EL*sw)/(3*cw),
+     gc109L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
+     gc109R -> (-2*EL*sw)/(3*cw),
+     gc110L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
+     gc110R -> (-2*EL*sw)/(3*cw),
+     gc111L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
+     gc111R -> (EL*sw)/(3*cw),
+     gc112L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
+     gc112R -> (EL*sw)/(3*cw),
+     gc113L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
+     gc113R -> (EL*sw)/(3*cw),
+     gc114 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
+     gc115 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
+     gc116 -> (EL*(cw^2 + sw^2))/(2*cw*sw),
+     gc117L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
+     gc117R -> (EL*sw)/cw,
+     gc118L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
+     gc118R -> (EL*sw)/cw,
+     gc119L -> -(EL*(cw^2 - sw^2))/(2*cw*sw),
+     gc119R -> (EL*sw)/cw,
+     gc120 -> -yDM,
+     gc121R -> -yDM};
 

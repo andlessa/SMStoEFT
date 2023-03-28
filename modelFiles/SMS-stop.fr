@@ -27,7 +27,7 @@ M$Parameters = {
   QS    == { TeX->Subscript[Q,s], ParameterType->External, Value->100,  Description->"QCD scale for running quark masses in CalcHEP"},
 
  (* External NP parameters*)
-  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->0.00002, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"}
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"}
 
 };
 
@@ -53,18 +53,18 @@ F[16] == {
 
 (* Colored Scalar *)
 S[5] == { 
-          ClassName        -> St,
+          ClassName        -> ST,
           Indices          -> {Index[Colour]},
           SelfConjugate    -> False,
           Unphysical       -> False,
-          Mass             -> {mSt, 400.},
-          Width            -> {wSt, 1.},
+          Mass             -> {mST, 400.},
+          Width            -> {wST, 1.},
           QuantumNumbers   -> {Q -> 2/3},
-          PropagatorLabel  -> {"St"},
+          PropagatorLabel  -> {"ST"},
           PropagatorType   -> ScalarDash, 
           PDG              -> {5000002},
-          ParticleName     -> {"~St" },
-          AntiParticleName -> {"~St~"},
+          ParticleName     -> {"~ST" },
+          AntiParticleName -> {"~ST~"},
           FullName         -> {"Colored Scalar"} }
 };
 
@@ -73,10 +73,10 @@ S[5] == {
 (* ************************** *)
 (* gauge kinetic and mass terms *)
 
-Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mchi/2) chibar.chi  + DC[Stbar[aa],mu] DC[St[aa],mu] -  mS^2 Stbar[aa] St[aa];
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
 
 (* DM-Scalar-Top coupling *)
-LYDM := -yDM (Stbar[cc] chibar[sp].uR[sp,3,cc]);
+LYDM := -yDM (STbar[cc] chibar[sp].uR[sp,3,cc]);
 
 
 LNP := Lkin + LYDM + HC[LYDM];
