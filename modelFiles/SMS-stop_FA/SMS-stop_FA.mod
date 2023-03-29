@@ -375,7 +375,7 @@ C[ S[1] , -U[2] , U[2] ] == {{((-I/4)*EL^2*(cw^2 + sw^2)^2*vev)/(cw^2*sw^2), 0}}
 
 C[ -U[5, {e1x1}] , U[5, {e2x1}] , V[4, {e3x2}] ] == {{gc35*FASUNF[e3x2, e1x1, e2x1], 0}, {0, 0}},
 
-C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] ] == {{-(GS*FASUNF[e1x2, e2x2, e3x2]), 0}},
+C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] ] == {{-(gc90*FASUNF[e1x2, e2x2, e3x2]), 0}},
 
 C[ V[4, {e1x2}] , V[4, {e2x2}] , V[4, {e3x2}] , V[4, {e4x2}] ] == {{(-I)*gc37*(FASUNF[e1x2, e3x2, e2x2, e4x2] + FASUNF[e1x2, e4x2, e2x2, e3x2]), 0}, {(-I)*gc37*(FASUNF[e1x2, e2x2, e3x2, e4x2] - FASUNF[e1x2, e4x2, e2x2, e3x2]), 0}, {I*gc37*(FASUNF[e1x2, e2x2, e3x2, e4x2] + FASUNF[e1x2, e3x2, e2x2, e4x2]), 0}},
 
@@ -547,9 +547,9 @@ C[ -F[9, {e1x2}] , F[13] , S[4, {e3x1}] ] == {{I*gc120*IndexDelta[e1x2, e3x1], 0
 
 C[ F[13] , F[9, {e2x2}] , -S[4, {e3x1}] ] == {{0, 0}, {I*gc121R*IndexDelta[e2x2, e3x1], 0}},
 
-C[ S[4, {e2x1}] , -S[4, {e3x1}] , V[4, {e1x2}] ] == {{I*GS*FASUNT[e1x2, e3x1, e2x1], 0}},
+C[ S[4, {e2x1}] , -S[4, {e3x1}] , V[4, {e1x2}] ] == {{I*gc90*FASUNT[e1x2, e3x1, e2x1], 0}},
 
-C[ S[4, {e3x1}] , -S[4, {e4x1}] , V[4, {e1x2}] , V[4, {e2x2}] ] == {{I*GS^2*(FASUNT[e1x2, e2x2, e4x1, e3x1] + FASUNT[e2x2, e1x2, e4x1, e3x1]), 0}}
+C[ S[4, {e3x1}] , -S[4, {e4x1}] , V[4, {e1x2}] , V[4, {e2x2}] ] == {{I*gc90^2*(FASUNT[e1x2, e2x2, e4x1, e3x1] + FASUNT[e2x2, e1x2, e4x1, e3x1]), 0}}
 
 }
 
@@ -572,8 +572,8 @@ M$FACouplings = {
      gc29 -> (cw*EL)/sw,
      gc31 -> -((cw*EL)/sw),
      gc33 -> (cw*EL)/sw,
-     gc35 -> -GS,
-     gc37 -> GS^2,
+     gc35 -> -Sqrt[4*Pi*aS],
+     gc37 -> 4*Pi*aS,
      gc38L -> yb,
      gc38R -> -yt,
      gc39L -> -(yb/Sqrt[2]),
@@ -602,12 +602,12 @@ M$FACouplings = {
      gc87 -> -EL/3,
      gc88 -> -EL/3,
      gc89 -> -EL/3,
-     gc90 -> GS,
-     gc91 -> GS,
-     gc92 -> GS,
-     gc93 -> GS,
-     gc94 -> GS,
-     gc95 -> GS,
+     gc90 -> Sqrt[4*Pi*aS],
+     gc91 -> Sqrt[4*Pi*aS],
+     gc92 -> Sqrt[4*Pi*aS],
+     gc93 -> Sqrt[4*Pi*aS],
+     gc94 -> Sqrt[4*Pi*aS],
+     gc95 -> Sqrt[4*Pi*aS],
      gc96 -> EL/(Sqrt[2]*sw),
      gc97 -> EL/(Sqrt[2]*sw),
      gc98 -> EL/(Sqrt[2]*sw),
