@@ -1,0 +1,42 @@
+(*********************************************************************)
+(*********************************************************************)
+(****** FeynRules for gluon-gluon-Higgs coupling ******)
+(******                                                         ******)
+(****** Authors: A. Lessa                       ******)
+(******                                                         ******)
+(****** The form factor implementation ang ggH couping is based on 1410.5806 (Eq.3) ****)
+(*********************************************************************)
+(*********************************************************************)
+
+M$ModelName = "gghEFT";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0"
+};
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+(* CalcHEP related parameters *)
+   cG  == { TeX -> Subscript[C,g] ,   ParameterType -> External,   Value -> 1.0,   InteractionOrder -> {NP,1},  Description->"g-g-H effective coupling"} }
+};
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+
+(* Higgs-G-G effective coupling (cG = 1 for the SM in the heavy top limit).  *)
+LNP := Block[{mu,nu,jj}, 
+ 
+  ExpandIndices[cG (aS/(8 Pi)) (2/3) (H/vev) FS[G,mu,nu,jj] FS[G,mu,nu,jj]] 
+  ];
+
+
+

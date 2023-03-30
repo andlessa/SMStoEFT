@@ -11,21 +11,23 @@ The following Mathematica packages must be installed (in <home folder>/.Mathemat
   * [FeynHelpers](https://github.com/FeynCalc/feynhelpers)
   * [Package-X](https://gitlab.com/mule-tools/package-x) (use this [tarball](./packageX.tar.gz))
 
-In addition [MadGraph5](https://launchpad.net/mg5amcnlo) must also be installed.
+In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/) must also be installed.
 
 
-### Form Factors
+### Computing Form Factors
 
-Instruction for implementing form factors within MadGraph can be found here:
+The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (through FeynHelpers).
+An example of the calculation of the Higgs-Gluon-Gluon form factor can be found [here](./Examples/feyncalc-HGG.nb).
+
+### Creating Models with Form Factors
+
+Instruction for implementing form factors within MadGraph can be found [here](./InstructionsFormFactors.md). 
+These instructions are based on:
 
  * [MadGraph wiki](https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/FormFactors)
  * [MadGraph Tutorial](./Refs/Hands-onStartToMG.pdf)
- * [Loop Induced Process - P. Bittar](./Refs/LI_off-shell_Higgs_Final.pdf)
  
-An example of the implementation of form factors for the effective Higgs-gluon-gluon coupling
-can be found [here](./modelFiles/gghEFT_UFO_withFormFactor/form_factors.py). The [vertices.py](./modelFiles/gghEFT_UFO_withFormFactor/vertices.py)
-and [lorentz.py](./modelFiles/gghEFT_UFO_withFormFactor/lorentz.py) files also need to be modified (more details [here](./modelFiles/hGG.fr)).
- 
+
    
 
 [^1]: Make sure to include the following lines to <home folder>/Mathematica/Kernel/init.m:
