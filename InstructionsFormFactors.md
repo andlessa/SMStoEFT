@@ -36,7 +36,7 @@ used (see discussion above concerning the implementation). In this case the foll
 of the process folder and before generating events:
 
  0. Collier must be installed through MadGraph5
- 1. The file MG5/HEPTools/collier/COLLIER-1.2.7/collier.mod *must be coppied to the model folder* (found in Source/MODEL)
+ 1. The file MG5/HEPTools/collier/COLLIER-1.2.7/modules/collier.mod *must be coppied to the model folder* (found in Source/MODEL)
  2. The static collier library, which can be found in MG5/HEPTools/collier/COLLIER-1.2.7/libcollier.a, *must be coppied to the lib folder* (in the process folder)
  3. In addition Source/makefile has to be modified in order to include the collier library (see [here](./auxFiles/Source/makefile#L34) and [here](./auxFiles/Source/makefile#L66))
 
