@@ -17,7 +17,7 @@ In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://
 ### Computing Form Factors
 
 The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (through FeynHelpers).
-An example of the calculation of the Higgs-Gluon-Gluon form factor can be found [here](./Examples/feyncalc-HGG.nb).
+An example of the calculation of the Higgs-Gluon-Gluon form factor can be found [here](./auxFiles/Examples/feyncalc-HGG.nb).
 
 ### Creating Models with Form Factors
 

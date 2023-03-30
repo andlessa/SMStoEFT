@@ -37,10 +37,10 @@ of the process folder and before generating events:
 
  0. Collier must be installed through MadGraph5
  1. The file MG5/HEPTools/collier/COLLIER-1.2.7/collier.mod *must be coppied to the model folder* (found in Source/MODEL)
- 2. The static collier library, which can be found in MG5/HEPTools/collier/COLLIER-1.2.7/libcollier.a, *must be coppied to the lib folder* (in <process folder>/lib)
- 3. In addition the Source/makefile has to be modified in order to include the collier library (see [example](./auxFiles/Source/makefile))
+ 2. The static collier library, which can be found in MG5/HEPTools/collier/COLLIER-1.2.7/libcollier.a, *must be coppied to the lib folder* (in the process folder)
+ 3. In addition Source/makefile has to be modified in order to include the collier library (see [here](./auxFiles/Source/makefile#L34) and [here](./auxFiles/Source/makefile#L66))
 
- 4. Finally, the SubProcess/makefile also has to be modified in order to include the collier library (see [example](./auxFiles/SubProcess/makefile))
+ 4. Finally, SubProcess/makefile also has to be modified in order to include the collier library (see [here](./auxFiles/SubProcesses/makefile#L27) and [here](./auxFiles/SubProcesses/makefile#L29))
  
      
 After all the above changes, it should be possible to generate events using bin/generate_events.
