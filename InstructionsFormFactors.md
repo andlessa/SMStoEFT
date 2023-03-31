@@ -29,7 +29,7 @@ The implementation of form factors can be done through the following steps:
 
 For the case of simple form factors which have an explicit analytic expression, [MadGraph5]() can be run normally. 
 After importing the modified UFO model, events can be generated running  bin/generate_events. Note that in many cases the order of the effective
-couplings might have to be specifically specified (e.g. NP=1) in order to generate the desired process.
+couplings might have to be specifically specified (e.g. NP=1) in order to generate the desired process (see [example](./auxFiles/Examples/hGG/proc_card_hTT.dat).
 
 If the form factors include the evaluation of loop integrals, the [Collier](https://collier.hepforge.org/) library can be
 used (see discussion above concerning the implementation). In this case the following steps must be taken after the creation
