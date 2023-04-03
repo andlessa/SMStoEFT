@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    441448,       9729]
-NotebookOptionsPosition[    358652,       8821]
-NotebookOutlinePosition[    359137,       8839]
-CellTagsIndexPosition[    359094,       8836]
+NotebookDataLength[    449142,       9919]
+NotebookOptionsPosition[    364764,       8993]
+NotebookOutlinePosition[    365249,       9011]
+CellTagsIndexPosition[    365206,       9008]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -8814,7 +8814,179 @@ Cell[BoxData[
  CellChangeTimes->{3.88927599572843*^9},
  CellLabel->
   "During evaluation of \
-In[6]:=",ExpressionUUID->"0a38957e-d2ec-49ad-bc87-6a2da6db113c"]
+In[6]:=",ExpressionUUID->"0a38957e-d2ec-49ad-bc87-6a2da6db113c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Flavor expansion of the vertices distributed over \"\>", 
+   "\[InvisibleSpace]", "4", "\[InvisibleSpace]", "\<\" cores: \"\>", 
+   "\[InvisibleSpace]", 
+   DynamicBox[ToBoxes[FeynRules`FR$Count1, StandardForm],
+    ImageSizeCache->{22., {0., 8.}}], "\[InvisibleSpace]", "\<\" / \"\>", 
+   "\[InvisibleSpace]", "206"}],
+  SequenceForm[
+  "Flavor expansion of the vertices distributed over ", 4, " cores: ", 
+   Dynamic[FeynRules`FR$Count1], " / ", 206],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.889283265512504*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"93d6ae50-5950-45fb-b68d-938fd4fe7127"],
+
+Cell[BoxData["\<\"   - Saved vertices in InterfaceRun[ 1 ].\"\>"], "Print",
+ CellChangeTimes->{3.889289791906649*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"7b430c42-053a-4db9-88fe-ba73c5bbc187"],
+
+Cell[BoxData[
+ StyleBox["\<\"Computing the squared matrix elements relevant for the 1->2 \
+decays: \"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0.5, 0],
+  FrontFaceColor->RGBColor[1, 0.5, 0],
+  BackFaceColor->RGBColor[1, 0.5, 0],
+  GraphicsColor->RGBColor[1, 0.5, 0],
+  FontWeight->Bold,
+  FontColor->RGBColor[1, 0.5, 0]]], "Print",
+ CellChangeTimes->{3.889289920183198*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"6a96a176-0c50-4ffe-8eab-44879ca89977"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   DynamicBox[ToBoxes[PRIVATE`mycounter, StandardForm],
+    ImageSizeCache->{14., {0., 8.}}], "\[InvisibleSpace]", "\<\" / \"\>", 
+   "\[InvisibleSpace]", "48"}],
+  SequenceForm[
+   Dynamic[PRIVATE`mycounter], " / ", 48],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.889289920233377*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"43889612-aa90-4e73-9c96-ff43792c3e22"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Squared matrix elent compute in \"\>", "\[InvisibleSpace]", 
+   "1.889698`", "\[InvisibleSpace]", "\<\" seconds.\"\>"}],
+  SequenceForm["Squared matrix elent compute in ", 1.889698, " seconds."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.889289924771311*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"0ad0beaa-af5f-425f-9765-dbb6727d3c85"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Decay widths computed in \"\>", "\[InvisibleSpace]", 
+   "0.024237`", "\[InvisibleSpace]", "\<\" seconds.\"\>"}],
+  SequenceForm["Decay widths computed in ", 0.024237, " seconds."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8892899247948112`*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"f387d099-1745-44a2-8f1d-1980dff40473"],
+
+Cell[BoxData["\<\"Preparing Python output.\"\>"], "Print",
+ CellChangeTimes->{3.889289924798922*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"3677566e-d68a-49f4-97ce-d0e95b188092"],
+
+Cell[BoxData["\<\"    - Splitting vertices into building blocks.\"\>"], \
+"Print",
+ CellChangeTimes->{3.889291050072994*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"d562f4de-5085-41b2-badb-817378e444e9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Splitting of vertices distributed over \"\>", 
+   "\[InvisibleSpace]", "4", "\[InvisibleSpace]", "\<\" kernels.\"\>"}],
+  SequenceForm["Splitting of vertices distributed over ", 4, " kernels."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8892912697922983`*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"112a2d73-a0e4-4ff7-bfdb-0679b7718f6d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"    - Optimizing: \"\>", "\[InvisibleSpace]", 
+   DynamicBox[ToBoxes[PRIVATE`PY$SplitVertexCounter, StandardForm],
+    ImageSizeCache->{22., {0., 8.}}], "\[InvisibleSpace]", "\<\"/\"\>", 
+   "\[InvisibleSpace]", "183", "\[InvisibleSpace]", "\<\" .\"\>"}],
+  SequenceForm["    - Optimizing: ", 
+   Dynamic[PRIVATE`PY$SplitVertexCounter], "/", 183, " ."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8893066712591257`*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"6a2a6314-3d00-49a3-9002-adf1e178bc87"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$IterationLimit", "itlim", 
+   "\"Iteration limit of \\!\\(\\*RowBox[{\\\"4096\\\"}]\\) exceeded.\"", 2, 
+   6, 1, 20040021051743256982, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.889306684930027*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"9f30c675-a8b7-45ca-aaf3-06fce809d4f7"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$IterationLimit", "itlim", 
+   "\"Iteration limit of \\!\\(\\*RowBox[{\\\"4096\\\"}]\\) exceeded.\"", 2, 
+   6, 2, 20040021051743256982, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.889306717984755*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"c787f1fd-6b9a-42ba-b65a-192613e157e6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$IterationLimit", "itlim", 
+   "\"Iteration limit of \\!\\(\\*RowBox[{\\\"4096\\\"}]\\) exceeded.\"", 2, 
+   6, 3, 20040021051743256982, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.889306739498611*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"70ed5fde-5a93-4f53-851a-6ef6e4475a96"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"$IterationLimit\\\", \\\
+\"::\\\", \\\"itlim\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 6, 4, 20040021051743256982, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.889306740561235*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"25736301-d007-43bd-905c-1e42071f67d5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"    - Writing files.\"\>"], "Print",
+ CellChangeTimes->{3.889311374006407*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"223b36ee-55b9-4833-a84b-4ea228ec5de2"],
+
+Cell[BoxData["\<\"Done!\"\>"], "Print",
+ CellChangeTimes->{3.8893119279837418`*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"5cd2c5c2-74bc-481c-afbf-0ce912083b41"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -9727,7 +9899,25 @@ Cell[356713, 8766, 209, 4, 24, "Print",ExpressionUUID->"3ac28f15-8e73-4d82-b9c2-
 Cell[356925, 8772, 388, 9, 24, "Print",ExpressionUUID->"de2a60d6-900c-4ede-9cd6-f72719e3c882"],
 Cell[357316, 8783, 242, 5, 24, "Print",ExpressionUUID->"61b6062d-54d4-46c1-b464-c01ef5008310"],
 Cell[357561, 8790, 727, 16, 24, "Print",ExpressionUUID->"47882948-bda0-49ec-bfde-26d7bea70c13"],
-Cell[358291, 8808, 321, 8, 24, "Print",ExpressionUUID->"0a38957e-d2ec-49ad-bc87-6a2da6db113c"]
+Cell[358291, 8808, 321, 8, 24, "Print",ExpressionUUID->"0a38957e-d2ec-49ad-bc87-6a2da6db113c"],
+Cell[358615, 8818, 678, 15, 24, "Print",ExpressionUUID->"93d6ae50-5950-45fb-b68d-938fd4fe7127"],
+Cell[359296, 8835, 221, 4, 24, "Print",ExpressionUUID->"7b430c42-053a-4db9-88fe-ba73c5bbc187"],
+Cell[359520, 8841, 488, 13, 24, "Print",ExpressionUUID->"6a96a176-0c50-4ffe-8eab-44879ca89977"],
+Cell[360011, 8856, 442, 12, 24, "Print",ExpressionUUID->"43889612-aa90-4e73-9c96-ff43792c3e22"],
+Cell[360456, 8870, 420, 9, 24, "Print",ExpressionUUID->"0ad0beaa-af5f-425f-9765-dbb6727d3c85"],
+Cell[360879, 8881, 408, 9, 24, "Print",ExpressionUUID->"f387d099-1745-44a2-8f1d-1980dff40473"],
+Cell[361290, 8892, 204, 4, 24, "Print",ExpressionUUID->"3677566e-d68a-49f4-97ce-d0e95b188092"],
+Cell[361497, 8898, 228, 5, 24, "Print",ExpressionUUID->"d562f4de-5085-41b2-badb-817378e444e9"],
+Cell[361728, 8905, 421, 9, 24, "Print",ExpressionUUID->"112a2d73-a0e4-4ff7-bfdb-0679b7718f6d"],
+Cell[362152, 8916, 580, 12, 24, "Print",ExpressionUUID->"6a2a6314-3d00-49a3-9002-adf1e178bc87"]
+}, Open  ]],
+Cell[362747, 8931, 365, 9, 22, "Message",ExpressionUUID->"9f30c675-a8b7-45ca-aaf3-06fce809d4f7"],
+Cell[363115, 8942, 365, 9, 22, "Message",ExpressionUUID->"c787f1fd-6b9a-42ba-b65a-192613e157e6"],
+Cell[363483, 8953, 365, 9, 22, "Message",ExpressionUUID->"70ed5fde-5a93-4f53-851a-6ef6e4475a96"],
+Cell[363851, 8964, 458, 10, 22, "Message",ExpressionUUID->"25736301-d007-43bd-905c-1e42071f67d5"],
+Cell[CellGroupData[{
+Cell[364334, 8978, 200, 4, 24, "Print",ExpressionUUID->"223b36ee-55b9-4833-a84b-4ea228ec5de2"],
+Cell[364537, 8984, 187, 4, 24, "Print",ExpressionUUID->"5cd2c5c2-74bc-481c-afbf-0ce912083b41"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
