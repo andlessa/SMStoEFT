@@ -6,14 +6,14 @@
 
 
 FR$ModelInformation={
-  ModelName->"SMS-stop",
+  ModelName->"SMS-stopQCD",
   Authors -> {"Andre Lessa"},
   Version -> "1.0",
   Date -> "18.03.2023"};
 
 FR$ClassesTranslation={A -> V[1], Z -> V[2], W -> V[3], G -> V[4], ghA -> U[1], ghZ -> U[2], ghWp -> U[3], ghWm -> U[4], ghG -> U[5], ve -> F[1], vm -> F[2], vt -> F[3], e -> F[4], mu -> F[5], ta -> F[6], u -> F[7], c -> F[8], t -> F[9], d -> F[10], s -> F[11], b -> F[12], H -> S[1], G0 -> S[2], GP -> S[3], chi -> F[13], ST -> S[4]};
 
-FR$InteractionOrderPerturbativeExpansion={{NP, 0}, {QCD, 0}, {QED, 0}};
+FR$InteractionOrderPerturbativeExpansion={{QCD, 0}, {QED, 0}};
 
 FR$GoldstoneList={S[2], S[3]};
 
@@ -405,9 +405,9 @@ C[ -F[9, {e1x2}] , F[9, {e2x2}] , S[1] ] == {{I*gc49*IndexDelta[e1x2, e2x2], ((-
 
 C[ -F[9, {e1x2}] , F[9, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{t, t}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{t, t}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-I/2)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
 
-C[ -F[9, {e1x2}] , F[13] , S[4, {e3x1}] ] == {{I*gc51*IndexDelta[e1x2, e3x1], (-I/2)*yDM*(FR$deltaZ[{ST, ST}, {{}}] + FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e3x1]}, {0, 0}},
+C[ -F[9, {e1x2}] , F[13] , S[4, {e3x1}] ] == {{I*gc51*IndexDelta[e1x2, e3x1], (-I/2)*(2*FR$delta[{yDM}, {}] + yDM*FR$deltaZ[{ST, ST}, {{}}] + yDM*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e3x1]}, {0, 0}},
 
-C[ F[13] , F[9, {e2x2}] , -S[4, {e3x1}] ] == {{0, 0}, {I*gc52R*IndexDelta[e2x2, e3x1], (-I/2)*yDM*(FR$deltaZ[{ST, ST}, {{}}] + FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e2x2, e3x1]}},
+C[ F[13] , F[9, {e2x2}] , -S[4, {e3x1}] ] == {{0, 0}, {I*gc52R*IndexDelta[e2x2, e3x1], (-I/2)*(2*FR$delta[{yDM}, {}] + yDM*FR$deltaZ[{ST, ST}, {{}}] + yDM*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e2x2, e3x1]}},
 
 C[ S[4, {e2x1}] , -S[4, {e3x1}] , V[4, {e1x2}] ] == {{I*GS*SUNT[e1x2, e3x1, e2x1], ((I/2)*GS*(FR$delta[{aS}, {}] + aS*FR$deltaZ[{G, G}, {{}}] + 2*aS*FR$deltaZ[{ST, ST}, {{}}])*SUNT[e1x2, e3x1, e2x1])/aS}},
 
