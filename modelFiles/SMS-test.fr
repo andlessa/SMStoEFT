@@ -1,0 +1,163 @@
+(*********************************************************************)
+(*********************************************************************)
+(** Toy model file for top-stop-chi coupling ******)
+(******                                                         ******)
+(****** A. Lessa                       ******)
+(******                                                         ******)
+(****** Feel free to use this model file!                       ******)
+(*********************************************************************)
+(*********************************************************************)
+
+M$ModelName = "SMS-test";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "18.03.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+(* CalcHEP related parameters *)
+  QS    == { TeX->Subscript[Q,s], ParameterType->External, Value->100,  Description->"QCD scale for running quark masses in CalcHEP"},
+
+ (* External NP parameters*)
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+
+  gs == { 
+    ParameterType    -> Internal, 
+    Value            -> Sqrt[4 Pi aS],
+    InteractionOrder -> {QCD,1},  
+    TeX              -> Subscript[g,s], 
+    ParameterName    -> G,
+    Description      -> "Strong coupling constant at the Z pole"
+  },
+  
+  aS    == { 
+    ParameterType    -> External,
+    BlockName        -> SMINPUTS,
+    OrderBlock       -> 3,
+    Value            -> 0.1184, 
+    InteractionOrder -> {QCD,2},
+    TeX              -> Subscript[\[Alpha],s],
+    Description      -> "Strong coupling constant at the Z pole"
+  }
+};
+
+M$GaugeGroups = {
+  SU3C == { 
+    Abelian           -> False, 
+    CouplingConstant  -> gs, 
+    GaugeBoson        -> G,
+    StructureConstant -> f, 
+    Representations   -> {T,Colour}, 
+    SymmetricTensor   -> dSUN
+  } 
+};
+
+
+(* ************************** *)
+(* *****    Indices     ***** *)
+(* ************************** *)
+
+IndexRange[Index[SU2W      ]] = Unfold[Range[3]]; 
+IndexRange[Index[SU2D      ]] = Unfold[Range[2]];
+IndexRange[Index[Gluon     ]] = NoUnfold[Range[8]];
+IndexRange[Index[Colour    ]] = NoUnfold[Range[3]]; 
+IndexRange[Index[Generation]] = Range[3];
+
+
+
+IndexStyle[SU2W,       j];
+IndexStyle[SU2D,       k];
+IndexStyle[Gluon,      a];
+IndexStyle[Colour,     m];
+IndexStyle[Generation, f];
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+V[4] == {
+    ClassName        -> G,
+    SelfConjugate    -> True,
+    Indices          -> {Index[Gluon]},
+    Mass             -> 0,
+    Width            -> 0,
+    ParticleName     -> "g", 
+    PDG              -> 21,
+    PropagatorLabel  -> "G",
+    PropagatorType   -> C,
+    PropagatorArrow  -> None,
+    FullName         -> "G"},
+
+(* The dark fermion *)
+F[6] == { 
+         ClassName -> t, 
+         Indices   -> {Index[Colour]},         
+         SelfConjugate-> False, 
+         QuantumNumbers -> {Q -> 2/3}, 
+         Mass->{mt,  173.0},  
+         Width->{wt,0.}, 
+         ParticleName-> "t", 
+         PDG->6, 
+         PropagatorLabel->"t", 
+         PropagatorType->Straight, 
+         ParticleName     -> {"~t" },
+         FullName         -> {"top"} },
+
+
+
+(* The dark fermion *)
+F[16] == { 
+         ClassName -> chi, 
+         SelfConjugate-> True, 
+         QuantumNumbers -> {}, 
+         Mass->{mChi,  100.0},  
+         Width->{wChi,0.}, 
+         ParticleName-> "~chi", 
+         PDG->5000012, 
+         PropagatorLabel->"chi", 
+         PropagatorType->Straight, 
+         ParticleName     -> {"~chi" },
+         FullName         -> {"Dark fermion"} },
+
+(* Colored Scalar *)
+S[5] == { 
+          ClassName        -> ST,
+          Indices          -> {Index[Colour]},
+          SelfConjugate    -> False,
+          Unphysical       -> False,
+          Mass             -> {mST, 400.},
+          Width            -> {wST, 1.},
+          QuantumNumbers   -> {Q -> 2/3},
+          PropagatorLabel  -> {"ST"},
+          PropagatorType   -> ScalarDash, 
+          PDG              -> {5000002},
+          ParticleName     -> {"~ST" },
+          AntiParticleName -> {"~ST~"},
+          FullName         -> {"Colored Scalar"} }
+};
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+
+LSM := - 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa] + I*tbar.Ga[mu].DC[t, mu] - (mt)*tbar.t;
+
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+
+(* DM-Scalar-Top coupling *)
+LYDM := -yDM (STbar[cc] chibar[sp].t[sp,cc]);
+
+
+LNP := LSM + Lkin + LYDM + HC[LYDM];
+
