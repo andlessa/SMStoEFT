@@ -23,8 +23,6 @@ M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
 (* ************************** *)
 
 M$Parameters = {
-(* CalcHEP related parameters *)
-  QS    == { TeX->Subscript[Q,s], ParameterType->External, Value->100,  Description->"QCD scale for running quark masses in CalcHEP"},
 
  (* External NP parameters*)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"}
@@ -42,7 +40,7 @@ F[16] == {
          ClassName -> chi, 
          SelfConjugate-> True, 
          QuantumNumbers -> {}, 
-         Mass->{mChi,  125},  
+         Mass->{mChi,  100.0},  
          Width->{wChi,0.}, 
          ParticleName-> "~chi", 
          PDG->5000012, 

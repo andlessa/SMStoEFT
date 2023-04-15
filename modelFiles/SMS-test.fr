@@ -23,11 +23,9 @@ M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
 (* ************************** *)
 
 M$Parameters = {
-(* CalcHEP related parameters *)
-  QS    == { TeX->Subscript[Q,s], ParameterType->External, Value->100,  Description->"QCD scale for running quark masses in CalcHEP"},
 
  (* External NP parameters*)
-  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"}
 
   gs == { 
     ParameterType    -> Internal, 
@@ -97,20 +95,34 @@ V[4] == {
     PropagatorArrow  -> None,
     FullName         -> "G"},
 
-(* The dark fermion *)
-F[6] == { 
-         ClassName -> t, 
-         Indices   -> {Index[Colour]},         
-         SelfConjugate-> False, 
-         QuantumNumbers -> {Q -> 2/3}, 
-         Mass->{mt,  173.0},  
-         Width->{wt,0.}, 
-         ParticleName-> "t", 
-         PDG->6, 
-         PropagatorLabel->"t", 
-         PropagatorType->Straight, 
-         ParticleName     -> {"~t" },
-         FullName         -> {"top"} },
+(* Fermions: physical fields *)
+  F[3] == {
+    ClassName        -> uq,
+    ClassMembers     -> {u, c, t},
+    Indices          -> {Index[Generation], Index[Colour]},
+    FlavorIndex      -> Generation,
+    SelfConjugate    -> False,
+    Mass             -> {Mu, {MU, 2.55*^-3}, {MC,1.27}, {MT,172}},
+    Width            -> {0, 0, {WT,1.50833649}},
+    QuantumNumbers   -> {Q -> 2/3},
+    PropagatorLabel  -> {"uq", "u", "c", "t"},
+    PropagatorType   -> Straight,
+    PropagatorArrow  -> Forward,
+    PDG              -> {2, 4, 6}, 
+    ParticleName     -> {"u",  "c",  "t" },
+    AntiParticleName -> {"u~", "c~", "t~"},
+    FullName         -> {"u-quark", "c-quark", "t-quark"}
+  },
+(* Fermions: unphysical fields *)  
+  F[14] == { 
+    ClassName      -> uR, 
+    Unphysical     -> True, 
+    Indices        -> {Index[Generation], Index[Colour]},
+    FlavorIndex    -> Generation,
+    SelfConjugate  -> False,
+    QuantumNumbers -> {Q -> 2/3},
+    Definitions    -> { uR[sp1_,ff_,cc_] :> Module[{sp2}, ProjP[sp1,sp2] uq[sp2,ff,cc]] }
+  },
 
 
 
@@ -151,12 +163,12 @@ S[5] == {
 (* gauge kinetic and mass terms *)
 
 
-LSM := - 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa] + I*tbar.Ga[mu].DC[t, mu] - (mt)*tbar.t;
+LSM := - 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa] + I*uqbar[sp,3,aa].Ga[mu].DC[uq[sp,3,aa], mu] - MT*uqbar[sp,3,aa].uq[sp,3,aa];
 
 Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
 
 (* DM-Scalar-Top coupling *)
-LYDM := -yDM (STbar[cc] chibar[sp].t[sp,cc]);
+LYDM := -yDM (STbar[cc] chibar[sp].uR[sp,3,cc]);
 
 
 LNP := LSM + Lkin + LYDM + HC[LYDM];
