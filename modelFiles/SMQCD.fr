@@ -16,23 +16,17 @@ M$ModelName = "SMQCD";
 
 M$Information = {
   Authors      -> {"N. Christensen", "C. Duhr", "B. Fuks", "A. Lessa"}, 
-  Version      -> "1.4.6",
+  Version      -> "1.5",
   Date         -> "17. 04. 2023"
   };
 
 FeynmanGauge = True;
 
 (* ************************** *)
-(* ***** NLO Variables ****** *)
-(******************************)
-
-FR$RmDblExt = { ymb -> MB, ymc -> MC, ymdo -> MD, yme -> Me, 
-   ymm -> MMU, yms -> MS, ymt -> MT, ymtau -> MTA, ymup -> MU};
-
-(* ************************** *)
 (* *****  Change  log   ***** *)
 (* ************************** *)
 
+(* v1.5: QCD and quarks only.                                                *)
 (* v1.4.6: NLO variable added.                                               *)
 (* v1.4.5: Added widths for ghosts.                                          *)
 (* v1.4.4: Changed widths of goldstone bosons to be the same as for the W and Z bosons *)
@@ -71,6 +65,7 @@ M$GaugeGroups = {
 (* ************************** *)
 
 IndexRange[Index[Gluon     ]] = NoUnfold[Range[8]];
+IndexRange[Index[Colour    ]] = NoUnfold[Range[3]]; 
 IndexRange[Index[Generation]] = Range[3];
 
 IndexStyle[Gluon,      a];
@@ -107,15 +102,29 @@ M$ClassesDescription = {
     PropagatorArrow  -> None,
     FullName         -> "G"
   },
+(* Ghosts: related to physical gauge bosons *)
+  U[4] == { 
+    ClassName       -> ghG, 
+    SelfConjugate   -> False,
+    Indices         -> {Index[Gluon]},
+    Ghost           -> G,
+    PDG             -> 82,
+    QuantumNumbers  ->{GhostNumber -> 1}, 
+    Mass            -> 0,
+    Width	    -> 0,
+    PropagatorLabel -> "uG",
+    PropagatorType  -> GhostDash,
+    PropagatorArrow -> Forward
+  },
 
-
+(* Fermions: physical fields *)
   F[3] == {
     ClassName        -> uq,
     ClassMembers     -> {u, c, t},
     Indices          -> {Index[Generation], Index[Colour]},
     FlavorIndex      -> Generation,
     SelfConjugate    -> False,
-    Mass             -> {Mu, {MU, 2.55*^-3}, {MC,1.27}, {MT,172}},
+    Mass             -> {Mu, {MU, 2.55*^-3}, {MC,1.27}, {MT,173.0}},
     Width            -> {0, 0, {WT,1.50833649}},
     QuantumNumbers   -> {Q -> 2/3},
     PropagatorLabel  -> {"uq", "u", "c", "t"},
@@ -154,7 +163,6 @@ M$ClassesDescription = {
 (* ************************** *)
 
 GaugeXi[ V[4]  ] = GaugeXi[G];
-GaugeXi[ S[1]  ] = 1;
 GaugeXi[ U[4]  ] = GaugeXi[G];
 
 
@@ -173,56 +181,6 @@ M$Parameters = {
     TeX              -> Subscript[\[Alpha],s],
     Description      -> "Strong coupling constant at the Z pole"
   },
-  ymdo == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 1,
-    Value         -> 5.04*^-3,
-    Description   -> "Down Yukawa mass"
-  },
-  ymup == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 2,
-    Value         -> 2.55*^-3,
-    Description   -> "Up Yukawa mass"
-  },
-  yms == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 3,
-    Value         -> 0.101,
-    Description   -> "Strange Yukawa mass"
-  },
-  ymc == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 4,
-    Value         -> 1.27,
-    Description   -> "Charm Yukawa mass"
-  },
-  ymb == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 5,
-    Value         -> 4.7,
-    Description   -> "Bottom Yukawa mass"
-  },
-  ymt == {
-    ParameterType -> External,
-    BlockName     -> YUKAWA,
-    OrderBlock    -> 6,
-    Value         -> 172,
-    Description   -> "Top Yukawa mass"
-  },
-  cabi == {
-    ParameterType -> External,
-    BlockName     -> CKMBLOCK,
-    OrderBlock    -> 1,
-    Value         -> 0.227736,
-    TeX           -> Subscript[\[Theta], c],
-    Description   -> "Cabibbo angle"
-  },
 
   (* Internal Parameters *)
   gs == { 
@@ -232,17 +190,8 @@ M$Parameters = {
     TeX              -> Subscript[g,s], 
     ParameterName    -> G,
     Description      -> "Strong coupling constant at the Z pole"
-  },
-(* N. B. : only Cabibbo mixing! *)
-  CKM == { 
-    ParameterType -> Internal,
-    Indices       -> {Index[Generation], Index[Generation]},
-    Unitary       -> True,
-    Value         -> {CKM[1,1] -> Cos[cabi],  CKM[1,2] -> Sin[cabi], CKM[1,3] -> 0,
-                      CKM[2,1] -> -Sin[cabi], CKM[2,2] -> Cos[cabi], CKM[2,3] -> 0,
-                      CKM[3,1] -> 0,          CKM[3,2] -> 0,         CKM[3,3] -> 1},
-    TeX         -> Superscript[V,CKM],
-    Description -> "CKM-Matrix"}
+  }
+
 };
 
 (* ************************** *)
@@ -252,39 +201,17 @@ M$Parameters = {
 LGauge := Block[{mu,nu,ii,aa},- 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa]];
 
 LFermions := Block[{mu}, 
-  ExpandIndices[I*(uqbar.Ga[mu].DC[uq, mu] + dqbar.Ga[mu].DC[dq, mu]), 
-  FlavorExpand->{SU2W,SU2D}]/.{CKM[a_,b_] Conjugate[CKM[a_,c_]]->IndexDelta[b,c], CKM[b_,a_] Conjugate[CKM[c_,a_]]->IndexDelta[b,c]}];
+  ExpandIndices[I*(uqbar.Ga[mu].DC[uq, mu] + dqbar.Ga[mu].DC[dq, mu])]
+  ];
 
+LQMass := Block[{sp,cc}, -MT uqbar[sp,3,cc].uq[sp,3,cc] -MB dqbar[sp,3,cc].dq[sp,3,cc]];
 
-LYukawa := Block[{sp,ii,jj,cc,ff1,ff2,ff3,yuk,feynmangaugerules},
-  feynmangaugerules = If[Not[FeynmanGauge], {G0|GP|GPbar ->0}, {}];
- 
-  yuk = ExpandIndices[
-   -yd[ff2, ff3] CKM[ff1, ff2] QLbar[sp, ii, ff1, cc].dR [sp, ff3, cc] Phi[ii] - 
-    yl[ff1, ff3] LLbar[sp, ii, ff1].lR [sp, ff3] Phi[ii] - 
-    yu[ff1, ff2] QLbar[sp, ii, ff1, cc].uR [sp, ff2, cc] Phibar[jj] Eps[ii, jj], FlavorExpand -> SU2D];
-  yuk = yuk /. { CKM[a_, b_] Conjugate[CKM[a_, c_]] -> IndexDelta[b, c], CKM[b_, a_] Conjugate[CKM[c_, a_]] -> IndexDelta[b, c]};
-  yuk+HC[yuk]/.feynmangaugerules
- ];
-
-LGhost := Block[{LGh1,LGhw,LGhs,LGhphi,mu, generators,gh,ghbar,Vectorize,phi1,phi2,togoldstones,doublet,doublet0},
+LGhost := Block[{mu},
   (* Pure gauge piece *) 	
-  LGh1 = -ghBbar.del[DC[ghB,mu],mu];
-  LGhw = -ghWibar.del[DC[ghWi,mu],mu];
   LGhs = -ghGbar.del[DC[ghG,mu],mu];
+  ExpandIndices[LGhs]];
 
-  (* Scalar pieces: see Peskin pages 739-742 *)
-  (* phi1 and phi2 are the real degrees of freedom of GP *)
-  (* Vectorize transforms a doublet in a vector in the phi-basis, i.e. the basis of real degrees of freedom *)
-  gh    = {ghB, ghWi[1], ghWi[2], ghWi[3]};
-  ghbar = {ghBbar, ghWibar[1], ghWibar[2], ghWibar[3]};
-  generators = {-I/2 g1 IdentityMatrix[2], -I/2 gw PauliSigma[1], -I/2 gw PauliSigma[2], -I/2 gw PauliSigma[3]};
-  doublet = Expand[{(-I phi1 - phi2)/Sqrt[2], Phi[2]} /. MR$Definitions /. vev -> 0]; 
-  doublet0 = {0, vev/Sqrt[2]};
-  Vectorize[{a_, b_}]:= Simplify[{Sqrt[2] Re[Expand[a]], Sqrt[2] Im[Expand[a]], Sqrt[2] Re[Expand[b]], Sqrt[2] Im[Expand[b]]}/.{Im[_]->0, Re[num_]->num}];
-  togoldstones := {phi1 -> (GP + GPbar)/Sqrt[2], phi2 -> (-GP + GPbar)/(I Sqrt[2])};
-  LGhphi=Plus@@Flatten[Table[-ghbar[[kkk]].gh[[lll]] Vectorize[generators[[kkk]].doublet0].Vectorize[generators[[lll]].(doublet+doublet0)],{kkk,4},{lll,4}]] /.togoldstones;
 
-ExpandIndices[ LGhs + If[FeynmanGauge, LGh1 + LGhw + LGhphi,0], FlavorExpand->SU2W]];
+(* LSM:= LGauge + LFermions + LQMass + LGhost; *)
 
-LSM:= LGauge + LFermions + LHiggs + LYukawa + LGhost;
+LSM:= LGauge + LGhost + LFermions + LQMass;

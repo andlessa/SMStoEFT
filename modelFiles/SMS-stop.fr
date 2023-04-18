@@ -16,7 +16,7 @@ M$Information = {Authors -> {"Andre Lessa"},
 
 FeynmanGauge = True;
 
-M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1}, {QED, 2} };
+M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1} };
 
 (* ************************** *)
 (* *****   Parameters   ***** *)
@@ -74,8 +74,8 @@ S[5] == {
 Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
 
 (* DM-Scalar-Top coupling *)
-LYDM := -yDM (STbar[cc] chibar[sp].uR[sp,3,cc]);
+LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 
 
+(* LNP := Lkin + LYDM + HC[LYDM]; *)
 LNP := Lkin + LYDM + HC[LYDM];
-
