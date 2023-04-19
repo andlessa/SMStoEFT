@@ -212,6 +212,4 @@ LGhost := Block[{mu},
   ExpandIndices[LGhs]];
 
 
-(* LSM:= LGauge + LFermions + LQMass + LGhost; *)
-
 LSM:= LGauge + LGhost + LFermions + LQMass;
