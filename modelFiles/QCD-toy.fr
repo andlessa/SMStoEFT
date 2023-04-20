@@ -1,22 +1,16 @@
-(*********************************************************************)
-(*********************************************************************)
-(** Toy model file for top-stop-chi coupling ******)
-(******                                                         ******)
-(****** A. Lessa                       ******)
-(******                                                         ******)
-(****** Feel free to use this model file!                       ******)
-(*********************************************************************)
-(*********************************************************************)
 
-M$ModelName = "SMS-toy";
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "ToyQCD";
 
-M$Information = {Authors -> {"Andre Lessa"}, 
-                 Version -> "1.0",
-                 Date -> "18.03.2023"};
+M$Information = {
+  Authors      -> {"A. Lessa"}, 
+  Version      -> "1.0",
+  Date         -> "17. 04. 2023"
+  };
 
 FeynmanGauge = True;
-
-M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 1}, {QED, 2} };
 
 (* ************************** *)
 (* *****  Gauge groups  ***** *)
@@ -42,6 +36,16 @@ IndexRange[Index[Colour    ]] = NoUnfold[Range[3]];
 
 IndexStyle[Gluon,      a];
 IndexStyle[Colour,     m];
+
+
+(* ************************** *)
+(* *** Interaction orders *** *)
+(* ***  (as used by mg5)  *** *)
+(* ************************** *)
+
+M$InteractionOrderHierarchy = {
+  {QCD, 1}, {QED,2}
+};
 
 
 (* ************************** *)
@@ -78,12 +82,12 @@ M$ClassesDescription = {
     PropagatorArrow -> Forward
   },
 
-(* Fermions: physical fields *)
-F[6] == {
+(* Fermions: top field *)
+  F[6] == {
     ClassName        -> t,
     Indices          -> {Index[Colour]},
     SelfConjugate    -> False,
-    Mass             -> {MT,172},
+    Mass             -> 172,
     Width            -> {WT,1.50833649},
     QuantumNumbers   -> {Q -> 2/3},
     PropagatorLabel  -> "t",
@@ -92,38 +96,9 @@ F[6] == {
     PDG              -> 6, 
     ParticleName     -> "t",
     AntiParticleName -> "t~",
-    FullName         -> "t-quark"
-  },
+    FullName         -> "top-quark"
+  }
 
-
-(* The dark fermion *)
-F[16] == { 
-         ClassName -> chi, 
-         SelfConjugate-> True, 
-         QuantumNumbers -> {}, 
-         Mass->{mChi,  100.0},  
-         Width->{wChi,0.}, 
-         ParticleName-> "~chi", 
-         PDG->5000012, 
-         PropagatorLabel->"chi", 
-         PropagatorType->Straight, 
-         ParticleName     -> "~chi" ,
-         FullName         -> "Dark fermion" },
-
-(* Colored Scalar *)
-S[5] == { 
-          ClassName        -> ST,
-          Indices          -> {Index[Colour]},
-          SelfConjugate    -> False,
-          Mass             -> {mST, 400.},
-          Width            -> {wST, 1.},
-          QuantumNumbers   -> {Q -> 2/3},
-          PropagatorLabel  -> "ST",
-          PropagatorType   -> ScalarDash, 
-          PDG              -> 5000002,
-          ParticleName     -> "~ST",
-          AntiParticleName -> "~ST~",
-          FullName         -> "Colored Scalar" }
 };
 
 
@@ -186,6 +161,14 @@ M$Parameters = {
     InteractionOrder -> {QED,1}, 
     TeX              -> e,  
     Description      -> "Electric coupling constant"
+  },
+
+  MT == {
+    ParameterType -> External,
+    BlockName     -> YUKAWA,
+    OrderBlock    -> 6,
+    Value         -> 172,
+    Description   -> "Top Yukawa mass"
   }
 
 };
@@ -194,13 +177,11 @@ M$Parameters = {
 (* *****   Lagrangian   ***** *)
 (* ************************** *)
 
-LGauge := Block[{mu,nu,aa},ExpandIndices[-1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa]]];
+LGauge := Block[{mu,nu,ii,aa},- 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa]];
 
-LFermions := Block[{mu}, 
-  ExpandIndices[I*(tbar.Ga[mu].DC[t, mu])]
+LFermions := Block[{mu,sp,cc}, 
+  ExpandIndices[I*(tbar.Ga[mu].DC[t, mu])- MT*tbar[sp,cc].t[sp,cc]]
   ];
-
-LQMass := Block[{sp,cc}, -MT tbar[sp,cc].t[sp,cc]];
 
 LGhost := Block[{mu},
   (* Pure gauge piece *) 	
@@ -208,15 +189,4 @@ LGhost := Block[{mu},
   ExpandIndices[LGhs]];
 
 
-LSM := LGauge + LGhost + LFermions + LQMass;
-
-Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
-
-(* DM-Scalar-Top coupling *)
-LYDM := Block[{sp1,sp2,cc},
-      -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].t[sp2,cc])];
-
-
-LNP := LSM + Lkin + LYDM + HC[LYDM];
-
-
+LSM:= LGauge + LGhost + LFermions;

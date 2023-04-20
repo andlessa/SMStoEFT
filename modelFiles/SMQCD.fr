@@ -134,23 +134,6 @@ M$ClassesDescription = {
     ParticleName     -> {"u",  "c",  "t" },
     AntiParticleName -> {"u~", "c~", "t~"},
     FullName         -> {"u-quark", "c-quark", "t-quark"}
-  },
-  F[4] == {
-    ClassName        -> dq,
-    ClassMembers     -> {d, s, b},
-    Indices          -> {Index[Generation], Index[Colour]},
-    FlavorIndex      -> Generation,
-    SelfConjugate    -> False,
-    Mass             -> {Md, {MD,5.04*^-3}, {MS,0.101}, {MB,4.7}},
-    Width            -> 0,
-    QuantumNumbers   -> {Q -> -1/3},
-    PropagatorLabel  -> {"dq", "d", "s", "b"},
-    PropagatorType   -> Straight, 
-    PropagatorArrow  -> Forward,
-    PDG              -> {1,3,5},
-    ParticleName     -> {"d",  "s",  "b" },
-    AntiParticleName -> {"d~", "s~", "b~"},
-    FullName         -> {"d-quark", "s-quark", "b-quark"}
   }
 
 };
@@ -190,6 +173,31 @@ M$Parameters = {
     TeX              -> Subscript[g,s], 
     ParameterName    -> G,
     Description      -> "Strong coupling constant at the Z pole"
+  },
+  
+  aEWM1 == { 
+    ParameterType    -> External, 
+    BlockName        -> SMINPUTS, 
+    OrderBlock       -> 1, 
+    Value            -> 127.9,
+    InteractionOrder -> {QED,-2},
+    Description      -> "Inverse of the EW coupling constant at the Z pole"
+  },
+
+  aEW == {
+    ParameterType    -> Internal,
+    Value            -> 1/aEWM1,
+    InteractionOrder -> {QED,2},
+    TeX              -> Subscript[\[Alpha], EW],
+    Description      -> "Electroweak coupling constant"
+  },
+
+  ee == { 
+    ParameterType    -> Internal, 
+    Value            -> Sqrt[4 Pi aEW], 
+    InteractionOrder -> {QED,1}, 
+    TeX              -> e,  
+    Description      -> "Electric coupling constant"
   }
 
 };
@@ -201,10 +209,10 @@ M$Parameters = {
 LGauge := Block[{mu,nu,ii,aa},- 1/4 FS[G,mu,nu,aa] FS[G,mu,nu,aa]];
 
 LFermions := Block[{mu}, 
-  ExpandIndices[I*(uqbar.Ga[mu].DC[uq, mu] + dqbar.Ga[mu].DC[dq, mu])]
+  ExpandIndices[I*(uqbar.Ga[mu].DC[uq, mu])]
   ];
 
-LQMass := Block[{sp,cc}, -MT uqbar[sp,3,cc].uq[sp,3,cc] -MB dqbar[sp,3,cc].dq[sp,3,cc]];
+LQMass := Block[{sp,cc}, -MT uqbar[sp,3,cc].uq[sp,3,cc]];
 
 LGhost := Block[{mu},
   (* Pure gauge piece *) 	
