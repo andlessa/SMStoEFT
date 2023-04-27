@@ -6,6 +6,7 @@
 from __future__ import print_function
 import sys,os,glob
 from configParserWrapper import ConfigParserExt
+from convert2SLHA import getSLHAFile
 import logging,shutil
 import subprocess
 import multiprocessing
@@ -96,9 +97,8 @@ def getInfoFromOutput(outputStr):
             runTag = runTag.replace(':','').replace('=','').strip()
         elif 'cross-section' in l.lower():
             xsec = eval(l.lower().split(':')[1].split('+-')[0])
-        elif 'events'in l.lower():
+        elif 'nb of events'in l.lower():
             nevts = eval(l.lower().split(':')[1])
-
     runInfo = {'run number' : runNumb, 'run tag' : runTag, 
                'cross-section (pb)' : xsec, 'Number of events' : int(nevts)}
     return runInfo
@@ -152,6 +152,9 @@ def generateEvents(parser):
     # By default do not run Pythia or Delphes
     runPythia = parser['options']['runPythia']
     runDelphes = parser['options']['runDelphes']
+    runConvert = parser['options']['runConvertSLHA']
+    
+    
 
     pythia8File = os.path.join(runFolder,'Cards/pythia8_card.dat')
     delphesFile = os.path.join(runFolder,'Cards/delphes_card.dat')
@@ -213,6 +216,13 @@ def generateEvents(parser):
     logger.debug('MG5 event error:\n %s \n' %errorMsg)
     logger.debug('MG5 event output:\n %s \n' %output)
       
+    if runConvert:
+        if 'run number' in runInfo:
+            lheFile = os.path.join(runFolder,'Events',runInfo['run number'],'unweighted_events.lhe.gz')
+            getSLHAFile(lheFile)
+        else:
+            logger.warning("Could not generate SLHA file for %s" %(runFolder))
+
     if cleanOutput:
         os.remove(commandsFile)
 
@@ -299,7 +309,7 @@ def main(parfile,verbose):
 
     now = datetime.datetime.now()
     children = []
-    for irun,newParser in enumerate(parserList[:1]):
+    for irun,newParser in enumerate(parserList):
         processFolder = newParser.get('MadGraphPars','processFolder')
         processFolder = os.path.abspath(processFolder)
         if processFolder[-1] == '/':
