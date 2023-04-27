@@ -37,12 +37,11 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] getting MadGraph5"; wget $URL 2>/dev/null || curl -O $URL; tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
-    echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall looptools\nexit\n" > mad_install.txt;
+    echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\nexit\n" > mad_install.txt;
 	./mg5_aMC -f mad_install.txt
 
 	rm mad_install.txt;
 	cd $homeDIR;
-	sed  "s|homeDIR|$homeDIR|g" mg5_configuration.txt > ./MG5/input/mg5_configuration.txt;
     rm $madgraph;
 fi
 
