@@ -44,7 +44,7 @@ if echo "$answer" | grep -iq "^y" ;then
 
 	rm mad_install.txt;
 	cd $homeDIR;
-    rm $madgraph;
+#    rm $madgraph;
 fi
 
 echo -n "Install SModelS (y/n)? "
