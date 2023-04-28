@@ -158,13 +158,22 @@ def generateEvents(parser):
 
     pythia8File = os.path.join(runFolder,'Cards/pythia8_card.dat')
     delphesFile = os.path.join(runFolder,'Cards/delphes_card.dat')
-    if runDelphes and 'delphescard' in pars:
-        if os.path.isfile(pars['delphescard']):
+
+    if runPythia:
+        if not 'pythia8card' in pars or not os.path.isfile(pars['pythia8card']):
+            logger.error("Pythia file not defined or not found.")
+            return False
+        else:
+            shutil.copyfile(pars['pythia8card'],pythia8File) 
+
+
+    if runDelphes:
+        if not 'delphescard' in pars or not os.path.isfile(pars['delphescard']):
+            logger.error("Delphes file not defined or not found.")
+            return False            
+        else:
             shutil.copyfile(pars['delphescard'],delphesFile)
 
-    if runPythia and 'pythia8card' in pars:        
-        if os.path.isfile(pars['pythia8card']):
-            shutil.copyfile(pars['pythia8card'],pythia8File) 
 
     cleanOutput = parser['options']['cleanOutput']
     
@@ -213,8 +222,8 @@ def generateEvents(parser):
     except:
         pass
 
-    logger.debug('MG5 event error:\n %s \n' %errorMsg)
-    logger.debug('MG5 event output:\n %s \n' %output)
+    logger.debug(f'MG5 event error:\n %s \n' %errorMsg.decode("utf-8"))
+    logger.debug(f'MG5 event output:\n %s \n' %output.decode("utf-8"))
       
     if runConvert:
         if 'run number' in runInfo:
