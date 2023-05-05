@@ -5,6 +5,7 @@ import pandas as pd
 import time,os,sys
 import progressbar as P
 import numpy as np
+sys.path.append('../')
 from statisticalTools.simplifiedLikelihoods import Data,UpperLimitComputer
 import pandas as pd
 

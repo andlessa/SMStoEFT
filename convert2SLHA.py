@@ -93,14 +93,15 @@ def getSLHAFile(inputLHE,outputSLHA=None):
         finalStates = finalStates.strip().split()
         finalStates = [particleLabels[f] if f in particleLabels else f
                         for f in finalStates[:]]
-        iproc += 1
+
         #Store the process ID with its final states:
         if not iproc in finalStatesDict:        
             finalStatesDict[iproc] = finalStates
         else:
             logger.error("Error reading processes. Process ID %i appears more than once." %iproc)
             return False
-    
+        iproc += 1
+
     #Get total cross-section,number of events
     xsecTotal = banner.get_cross()
     if xsecTotal <= 0.:
