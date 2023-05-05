@@ -86,7 +86,9 @@ def getSLHAFile(inputLHE,outputSLHA=None):
             l = l[l.find('add process')+11:]
         else:
             continue
-        l = l.strip()
+
+        l = l[:l.find('[')]
+        l = l.strip()        
         #Get final states and process ID
         finalStates = l.split('>')[1]
         finalStates = finalStates.split(',')[0]
