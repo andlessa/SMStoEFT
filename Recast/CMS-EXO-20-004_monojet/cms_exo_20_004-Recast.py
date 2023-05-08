@@ -124,6 +124,8 @@ def getModelDict(inputFiles):
     elif model == 'ADD':
         MD = pars.blocks['ADDINPUTS'][1] # Fundamental Planck scale in large extra dimensions
         d = pars.blocks['ADDINPUTS'][2] # Number of extra dimentions
+    elif model == 'stop':
+        yDM = pars.blocks['FRBLOCK'][1] # Fundamental Planck scale in large extra dimensions
     
     print('\nModel parameters:')
     if model in ['spin1','spin0']:
@@ -132,7 +134,7 @@ def getModelDict(inputFiles):
     elif model == 'ADD':
         print('MD = %1.2f GeV, d = %1.2f\n'  %(MD,d))
     elif model == 'stop':
-        print('Mstop = %1.2f GeV, mDM = %1.2f\n'  %(mMed,mDM))
+        print('Mstop = %1.2f GeV, mDM = %1.2f, yDM = %1.1f \n'  %(mMed,mDM,yDM))
 
 
     # #### Store data
@@ -170,6 +172,7 @@ def getModelDict(inputFiles):
     elif model == 'stop':
         modelDict['$m_{\tilde t}$'] = mMed
         modelDict['$m_{\tilde \chi_1^0}$'] = mDM
+        modelDict['$y_{DM}$'] = yDM
 
     return modelDict
 
