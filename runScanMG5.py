@@ -147,9 +147,6 @@ def generateEvents(parser):
         shutil.copyfile(pars['runcard'],os.path.join(runFolder,'Cards/run_card.dat'))
     if 'paramcard' in pars and os.path.isfile(pars['paramcard']):
         shutil.copyfile(pars['paramcard'],os.path.join(runFolder,'Cards/param_card.dat'))    
-    if 'extracard' in pars and os.path.isfile(pars['extracard']):
-        basename = os.path.basename(pars['extracard'])
-        shutil.copyfile(pars['extracard'],os.path.join(runFolder,'Cards/%s'%basename))    
 
 
     # By default do not run Pythia or Delphes
