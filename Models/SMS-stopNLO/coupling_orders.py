@@ -8,14 +8,15 @@ from object_library import all_orders, CouplingOrder
 
 NP = CouplingOrder(name = 'NP',
                    expansion_order = 99,
+                   perturbative_expansion = 1,
                    hierarchy = 1)
 
 QCD = CouplingOrder(name = 'QCD',
                     expansion_order = 99,
-                    hierarchy = 1,
+                    hierarchy = 2,
                     perturbative_expansion = 1)
 
 QED = CouplingOrder(name = 'QED',
                     expansion_order = 99,
-                    hierarchy = 2)
+                    hierarchy = 3)
 
