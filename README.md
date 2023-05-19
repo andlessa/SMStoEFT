@@ -41,7 +41,7 @@ Some of the diagrams generated using FeynArts are zero due to color conservation
 The computation of the BSM corrections to ttbar production does not seem reliable. The following issues were found:
 
   * When increasing the BSM coupling ($y_{DM}$) the QCD+BSM NLO cross-section becomes negative. This happens
-    whether the counterterms from BSM loops (proportional to $y_{DM}$) are included or not. Maybe this could be due to the fact that we are not in the perturbative regime. In this case, if the $born\times virtual^*$ interference term is large and negative and the $|virtual|^2$ term (which is even larger) is not included in the calculation, the total cross-section ( $|born|^2 + born \times virtual^* + h.c\,$) would be negative (true?).
+    whether the counterterms from BSM loops (proportional to $y_{DM}$) are included or not. Maybe this could be due to the fact that we are not in the perturbative regime. In this case, if the $born \times virtual$ interference term is large and negative and the $|virtual|^2$ term (which is even larger) is not included in the calculation, the total cross-section ( $|born|^2 + born \times virtual^* + h.c\,$) would be negative (true?).
   * If only the BSM NLO cross-section is computed (i.e. only BSM loop diagrams are considered), the
     total cross-section seems to be independent of the $y_{DM}$ value. However in this case the cross-section is always positive when one would expect it to reproduce the full calculation for $y_{DM}$ sufficiently large, since it would dominate the terms.
   * The fixed order calculation seems to break.
