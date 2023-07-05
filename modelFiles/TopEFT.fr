@@ -1,0 +1,94 @@
+(*********************************************************************)
+(*********************************************************************)
+(** FeynRules model file for a topEFT matched to a simplified colored scalar-dark fermion model ******)
+(******                                                         ******)
+(****** A. Lessa                       ******)
+(******                                                         ******)
+(****** Feel free to use this model file!                       ******)
+(*********************************************************************)
+(*********************************************************************)
+
+M$ModelName = "SMS-stop";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "18.03.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+(* New Physics (UV) Parameters *)
+yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+mChi  == { TeX->mChi,  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
+mST  == { TeX->mST,  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
+
+(* EFT coefficients *)
+(* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)
+(* C00eff = C_{00} - 2 MT^2 (C_{1} + C_{11} + C_{12}) - (s/2)*(C_{1} + 2 C_{12}) *)
+(* where s = (p1+p2)^2, p1 = top momentum, p2 = anti-top momentum, MT = top mass *)
+
+  C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C00eff g-top-top coupling"},
+  C1  == { TeX->Subscript[C,1],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C1 g-top-top coupling"}, 
+  C11  == { TeX->Subscript[C,11],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C11 g-top-top coupling"},
+  C12  == { TeX->Subscript[C,12],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C12 g-top-top coupling"}
+};
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+
+C0eff := I*(2*Pi^2)*(yDM^2)*C00eff;
+C1eff := I*(2*Pi^2)*(yDM^2)*(C1+C11+C12);
+C12eff := (2*Pi^2)*(gs*yDM^2)*(C1/2+C12);
+
+(* EFT operator top-D_\mu(top) *)
+LC0 := Block[{mu},
+              C0eff*(tbar.ProjP[mu].DC[t, mu])
+            ];
+
+(* EFT operator D_\mu(top)-D^2(top) *)
+(* It was necessary to split the derivatives in 3 terms *)
+(* in order to FeynRules to properly handle the operator *)
+
+LC1a := Block[{mu,nu},
+          C1eff*(del[tbar,mu]).ProjP[mu].(DC[DC[t,nu],nu])
+         ];
+
+LC1b := Block[{aa,mu,nu},
+          C1eff*I*gs*G[mu,aa]*(tbar.T[aa].ProjP[mu].(del[DC[t,nu],nu]))
+        ];
+
+LC1c := Block[{aa,bb,mu,nu},
+          C1eff*(gs^2)*G[mu,aa]*G[nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].DC[t,nu])
+        ];
+
+LC1 := LC1a + LC1b + LC1c; 
+
+
+(* EFT operator D_\mu(G^\mu\nu)-top-top *)
+(* It was necessary to split the derivatives in 2 terms *)
+(* in order to FeynRules to properly handle the operator *)
+
+LC12a := Block[{aa,mu,nu},
+               C12eff*del[FS[G,mu,nu,aa],nu]*tbar.T[aa].ProjP[mu].t
+             ];
+
+LC12b := Block[{aa,bb,mu,nu},
+               C12eff*(-I*gs)*G[nu,aa]*FS[G,mu,nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].t - tbar.T[bb].T[aa].ProjP[mu].t)
+             ];
+LC12 := LC12a + LC12b;
+
+
+(* Total EFT lagrangian *)
+
+LNP := LC0 + LC1 + HC[LC1] + LC12;
