@@ -32,7 +32,7 @@ double complex function formFactorC00eff(s)
     if (c00effvalue == 0.0) then
         formFactorC00eff = 0.0 ! If the default C00eff value is zero, do nothing (it can be used to turn off this term)
     else            
-        call Init_cll(4,0,'')
+        call Init_cll(4,0,'',.true.)
         call InitCacheSystem_cll(1,4)
         call InitEvent_cll     
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
@@ -93,7 +93,7 @@ double complex function formFactorC1(s)
     if (c1value == 0.0) then
         formFactorC1 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        call Init_cll(4,0,'')
+        call Init_cll(4,0,'',.true.)
         call InitCacheSystem_cll(1,4)
         call InitEvent_cll     
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
@@ -149,7 +149,7 @@ double complex function formFactorC11(s)
     if (c11value == 0.0) then
         formFactorC11 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        call Init_cll(4,0,'')
+        call Init_cll(4,0,'',.true.)
         call InitCacheSystem_cll(1,4)
         call InitEvent_cll     
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
@@ -208,7 +208,7 @@ double complex function formFactorC12(s)
     if (c12value == 0.0) then
         formFactorC12 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        call Init_cll(4,0,'')
+        call Init_cll(4,0,'',.true.)
         call InitCacheSystem_cll(1,4)
         call InitEvent_cll     
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
