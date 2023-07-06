@@ -16,7 +16,7 @@ M$Information = {Authors -> {"Andre Lessa"},
 
 FeynmanGauge = True;
 
-M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1} };
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 (* ************************** *)
 (* *****   Parameters   ***** *)
@@ -25,7 +25,7 @@ M$InteractionOrderHierarchy = {  {NP,  1}, {QCD, 1} };
 M$Parameters = {
 
 (* New Physics (UV) Parameters *)
-yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
 mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
 mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
 
