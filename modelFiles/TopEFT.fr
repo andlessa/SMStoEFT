@@ -34,10 +34,10 @@ mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->Exter
 (* C00eff = C_{00} - 2 MT^2 (C_{1} + C_{11} + C_{12}) - (s/2)*(C_{1} + 2 C_{12}) *)
 (* where s = (p1+p2)^2, p1 = top momentum, p2 = anti-top momentum, MT = top mass *)
 
-  C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C00eff g-top-top coupling"},
-  C1  == { TeX->Subscript[C,1],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C1 g-top-top coupling"}, 
-  C11  == { TeX->Subscript[C,11],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C11 g-top-top coupling"},
-  C12  == { TeX->Subscript[C,12],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"C12 g-top-top coupling"}
+  C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0/(64*Pi^4), InteractionOrder->{NP ,1}, Description->"C00eff g-top-top coupling"},
+  C1  == { TeX->Subscript[C,1],  ComplexParameter -> False, ParameterType->External, Value->1.0/(10^6*96*Pi^4), InteractionOrder->{NP ,1}, Description->"C1 g-top-top coupling"}, 
+  C11  == { TeX->Subscript[C,11],  ComplexParameter -> False, ParameterType->External, Value->-1.0/(10^6*192*Pi^4), InteractionOrder->{NP ,1}, Description->"C11 g-top-top coupling"},
+  C12  == { TeX->Subscript[C,12],  ComplexParameter -> False, ParameterType->External, Value->-1.0/(10^6*384*Pi^4), InteractionOrder->{NP ,1}, Description->"C12 g-top-top coupling"}
 };
 
 

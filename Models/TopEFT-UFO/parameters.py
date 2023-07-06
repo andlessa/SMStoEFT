@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Thu 6 Jul 2023 11:44:48
+# Date: Thu 6 Jul 2023 12:22:36
 
 
 
@@ -92,7 +92,7 @@ mST = Parameter(name = 'mST',
 C00eff = Parameter(name = 'C00eff',
                    nature = 'external',
                    type = 'real',
-                   value = 1.,
+                   value = 0.00016040597272944275,
                    texname = '\\text{Ceff}_0',
                    lhablock = 'FRBlock',
                    lhacode = [ 4 ])
@@ -100,7 +100,7 @@ C00eff = Parameter(name = 'C00eff',
 C1 = Parameter(name = 'C1',
                nature = 'external',
                type = 'real',
-               value = 1.,
+               value = 1.0693731515296184e-10,
                texname = 'C_1',
                lhablock = 'FRBlock',
                lhacode = [ 5 ])
@@ -108,7 +108,7 @@ C1 = Parameter(name = 'C1',
 C11 = Parameter(name = 'C11',
                 nature = 'external',
                 type = 'real',
-                value = 1.,
+                value = -5.346865757648092e-11,
                 texname = 'C_{11}',
                 lhablock = 'FRBlock',
                 lhacode = [ 6 ])
@@ -116,7 +116,7 @@ C11 = Parameter(name = 'C11',
 C12 = Parameter(name = 'C12',
                 nature = 'external',
                 type = 'real',
-                value = 1.,
+                value = -2.673432878824046e-11,
                 texname = 'C_{12}',
                 lhablock = 'FRBlock',
                 lhacode = [ 7 ])
