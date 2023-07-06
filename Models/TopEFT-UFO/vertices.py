@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Thu 6 Jul 2023 12:22:36
+# Date: Thu 6 Jul 2023 14:50:17
 
 
 from object_library import all_vertices, Vertex
@@ -558,7 +558,7 @@ V_91 = Vertex(name = 'V_91',
 V_92 = Vertex(name = 'V_92',
               particles = [ P.t__tilde__, P.t, P.g ],
               color = [ 'T(3,2,1)' ],
-              lorentz = [ L.FFV1, L.FFV3, L.FFV4, L.FFV5, L.FFV6 ],
+              lorentz = [ L.FFV1, L.TTGC00EFF, L.TTGC1, L.TTGC11, L.TTGC12 ],
               couplings = {(0,0):C.GC_11,(0,1):C.GC_62,(0,3):C.GC_63,(0,2):C.GC_64,(0,4):C.GC_65})
 
 V_93 = Vertex(name = 'V_93',

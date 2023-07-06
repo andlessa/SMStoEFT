@@ -24,10 +24,14 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 M$Parameters = {
 
+(* Renormalization scale (for divergent coefficients) *)
+
+  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->External, Value->91.0, Description->"Renormalization scale for the regularization of the top-top-gluon loop (corresponds to the aS renormalization scale)"},
+  
 (* New Physics (UV) Parameters *)
-yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
-mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+  mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
+  mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)

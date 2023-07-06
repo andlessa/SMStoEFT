@@ -1,0 +1,58 @@
+### Aloha definitions
+
+Momenta of particle N = P(mu,N)
+This includes the momenta P(x,y). This first index is the lorentz index which should be contracted, while the second index refers to the particle ordering of the vertex.
+E.g: P(-2,1)*P(-2,1) = p1(mu)*p1(mu)
+       ^
+       dummy index for sum
+
+Top-Top-Gluon vertex:
+
+V_92 = Vertex(name = 'V_92',
+              particles = [ P.t__tilde__, P.t, P.g ],
+              color = [ 'T(3,2,1)' ],
+              lorentz = [ L.FFV1, L.FFV3, L.FFV4, L.FFV5, L.FFV6 ],
+              couplings = {(0,0):C.GC_11,(0,1):C.GC_62,(0,3):C.GC_63,(0,2):C.GC_64,(0,4):C.GC_65})
+
+
+#QCD/SM coupling -> L.FFV1
+GC_11 = Coupling(name = 'GC_11',
+                 value = 'complex(0,1)*G',
+                 order = {'QCD':1})
+
+#C00eff coupling ->  L.FFV3 -> L.TTGC00eff
+GC_62 = Coupling(name = 'GC_62',
+                 value = '2*C00eff*cmath.pi**2*complex(0,1)*G*yDM**2',
+                 order = {'NP':1,'QCD':1})
+
+TTGC00EFF = Lorentz(name = 'TTGC00EFF',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC00eff(P(-5,3)*P(-5,3)))*(Gamma(3,2,-1)*ProjP(-1,1))')
+
+
+#C1-coupling -> L.FFV4 -> L.TTGC1
+GC_63 = Coupling(name = 'GC_63',
+                 value = '-2*C1*cmath.pi**2*complex(0,1)*G*yDM**2',
+                 order = {'NP':1,'QCD':1})
+
+TTGC1 = Lorentz(name = 'TTGC1',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC1(P(-5,3)*P(-5,3),P(-6,1)*P(-6,1),P(-7,2)*P(-7,2)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1))')                 
+
+#C11-coupling -> L.FFV5 -> L.TTGC11
+GC_64 = Coupling(name = 'GC_64',
+                 value = '-2*C11*cmath.pi**2*complex(0,1)*G*yDM**2',
+                 order = {'NP':1,'QCD':1})
+
+TTGC11 = Lorentz(name = 'TTGC11',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC11(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - (P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))/2.)')                 
+
+#C12-coupling -> L.FFV6 -> L.TTGC12
+GC_65 = Coupling(name = 'GC_65',
+                 value = '-2*C12*cmath.pi**2*complex(0,1)*G*yDM**2',
+                 order = {'NP':1,'QCD':1})
+
+TTGC12 = Lorentz(name = 'TTGC12',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC12(P(-5,3)*P(-5,3)))(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))')                 

@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Thu 6 Jul 2023 12:22:36
+# Date: Thu 6 Jul 2023 14:50:17
 
 
 from object_library import all_lorentz, Lorentz
@@ -52,17 +52,33 @@ FFV3 = Lorentz(name = 'FFV3',
                spins = [ 2, 2, 3 ],
                structure = 'Gamma(3,2,-1)*ProjP(-1,1)')
 
+TTGC00EFF = Lorentz(name = 'TTGC00EFF',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC00eff(P(-5,3)*P(-5,3)))*(Gamma(3,2,-1)*ProjP(-1,1))')
+
 FFV4 = Lorentz(name = 'FFV4',
                spins = [ 2, 2, 3 ],
                structure = 'P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1)')
+
+TTGC1 = Lorentz(name = 'TTGC1',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC1(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1))')
 
 FFV5 = Lorentz(name = 'FFV5',
                spins = [ 2, 2, 3 ],
                structure = 'P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - (P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))/2.')
 
+TTGC11 = Lorentz(name = 'TTGC11',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC11(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - (P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))/2.)')
+
 FFV6 = Lorentz(name = 'FFV6',
                spins = [ 2, 2, 3 ],
                structure = 'P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1)')
+
+TTGC12 = Lorentz(name = 'TTGC12',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC12(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))')
 
 VSS1 = Lorentz(name = 'VSS1',
                spins = [ 3, 1, 1 ],
