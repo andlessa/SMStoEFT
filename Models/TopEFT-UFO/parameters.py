@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Wed 5 Jul 2023 20:00:05
+# Date: Thu 6 Jul 2023 11:19:42
 
 
 
@@ -77,7 +77,7 @@ mChi = Parameter(name = 'mChi',
                  nature = 'external',
                  type = 'real',
                  value = 100.,
-                 texname = '',
+                 texname = 'm_{\\chi }',
                  lhablock = 'FRBlock',
                  lhacode = [ 2 ])
 
@@ -85,7 +85,7 @@ mST = Parameter(name = 'mST',
                 nature = 'external',
                 type = 'real',
                 value = 400.,
-                texname = '',
+                texname = 'm_{\\text{ST}}',
                 lhablock = 'FRBlock',
                 lhacode = [ 3 ])
 

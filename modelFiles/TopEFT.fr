@@ -8,7 +8,7 @@
 (*********************************************************************)
 (*********************************************************************)
 
-M$ModelName = "SMS-stop";
+M$ModelName = "Top-EFT";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
@@ -26,8 +26,8 @@ M$Parameters = {
 
 (* New Physics (UV) Parameters *)
 yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-mChi  == { TeX->mChi,  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
-mST  == { TeX->mST,  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
+mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
+mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)

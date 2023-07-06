@@ -6,7 +6,7 @@
 
 
 FR$ModelInformation={
-  ModelName->"SMS-stop",
+  ModelName->"Top-EFT",
   Authors -> {"Andre Lessa"},
   Version -> "1.0",
   Date -> "18.03.2023"};
