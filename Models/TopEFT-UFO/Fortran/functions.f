@@ -39,6 +39,10 @@ double complex function formFactorC00eff(s)
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale
 
+        open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+        WRITE(10,*) 'INPUT-C00eff = ',mt2,mchi2,mst2,s
+
+
         ! Compute the scalar loop integrals:
         call A0_cll(A0a,mchi2)
         call A0_cll(A0b,mst2)
@@ -46,6 +50,19 @@ double complex function formFactorC00eff(s)
         call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
 
+        ! Collier definitions do not include the 1/(2*Pi)^4 factor in the integral
+        A0a = A0a/((2.*Pi)**4)
+        A0b = A0b/((2.*Pi)**4)
+        B0a = B0a/((2.*Pi)**4)
+        B0b = B0b/((2.*Pi)**4)
+        C0a = C0a/((2.*Pi)**4)
+
+        
+        WRITE(10,*) 'A0a (coll) = ',A0a        
+        WRITE(10,*) 'A0b (coll) = ',A0b
+        WRITE(10,*) 'B0a (coll) = ',B0a
+        WRITE(10,*) 'B0b (coll) = ',B0b
+        WRITE(10,*) 'C0a (coll) = ',C0a
 
         ! Combine to get the value of the C00 loop integral:
         ScalarC00eff = 8*A0a*(-4*mt2 + s)  
@@ -57,6 +74,14 @@ double complex function formFactorC00eff(s)
         
         ! New value to be used to replace the default value:
         formFactorC00eff = ScalarC00eff/c00effvalue
+
+        write(10,*) 'ScalarC0eff = ',ScalarC00eff
+        write(10,*) 'C0eff value = ',c00effvalue
+        write(10,*) 'Returning = ',formFactorC00eff
+        write(10,*)
+        write(10,*)
+        write(10,*)
+
 
     end if 
 
@@ -105,12 +130,18 @@ double complex function formFactorC1(s)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale
 
         open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-        WRITE(10,*) 'INPUT = ',mt2,mchi2,mst2,s
+        WRITE(10,*) 'INPUT-C1 = ',mt2,mchi2,mst2,s
 
         ! Compute the scalar loop integrals:
         call B0_cll(B0a,s,mst2,mst2)
         call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
+
+        ! Collier definitions do not include the 1/(2*Pi)^4 factor in the integral
+        B0a = B0a/((2.*Pi)**4)
+        B0b = B0b/((2.*Pi)**4)
+        C0a = C0a/((2.*Pi)**4)
+
 
         WRITE(10,*) 'B0a (coll) = ',B0a
         WRITE(10,*) 'B0b (coll) = ',B0b
@@ -141,7 +172,7 @@ double complex function formFactorC1(s)
         
         write(10,*) 'ScalarC1 = ',ScalarC1
         write(10,*) 'C1 value = ',c1value
-        write(10,*) 'Returning:  ',formFactorC1
+        write(10,*) 'Returning = ',formFactorC1
         write(10,*)
         write(10,*)
         write(10,*)
@@ -164,7 +195,7 @@ double complex function formFactorC11(s)
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
     double complex mchi2,mst2,mt2
     double precision muR2,c11value
-    double complex A0a,A0b,B0a,B0b,C0a,ScalarC11
+    double complex A0a,A0b,B0a,B0b,C0a,ScalarC11,lamb
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
     include 'input.inc' ! include all external model parameter
@@ -192,35 +223,33 @@ double complex function formFactorC11(s)
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale
 
+        open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+        WRITE(10,*) 'INPUT-C11 = ',mt2,mchi2,mst2,s
+
         ! Compute the scalar loop integrals:
-        call A0_cll(A0a,mchi2)
-        call A0_cll(A0b,mst2)
-        call B0_cll(B0a,s,mst2,mst2)
-        call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
 
+        WRITE(10,*) 'C0a (coll) = ',C0a
+   
+        ! Sqrt of Kallen function
+        lamb = CDSQRT(mt2**2 + mchi2**2 + mst2**2 - 2*mchi2*mst2 - 2*mchi2*mt2 -2*mst2*mt2)
 
-        ! A0a = mchi2*CDLOG(muR2/mchi2)/(16*Pi**4)
-        ! A0b = mst2*CDLOG(muR2/mst2)/(16*Pi**4)
-        
-        ! B0a = CDLOG(muR2/mst2) 
-        ! B0a = B0a + CDSQRT(s*(s-4*mst2))*CDLOG((CDSQRT(s*(s-4*mst2)) + 2*mst2-s)/(2*mst2))
-        ! B0a = B0a/(16*s*Pi**4)
-
-        ! B0b = 2*CDLOG(muR2/mst2)+CDLOG(mst2/mchi2) 
-        ! B0b = B0b - (mchi2*CDLOG(mchi2/mst2) - mst2*CDLOG(mchi2/mst2) + CDSQRT(mchi2**2 + (mst2 - mt2)**2 - 2*mchi2*(mst2 + mt2))*(CDLOG(4*mchi2*mst2) - 2*CDLOG(mchi2 + mst2 - mt2 + CDSQRT((mchi2 - mst2)**2 - 2*(mchi2 + mst2)*mt2 + mt2**2))))/mt2
-        ! B0b = B0b/(32*Pi**4)        
-
-        ! Combine to get the value of the C11 loop integral:
-        ScalarC11 = -2*A0a*(2*mt2 - s)*(4*mt2 - s) 
-        ScalarC11 = ScalarC11 + 2*A0b*(2*mt2 - s)*(4*mt2 - s) 
-        ScalarC11 = ScalarC11 + 2*B0b*(mchi2 - mst2 + mt2)*(4*mt2**2 - 8*mt2*s + s**2) 
-        ScalarC11 = ScalarC11 - 2*B0a*mt2*(4*mt2**2 - 8*mt2*s + s**2 - 2*mchi2*(2*mt2 + s) + 2*mst2*(2*mt2 + s))
-        ScalarC11 = ScalarC11 + 4*C0a*mt2*(mchi2**2*(2*mt2 + s) + (mst2 - mt2)**2*(2*mt2 + s) - 2*mchi2*(2*mt2*(mt2 - s) + mst2*(2*mt2 + s)))
-        ScalarC11 = ScalarC11/(4.*mt2*s*(-4*mt2 + s)**2)
+        ! Combine to get the value of the C11 loop integral (obtained with Package-X):
+        ScalarC11 = -((2*(4*mt2 - s)*s*(2*mt2*(mst2 + mt2) - mst2*s + mchi2*(-2*mt2 + s)))/mt2 + (s*(-8*mchi2*mt2**2*(mst2 + mt2) - 4*mchi2*mt2*(-4*mst2 + mt2)*s - 2*mchi2*mst2*s**2 + mchi2**2*(4*mt2**2 - 8*mt2*s + s**2) + (mst2 - mt2)**2*(4*mt2**2 - 8*mt2*s + s**2))*CDLOG(mchi2/mst2))/mt2**2 - 2*CDSQRT(s*(-4*mst2 + s))*(4*mt2*(-mchi2 + mst2 + mt2) - 2*(mchi2 - mst2 + 4*mt2)*s + s**2)*(CDLOG(2*mst2) - CDLOG(2*mst2 - s + CDSQRT(s*(-4*mst2 + s)))) + ((mchi2 - mst2 + mt2)*s*(4*mt2**2 - 8*mt2*s + s**2)*lamb*(CDLOG(4*mchi2*mst2) - 2*CDLOG(mchi2 + mst2 - mt2 + lamb)))/mt2**2 - 4*s*(-4*mchi2*mt2*(mst2 + mt2) - 2*mchi2*(mst2 - 2*mt2)*s + mchi2**2*(2*mt2 + s) + (mst2 - mt2)**2*(2*mt2 + s))*C0a)/(64.*Pi**4*s**2*(-4*mt2 + s)**2)
 
         ! New value to be used to replace the default value:
         formFactorC11 = ScalarC11/c11value
+
+        
+        write(10,*) 'ScalarC11 = ',ScalarC11
+        write(10,*) 'C11 value = ',c11value
+        write(10,*) 'Returning = ',formFactorC11
+        write(10,*)
+        write(10,*)
+        write(10,*)
+        close(10)
+
+
     end if 
 
     return 
@@ -265,12 +294,30 @@ double complex function formFactorC12(s)
         call SetDeltaUV_cll(0d0) ! Remove the divergence (MSbar)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale
 
+        open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+        WRITE(10,*) 'INPUT-C12 = ',mt2,mchi2,mst2,s
+
+
         ! Compute the scalar loop integrals:
         call A0_cll(A0a,mchi2)
         call A0_cll(A0b,mst2)
         call B0_cll(B0a,s,mst2,mst2)
         call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
+
+        ! Collier definitions do not include the 1/(2*Pi)^4 factor in the integral
+        A0a = A0a/((2.*Pi)**4)
+        A0b = A0b/((2.*Pi)**4)
+        B0a = B0a/((2.*Pi)**4)
+        B0b = B0b/((2.*Pi)**4)
+        C0a = C0a/((2.*Pi)**4)
+
+        WRITE(10,*) 'A0a (coll) = ',A0a        
+        WRITE(10,*) 'A0b (coll) = ',A0b
+        WRITE(10,*) 'B0a (coll) = ',B0a
+        WRITE(10,*) 'B0b (coll) = ',B0b
+        WRITE(10,*) 'C0a (coll) = ',C0a
+
 
         ! A0a = mchi2*CDLOG(muR2/mchi2)/(16*Pi**4)
         ! A0b = mst2*CDLOG(muR2/mst2)/(16*Pi**4)
@@ -293,6 +340,18 @@ double complex function formFactorC12(s)
 
         ! New value to be used to replace the default value:
         formFactorC12 = ScalarC12/c12value
+
+
+        
+        write(10,*) 'ScalarC11 = ',ScalarC12
+        write(10,*) 'C12 value = ',c12value
+        write(10,*) 'Returning = ',formFactorC12
+        write(10,*)
+        write(10,*)
+        write(10,*)
+        close(10)
+
+
     end if 
 
     return 
