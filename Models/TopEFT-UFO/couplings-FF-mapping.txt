@@ -14,6 +14,18 @@ V_92 = Vertex(name = 'V_92',
               lorentz = [ L.FFV1, L.FFV3, L.FFV4, L.FFV5, L.FFV6 ],
               couplings = {(0,0):C.GC_11,(0,1):C.GC_62,(0,3):C.GC_63,(0,2):C.GC_64,(0,4):C.GC_65})
 
+# Effective vertex:
+
+Cttg = 'T(3,2,1)' * (  L.FFV1*C.GC_11 +  L.FFV3*C.GC_62 + L.FFV4*C.GC_64 + L.FFV5*C.GC_63 +  L.FFV6*C.GC_65 )
+     = 'T(3,2,1)' * (  (I*gs)*L.FFV1 
+                    +  (2*I*pi^2*gs*yDM^2*C00eff)*L.FFV3
+                    +  (-2*I*pi^2*gs*yDM^2*C11)*L.FFV4
+                    +  (-2*I*pi^2*gs*yDM^2*C1)*L.FFV5
+                    +  (-2*I*pi^2*gs*yDM^2*C12)*L.FFV6)
+
+
+
+
 
 #QCD/SM coupling -> L.FFV1
 GC_11 = Coupling(name = 'GC_11',
@@ -30,23 +42,24 @@ FFVC00EFF = Lorentz(name = 'FFVC00EFF',
                structure = '(formFactorC00eff(P(-5,3)*P(-5,3)))*(Gamma(3,2,-1)*ProjP(-1,1))')
 
 
-#C1-coupling -> L.FFV4 -> L.FFVC1
-GC_63 = Coupling(name = 'GC_63',
-                 value = '-2*C1*cmath.pi**2*complex(0,1)*G*yDM**2',
-                 order = {'NP':1,'QCD':1})
-
-FFVC1 = Lorentz(name = 'FFVC1',
-               spins = [ 2, 2, 3 ],
-               structure = '(formFactorC1(P(-5,3)*P(-5,3),P(-6,1)*P(-6,1),P(-7,2)*P(-7,2)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1))')                 
-
-#C11-coupling -> L.FFV5 -> L.FFVC11
+#C11-coupling -> L.FFV4 -> L.FFVC11
 GC_64 = Coupling(name = 'GC_64',
                  value = '-2*C11*cmath.pi**2*complex(0,1)*G*yDM**2',
                  order = {'NP':1,'QCD':1})
 
-FFVC11 = Lorentz(name = 'FFVC11',
+FFVC11 = Lorentz(name = 'FFVC1',
                spins = [ 2, 2, 3 ],
-               structure = '(formFactorC11(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - (P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))/2.)')                 
+               structure = '(formFactorC11(P(-5,3)*P(-5,3),P(-6,1)*P(-6,1),P(-7,2)*P(-7,2)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1))')                 
+
+#C1-coupling -> L.FFV5 -> L.FFVC1
+GC_63 = Coupling(name = 'GC_63',
+                 value = '-2*C1*cmath.pi**2*complex(0,1)*G*yDM**2',
+                 order = {'NP':1,'QCD':1})
+
+
+FFVC1 = Lorentz(name = 'FFVC1',
+               spins = [ 2, 2, 3 ],
+               structure = '(formFactorC1(P(-5,3)*P(-5,3)))*(P(-1,2)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. - P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1) - P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1) - (P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))/2.)')                 
 
 #C12-coupling -> L.FFV6 -> L.FFVC12
 GC_65 = Coupling(name = 'GC_65',
