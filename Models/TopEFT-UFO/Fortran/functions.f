@@ -99,9 +99,8 @@ double complex function formFactorC1(s)
 
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
     double complex mchi2,mst2,mt2
-    double precision c1value
-    double precision muR2
-    double complex B0a,B0b,C0a,ScalarC1
+    double precision muR2,c1value
+    double complex xS,xT,xC,C0a,ScalarC1,lamb
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
     include 'input.inc' ! include all external model parameter
@@ -113,9 +112,14 @@ double complex function formFactorC1(s)
     muR2 = dcmplx(MDL_MUR)**2
     c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the loop integral
 
+    ! Make sure masses and S are real 
+    ! (divide by mST to deal with dimensionless quantities)
+    xS = DCMPLX(real(s)/real(mst2),0d0)
+    xT = DCMPLX(real(mt2)/real(mst2),0d0)
+    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
 
     ! Make sure the tops can be on-shell:
-    if (real(s) < 4*real(mt2)) then
+    if (real(xS) < 4*real(xT)) then
         formFactorC1 = 0.0
         return
     end if
@@ -133,38 +137,20 @@ double complex function formFactorC1(s)
         WRITE(10,*) 'INPUT-C1 = ',mt2,mchi2,mst2,s
 
         ! Compute the scalar loop integrals:
-        call B0_cll(B0a,s,mst2,mst2)
-        call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
 
-        ! Collier definitions do not include the 1/(2*Pi)^4 factor in the integral
-        B0a = B0a/((2.*Pi)**4)
-        B0b = B0b/((2.*Pi)**4)
-        C0a = C0a/((2.*Pi)**4)
-
-
-        WRITE(10,*) 'B0a (coll) = ',B0a
-        WRITE(10,*) 'B0b (coll) = ',B0b
         WRITE(10,*) 'C0a (coll) = ',C0a
         
-        ! B0a = CDLOG(muR2/mst2) 
-        ! B0a = B0a + CDSQRT(s*(s-4*mst2))*(CDLOG(CDSQRT(s*(s-4*mst2)) + 2*mst2-s) - CDLOG(2*mst2))/s
-        ! B0a = B0a/(16*Pi**4)
-
-        ! B0b = 2*CDLOG(muR2/mst2)+CDLOG(mst2/mchi2) 
-        ! B0b = B0b - (mchi2*CDLOG(mchi2/mst2) - mst2*CDLOG(mchi2/mst2) + CDSQRT(mchi2**2 + (mst2 - mt2)**2 - 2*mchi2*(mst2 + mt2))*(CDLOG(4*mchi2*mst2) - 2*CDLOG(mchi2 + mst2 - mt2 + CDSQRT((mchi2 - mst2)**2 - 2*(mchi2 + mst2)*mt2 + mt2**2))))/mt2
-        ! B0b = B0b/(32*Pi**4)        
-
-        ! WRITE(10,*) 'B0a (exp) = ',B0a
-        ! WRITE(10,*) 'B0b (exp) = ',B0b
-        ! WRITE(10,*) 'C0a (exp) = ',C0a
-
-
-        ! Combine to get the value of the C1 loop integral:
-        ScalarC1 = -B0a
-        ScalarC1 = ScalarC1 + B0b
-        ScalarC1 = ScalarC1 - C0a*(mchi2 - mst2 + mt2)
-        ScalarC1 = ScalarC1/(4*mt2 - s)
+        ! Square-root of Kallen function:
+        lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
+        ! Multiply by mst2 to make the coefficient dimensionless
+        C0a = C0a*mst2
+        ! Compute the C12 integral (expression obtained with Package-X)
+        ScalarC1 = 2*xS*xT*(xC+xT-1)*C0a
+        ScalarC1 = ScalarC1 + xS*lamb*(CDLOG(4*xC) - 2*CDLOG(lamb+xC-xT+1))
+        ScalarC1 = ScalarC1 + xS*(xC+xT-1)*CDLOG(xC)
+        ScalarC1 = ScalarC1 + 2*xT*CDSQRT(xS*(xS-4))*CDLOG((CDSQRT(xS*(xS-4)) + 2 - xS)/2)
+        ScalarC1 = ScalarC1/(32*Pi**4*mst2*xS*xT*(xS-4*xT))
 
         ! New value to be used to replace the default value:
         formFactorC1 = ScalarC1/c1value
@@ -195,7 +181,7 @@ double complex function formFactorC11(s)
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
     double complex mchi2,mst2,mt2
     double precision muR2,c11value
-    double complex A0a,A0b,B0a,B0b,C0a,ScalarC11,lamb
+    double complex xS,xT,xC,C0a,ScalarC11,lamb
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
     include 'input.inc' ! include all external model parameter
@@ -207,9 +193,14 @@ double complex function formFactorC11(s)
     muR2 = dcmplx(MDL_MUR)**2
     c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the loop integral
 
+    ! Make sure masses and S are real 
+    ! (divide by mST to deal with dimensionless quantities)
+    xS = DCMPLX(real(s)/real(mst2),0d0)
+    xT = DCMPLX(real(mt2)/real(mst2),0d0)
+    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
 
     ! Make sure the tops can be on-shell:
-    if (real(s) < 4*real(mt2)) then
+    if (real(xS) < 4*real(xT)) then
         formFactorC11 = 0.0
         return
     end if
@@ -231,11 +222,17 @@ double complex function formFactorC11(s)
 
         WRITE(10,*) 'C0a (coll) = ',C0a
    
-        ! Sqrt of Kallen function
-        lamb = CDSQRT(mt2**2 + mchi2**2 + mst2**2 - 2*mchi2*mst2 - 2*mchi2*mt2 -2*mst2*mt2)
-
-        ! Combine to get the value of the C11 loop integral (obtained with Package-X):
-        ScalarC11 = -((2*(4*mt2 - s)*s*(2*mt2*(mst2 + mt2) - mst2*s + mchi2*(-2*mt2 + s)))/mt2 + (s*(-8*mchi2*mt2**2*(mst2 + mt2) - 4*mchi2*mt2*(-4*mst2 + mt2)*s - 2*mchi2*mst2*s**2 + mchi2**2*(4*mt2**2 - 8*mt2*s + s**2) + (mst2 - mt2)**2*(4*mt2**2 - 8*mt2*s + s**2))*CDLOG(mchi2/mst2))/mt2**2 - 2*CDSQRT(s*(-4*mst2 + s))*(4*mt2*(-mchi2 + mst2 + mt2) - 2*(mchi2 - mst2 + 4*mt2)*s + s**2)*(CDLOG(2*mst2) - CDLOG(2*mst2 - s + CDSQRT(s*(-4*mst2 + s)))) + ((mchi2 - mst2 + mt2)*s*(4*mt2**2 - 8*mt2*s + s**2)*lamb*(CDLOG(4*mchi2*mst2) - 2*CDLOG(mchi2 + mst2 - mt2 + lamb)))/mt2**2 - 4*s*(-4*mchi2*mt2*(mst2 + mt2) - 2*mchi2*(mst2 - 2*mt2)*s + mchi2**2*(2*mt2 + s) + (mst2 - mt2)**2*(2*mt2 + s))*C0a)/(64.*Pi**4*s**2*(-4*mt2 + s)**2)
+        ! Square-root of Kallen function:
+        lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
+        ! Multiply by mst2 to make the coefficient dimensionless
+        C0a = C0a*mst2
+        ! Compute the C12 integral (expression obtained with Package-X)
+        ScalarC11 = 4*xS*C0a*xT**2*(xS*(xC**2 + xC*(4*xT-2) + (xT-1)**2) + 2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2))
+        ScalarC11 = ScalarC11 - xS*CDLOG(xC)*(-4*xS*xT*(2*xC**2 + xC*(xT-4) + 2*(xT-1)**2) + 4*xT**2*(xC**2 - 2*xC*(xT+1) + (xT-1)**2) + xS**2*(xC*(xC-2) + (xT-1)**2))
+        ScalarC11 = ScalarC11 + 2*xS*(xC+xT-1)*lamb*(xS**2-8*xS*xT + 4*xT**2)*CDLOG((1+xC-xT + lamb)/(2*CDSQRT(xC)))
+        ScalarC11 = ScalarC11 - 2*CDSQRT(xS*(xS-4))*xT**2*CDLOG((2-xS + CDSQRT(xS*(xS-4)))/2)*(-2*xS*(xC+4*xT-1) + 4*xT*(1+xT-xC) +xS**2)
+        ScalarC11 = ScalarC11 + 2*xS*xT*(xS-4*xT)*(xS*(xC-1) + 2*xT*(1+xT-xC))
+        ScalarC11 = ScalarC11/(64*Pi**4*mst2*xS**2*xT**2*(xS-4*xT)**2)
 
         ! New value to be used to replace the default value:
         formFactorC11 = ScalarC11/c11value
@@ -266,7 +263,7 @@ double complex function formFactorC12(s)
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
     double complex mchi2,mst2,mt2
     double precision muR2,c12value
-    double complex A0a,A0b,B0a,B0b,C0a,ScalarC12
+    double complex xS,xT,xC,C0a,ScalarC12,lamb
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
     include 'input.inc' ! include all external model parameter
@@ -278,9 +275,14 @@ double complex function formFactorC12(s)
     muR2 = dcmplx(MDL_MUR)**2
     c12value = MDL_C12 ! Numerical value for C12, which should be replaced by the loop integral
 
+    ! Make sure masses and S are real 
+    ! (divide by mST to deal with dimensionless quantities)
+    xS = DCMPLX(real(s)/real(mst2),0d0)
+    xT = DCMPLX(real(mt2)/real(mst2),0d0)
+    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
 
     ! Make sure the tops can be on-shell:
-    if (real(s) < 4*real(mt2)) then
+    if (real(xS) < 4*real(xT)) then
         formFactorC12 = 0.0
         return
     end if
@@ -299,51 +301,26 @@ double complex function formFactorC12(s)
 
 
         ! Compute the scalar loop integrals:
-        call A0_cll(A0a,mchi2)
-        call A0_cll(A0b,mst2)
-        call B0_cll(B0a,s,mst2,mst2)
-        call B0_cll(B0b,mt2,mchi2,mst2)
         call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
 
-        ! Collier definitions do not include the 1/(2*Pi)^4 factor in the integral
-        A0a = A0a/((2.*Pi)**4)
-        A0b = A0b/((2.*Pi)**4)
-        B0a = B0a/((2.*Pi)**4)
-        B0b = B0b/((2.*Pi)**4)
-        C0a = C0a/((2.*Pi)**4)
-
-        WRITE(10,*) 'A0a (coll) = ',A0a        
-        WRITE(10,*) 'A0b (coll) = ',A0b
-        WRITE(10,*) 'B0a (coll) = ',B0a
-        WRITE(10,*) 'B0b (coll) = ',B0b
         WRITE(10,*) 'C0a (coll) = ',C0a
 
-
-        ! A0a = mchi2*CDLOG(muR2/mchi2)/(16*Pi**4)
-        ! A0b = mst2*CDLOG(muR2/mst2)/(16*Pi**4)
-        
-        ! B0a = CDLOG(muR2/mst2) 
-        ! B0a = B0a + CDSQRT(s*(s-4*mst2))*CDLOG((CDSQRT(s*(s-4*mst2)) + 2*mst2-s)/(2*mst2))
-        ! B0a = B0a/(16*s*Pi**4)
-
-        ! B0b = 2*CDLOG(muR2/mst2)+CDLOG(mst2/mchi2) 
-        ! B0b = B0b - (mchi2*CDLOG(mchi2/mst2) - mst2*CDLOG(mchi2/mst2) + CDSQRT(mchi2**2 + (mst2 - mt2)**2 - 2*mchi2*(mst2 + mt2))*(CDLOG(4*mchi2*mst2) - 2*CDLOG(mchi2 + mst2 - mt2 + CDSQRT((mchi2 - mst2)**2 - 2*(mchi2 + mst2)*mt2 + mt2**2))))/mt2
-        ! B0b = B0b/(32*Pi**4)
-
-        ! Combine to get the value of the C11 loop integral:
-        ScalarC12 = -(A0a*(4*mt2 - s))
-        ScalarC12 = ScalarC12 + A0b*(4*mt2 - s) 
-        ScalarC12 = ScalarC12 + B0a*(2*mchi2*(mt2 - s) - 2*mst2*(mt2 - s) - mt2*(2*mt2 + s))         
-        ScalarC12 = ScalarC12 + B0b*(mchi2 - mst2 + mt2)*(2*mt2 + s) 
-        ScalarC12 = ScalarC12 + C0a*(2*mchi2**2*(mt2 - s) + 2*(mst2 - mt2)**2*(mt2 - s) - mchi2*(4*mt2**2 + 4*mst2*(mt2 - s) - 2*mt2*s + s**2))
-        ScalarC12 = -ScalarC12/(s*(-4*mt2 + s)**2)
+        ! Square-root of Kallen function:
+        lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
+        ! Multiply by mst2 to make the coefficient dimensionless
+        C0a = C0a*mst2
+        ! Compute the C12 integral (expression obtained with Package-X)
+        ScalarC12 = 2*xS*xT*C0a*(2*xS*(xC**2 - xC*(xT+2) + (xT-1)**2) -2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2) + xC*xS**2)
+        ScalarC12 = ScalarC12 + 2*xS*(1-xC-xT)*lamb*(xS+2*xT)*CDLOG((lamb+xC-xT+1)/(2*CDSQRT(xC)))
+        ScalarC12 = ScalarC12 + xS*CDLOG(xC)*(xS*(xC**2 + xC*(4*xT-2) + (xT-1)**2) + 2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2))
+        ScalarC12 = ScalarC12 + xS*xT*(xS-4*xT)*(2*xC+xS-2*(xT+1))
+        ScalarC12 = ScalarC12 + 2*xT*CDSQRT(xS*(xS-4))*CDLOG((2+CDSQRT(xS*(xS-4))-xS)/2)*(xS*(2*xC+xT-2) + 2*xT*(1+xT-xC))
+        ScalarC12 = ScalarC12/(32*Pi**4*mst2*xS**2*xT*((xS-4*xT)**2))
 
         ! New value to be used to replace the default value:
         formFactorC12 = ScalarC12/c12value
-
-
         
-        write(10,*) 'ScalarC11 = ',ScalarC12
+        write(10,*) 'ScalarC12 = ',ScalarC12
         write(10,*) 'C12 value = ',c12value
         write(10,*) 'Returning = ',formFactorC12
         write(10,*)

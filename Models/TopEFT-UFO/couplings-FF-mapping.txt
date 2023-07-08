@@ -5,7 +5,29 @@ This includes the momenta P(x,y). This first index is the lorentz index which sh
 E.g: P(-2,1)*P(-2,1) = p1(mu)*p1(mu)
        ^
        dummy index for sum
+Gamma(a,b,c) -> a = Lorentz index, b,c-> spinor indices
 
+### C00 effective coefficient ###
+
+From the loop calculation the term proportional to Gamma^mu*P_L should come multiplied by the C00 loop integral.
+However the couplings C1,C11 and C12 all contribute to this term. Hence we obtain the relation:
+
+C00 = C00eff + 2 MT^2 (C1 + C11 + C12) + s/2 (C1 + 2 C12)
+
+where C00eff is the coupling multiplying the tbar.ProjP[mu].DC[t, mu] operator.
+As a result, the form factor which replaces C00eff (formFactorC00eff) should actually return:
+
+formFactorC00eff = C00 - 2 MT^2 (C1 + C11 + C12) - s/2 (C1 + 2 C12)
+
+in order to cancel the contribution from the other coefficients, so the Gamma^mu*P_L term is indeed
+only multiplied by C00.
+An alternative is to replace the formFactorC00eff by:
+(formFactorC00 - (P(-1,1)**2+P(-2,2)**2)*(formFactorC1+formFactorC11+formFactorC2) - P(-3,3)*P(-3,3)*(formFactorC1 + 2*formFactorC12))
+
+where P(-1,1) -> anti-top momentum, P(-2,2) -> top momentum, P(-3,3) -> gluon momentum and formFactorC00 returns the C00 loop integral.
+
+
+### UFO Vertices:
 Top-Top-Gluon vertex:
 
 V_92 = Vertex(name = 'V_92',
