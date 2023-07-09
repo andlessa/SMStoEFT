@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Sun 9 Jul 2023 21:11:31
+# Date: Sun 9 Jul 2023 21:45:52
 
 
 
@@ -89,29 +89,13 @@ yDM = Parameter(name = 'yDM',
                 lhablock = 'FRBlock',
                 lhacode = [ 3 ])
 
-mChi = Parameter(name = 'mChi',
-                 nature = 'external',
-                 type = 'real',
-                 value = 100.,
-                 texname = 'm_{\\chi }',
-                 lhablock = 'FRBlock',
-                 lhacode = [ 4 ])
-
-mST = Parameter(name = 'mST',
-                nature = 'external',
-                type = 'real',
-                value = 400.,
-                texname = 'm_{\\text{ST}}',
-                lhablock = 'FRBlock',
-                lhacode = [ 5 ])
-
 C00eff = Parameter(name = 'C00eff',
                    nature = 'external',
                    type = 'real',
                    value = 0.00016040597272944275,
                    texname = '\\text{Ceff}_0',
                    lhablock = 'FRBlock',
-                   lhacode = [ 6 ])
+                   lhacode = [ 4 ])
 
 C1 = Parameter(name = 'C1',
                nature = 'external',
@@ -119,7 +103,7 @@ C1 = Parameter(name = 'C1',
                value = 1.0693731515296184e-10,
                texname = 'C_1',
                lhablock = 'FRBlock',
-               lhacode = [ 7 ])
+               lhacode = [ 5 ])
 
 C11 = Parameter(name = 'C11',
                 nature = 'external',
@@ -127,7 +111,7 @@ C11 = Parameter(name = 'C11',
                 value = -5.346865757648092e-11,
                 texname = 'C_{11}',
                 lhablock = 'FRBlock',
-                lhacode = [ 8 ])
+                lhacode = [ 6 ])
 
 C12 = Parameter(name = 'C12',
                 nature = 'external',
@@ -135,7 +119,7 @@ C12 = Parameter(name = 'C12',
                 value = -2.673432878824046e-11,
                 texname = 'C_{12}',
                 lhablock = 'FRBlock',
-                lhacode = [ 9 ])
+                lhacode = [ 7 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -177,6 +161,22 @@ MH = Parameter(name = 'MH',
                lhablock = 'MASS',
                lhacode = [ 25 ])
 
+mChi = Parameter(name = 'mChi',
+                 nature = 'external',
+                 type = 'real',
+                 value = 100.,
+                 texname = '\\text{mChi}',
+                 lhablock = 'MASS',
+                 lhacode = [ 5000012 ])
+
+mST = Parameter(name = 'mST',
+                nature = 'external',
+                type = 'real',
+                value = 400.,
+                texname = '\\text{mST}',
+                lhablock = 'MASS',
+                lhacode = [ 5000002 ])
+
 WZ = Parameter(name = 'WZ',
                nature = 'external',
                type = 'real',
@@ -208,6 +208,22 @@ WH = Parameter(name = 'WH',
                texname = '\\text{WH}',
                lhablock = 'DECAY',
                lhacode = [ 25 ])
+
+wChi = Parameter(name = 'wChi',
+                 nature = 'external',
+                 type = 'real',
+                 value = 0.,
+                 texname = '\\text{wChi}',
+                 lhablock = 'DECAY',
+                 lhacode = [ 5000012 ])
+
+wST = Parameter(name = 'wST',
+                nature = 'external',
+                type = 'real',
+                value = 1.,
+                texname = '\\text{wST}',
+                lhablock = 'DECAY',
+                lhacode = [ 5000002 ])
 
 aEW = Parameter(name = 'aEW',
                 nature = 'internal',

@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Sun 9 Jul 2023 21:11:31
+# Date: Sun 9 Jul 2023 21:45:52
 
 
 from __future__ import division
@@ -384,4 +384,34 @@ G__plus__ = Particle(pdg_code = 251,
                      Y = 0)
 
 G__minus__ = G__plus__.anti()
+
+P__tilde__chi = Particle(pdg_code = 5000012,
+                         name = '~chi',
+                         antiname = '~chi',
+                         spin = 2,
+                         color = 1,
+                         mass = Param.mChi,
+                         width = Param.wChi,
+                         texname = '~chi',
+                         antitexname = '~chi',
+                         charge = 0,
+                         GhostNumber = 0,
+                         LeptonNumber = 0,
+                         Y = 0)
+
+P__tilde__ST = Particle(pdg_code = 5000002,
+                        name = '~ST',
+                        antiname = '~ST~',
+                        spin = 1,
+                        color = 3,
+                        mass = Param.mST,
+                        width = Param.wST,
+                        texname = '~ST',
+                        antitexname = '~ST~',
+                        charge = 2/3,
+                        GhostNumber = 0,
+                        LeptonNumber = 0,
+                        Y = 0)
+
+P__tilde__ST__tilde__ = P__tilde__ST.anti()
 

@@ -1,18 +1,20 @@
 (*********************************************************************)
 (*********************************************************************)
-(** FeynRules model file for a topEFT matched to a simplified colored scalar-dark fermion model ******)
+(** FeynRules model file for a simplified colored scalar-dark ********)
+(** fermion model including dim-6 EFT operators for the       ********)
+(** top-top-gluon coupling induced at one loop  (for on-shell tops) **)
 (******                                                         ******)
-(****** A. Lessa                       ******)
+(****** A. Lessa                                                ******)
 (******                                                         ******)
 (****** Feel free to use this model file!                       ******)
 (*********************************************************************)
 (*********************************************************************)
 
-M$ModelName = "Top-EFT";
+M$ModelName = "SMS-Top-EFT";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "18.03.2023"};
+                 Date -> "09.07.2023"};
 
 FeynmanGauge = True;
 
@@ -30,9 +32,7 @@ M$Parameters = {
   deltaUV == { TeX->Subscript[\[Delta],UV],  ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Renormalization condition (zero value corresponds to MSbar)"},
 
 (* New Physics (UV) Parameters *)
-  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-  mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
-  mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)
@@ -46,11 +46,58 @@ M$Parameters = {
 };
 
 
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+(* The dark fermion *)
+F[16] == { 
+         ClassName -> chi, 
+         SelfConjugate-> True, 
+         QuantumNumbers -> {}, 
+         Mass->{mChi,  100.0},  
+         Width->{wChi,0.}, 
+         ParticleName-> "~chi", 
+         PDG->5000012, 
+         PropagatorLabel->"chi", 
+         PropagatorType->Straight, 
+         ParticleName     -> {"~chi" },
+         FullName         -> {"Dark fermion"} },
+
+(* Colored Scalar *)
+S[5] == { 
+          ClassName        -> ST,
+          Indices          -> {Index[Colour]},
+          SelfConjugate    -> False,
+          Unphysical       -> False,
+          Mass             -> {mST, 400.},
+          Width            -> {wST, 1.},
+          QuantumNumbers   -> {Q -> 2/3},
+          PropagatorLabel  -> {"ST"},
+          PropagatorType   -> ScalarDash, 
+          PDG              -> {5000002},
+          ParticleName     -> {"~ST" },
+          AntiParticleName -> {"~ST~"},
+          FullName         -> {"Colored Scalar"} }
+};
+
+
+
+
 (* ************************** *)
 (* *****   Lagrangian   ***** *)
 (* ************************** *)
 (* gauge kinetic and mass terms *)
 
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+
+(* DM-Scalar-Top coupling *)
+LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
+
+(* dim-6 EFT operators (valid only for on-shell tops) *)
 
 C0eff := I*(2*Pi^2)*(yDM^2)*C00eff;
 C1eff := I*(2*Pi^2)*(yDM^2)*(C1+C11+C12);
@@ -96,4 +143,4 @@ LC12 := LC12a + LC12b;
 
 (* Total EFT lagrangian *)
 
-LNP := LC0 + LC1 + HC[LC1] + LC12;
+LNP := Lkin + LYDM + HC[LYDM] + LC0 + LC1 + HC[LC1] + LC12;
