@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Sun 9 Jul 2023 21:45:53
+# Date: Mon 10 Jul 2023 09:07:03
 
 
 from object_library import all_couplings, Coupling
@@ -263,63 +263,63 @@ GC_63 = Coupling(name = 'GC_63',
 
 GC_64 = Coupling(name = 'GC_64',
                  value = '2*C00eff*cmath.pi**2*complex(0,1)*G*yDM**2',
-                 order = {'NP':3,'QCD':1})
+                 order = {'NP':2,'QCD':1})
 
 GC_65 = Coupling(name = 'GC_65',
                  value = '-2*C1*cmath.pi**2*complex(0,1)*G*yDM**2',
-                 order = {'NP':3,'QCD':1})
+                 order = {'NP':2,'QCD':1})
 
 GC_66 = Coupling(name = 'GC_66',
                  value = '-2*C11*cmath.pi**2*complex(0,1)*G*yDM**2',
-                 order = {'NP':3,'QCD':1})
+                 order = {'NP':2,'QCD':1})
 
 GC_67 = Coupling(name = 'GC_67',
                  value = '-2*C12*cmath.pi**2*complex(0,1)*G*yDM**2',
-                 order = {'NP':3,'QCD':1})
+                 order = {'NP':2,'QCD':1})
 
 GC_68 = Coupling(name = 'GC_68',
                  value = '-(C1*cmath.pi**2*G**2*yDM**2) - 2*C12*cmath.pi**2*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_69 = Coupling(name = 'GC_69',
                  value = '-(C1*cmath.pi**2*complex(0,1)*G**2*yDM**2) - 2*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_70 = Coupling(name = 'GC_70',
                  value = '-2*C1*cmath.pi**2*complex(0,1)*G**2*yDM**2 - 2*C11*cmath.pi**2*complex(0,1)*G**2*yDM**2 - 2*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_71 = Coupling(name = 'GC_71',
                  value = 'C1*cmath.pi**2*complex(0,1)*G**2*yDM**2 + 2*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_72 = Coupling(name = 'GC_72',
                  value = '2*C1*cmath.pi**2*complex(0,1)*G**2*yDM**2 + 2*C11*cmath.pi**2*complex(0,1)*G**2*yDM**2 + 2*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_73 = Coupling(name = 'GC_73',
                  value = '-4*C1*cmath.pi**2*complex(0,1)*G**2*yDM**2 - 4*C11*cmath.pi**2*complex(0,1)*G**2*yDM**2 - 4*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_74 = Coupling(name = 'GC_74',
                  value = '4*C1*cmath.pi**2*complex(0,1)*G**2*yDM**2 + 4*C11*cmath.pi**2*complex(0,1)*G**2*yDM**2 + 4*C12*cmath.pi**2*complex(0,1)*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_75 = Coupling(name = 'GC_75',
                  value = 'C1*cmath.pi**2*G**2*yDM**2 + 2*C12*cmath.pi**2*G**2*yDM**2',
-                 order = {'NP':3,'QCD':2})
+                 order = {'NP':2,'QCD':2})
 
 GC_76 = Coupling(name = 'GC_76',
                  value = '-(C1*cmath.pi**2*G**3*yDM**2) - 2*C12*cmath.pi**2*G**3*yDM**2',
-                 order = {'NP':3,'QCD':3})
+                 order = {'NP':2,'QCD':3})
 
 GC_77 = Coupling(name = 'GC_77',
                  value = '2*C1*cmath.pi**2*complex(0,1)*G**3*yDM**2 + 2*C11*cmath.pi**2*complex(0,1)*G**3*yDM**2 + 2*C12*cmath.pi**2*complex(0,1)*G**3*yDM**2',
-                 order = {'NP':3,'QCD':3})
+                 order = {'NP':2,'QCD':3})
 
 GC_78 = Coupling(name = 'GC_78',
                  value = 'C1*cmath.pi**2*G**3*yDM**2 + 2*C12*cmath.pi**2*G**3*yDM**2',
-                 order = {'NP':3,'QCD':3})
+                 order = {'NP':2,'QCD':3})
 
 GC_79 = Coupling(name = 'GC_79',
                  value = '-((complex(0,1)*yt)/cmath.sqrt(2))',
