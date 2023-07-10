@@ -285,10 +285,12 @@ double complex function formFactorC00eff(s)
     implicit none
 
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
+    integer rank
     double complex mt2,mst2,mchi2
     double precision c00effvalue,deltaUV,muR2
     double complex C00,C1,C11,C12,ScalarC00eff
     double complex loopIntegralC00,loopIntegralC1,loopIntegralC11,loopIntegralC12
+    double complex, allocatable :: Ccoeff(:,:,:),Ccoeffuv(:,:,:)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -307,6 +309,29 @@ double complex function formFactorC00eff(s)
         C11 = loopIntegralC11(s,mt2,mchi2,mst2,muR2,deltaUV)
         C12 = loopIntegralC12(s,mt2,mchi2,mst2,muR2,deltaUV)
         
+
+        ! call Init_cll(6,6,'',.true.)
+        ! call InitCacheSystem_cll(1,4)
+        ! call InitEvent_cll     
+        ! call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+        ! call SetMuUV2_cll(muR2) ! Set the renormalization scale
+    
+        ! rank = 1
+        ! allocate(Ccoeff(0:rank/2,0:rank,0:rank))
+        ! allocate(Ccoeffuv(0:rank/2,0:rank,0:rank))
+        ! call C_cll(Ccoeff,Ccoeffuv,mt2,s,mt2,mchi2,mst2,mst2,rank) 
+        ! open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+        ! WRITE(10,*) 'INPUT-C00 = ',mt2,mchi2,mst2,s
+        ! write(10,*) 'C00 (loop) = ',C00
+        ! write(10,*) 'C11 (loop) = ',C11
+        ! write(10,*) 'C12 (loop) = ',C12
+        ! write(10,*) 'C1 (loop) = ',C1
+        ! write(10,*)
+        ! write(10,*) 'COEFF=',Ccoeff
+        ! close(10)
+
+
+
 
         ! Compute effective C00 value:
         ! Note that: C00eff = C_{00} - 2 MT^2 (C_{1} + C_{11} + C_{12}) - (s/2)*(C_{1} + 2 C_{12})
