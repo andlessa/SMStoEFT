@@ -1,0 +1,60 @@
+(*********************************************************************)
+(*********************************************************************)
+(** FeynRules model file for the on-shell topEFT matched to a simplified colored scalar-dark fermion model ******)
+(******                                                         ******)
+(****** A. Lessa ******)
+(******                                                         ******)
+(****** Feel free to use this model file!                       ******)
+(*********************************************************************)
+(*********************************************************************)
+
+M$ModelName = "Top-EFT";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "11.07.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+(* New Physics (UV) Parameters *)
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+  mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
+  mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
+
+(* EFT coefficient *)
+
+  A0  == { TeX->Subscript[A,0],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          Value-> (-gs*yDM^2*MT/(384.*Pi^2))*(2*mChi^6 - 6*mChi^2*mST^4 + mST^6 + 3*mChi^4*mST^2*(1+2*Log[mST^2/mChi^2]))/((mChi^2-mST^2)^4), 
+          InteractionOrder->{{NP,2},{QCD,1}},
+          Description->"Effective on-shell g-top-top coupling"
+        }
+};
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+
+(* EFT operator G_{\mu\nu} tbar.sigma[\mu,\nu].Ta.t *)
+(* the factor of 2 is due to the fact that G_{\mu\nu} and sigma[\mu\nu] and anti-symmetric *)
+
+LC0 := Block[{mu,nu,aa},
+              2*I*A0*FS[G,mu,nu,aa]*(tbar.Ga[mu].Ga[nu].T[aa].t)
+            ];
+
+
+(* Total EFT lagrangian *)
+
+LNP := LC0;

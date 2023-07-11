@@ -35,16 +35,11 @@ set zerowidth_tchannel True
 set nlo_mixed_expansion True
 import model sm
 define p = g u c d s u~ c~ d~ s~
-define q = u c d s u~ c~ d~ s~
 define j = g u c d s u~ c~ d~ s~
 define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-#import model /home/lessa/SMStoEFT/Models/TopEFT-UFO
-#generate q q > t t~ / a z NP==1 QCD==2
-#output ../../processFolders/qq2TT_EFT_good
 import model /home/lessa/SMStoEFT/Models/SMS-TopEFT-UFO
-generate q q > t t~ / a z NP==3 QCD==2
-output ../../processFolders/qq2TT_SMS-EFT
-
+generate u u~ > t t~ QCD^2<=4 NP^2<=2 QED^2<=0
+output ../../processFolders/qq2tt_bornPlusInter
