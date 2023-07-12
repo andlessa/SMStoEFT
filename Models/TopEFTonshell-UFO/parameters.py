@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 11 Jul 2023 11:12:56
+# Date: Tue 11 Jul 2023 18:48:55
 
 
 
@@ -65,29 +65,13 @@ ymtau = Parameter(name = 'ymtau',
                   lhablock = 'YUKAWA',
                   lhacode = [ 15 ])
 
-muR = Parameter(name = 'muR',
-                nature = 'external',
-                type = 'real',
-                value = 91.,
-                texname = '\\mu _R',
-                lhablock = 'FRBlock',
-                lhacode = [ 1 ])
-
-deltaUV = Parameter(name = 'deltaUV',
-                    nature = 'external',
-                    type = 'real',
-                    value = 0.,
-                    texname = '\\delta _{\\text{UV}}',
-                    lhablock = 'FRBlock',
-                    lhacode = [ 2 ])
-
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
                 type = 'real',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 3 ])
+                lhacode = [ 1 ])
 
 mChi = Parameter(name = 'mChi',
                  nature = 'external',
@@ -95,7 +79,7 @@ mChi = Parameter(name = 'mChi',
                  value = 100.,
                  texname = 'm_{\\chi }',
                  lhablock = 'FRBlock',
-                 lhacode = [ 4 ])
+                 lhacode = [ 2 ])
 
 mST = Parameter(name = 'mST',
                 nature = 'external',
@@ -103,7 +87,7 @@ mST = Parameter(name = 'mST',
                 value = 400.,
                 texname = 'm_{\\text{ST}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 5 ])
+                lhacode = [ 3 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',

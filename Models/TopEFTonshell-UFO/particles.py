@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 11 Jul 2023 11:12:56
+# Date: Tue 11 Jul 2023 18:48:55
 
 
 from __future__ import division

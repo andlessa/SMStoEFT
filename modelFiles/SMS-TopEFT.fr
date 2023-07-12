@@ -14,7 +14,7 @@ M$ModelName = "SMS-Top-EFT";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "09.07.2023"};
+                 Date -> "11.07.2023"};
 
 FeynmanGauge = True;
 
@@ -28,7 +28,8 @@ M$Parameters = {
 
 (* Renormalization parameters (for divergent coefficients) *)
 
-  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->External, Value->91.0, Description->"Renormalization scale for the regularization of the top-top-gluon loop (corresponds to the aS renormalization scale)"},
+  kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
+  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
   deltaUV == { TeX->Subscript[\[Delta],UV],  ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Renormalization condition (zero value corresponds to MSbar)"},
 
 (* New Physics (UV) Parameters *)
@@ -39,10 +40,10 @@ M$Parameters = {
 (* C00eff = C_{00} - 2 MT^2 (C_{1} + C_{11} + C_{12}) - (s/2)*(C_{1} + 2 C_{12}) *)
 (* where s = (p1+p2)^2, p1 = top momentum, p2 = anti-top momentum, MT = top mass *)
 
-  C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0/(64*Pi^4), Description->"C00eff g-top-top coupling"},
-  C1  == { TeX->Subscript[C,1],  ComplexParameter -> False, ParameterType->External, Value->1.0/(10^6*96*Pi^4), Description->"C1 g-top-top coupling"}, 
-  C11  == { TeX->Subscript[C,11],  ComplexParameter -> False, ParameterType->External, Value->-1.0/(10^6*192*Pi^4), Description->"C11 g-top-top coupling"},
-  C12  == { TeX->Subscript[C,12],  ComplexParameter -> False, ParameterType->External, Value->-1.0/(10^6*384*Pi^4), Description->"C12 g-top-top coupling"}
+  C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"C00eff effective coupling"},
+  C1  == { TeX->Subscript[C,1],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"C1 loop integral"}, 
+  C11  == { TeX->Subscript[C,11],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"C11 loop integral"},
+  C12  == { TeX->Subscript[C,12],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"C12 loop integral"}
 };
 
 
@@ -99,48 +100,48 @@ LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 
 (* dim-6 EFT operators (valid only for on-shell tops) *)
 
-C0eff := I*(2*Pi^2)*(yDM^2)*C00eff;
-C1eff := I*(2*Pi^2)*(yDM^2)*(C1+C11+C12);
-C12eff := (2*Pi^2)*(gs*yDM^2)*(C1/2+C12);
+A1 := I*(2*Pi^2)*(yDM^2)*C00eff;
+A2 := I*(2*Pi^2)*(yDM^2)*(C1+C11+C12);
+A3 := (2*Pi^2)*(gs*yDM^2)*(C1/2+C12);
 
 (* EFT operator top-D_\mu(top) *)
-LC0 := Block[{mu},
-              C0eff*(tbar.ProjP[mu].DC[t, mu])
+LA1 := Block[{mu},
+              A1*(tbar.ProjP[mu].DC[t, mu])
             ];
 
 (* EFT operator D_\mu(top)-D^2(top) *)
 (* It was necessary to split the derivatives in 3 terms *)
 (* in order to FeynRules to properly handle the operator *)
 
-LC1a := Block[{mu,nu},
-          C1eff*(del[tbar,mu]).ProjP[mu].(DC[DC[t,nu],nu])
+LA2a := Block[{mu,nu},
+          A2*(del[tbar,mu]).ProjP[mu].(DC[DC[t,nu],nu])
          ];
 
-LC1b := Block[{aa,mu,nu},
-          C1eff*I*gs*G[mu,aa]*(tbar.T[aa].ProjP[mu].(del[DC[t,nu],nu]))
+LA2b := Block[{aa,mu,nu},
+          A2*I*gs*G[mu,aa]*(tbar.T[aa].ProjP[mu].(del[DC[t,nu],nu]))
         ];
 
-LC1c := Block[{aa,bb,mu,nu},
-          C1eff*(gs^2)*G[mu,aa]*G[nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].DC[t,nu])
+LA2c := Block[{aa,bb,mu,nu},
+          A2*(gs^2)*G[mu,aa]*G[nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].DC[t,nu])
         ];
 
-LC1 := LC1a + LC1b + LC1c; 
+LA2 := LA2a + LA2b + LA2c; 
 
 
 (* EFT operator D_\mu(G^\mu\nu)-top-top *)
 (* It was necessary to split the derivatives in 2 terms *)
 (* in order to FeynRules to properly handle the operator *)
 
-LC12a := Block[{aa,mu,nu},
-               C12eff*del[FS[G,mu,nu,aa],nu]*tbar.T[aa].ProjP[mu].t
+LA3a := Block[{aa,mu,nu},
+               A3*del[FS[G,mu,nu,aa],nu]*tbar.T[aa].ProjP[mu].t
              ];
 
-LC12b := Block[{aa,bb,mu,nu},
-               C12eff*(-I*gs)*G[nu,aa]*FS[G,mu,nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].t - tbar.T[bb].T[aa].ProjP[mu].t)
+LA3b := Block[{aa,bb,mu,nu},
+               A3*(-I*gs)*G[nu,aa]*FS[G,mu,nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].t - tbar.T[bb].T[aa].ProjP[mu].t)
              ];
-LC12 := LC12a + LC12b;
+LA3 := LA3a + LA3b;
 
 
 (* Total EFT lagrangian *)
 
-LNP := Lkin + LYDM + HC[LYDM] + LC0 + LC1 + HC[LC1] + LC12;
+LNP := Lkin + LYDM + HC[LYDM] + LA1 + LA2 + HC[LA2] + LA3;
