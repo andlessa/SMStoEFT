@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 11 Jul 2023 18:48:55
+# Date: Thu 13 Jul 2023 16:51:48
 
 
 
@@ -188,7 +188,7 @@ ee = Parameter(name = 'ee',
 A0 = Parameter(name = 'A0',
                nature = 'internal',
                type = 'real',
-               value = '(-0.00026385724906858796*G*MT*yDM**2*(2*mChi**6 - 6*mChi**2*mST**4 + mST**6 + 3*mChi**4*mST**2*(1 + 2*cmath.log(mST**2/mChi**2))))/(mChi**2 - mST**2)**4',
+               value = '-0.00026385724906858796*( (mChi - mST)**2/(5.*mST**4) - (2*(mChi - mST))/(5.*mST**3) + 1/(2.*mST**2) if 1 - mChi**2/mST**2<0.1 else (mST**6/mChi**6 + 2*(1 - (3*mST**4)/mChi**4) + (3*mST**2*(1 + 4*cmath.log(mST/mChi)))/mChi**2)/(mChi**2*(1 - mST**2/mChi**2)**4) )*G*MT*yDM**2',
                texname = 'A_0')
 
 sw2 = Parameter(name = 'sw2',
