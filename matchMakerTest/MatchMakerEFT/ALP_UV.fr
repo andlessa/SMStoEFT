@@ -1,0 +1,179 @@
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "ALP_EFT";
+
+M$Information = {
+  Authors      -> {"J. Santiago"}, 
+  Version      -> "1.0",
+  Date         -> "04. 10. 2021",
+  Institutions -> {"CAFPE and Universidad de Granada"},
+  Emails       -> {"jsantiago@ugr.es"}
+};
+
+FeynmanGauge = True;
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+  S[105] == {
+    ClassName        -> s,
+    SelfConjugate    -> True,
+    Mass             -> ms,
+    FullName         -> "light",
+    Width            -> 0
+  }
+
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+
+  (* External parameters *)
+
+  (* Internal Parameters *)
+
+
+(* Renormalizable parameters ALP *)
+  
+  ms == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  kappas == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  lambdas == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  kappasphi == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  lambdasphi == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+
+(* dim 5 ops *)
+
+  alphaOs5 == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOs3 == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOs == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsuphi == {
+    ParameterType -> Internal,
+    Indices          -> {Index[Generation], Index[Generation]},
+    ComplexParameter -> True
+  },
+
+  alphaOsdphi == {
+    ParameterType -> Internal,
+    Indices          -> {Index[Generation], Index[Generation]},
+    ComplexParameter -> True
+  },
+
+  alphaOsephi == {
+    ParameterType -> Internal,
+    Indices          -> {Index[Generation], Index[Generation]},
+    ComplexParameter -> True
+  },
+
+  alphaOsGt == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsWt == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsBt == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsG == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsW == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+
+  alphaOsB == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  }
+
+
+
+};
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+gotoBFM={G[a__]->G[a]+GQuantum[a],Wi[a__]->Wi[a]+WiQuantum[a],B[a__]->B[a]+BQuantum[a]};
+
+
+L4ALP := Block[{mu,ii},
+    del[s,mu]*del[s,mu]/2-ms^2 s^2/2
+   -kappas/6 s^3 - lambdas/24 s^4 - kappasphi s Phibar[ii] Phi[ii]
+   -lambdasphi/2  s^2 Phibar[ii] Phi[ii]
+];
+
+L5ALP := Block[{ii,jj,ff1,ff2,mu,nu,sp, sp1, sp2, cc,lagh,lagnoh},
+      
+     lagh=
+      alphaOs5 s^5
+     +alphaOs3 s^3 Phibar[ii] Phi[ii] 
+     +alphaOs s Phibar[ii] Phi[ii]  Phibar[jj] Phi[jj]
+     +alphaOsGt s FS[G,mu,nu,jj] Dual[FS][G,mu,nu,jj]
+     +alphaOsWt s FS[Wi,mu,nu,jj] Dual[FS][Wi,mu,nu,jj]
+     +alphaOsBt s FS[B,mu,nu] Dual[FS][B,mu,nu]
+     +alphaOsG s FS[G,mu,nu,jj] FS[G,mu,nu,jj]
+     +alphaOsW s FS[Wi,mu,nu,jj] FS[Wi,mu,nu,jj]
+     +alphaOsB s FS[B,mu,nu] FS[B,mu,nu];
+     lagnoh=
+      alphaOsuphi[ff1,ff2] s QLbar[sp, ii, ff1, cc].UR [sp, ff2, cc] Phitilde[ii]
+     +alphaOsdphi[ff1,ff2] s QLbar[sp, ii, ff1, cc].DR [sp, ff2, cc] Phi[ii]
+     +alphaOsephi[ff1,ff2] s LLbar[sp, ii, ff1].LR [sp, ff2] Phi[ii];
+     (lagh+lagnoh+HC[lagnoh])/.gotoBFM
+];
+
+LNP := L4ALP + L5ALP;
+
+(*Ltot := (L2Higgs + L4Gauge + L4Fermions + L4Higgs + L4Yukawa + L4ALP + L5ALP)/.gotoBFM;*)
+
+
+Ltot := LSM + LNP;
+
+

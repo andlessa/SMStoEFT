@@ -1,0 +1,1597 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     55729,       1589]
+NotebookOptionsPosition[     53330,       1542]
+NotebookOutlinePosition[     53728,       1558]
+CellTagsIndexPosition[     53685,       1555]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Quit", "[", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.898243755681196*^9, 3.898243757921219*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"85b79fec-ec88-4163-a63d-c330da81cc91"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "<<", "\"\</home/lessa/SMStoEFT/matchMakerTest/SMS-stop_MM/MatchingResult2.\
+dat\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.898245032341961*^9, 3.8982450339987907`*^9}, 
+   3.898245294598575*^9, 3.8982493080079203`*^9, 3.898270361241625*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"56f7eeae-e4e2-4455-b6d4-4894960b1e2a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"physicalBasis", " ", "=", " ", 
+   RowBox[{"MatchingResult", "[", 
+    RowBox[{"[", "3", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"greenBasis", " ", "=", " ", 
+   RowBox[{"MatchingResult", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2", ",", "1"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"greenBasisTree", " ", "=", " ", 
+   RowBox[{"MatchingResult", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "1"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"greenBasisNorm", " ", "=", " ", 
+   RowBox[{"MatchingResult", "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ",", "2", ",", "1"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"greenBasisNormTree", " ", "=", " ", 
+   RowBox[{"MatchingResult", "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ",", "1", ",", "1"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.898243916542017*^9, 3.8982439294091682`*^9}, {
+  3.898245306207981*^9, 3.898245332626595*^9}, {3.89824543920299*^9, 
+  3.898245511318458*^9}, {3.8982493156091127`*^9, 3.898249359164824*^9}, {
+  3.898249401379624*^9, 3.898249410598295*^9}, {3.898270450430052*^9, 
+  3.898270451641891*^9}, {3.898274901758292*^9, 3.898274913476102*^9}, {
+  3.898310377203525*^9, 3.8983103952477407`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"19ef75c4-65ac-47fd-bb15-751d605ce400"],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.89824457097736*^9, 3.898244577173992*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"cba66eec-2d1f-44a6-99e6-53d4d634d234"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"x_", "\[Rule]", "0"}], "]"}], ":=", "Nothing"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"x_", "\[Rule]", "y_"}], "]"}], ":=", "x"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{
+     RowBox[{"x_", "[", "z___", "]"}], "\[Rule]", "y_"}], "]"}], ":=", 
+   RowBox[{"x", "[", "z", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.89824437903681*^9, 3.898244457944067*^9}, {
+  3.898244528599689*^9, 3.8982445321751223`*^9}, {3.898244562368976*^9, 
+  3.898244593134323*^9}, {3.898245624272025*^9, 3.898245627299855*^9}, {
+  3.898245666357901*^9, 3.8982456794373703`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"51b6e577-3d30-487a-a76a-65dbeaaccd90"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"coeffListPhys", "=", 
+   RowBox[{"f", "/@", "physicalBasis"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coeffListGreen", "=", 
+   RowBox[{"f", "/@", "greenBasis"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coeffListGreenNorm", "=", 
+   RowBox[{"f", "/@", "greenBasisNorm"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coeffListGreenTree", "=", 
+   RowBox[{"f", "/@", "greenBasisTree"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coeffListGreenNormTree", "=", 
+   RowBox[{"f", "/@", "greenBasisNormTree"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.898245691498263*^9, 3.898245693105548*^9}, {
+  3.898245914818534*^9, 3.898245940030333*^9}, {3.898249416079163*^9, 
+  3.8982494220169287`*^9}, {3.8982749282957773`*^9, 3.898274933172675*^9}, {
+  3.898310402514892*^9, 3.8983104123975782`*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"fa4a3648-65b7-4c04-a7a5-1c78b2b903f0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"coeffListPhys", "[", 
+      RowBox[{"[", "a", "]"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"coeffListPhys", "[", 
+        RowBox[{"[", "a", "]"}], "]"}], "/.", "physicalBasis"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{"onelooporder", "\[Rule]", "1"}], "}"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "1", ",", 
+     RowBox[{"Length", "[", "coeffListPhys", "]"}]}], "}"}]}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.898245712878029*^9, 3.898245752235276*^9}, {
+  3.8982457932200747`*^9, 3.898245803412681*^9}, {3.8982459194033833`*^9, 
+  3.8982459238612947`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"f8bf5f92-5140-4a03-9cb3-4014c97802b8"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"g1", 
+      RowBox[{"g1", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "2"], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              SuperscriptBox["g1", "2"], " ", "invepsilonbar"}], 
+             RowBox[{"36", " ", 
+              SuperscriptBox["\[Pi]", "2"]}]], "-", 
+            FractionBox[
+             RowBox[{
+              SuperscriptBox["g1", "2"], " ", 
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mST", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}]}], 
+             RowBox[{"36", " ", 
+              SuperscriptBox["\[Pi]", "2"]}]]}], ")"}]}], "+", "1"}], ")"}]}]},
+     {"g2", "g2"},
+     {"g3", 
+      RowBox[{"g3", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "2"], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            FractionBox[
+             RowBox[{
+              SuperscriptBox["g3", "2"], " ", "invepsilonbar"}], 
+             RowBox[{"96", " ", 
+              SuperscriptBox["\[Pi]", "2"]}]], "-", 
+            FractionBox[
+             RowBox[{
+              SuperscriptBox["g3", "2"], " ", 
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mST", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}]}], 
+             RowBox[{"96", " ", 
+              SuperscriptBox["\[Pi]", "2"]}]]}], ")"}]}], "+", "1"}], 
+        ")"}]}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{
+  3.898245803792549*^9, 3.898245928383333*^9, 3.898249383241571*^9, 
+   3.8982704853791513`*^9, 3.898274274524884*^9, {3.89827493528301*^9, 
+   3.898274944556713*^9}, {3.8983104144142027`*^9, 3.898310420028702*^9}, 
+   3.8983112526102133`*^9, 3.8984426859316053`*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"795f34ea-9823-40f9-afb1-1027947c27de"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"coeffListGreen", "[", 
+      RowBox[{"[", "a", "]"}], "]"}], ",", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"coeffListGreen", "[", 
+         RowBox[{"[", "a", "]"}], "]"}], "/.", "greenBasis"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{"onelooporder", "\[Rule]", "1"}], "}"}]}], "]"}]}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "1", ",", 
+     RowBox[{"Length", "[", "coeffListGreen", "]"}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.898245956328108*^9, 3.8982459822943697`*^9}, {
+  3.8983112339891768`*^9, 3.898311239136744*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"52e389ac-d549-402c-ba31-86ff0902b3b4"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"alphaKB", 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["g1", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"invepsilonbar", "-", 
+          RowBox[{"log", "(", 
+           FractionBox[
+            SuperscriptBox["mST", "2"], 
+            SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], 
+       RowBox[{"36", " ", 
+        SuperscriptBox["\[Pi]", "2"]}]]},
+     {"alphaKG", 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["g3", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"invepsilonbar", "-", 
+          RowBox[{"log", "(", 
+           FractionBox[
+            SuperscriptBox["mST", "2"], 
+            SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], 
+       RowBox[{"96", " ", 
+        SuperscriptBox["\[Pi]", "2"]}]]},
+     {"alphaO3G", 
+      FractionBox[
+       SuperscriptBox["g3", "3"], 
+       RowBox[{"5760", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox["mST", "2"]}]]},
+     {"alphaR2B", 
+      FractionBox[
+       SuperscriptBox["g1", "2"], 
+       RowBox[{"360", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox["mST", "2"]}]]},
+     {"alphaR2G", 
+      FractionBox[
+       SuperscriptBox["g3", "2"], 
+       RowBox[{"960", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox["mST", "2"]}]]},
+     {
+      RowBox[{"alphaEcuu", "(", 
+       RowBox[{"fl95_", ",", "fl97_", ",", "fl93_", ",", "fl99_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["mChi", "2"], " ", 
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl1", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl2", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl7", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl8", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["mChi", "2"], "+", 
+             SuperscriptBox["mST", "2"]}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "2"]}]}], ")"}]}], 
+       RowBox[{"32", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEcuu", "(", 
+       RowBox[{"fl95_", ",", "fl97_", ",", "fl99_", ",", "fl93_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["mChi", "2"], " ", 
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl1", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl2", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl7", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl8", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["mChi", "2"], "+", 
+             SuperscriptBox["mST", "2"]}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "2"]}]}], ")"}]}], 
+       RowBox[{"32", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEcuubar", "(", 
+       RowBox[{"fl95_", ",", "fl97_", ",", "fl93_", ",", "fl99_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["mChi", "2"], " ", 
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl1", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl2", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl7", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl8", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["mChi", "2"], "+", 
+             SuperscriptBox["mST", "2"]}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "2"]}]}], ")"}]}], 
+       RowBox[{"32", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEcuubar", "(", 
+       RowBox[{"fl95_", ",", "fl97_", ",", "fl99_", ",", "fl93_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["mChi", "2"], " ", 
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl1", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl2", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl7", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl8", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox["mChi", "2"], "+", 
+             SuperscriptBox["mST", "2"]}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "2"]}]}], ")"}]}], 
+       RowBox[{"32", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEuu8", "(", 
+       RowBox[{"fl93_", ",", "fl95_", ",", "fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEuu8", "(", 
+       RowBox[{"fl93_", ",", "fl97_", ",", "fl99_", ",", "fl95_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEuu8bar", "(", 
+       RowBox[{"fl93_", ",", "fl95_", ",", "fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaEuu8bar", "(", 
+       RowBox[{"fl93_", ",", "fl97_", ",", "fl99_", ",", "fl95_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaOuu", "(", 
+       RowBox[{"fl93_", ",", "fl95_", ",", "fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"384", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaOuu", "(", 
+       RowBox[{"fl93_", ",", "fl97_", ",", "fl99_", ",", "fl95_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"384", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaOuubar", "(", 
+       RowBox[{"fl93_", ",", "fl95_", ",", "fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"384", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaOuubar", "(", 
+       RowBox[{"fl93_", ",", "fl97_", ",", "fl99_", ",", "fl95_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "4"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl5", ",", "fl93_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl95_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "-", 
+          SuperscriptBox["mChi", "4"], "+", 
+          SuperscriptBox["mST", "4"]}], ")"}]}], 
+       RowBox[{"384", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "3"]}]]},
+     {
+      RowBox[{"alphaRBu", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{"g1", " ", 
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"6", " ", 
+           SuperscriptBox["mChi", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+          RowBox[{"18", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           SuperscriptBox["mST", "2"]}], "-", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"11", " ", 
+           SuperscriptBox["mChi", "6"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "6"]}]}], ")"}]}], 
+       RowBox[{"864", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]},
+     {
+      RowBox[{"alphaRBubar", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{"g1", " ", 
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"6", " ", 
+           SuperscriptBox["mChi", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+          RowBox[{"18", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           SuperscriptBox["mST", "2"]}], "-", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"11", " ", 
+           SuperscriptBox["mChi", "6"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "6"]}]}], ")"}]}], 
+       RowBox[{"864", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]},
+     {
+      RowBox[{"alphaRGu", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{"g3", " ", 
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"6", " ", 
+           SuperscriptBox["mChi", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+          RowBox[{"18", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           SuperscriptBox["mST", "2"]}], "-", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"11", " ", 
+           SuperscriptBox["mChi", "6"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "6"]}]}], ")"}]}], 
+       RowBox[{"576", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]},
+     {
+      RowBox[{"alphaRGubar", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{"g3", " ", 
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl6", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"6", " ", 
+           SuperscriptBox["mChi", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mChi", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+             RowBox[{"log", "(", 
+              FractionBox[
+               SuperscriptBox["mST", "2"], 
+               SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+          RowBox[{"18", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           SuperscriptBox["mST", "2"]}], "-", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["mChi", "2"], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"11", " ", 
+           SuperscriptBox["mChi", "6"]}], "+", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mST", "6"]}]}], ")"}]}], 
+       RowBox[{"576", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]},
+     {
+      RowBox[{"alphaKu", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"4", " ", 
+            RowBox[{"(", 
+             RowBox[{"invepsilonbar", "+", "1"}], ")"}], " ", 
+            SuperscriptBox["mChi", "2"], " ", 
+            SuperscriptBox["mST", "2"]}]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", " ", "invepsilonbar"}], "+", "3"}], ")"}], " ", 
+           SuperscriptBox["mChi", "4"]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", " ", "invepsilonbar"}], "+", "1"}], ")"}], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           RowBox[{"log", "(", 
+            FractionBox[
+             SuperscriptBox["mChi", "2"], 
+             SuperscriptBox["\[Mu]", "2"]], ")"}]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"4", " ", 
+              SuperscriptBox["mChi", "2"], " ", 
+              SuperscriptBox["mST", "2"]}], "-", 
+             RowBox[{"2", " ", 
+              SuperscriptBox["mST", "4"]}]}], ")"}], " ", 
+           RowBox[{"log", "(", 
+            FractionBox[
+             SuperscriptBox["mST", "2"], 
+             SuperscriptBox["\[Mu]", "2"]], ")"}]}]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "2"]}]]},
+     {
+      RowBox[{"alphaKubar", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["yDM", "2"], " ", 
+        TemplateBox[{
+          RowBox[{"fl3", ",", "fl99_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        TemplateBox[{
+          RowBox[{"fl4", ",", "fl97_"}]},
+         "KroneckerDeltaSeq"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"4", " ", 
+            RowBox[{"(", 
+             RowBox[{"invepsilonbar", "+", "1"}], ")"}], " ", 
+            SuperscriptBox["mChi", "2"], " ", 
+            SuperscriptBox["mST", "2"]}]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", " ", "invepsilonbar"}], "+", "3"}], ")"}], " ", 
+           SuperscriptBox["mChi", "4"]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", " ", "invepsilonbar"}], "+", "1"}], ")"}], " ", 
+           SuperscriptBox["mST", "4"]}], "-", 
+          RowBox[{"2", " ", 
+           SuperscriptBox["mChi", "4"], " ", 
+           RowBox[{"log", "(", 
+            FractionBox[
+             SuperscriptBox["mChi", "2"], 
+             SuperscriptBox["\[Mu]", "2"]], ")"}]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"4", " ", 
+              SuperscriptBox["mChi", "2"], " ", 
+              SuperscriptBox["mST", "2"]}], "-", 
+             RowBox[{"2", " ", 
+              SuperscriptBox["mST", "4"]}]}], ")"}], " ", 
+           RowBox[{"log", "(", 
+            FractionBox[
+             SuperscriptBox["mST", "2"], 
+             SuperscriptBox["\[Mu]", "2"]], ")"}]}]}], ")"}]}], 
+       RowBox[{"64", " ", 
+        SuperscriptBox["\[Pi]", "2"], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["mChi", "2"], "-", 
+           SuperscriptBox["mST", "2"]}], ")"}], "2"]}]]},
+     {
+      RowBox[{"alphaRuD", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{
+         SuperscriptBox["yDM", "2"], " ", 
+         TemplateBox[{
+           RowBox[{"fl3", ",", "fl99_"}]},
+          "KroneckerDeltaSeq"], " ", 
+         TemplateBox[{
+           RowBox[{"fl4", ",", "fl97_"}]},
+          "KroneckerDeltaSeq"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"6", " ", 
+            SuperscriptBox["mChi", "4"], " ", 
+            SuperscriptBox["mST", "2"], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mST", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mChi", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["mChi", "4"], " ", 
+            SuperscriptBox["mST", "2"]}], "-", 
+           RowBox[{"6", " ", 
+            SuperscriptBox["mChi", "2"], " ", 
+            SuperscriptBox["mST", "4"]}], "+", 
+           RowBox[{"2", " ", 
+            SuperscriptBox["mChi", "6"]}], "+", 
+           SuperscriptBox["mST", "6"]}], ")"}]}], 
+        RowBox[{"96", " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["mChi", "2"], "-", 
+            SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]}]},
+     {
+      RowBox[{"alphaRuDbar", "(", 
+       RowBox[{"fl99_", ",", "fl97_"}], ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{
+         SuperscriptBox["yDM", "2"], " ", 
+         TemplateBox[{
+           RowBox[{"fl3", ",", "fl99_"}]},
+          "KroneckerDeltaSeq"], " ", 
+         TemplateBox[{
+           RowBox[{"fl4", ",", "fl97_"}]},
+          "KroneckerDeltaSeq"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"6", " ", 
+            SuperscriptBox["mChi", "4"], " ", 
+            SuperscriptBox["mST", "2"], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mST", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}], "-", 
+              RowBox[{"log", "(", 
+               FractionBox[
+                SuperscriptBox["mChi", "2"], 
+                SuperscriptBox["\[Mu]", "2"]], ")"}]}], ")"}]}], "+", 
+           RowBox[{"3", " ", 
+            SuperscriptBox["mChi", "4"], " ", 
+            SuperscriptBox["mST", "2"]}], "-", 
+           RowBox[{"6", " ", 
+            SuperscriptBox["mChi", "2"], " ", 
+            SuperscriptBox["mST", "4"]}], "+", 
+           RowBox[{"2", " ", 
+            SuperscriptBox["mChi", "6"]}], "+", 
+           SuperscriptBox["mST", "6"]}], ")"}]}], 
+        RowBox[{"96", " ", 
+         SuperscriptBox["\[Pi]", "2"], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["mChi", "2"], "-", 
+            SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.8982459659924183`*^9, 3.898245983456147*^9}, 
+   3.8982493875446978`*^9, 3.898270492219173*^9, 3.8982742761825953`*^9, 
+   3.898274947101322*^9, 3.898310422796344*^9, {3.898311241754017*^9, 
+   3.8983112555302277`*^9}, 3.898442688980253*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"a1a0a52b-1f06-4dd1-9385-3dbbe25d1772"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"A1", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"alphaKu", "[", 
+        RowBox[{"a_", ",", "b_"}], "]"}], "/.", "greenBasis"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"mChi", "^", "2"}], 
+           RowBox[{"\[Mu]", "^", "2"}]], "]"}], "\[Rule]", 
+         RowBox[{
+          RowBox[{"Log", "[", 
+           FractionBox[
+            RowBox[{"mChi", "^", "2"}], 
+            RowBox[{"mST", "^", "2"}]], "]"}], "+", 
+          RowBox[{"Log", "[", 
+           FractionBox[
+            RowBox[{"mST", "^", "2"}], 
+            RowBox[{"\[Mu]", "^", "2"}]], "]"}]}]}], ",", 
+        RowBox[{"invepsilonbar", "\[Rule]", " ", 
+         FractionBox["1", "\[Epsilon]"]}]}], "}"}]}], " ", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Epsilon]", ",", 
+      RowBox[{"Log", "[", "a_", "]"}]}], "}"}], ",", "Simplify"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.898311280459298*^9, 3.8983114160942574`*^9}, {
+  3.898311501434623*^9, 3.89831151596717*^9}, {3.898311595327846*^9, 
+  3.898311641735371*^9}, {3.89844266370084*^9, 3.898442664228842*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"76121260-6f3a-4be6-9be8-d09c6d5aa5fd"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["yDM", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"3", " ", 
+        SuperscriptBox["mChi", "2"]}], "-", 
+       SuperscriptBox["mST", "2"]}], ")"}], " ", 
+     TemplateBox[{
+       RowBox[{"fl3", ",", "a_"}]},
+      "KroneckerDeltaSeq"], " ", 
+     TemplateBox[{
+       RowBox[{"fl4", ",", "b_"}]},
+      "KroneckerDeltaSeq"]}], 
+    RowBox[{"64", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["mChi", "2"], "-", 
+       SuperscriptBox["mST", "2"]}], ")"}]}]], "-", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["mChi", "4"], " ", 
+     SuperscriptBox["yDM", "2"], " ", 
+     RowBox[{"log", "(", 
+      FractionBox[
+       SuperscriptBox["mChi", "2"], 
+       SuperscriptBox["mST", "2"]], ")"}], " ", 
+     TemplateBox[{
+       RowBox[{"fl3", ",", "a_"}]},
+      "KroneckerDeltaSeq"], " ", 
+     TemplateBox[{
+       RowBox[{"fl4", ",", "b_"}]},
+      "KroneckerDeltaSeq"]}], 
+    RowBox[{"32", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["mChi", "2"], "-", 
+        SuperscriptBox["mST", "2"]}], ")"}], "2"]}]], "-", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["yDM", "2"], " ", 
+     RowBox[{"log", "(", 
+      FractionBox[
+       SuperscriptBox["mST", "2"], 
+       SuperscriptBox["\[Mu]", "2"]], ")"}], " ", 
+     TemplateBox[{
+       RowBox[{"fl3", ",", "a_"}]},
+      "KroneckerDeltaSeq"], " ", 
+     TemplateBox[{
+       RowBox[{"fl4", ",", "b_"}]},
+      "KroneckerDeltaSeq"]}], 
+    RowBox[{"32", " ", 
+     SuperscriptBox["\[Pi]", "2"]}]], "+", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["yDM", "2"], " ", 
+     TemplateBox[{
+       RowBox[{"fl3", ",", "a_"}]},
+      "KroneckerDeltaSeq"], " ", 
+     TemplateBox[{
+       RowBox[{"fl4", ",", "b_"}]},
+      "KroneckerDeltaSeq"]}], 
+    RowBox[{"32", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", "\[Epsilon]"}]]}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.898311383340303*^9, 3.898311417152122*^9}, {
+   3.898311503671569*^9, 3.898311516294154*^9}, {3.898311600155376*^9, 
+   3.898311643641168*^9}, 3.89844269100039*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"0856690f-0186-4415-a47d-454a947e9044"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"A2", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"alphaRuD", "[", 
+        RowBox[{"a_", ",", "b_"}], "]"}], "/.", "greenBasis"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Log", "[", 
+         FractionBox[
+          RowBox[{"mChi", "^", "2"}], 
+          RowBox[{"\[Mu]", "^", "2"}]], "]"}], "\[Rule]", 
+        RowBox[{
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"mChi", "^", "2"}], 
+           RowBox[{"mST", "^", "2"}]], "]"}], "+", 
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"mST", "^", "2"}], 
+           RowBox[{"\[Mu]", "^", "2"}]], "]"}]}]}], "}"}]}], "]"}], " ", ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"mChi", ",", "mST"}], "}"}], ",", "Simplify"}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.898311709563611*^9, 3.898311710546164*^9}, {
+   3.898311790711405*^9, 3.898311847045195*^9}, 3.8984426714408283`*^9},
+ CellLabel->"In[19]:=",ExpressionUUID->"e3be9223-4c8f-4cae-a7af-1423f3546735"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"-", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["yDM", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"3", " ", 
+        SuperscriptBox["mChi", "4"], " ", 
+        SuperscriptBox["mST", "2"]}], "-", 
+       RowBox[{"6", " ", 
+        SuperscriptBox["mChi", "2"], " ", 
+        SuperscriptBox["mST", "4"]}], "-", 
+       RowBox[{"6", " ", 
+        SuperscriptBox["mChi", "4"], " ", 
+        SuperscriptBox["mST", "2"], " ", 
+        RowBox[{"log", "(", 
+         FractionBox[
+          SuperscriptBox["mChi", "2"], 
+          SuperscriptBox["mST", "2"]], ")"}]}], "+", 
+       RowBox[{"2", " ", 
+        SuperscriptBox["mChi", "6"]}], "+", 
+       SuperscriptBox["mST", "6"]}], ")"}], " ", 
+     TemplateBox[{
+       RowBox[{"fl3", ",", "a_"}]},
+      "KroneckerDeltaSeq"], " ", 
+     TemplateBox[{
+       RowBox[{"fl4", ",", "b_"}]},
+      "KroneckerDeltaSeq"]}], 
+    RowBox[{"96", " ", 
+     SuperscriptBox["\[Pi]", "2"], " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["mChi", "2"], "-", 
+        SuperscriptBox["mST", "2"]}], ")"}], "4"]}]]}], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.898311826912574*^9, 3.8983118476468897`*^9}, 
+   3.8984427317247143`*^9},
+ CellLabel->"Out[19]=",ExpressionUUID->"f5a15415-2aa2-4464-a8d3-51c0ea3bbc73"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"A3", "=", 
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"FullSimplify", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"alphaRGu", "[", 
+        RowBox[{"a_", ",", "b_"}], "]"}], "/.", "greenBasis"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Log", "[", 
+         FractionBox[
+          RowBox[{"mChi", "^", "2"}], 
+          RowBox[{"\[Mu]", "^", "2"}]], "]"}], "\[Rule]", 
+        RowBox[{
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"mChi", "^", "2"}], 
+           RowBox[{"mST", "^", "2"}]], "]"}], "+", 
+         RowBox[{"Log", "[", 
+          FractionBox[
+           RowBox[{"mST", "^", "2"}], 
+           RowBox[{"\[Mu]", "^", "2"}]], "]"}]}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"mChi", ",", "mST"}], "}"}], ",", "Simplify"}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.89827431348547*^9, 3.8982743731235733`*^9}, {
+  3.898311742981617*^9, 3.8983117563890247`*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"ff110953-d69c-4c19-908c-11ced7ab74a5"],
+
+Cell[BoxData[
+ FormBox[
+  FractionBox[
+   RowBox[{"g3", " ", 
+    SuperscriptBox["yDM", "2"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"18", " ", 
+       SuperscriptBox["mChi", "4"], " ", 
+       SuperscriptBox["mST", "2"]}], "-", 
+      RowBox[{"9", " ", 
+       SuperscriptBox["mChi", "2"], " ", 
+       SuperscriptBox["mST", "4"]}], "+", 
+      RowBox[{"6", " ", 
+       SuperscriptBox["mChi", "6"], " ", 
+       RowBox[{"log", "(", 
+        FractionBox[
+         SuperscriptBox["mChi", "2"], 
+         SuperscriptBox["mST", "2"]], ")"}]}], "-", 
+      RowBox[{"11", " ", 
+       SuperscriptBox["mChi", "6"]}], "+", 
+      RowBox[{"2", " ", 
+       SuperscriptBox["mST", "6"]}]}], ")"}], " ", 
+    TemplateBox[{
+      RowBox[{"fl3", ",", "a_"}]},
+     "KroneckerDeltaSeq"], " ", 
+    TemplateBox[{
+      RowBox[{"fl6", ",", "b_"}]},
+     "KroneckerDeltaSeq"]}], 
+   RowBox[{"576", " ", 
+    SuperscriptBox["\[Pi]", "2"], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["mChi", "2"], "-", 
+       SuperscriptBox["mST", "2"]}], ")"}], "4"]}]], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.898274361543262*^9, 3.898274381523744*^9}, 
+   3.898310427600552*^9, 3.898311756825522*^9},
+ CellLabel->"Out[33]=",ExpressionUUID->"2c024905-4a13-4604-8462-8b61f6e195b8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"alphaOuG", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], "/.", "greenBasis"}]], "Input",
+ CellChangeTimes->{{3.89827477518711*^9, 3.8982748290626917`*^9}, {
+  3.898275739344841*^9, 3.8982757418253527`*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"57b5e046-4a4a-4c41-99ec-c695c32c59fa"],
+
+Cell[BoxData[
+ FormBox["0", TraditionalForm]], "Output",
+ CellChangeTimes->{{3.8982747895093517`*^9, 3.898274829971245*^9}, 
+   3.898275742249071*^9, 3.898310429360921*^9},
+ CellLabel->"Out[27]=",ExpressionUUID->"40212b0f-7c63-40d4-820a-346216c12b6b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FullSimplify", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"alphaOuu", "[", 
+     RowBox[{"a_", ",", "b_", ",", "c_", ",", "d_"}], "]"}], "/.", 
+    "greenBasis"}], "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Log", "[", 
+      FractionBox[
+       RowBox[{"mChi", "^", "2"}], 
+       RowBox[{"\[Mu]", "^", "2"}]], "]"}], "\[Rule]", 
+     RowBox[{
+      RowBox[{"Log", "[", 
+       FractionBox[
+        RowBox[{"mChi", "^", "2"}], 
+        RowBox[{"mST", "^", "2"}]], "]"}], "+", 
+      RowBox[{"Log", "[", 
+       FractionBox[
+        RowBox[{"mST", "^", "2"}], 
+        RowBox[{"\[Mu]", "^", "2"}]], "]"}]}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.898311961016963*^9, 3.898311978276474*^9}},
+ CellLabel->"In[39]:=",ExpressionUUID->"1c968a30-49c7-47f9-8fe6-f2318d24cbf4"],
+
+Cell[BoxData[
+ FormBox[
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["yDM", "4"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       SuperscriptBox["mChi", "2"], " ", 
+       SuperscriptBox["mST", "2"], " ", 
+       RowBox[{"log", "(", 
+        FractionBox[
+         SuperscriptBox["mChi", "2"], 
+         SuperscriptBox["mST", "2"]], ")"}]}], "-", 
+      SuperscriptBox["mChi", "4"], "+", 
+      SuperscriptBox["mST", "4"]}], ")"}], " ", 
+    TemplateBox[{
+      RowBox[{"fl5", ",", "a_"}]},
+     "KroneckerDeltaSeq"], " ", 
+    TemplateBox[{
+      RowBox[{"fl4", ",", "b_"}]},
+     "KroneckerDeltaSeq"], " ", 
+    TemplateBox[{
+      RowBox[{"fl3", ",", "c_"}]},
+     "KroneckerDeltaSeq"], " ", 
+    TemplateBox[{
+      RowBox[{"fl6", ",", "d_"}]},
+     "KroneckerDeltaSeq"]}], 
+   RowBox[{"384", " ", 
+    SuperscriptBox["\[Pi]", "2"], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["mChi", "2"], "-", 
+       SuperscriptBox["mST", "2"]}], ")"}], "3"]}]], 
+  TraditionalForm]], "Output",
+ CellChangeTimes->{{3.898311971273058*^9, 3.898311979583359*^9}},
+ CellLabel->"Out[39]=",ExpressionUUID->"771d76ce-a433-4bf1-95ce-c82f5c995436"]
+}, Open  ]]
+},
+WindowSize->{1437, 564},
+WindowMargins->{{Automatic, -16.5}, {17.25, Automatic}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4ca69e78-b446-421e-878f-72b531ba2f90"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 215, 4, 29, "Input",ExpressionUUID->"85b79fec-ec88-4163-a63d-c330da81cc91"],
+Cell[776, 26, 360, 7, 29, "Input",ExpressionUUID->"56f7eeae-e4e2-4455-b6d4-4894960b1e2a"],
+Cell[1139, 35, 1429, 34, 113, "Input",ExpressionUUID->"19ef75c4-65ac-47fd-bb15-751d605ce400"],
+Cell[2571, 71, 201, 3, 29, "Input",ExpressionUUID->"cba66eec-2d1f-44a6-99e6-53d4d634d234"],
+Cell[2775, 76, 808, 21, 71, "Input",ExpressionUUID->"51b6e577-3d30-487a-a76a-65dbeaaccd90"],
+Cell[3586, 99, 954, 20, 113, "Input",ExpressionUUID->"fa4a3648-65b7-4c04-a7a5-1c78b2b903f0"],
+Cell[CellGroupData[{
+Cell[4565, 123, 771, 20, 71, "Input",ExpressionUUID->"f8bf5f92-5140-4a03-9cb3-4014c97802b8"],
+Cell[5339, 145, 2307, 63, 148, "Output",ExpressionUUID->"795f34ea-9823-40f9-afb1-1027947c27de"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7683, 213, 773, 21, 71, "Input",ExpressionUUID->"52e389ac-d549-402c-ba31-86ff0902b3b4"],
+Cell[8459, 236, 33645, 952, 1144, "Output",ExpressionUUID->"a1a0a52b-1f06-4dd1-9385-3dbbe25d1772"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42141, 1193, 1318, 34, 48, "Input",ExpressionUUID->"76121260-6f3a-4be6-9be8-d09c6d5aa5fd"],
+Cell[43462, 1229, 2332, 74, 64, "Output",ExpressionUUID->"0856690f-0186-4415-a47d-454a947e9044"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45831, 1308, 1082, 30, 48, "Input",ExpressionUUID->"e3be9223-4c8f-4cae-a7af-1423f3546735"],
+Cell[46916, 1340, 1347, 40, 63, "Output",ExpressionUUID->"f5a15415-2aa2-4464-a8d3-51c0ea3bbc73"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48300, 1385, 1050, 29, 48, "Input",ExpressionUUID->"ff110953-d69c-4c19-908c-11ced7ab74a5"],
+Cell[49353, 1416, 1314, 39, 63, "Output",ExpressionUUID->"2c024905-4a13-4604-8462-8b61f6e195b8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50704, 1460, 317, 6, 29, "Input",ExpressionUUID->"57b5e046-4a4a-4c41-99ec-c695c32c59fa"],
+Cell[51024, 1468, 251, 4, 32, "Output",ExpressionUUID->"40212b0f-7c63-40d4-820a-346216c12b6b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51312, 1477, 809, 23, 48, "Input",ExpressionUUID->"1c968a30-49c7-47f9-8fe6-f2318d24cbf4"],
+Cell[52124, 1502, 1190, 37, 63, "Output",ExpressionUUID->"771d76ce-a433-4bf1-95ce-c82f5c995436"]
+}, Open  ]]
+}
+]
+*)
+

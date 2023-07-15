@@ -1,0 +1,71 @@
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "Neu";
+
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+  F[37] == {
+    ClassName        -> Neu,
+    SelfConjugate    -> True,
+    Mass             -> MN,
+    FullName         -> "heavy",
+    Width            -> 0
+  }
+
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+
+  (* External parameters *)
+
+  (* Internal Parameters *)
+  Ynu == { 
+    ParameterType     -> Internal, 
+    Indices           -> {Index[Generation]},
+    ComplexParameter  -> True
+  },
+
+  MN == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  }
+
+};
+
+
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+gotoBFM={G[a__]->G[a]+GQuantum[a],Wi[a__]->Wi[a]+WiQuantum[a],B[a__]->B[a]+BQuantum[a]};
+
+LHeavy := Block[{mu}, 
+  I*(Neubar.Ga[mu].DC[Neu, mu])-MN*Neubar.Neu/2]/.gotoBFM;
+
+
+
+LHeavylight := Block[{sp1,ii,jj,cc,ff1,ff2,ff3,yuk},
+ 
+  yuk =
+   -Ynu[ff1] LLbar[sp1,ii,ff1].Neu[sp1] Phibar[jj] Eps[ii,jj];
+  yuk+HC[yuk]
+ ];
+
+LNP := LHeavy + LHeavylight;
+
+Ltot := LSM + LNP;
+
+
+
+

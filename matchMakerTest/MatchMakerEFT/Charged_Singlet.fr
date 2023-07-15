@@ -1,0 +1,82 @@
+(* ************************** *)
+(* *****  Information   ***** *)
+(* ************************** *)
+M$ModelName = "Charged_singlet";
+
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+  S[37] == {
+    ClassName        -> sphi,
+    SelfConjugate    -> False,
+    QuantumNumbers -> {Y -> -1},
+    FullName         -> "heavy" ,
+    Mass             -> Msphi,
+    Width            -> 0
+  }
+
+};
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+M$Parameters = {
+
+  (* External parameters *)
+
+  (* Internal Parameters *)
+  FL == { 
+    ParameterType     -> Internal, 
+    Indices           -> {Index[Generation],Index[Generation]},
+    ComplexParameter  -> True
+  },
+
+  Msphi == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+  aprime == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  },
+  bprime == { 
+    ParameterType     -> Internal, 
+    ComplexParameter  -> False
+  }
+
+};
+
+
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+gotoBFM={G[a__]->G[a]+GQuantum[a],Wi[a__]->Wi[a]+WiQuantum[a],B[a__]->B[a]+BQuantum[a]};
+
+LHeavy := Block[{mu}, 
+  ExpandIndices[(DC[sphibar,mu]DC[sphi, mu])-Msphi*sphibar*sphi]/.gotoBFM];
+
+
+
+LHeavylight := Block[{sp1,ii,jj,cc,ff1,ff2,ff3,yuk,sca},
+ 
+sca=
+  -aprime*(sphibar*sphi)^2-bprime sphibar*sphi*Phibar[ii]*Phi[ii];
+yuk =
+   - FL[ff1,ff2] Eps[ii,jj] CC[LLbar[sp1,ii,ff1]].LL[sp1,jj,ff2] sphibar;	
+  sca+yuk+HC[yuk]
+ ];
+
+LNP := LHeavy + LHeavylight;
+
+Ltot := LSM + LNP;
+
+
+
+
