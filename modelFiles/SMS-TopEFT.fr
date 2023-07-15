@@ -14,7 +14,7 @@ M$ModelName = "SMS-Top-EFT";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "11.07.2023"};
+                 Date -> "16.07.2023"};
 
 FeynmanGauge = True;
 
@@ -37,7 +37,7 @@ M$Parameters = {
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)
-(* C00eff = C_{00} - 2 MT^2 (C_{1} + C_{11} + C_{12}) - (s/2)*(C_{1} + 2 C_{12}) *)
+(* C00eff = C_{00} - MT^2 (C_{1} + C_{11} + C_{12}) + (s/2)*(C_{11} - C_{12}) *)
 (* where s = (p1+p2)^2, p1 = top momentum, p2 = anti-top momentum, MT = top mass *)
 
   C00eff  == { TeX->Subscript[Ceff,00],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"C00eff effective coupling"},
@@ -98,50 +98,40 @@ Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC
 (* DM-Scalar-Top coupling *)
 LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 
-(* dim-6 EFT operators (valid only for on-shell tops) *)
+A1 := 2*(Pi^2)*(yDM^2)*C00eff;
+A2 := -2*(Pi^2)*(yDM^2)*(C1+C11+C12);
+A3 := (Pi^2)*(gs*yDM^2)*(C12-C11);
 
-A1 := I*(2*Pi^2)*(yDM^2)*C00eff;
-A2 := I*(2*Pi^2)*(yDM^2)*(C1+C11+C12);
-A3 := (2*Pi^2)*(gs*yDM^2)*(C1/2+C12);
 
-(* EFT operator top-D_\mu(top) *)
-LA1 := Block[{mu},
-              A1*(tbar.ProjP[mu].DC[t, mu])
+
+(* EFT operators - obtained from MatchMaker SMEFT_Green_Bpreserving.fr *)
+(* top_R-D_\mu(top_R) *)
+LA1 := Block[{mu,sp1,sp2,cc},
+      ExpandIndices[
+              A1*I*Ga[mu,sp1,sp2] uRbar[sp1,3,cc].DC[uR[sp2,3,cc], mu]]
             ];
 
 (* EFT operator D_\mu(top)-D^2(top) *)
 (* It was necessary to split the derivatives in 3 terms *)
 (* in order to FeynRules to properly handle the operator *)
 
-LA2a := Block[{mu,nu},
-          A2*(del[tbar,mu]).ProjP[mu].(DC[DC[t,nu],nu])
+LA2 := Block[{mu,nu,sp1,sp2,jj,cc},
+      ExpandIndices[
+          A2*I/2*(uRbar[sp1,3,cc].DC[DC[DC[uR[sp2,3,cc],nu],nu],mu]+uRbar[sp1,3,cc].DC[DC[DC[uR[sp2,3,cc],mu],nu],nu])*Ga[mu,sp1,sp2]]
          ];
-
-LA2b := Block[{aa,mu,nu},
-          A2*I*gs*G[mu,aa]*(tbar.T[aa].ProjP[mu].(del[DC[t,nu],nu]))
-        ];
-
-LA2c := Block[{aa,bb,mu,nu},
-          A2*(gs^2)*G[mu,aa]*G[nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].DC[t,nu])
-        ];
-
-LA2 := LA2a + LA2b + LA2c; 
-
 
 (* EFT operator D_\mu(G^\mu\nu)-top-top *)
 (* It was necessary to split the derivatives in 2 terms *)
 (* in order to FeynRules to properly handle the operator *)
 
-LA3a := Block[{aa,mu,nu},
-               A3*del[FS[G,mu,nu,aa],nu]*tbar.T[aa].ProjP[mu].t
+LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
+       ExpandIndices[
+               A3*T[aa,cc1,cc2] uRbar[sp1,3,cc1].uR[sp2,3,cc2]*Ga[mu,sp1,sp2] DC[FS[G,mu,nu,aa],nu]]
              ];
-
-LA3b := Block[{aa,bb,mu,nu},
-               A3*(-I*gs)*G[nu,aa]*FS[G,mu,nu,bb]*(tbar.T[aa].T[bb].ProjP[mu].t - tbar.T[bb].T[aa].ProjP[mu].t)
-             ];
-LA3 := LA3a + LA3b;
-
 
 (* Total EFT lagrangian *)
+(* OBS: LA2 and HC[LA2] are equal if one uses integration by parts. *)
+(* However, FeynRules complains about hermiticity if the hermitian conjugate is not added. *)
+(* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
 
-LNP := Lkin + LYDM + HC[LYDM] + LA1 + LA2 + HC[LA2] + LA3;
+LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;

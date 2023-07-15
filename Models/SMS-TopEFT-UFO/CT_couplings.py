@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 11 Jul 2023 19:27:55
+# Date: Sun 16 Jul 2023 01:08:17
 
 
 from object_library import all_couplings, Coupling
