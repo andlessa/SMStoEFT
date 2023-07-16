@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Thu 13 Jul 2023 16:51:48
+# Date: Sun 16 Jul 2023 11:38:08
 
 
 from object_library import all_lorentz, Lorentz
@@ -54,15 +54,7 @@ FFV3 = Lorentz(name = 'FFV3',
 
 FFV4 = Lorentz(name = 'FFV4',
                spins = [ 2, 2, 3 ],
-               structure = 'Gamma(3,2,-1)*ProjM(-1,1) - 2*Gamma(3,2,-1)*ProjP(-1,1)')
-
-FFV5 = Lorentz(name = 'FFV5',
-               spins = [ 2, 2, 3 ],
-               structure = 'Gamma(3,2,-1)*ProjM(-1,1) + 2*Gamma(3,2,-1)*ProjP(-1,1)')
-
-FFV6 = Lorentz(name = 'FFV6',
-               spins = [ 2, 2, 3 ],
-               structure = 'Gamma(3,2,-1)*ProjM(-1,1) + 4*Gamma(3,2,-1)*ProjP(-1,1)')
+               structure = 'Gamma(3,2,-1)*ProjP(-1,1)')
 
 VSS1 = Lorentz(name = 'VSS1',
                spins = [ 3, 1, 1 ],
@@ -80,9 +72,29 @@ SSSS1 = Lorentz(name = 'SSSS1',
                 spins = [ 1, 1, 1, 1 ],
                 structure = '1')
 
+FFFF1 = Lorentz(name = 'FFFF1',
+                spins = [ 2, 2, 2, 2 ],
+                structure = 'Gamma(-1,2,-2)*Gamma(-1,4,3)*ProjP(-2,1)')
+
+FFFF2 = Lorentz(name = 'FFFF2',
+                spins = [ 2, 2, 2, 2 ],
+                structure = 'Gamma(-1,2,3)*Gamma(-1,4,-2)*ProjP(-2,1)')
+
+FFFF3 = Lorentz(name = 'FFFF3',
+                spins = [ 2, 2, 2, 2 ],
+                structure = 'Gamma(-1,2,-2)*Gamma(-1,4,1)*ProjP(-2,3)')
+
+FFFF4 = Lorentz(name = 'FFFF4',
+                spins = [ 2, 2, 2, 2 ],
+                structure = 'Gamma(-1,2,1)*Gamma(-1,4,-2)*ProjP(-2,3)')
+
 FFVV1 = Lorentz(name = 'FFVV1',
                 spins = [ 2, 2, 3, 3 ],
-                structure = 'Gamma(3,2,-1)*Gamma(4,-1,1) - Gamma(3,-1,1)*Gamma(4,2,-1)')
+                structure = 'Gamma(3,-1,1)*Gamma(4,2,-1)')
+
+FFVV2 = Lorentz(name = 'FFVV2',
+                spins = [ 2, 2, 3, 3 ],
+                structure = 'Gamma(3,2,-1)*Gamma(4,-1,1)')
 
 VVSS1 = Lorentz(name = 'VVSS1',
                 spins = [ 3, 3, 1, 1 ],

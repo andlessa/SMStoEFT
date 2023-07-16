@@ -8,13 +8,13 @@
 
 (*     Kinematic indices    *)
 
-KinematicIndices[ F ] = {};
+KinematicIndices[ F ] = {Dirac};
 KinematicIndices[ V ] = {Lorentz};
 KinematicIndices[ S ] = {};
 KinematicIndices[ SV ] = {Lorentz};
 KinematicIndices[ U ] = {};
 
-$FermionLines = True;
+$FermionLines = False;
 
 (*     Simplification rules    *)
 
@@ -34,11 +34,11 @@ M$GenericPropagators={
 
 (*general fermion propagator:*)
 
-AnalyticalPropagator[External][s1 F[j1,mom]]==
-FANonCommutative[SpinorType[j1][-mom,Mass[F[j1]]]],
+AnalyticalPropagator[External][s1 F[j1,mom,{di1}]]==
+DiracObject[SpinorType[j1][-mom,Mass[F[j1]]]][di1],
 
-AnalyticalPropagator[Internal][s1 F[j1,mom]]==
-FANonCommutative[FADiracSlash[-mom]+Mass[F[j1]]]*
+AnalyticalPropagator[Internal][s1 F[j1,mom,{di1}->{di2}]]==
+DiracObject[FADiracSlash[-mom]+Mass[F[j1]]][di1,di2]*
 I FAPropagatorDenominator[mom,Mass[F[j1]]],
 
 (*general vector boson propagator:*)
@@ -77,20 +77,25 @@ I*FAPropagatorDenominator[mom,Sqrt[GaugeXi[U[j1]]] Mass[U[j1]]]
 
 M$GenericCouplings = {
 
+	 (* FFFF *)
+
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 F[j3, mom3, {di3}], s4 F[j4, mom4, {di4}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 F[j3], s4 F[j4]].{IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di2,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di4,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di1,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[-1] ][di3,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di1,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di3]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di2]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di1]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di2,di4]DiracObject[FADiracMatrix[a], FAChiralityProjector[+1] ][di3,di1], {a,1,4}]},
+
 	 (* FFS *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 S[j3, mom3] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 S[j3]].{FANonCommutative[FAChiralityProjector[-1]], FANonCommutative[FAChiralityProjector[+1]]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 S[j3, mom3] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 S[j3]].{DiracObject[FAChiralityProjector[-1]][di1,di2], DiracObject[FAChiralityProjector[-1]][di2,di1], DiracObject[FAChiralityProjector[+1]][di1,di2], DiracObject[FAChiralityProjector[+1]][di2,di1]},
 
 	 (* FFV *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 V[j3, mom3, {li3}] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 V[j3]].{FANonCommutative[FADiracMatrix[li3], FAChiralityProjector[-1] ], FANonCommutative[FADiracMatrix[li3], FAChiralityProjector[+1] ], FANonCommutative[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[-1] ], FANonCommutative[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[+1] ], FANonCommutative[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[-1] ], FANonCommutative[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[+1] ]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 V[j3, mom3, {li3}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 V[j3]].{DiracObject[FADiracMatrix[li3], FAChiralityProjector[-1] ][di1,di2], DiracObject[FADiracMatrix[li3], FAChiralityProjector[-1] ][di2,di1], DiracObject[FADiracMatrix[li3], FAChiralityProjector[+1] ][di1,di2], DiracObject[FADiracMatrix[li3], FAChiralityProjector[+1] ][di2,di1], DiracObject[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[-1] ][di1,di2], DiracObject[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[-1] ][di2,di1], DiracObject[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[+1] ][di1,di2], DiracObject[FADiracMatrix[li3], FADiracSlash[mom3 ], FAChiralityProjector[+1] ][di2,di1], DiracObject[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[-1] ][di1,di2], DiracObject[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[-1] ][di2,di1], DiracObject[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[+1] ][di1,di2], DiracObject[FADiracSlash[mom3 ], FADiracMatrix[li3], FAChiralityProjector[+1] ][di2,di1]},
 
 	 (* FFVV *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 V[j3, mom3, {li3}], s4 V[j4, mom4, {li4}] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 V[j3], s4 V[j4]].{FANonCommutative[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[-1] ], FANonCommutative[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[+1] ], FANonCommutative[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[-1] ], FANonCommutative[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[+1] ]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 V[j3, mom3, {li3}], s4 V[j4, mom4, {li4}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 V[j3], s4 V[j4]].{DiracObject[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[-1] ][di1,di2], DiracObject[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[-1] ][di2,di1], DiracObject[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[+1] ][di1,di2], DiracObject[FADiracMatrix[li3], FADiracMatrix[li4], FAChiralityProjector[+1] ][di2,di1], DiracObject[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[-1] ][di1,di2], DiracObject[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[-1] ][di2,di1], DiracObject[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[+1] ][di1,di2], DiracObject[FADiracMatrix[li4], FADiracMatrix[li3], FAChiralityProjector[+1] ][di2,di1]},
 
 	 (* SSS *)
 
@@ -144,14 +149,7 @@ G[+1][s1 V[j1], s2 V[j2], s3 V[j3], s4 V[j4]].{FAMetricTensor[li1 ,li4 ]FAMetric
    coupling C[F, -F, ...] is derived from C[-F, F, ...].*)
 
 M$FlippingRules = {
-FANonCommutative[dm1:_FADiracMatrix | _FADiracSlash,dm2:_FADiracMatrix | _FADiracSlash, FAChiralityProjector[+1]] ->
- FANonCommutative[dm2,dm1, FAChiralityProjector[+1]],
-FANonCommutative[dm1:_FADiracMatrix | _FADiracSlash,dm2:_FADiracMatrix | _FADiracSlash, FAChiralityProjector[-1]] ->
- FANonCommutative[dm2,dm1, FAChiralityProjector[-1]],
-FANonCommutative[dm:_FADiracMatrix | _FADiracSlash, FAChiralityProjector[+1]] ->
--FANonCommutative[dm, FAChiralityProjector[-1]],
-FANonCommutative[dm:_FADiracMatrix | _FADiracSlash, FAChiralityProjector[-1]] ->
--FANonCommutative[dm, FAChiralityProjector[+1]]}
+}
 
 	(* TruncationRules: rule for omitting the wave functions of
 	   external Propagators defined in this file. *)

@@ -582,7 +582,7 @@ V_95 = Vertex(name = 'V_95',
 V_96 = Vertex(name = 'V_96',
               particles = [ P.t__tilde__, P.t, P.g ],
               color = [ 'T(3,2,1)' ],
-              lorentz = [ L.FFV1, L.FFV3, L.FFV7, L.FFV8, L.FFV9 ],
+              lorentz = [ L.FFV1, L.FFVC00EFF, L.FFVC12, L.FFVC1, L.FFVC11 ],
               couplings = {(0,0):C.GC_12,(0,1):C.GC_64,(0,3):C.GC_65,(0,4):C.GC_66,(0,2):C.GC_67})
 
 V_97 = Vertex(name = 'V_97',

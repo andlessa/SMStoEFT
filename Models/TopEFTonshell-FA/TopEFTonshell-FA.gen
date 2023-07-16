@@ -8,13 +8,13 @@
 
 (*     Kinematic indices    *)
 
-KinematicIndices[ F ] = {};
+KinematicIndices[ F ] = {Dirac};
 KinematicIndices[ V ] = {Lorentz};
 KinematicIndices[ S ] = {};
 KinematicIndices[ SV ] = {Lorentz};
 KinematicIndices[ U ] = {};
 
-$FermionLines = True;
+$FermionLines = False;
 
 (*     Simplification rules    *)
 
@@ -34,11 +34,11 @@ M$GenericPropagators={
 
 (*general fermion propagator:*)
 
-AnalyticalPropagator[External][s1 F[j1,mom]]==
-NonCommutative[SpinorType[j1][-mom,Mass[F[j1]]]],
+AnalyticalPropagator[External][s1 F[j1,mom,{di1}]]==
+DiracObject[SpinorType[j1][-mom,Mass[F[j1]]]][di1],
 
-AnalyticalPropagator[Internal][s1 F[j1,mom]]==
-NonCommutative[DiracSlash[-mom]+Mass[F[j1]]]*
+AnalyticalPropagator[Internal][s1 F[j1,mom,{di1}->{di2}]]==
+DiracObject[DiracSlash[-mom]+Mass[F[j1]]][di1,di2]*
 I PropagatorDenominator[mom,Mass[F[j1]]],
 
 (*general vector boson propagator:*)
@@ -77,20 +77,25 @@ I*PropagatorDenominator[mom,Sqrt[GaugeXi[U[j1]]] Mass[U[j1]]]
 
 M$GenericCouplings = {
 
+	 (* FFFF *)
+
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 F[j3, mom3, {di3}], s4 F[j4, mom4, {di4}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 F[j3], s4 F[j4]].{IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di2,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di4,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di1,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[-1] ][di3,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di1,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di3]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di2]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di1], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di2], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di4,di3], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di1]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di4], {a,1,4}], IndexSum[DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di2,di4]DiracObject[DiracMatrix[a], ChiralityProjector[+1] ][di3,di1], {a,1,4}]},
+
 	 (* FFS *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 S[j3, mom3] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 S[j3]].{NonCommutative[ChiralityProjector[-1]], NonCommutative[ChiralityProjector[+1]]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 S[j3, mom3] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 S[j3]].{DiracObject[ChiralityProjector[-1]][di1,di2], DiracObject[ChiralityProjector[-1]][di2,di1], DiracObject[ChiralityProjector[+1]][di1,di2], DiracObject[ChiralityProjector[+1]][di2,di1]},
 
 	 (* FFV *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 V[j3, mom3, {li3}] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 V[j3]].{NonCommutative[DiracMatrix[li3], ChiralityProjector[-1] ], NonCommutative[DiracMatrix[li3], ChiralityProjector[+1] ], NonCommutative[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[-1] ], NonCommutative[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[+1] ], NonCommutative[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[-1] ], NonCommutative[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[+1] ]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 V[j3, mom3, {li3}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 V[j3]].{DiracObject[DiracMatrix[li3], ChiralityProjector[-1] ][di1,di2], DiracObject[DiracMatrix[li3], ChiralityProjector[-1] ][di2,di1], DiracObject[DiracMatrix[li3], ChiralityProjector[+1] ][di1,di2], DiracObject[DiracMatrix[li3], ChiralityProjector[+1] ][di2,di1], DiracObject[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[-1] ][di1,di2], DiracObject[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[-1] ][di2,di1], DiracObject[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[+1] ][di1,di2], DiracObject[DiracMatrix[li3], DiracSlash[mom3 ], ChiralityProjector[+1] ][di2,di1], DiracObject[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[-1] ][di1,di2], DiracObject[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[-1] ][di2,di1], DiracObject[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[+1] ][di1,di2], DiracObject[DiracSlash[mom3 ], DiracMatrix[li3], ChiralityProjector[+1] ][di2,di1]},
 
 	 (* FFVV *)
 
-AnalyticalCoupling[s1 F[j1, mom1], s2 F[j2, mom2], s3 V[j3, mom3, {li3}], s4 V[j4, mom4, {li4}] ] ==
-G[-1][s1 F[j1], s2 F[j2], s3 V[j3], s4 V[j4]].{NonCommutative[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[-1] ], NonCommutative[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[+1] ], NonCommutative[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[-1] ], NonCommutative[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[+1] ]},
+AnalyticalCoupling[s1 F[j1, mom1, {di1}], s2 F[j2, mom2, {di2}], s3 V[j3, mom3, {li3}], s4 V[j4, mom4, {li4}] ] ==
+G[-1][s1 F[j1], s2 F[j2], s3 V[j3], s4 V[j4]].{DiracObject[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[-1] ][di1,di2], DiracObject[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[-1] ][di2,di1], DiracObject[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[+1] ][di1,di2], DiracObject[DiracMatrix[li3], DiracMatrix[li4], ChiralityProjector[+1] ][di2,di1], DiracObject[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[-1] ][di1,di2], DiracObject[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[-1] ][di2,di1], DiracObject[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[+1] ][di1,di2], DiracObject[DiracMatrix[li4], DiracMatrix[li3], ChiralityProjector[+1] ][di2,di1]},
 
 	 (* SSS *)
 
@@ -144,14 +149,7 @@ G[+1][s1 V[j1], s2 V[j2], s3 V[j3], s4 V[j4]].{MetricTensor[li1 ,li4 ]MetricTens
    coupling C[F, -F, ...] is derived from C[-F, F, ...].*)
 
 M$FlippingRules = {
-NonCommutative[dm1:_DiracMatrix | _DiracSlash,dm2:_DiracMatrix | _DiracSlash, ChiralityProjector[+1]] ->
- NonCommutative[dm2,dm1, ChiralityProjector[+1]],
-NonCommutative[dm1:_DiracMatrix | _DiracSlash,dm2:_DiracMatrix | _DiracSlash, ChiralityProjector[-1]] ->
- NonCommutative[dm2,dm1, ChiralityProjector[-1]],
-NonCommutative[dm:_DiracMatrix | _DiracSlash, ChiralityProjector[+1]] ->
--NonCommutative[dm, ChiralityProjector[-1]],
-NonCommutative[dm:_DiracMatrix | _DiracSlash, ChiralityProjector[-1]] ->
--NonCommutative[dm, ChiralityProjector[+1]]}
+}
 
 	(* TruncationRules: rule for omitting the wave functions of
 	   external Propagators defined in this file. *)

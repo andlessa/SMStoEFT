@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Thu 13 Jul 2023 16:51:48
+# Date: Sun 16 Jul 2023 11:38:08
 
 
 
@@ -188,8 +188,20 @@ ee = Parameter(name = 'ee',
 A0 = Parameter(name = 'A0',
                nature = 'internal',
                type = 'real',
-               value = '-0.00026385724906858796*( (mChi - mST)**2/(5.*mST**4) - (2*(mChi - mST))/(5.*mST**3) + 1/(2.*mST**2) if 1 - mChi**2/mST**2<0.1 else (mST**6/mChi**6 + 2*(1 - (3*mST**4)/mChi**4) + (3*mST**2*(1 + 4*cmath.log(mST/mChi)))/mChi**2)/(mChi**2*(1 - mST**2/mChi**2)**4) )*G*MT*yDM**2',
+               value = '-0.00026385724906858796*( mChi**2/(5.*mST**4) - (4*mChi)/(5.*mST**3) + 11/(10.*mST**2) if 1 - mChi**2/mST**2<0.1 else (mST**6/mChi**6 + 2*(1 - (3*mST**4)/mChi**4) + (3*mST**2*(1 + 4*cmath.log(mST/mChi)))/mChi**2)/(mChi**2*(1 - mST**2/mChi**2)**4) )*G*MT*yDM**2',
                texname = 'A_0')
+
+A1 = Parameter(name = 'A1',
+               nature = 'internal',
+               type = 'real',
+               value = '-0.00026385724906858796*( mChi**2/(5.*mST**4) - (4*mChi)/(5.*mST**3) + 11/(10.*mST**2) if 1 - mChi**2/mST**2<0.1 else (mST**6/mChi**6 + 2*(1 - (3*mST**4)/mChi**4) + (3*mST**2*(1 + 4*cmath.log(mST/mChi)))/mChi**2)/(mChi**2*(1 - mST**2/mChi**2)**4) )*G*MT*yDM**2',
+               texname = 'A_1')
+
+B0 = Parameter(name = 'B0',
+               nature = 'internal',
+               type = 'real',
+               value = '0.000014658736059365999*( -mChi**2/(10.*mST**4) + (4*mChi)/(5.*mST**3) - 11/(5.*mST**2) if 1 - mChi**2/mST**2<0.1 else (11 - (18*mST**2)/mChi**2 + (9*mST**4)/mChi**4 - (2*mST**6)/mChi**6 + 6*cmath.log(mST**2/mChi**2))/(mChi**2*(1 - mST**2/mChi**2)**4) )*G**2*yDM**2',
+               texname = 'B_0')
 
 sw2 = Parameter(name = 'sw2',
                 nature = 'internal',

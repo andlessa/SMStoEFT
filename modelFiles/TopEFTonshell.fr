@@ -35,10 +35,27 @@ M$Parameters = {
           ComplexParameter -> False, 
           ParameterType->Internal, 
           (* Value-> (-gs*yDM^2*MT/(384.*Pi^2))*(2*mChi^6 - 6*mChi^2*mST^4 + mST^6 + 3*mChi^4*mST^2*(1+2*Log[mST^2/mChi^2]))/((mChi^2-mST^2)^4), *)
-          Value-> (-gs*yDM^2*MT/(384.*Pi^2))*If[1-mChi^2/mST^2 < 0.1,(mChi - mST)^2/(5*mST^4) - (2*(mChi - mST))/(5*mST^3) + 1/(2*mST^2),(mST^6/mChi^6 + 2*(1 - (3*mST^4)/mChi^4) + (3*mST^2*(1 + 4*Log[mST/mChi]))/mChi^2)/(mChi^2*(1 - mST^2/mChi^2)^4)],           
+          Value-> (-gs*yDM^2*MT/(384.*Pi^2))*If[1-mChi^2/mST^2 < 0.1, mChi^2/(5*mST^4)-4*mChi/(5*mST^3) + 11/(10*mST^2),(mST^6/mChi^6 + 2*(1 - (3*mST^4)/mChi^4) + (3*mST^2*(1 + 4*Log[mST/mChi]))/mChi^2)/(mChi^2*(1 - mST^2/mChi^2)^4)],           
           InteractionOrder->{{NP,2},{QCD,1}},
           Description->"Effective on-shell g-top-top coupling"
-        }
+        },
+
+A1  == { TeX->Subscript[A,1],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          (* Value-> (-gs*yDM^2*MT/(384.*Pi^2))*(2*mChi^6 - 6*mChi^2*mST^4 + mST^6 + 3*mChi^4*mST^2*(1+2*Log[mST^2/mChi^2]))/((mChi^2-mST^2)^4), *)
+          Value-> (-gs*yDM^2*MT/(384.*Pi^2))*If[1-mChi^2/mST^2 < 0.1, mChi^2/(5*mST^4)-4*mChi/(5*mST^3) + 11/(10*mST^2),(mST^6/mChi^6 + 2*(1 - (3*mST^4)/mChi^4) + (3*mST^2*(1 + 4*Log[mST/mChi]))/mChi^2)/(mChi^2*(1 - mST^2/mChi^2)^4)],           
+          InteractionOrder->{{NP,2},{QCD,1}},
+          Description->"Effective on-shell g-top-top coupling"
+        },        
+
+  B0  == { TeX->Subscript[B,0],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          Value-> (gs^2*yDM^2/(6912.*Pi^2))*If[1-mChi^2/mST^2 < 0.1,4*mChi/(5*mST^3)-mChi^2/(10*mST^4)-11/(5*mST^2),(9*mST^4/mChi^4 - 18*mST^2/mChi^2 -2*mST^6/mChi^6 + 11 + 6*Log[mST^2/mChi^2])/(mChi^2*(1 - mST^2/mChi^2)^4)],           
+          InteractionOrder->{{NP,2},{QCD,2}},
+          Description->"Effective on-shell g-top-top coupling"
+        }        
 };
 
 
@@ -48,14 +65,31 @@ M$Parameters = {
 (* gauge kinetic and mass terms *)
 
 
-(* EFT operator G_{\mu\nu} tbar.sigma[\mu,\nu].Ta.t *)
-(* the factor of 2 is due to the fact that G_{\mu\nu} and sigma[\mu\nu] and anti-symmetric *)
+(* Convenience function *)
+sigmamunu[mu_,nu_,sp_,sp2_]:=Module[{sp1},(I/2)*(Ga[mu,sp,sp1]*Ga[nu,sp1,sp2]-Ga[nu,sp,sp1]*Ga[mu,sp1,sp2])];
 
-LC0 := Block[{mu,nu,aa},
-              2*I*A0*FS[G,mu,nu,aa]*(tbar.Ga[mu].Ga[nu].T[aa].t)
+
+(* EFT operator G_{\mu\nu} tbar.sigma[\mu,\nu].Ta.t *)
+
+(* The A0 term is equivalent to QLbar.uR + h.c., so it agrees with matchmakereft *)
+LA0 := Block[{mu,nu,aa,bb,cc,sp1,sp2},
+              ExpandIndices[
+                A0*FS[G,mu,nu,aa]*tbar[sp1,bb].t[sp2,cc]*T[aa,bb,cc]*sigmamunu[mu,nu,sp1,sp2]
+                ]
+            ];
+
+(* Using the identiy: delta_{a,d}*delta_{b,c} - 3*delta_{a,b}*delta_{c,d} = sum_A[ -(3/2)*T[A,a,d]*T[A,c,b] ] *)
+LB0 := Block[{mu,nu,cc1,cc2,cc3,cc4,aa,sp1,sp2,sp3,sp4},
+              ExpandIndices[
+                (* B0*((uRbar[sp1,3,cc1].uR[sp2,3,cc1])*(uqbar[sp3,ff,cc2].uq[sp4,ff,cc2])*Ga[mu,sp1,sp2]*Ga[mu,sp3,sp4] *)
+                (*  -3*(uRbar[sp1,3,cc1].uR[sp2,3,cc2])*(uqbar[sp3,ff,cc2].uq[sp4,ff,cc1])*Ga[mu,sp1,sp2]*Ga[mu,sp3,sp4]) *)
+
+                -B0*(3/2)*((uRbar[sp1,3,cc1].uR[sp2,3,cc2])*(uqbar[sp3,ff,cc3].uq[sp4,ff,cc4])*Ga[mu,sp1,sp2]*Ga[mu,sp3,sp4]*T[aa,cc1,cc2]*T[aa,cc3,cc4])
+                -B0*(3/2)*((uRbar[sp1,3,cc1].uR[sp2,3,cc2])*(dqbar[sp3,ff,cc3].dq[sp4,ff,cc4])*Ga[mu,sp1,sp2]*Ga[mu,sp3,sp4]*T[aa,cc1,cc2]*T[aa,cc3,cc4])
+              ]
             ];
 
 
 (* Total EFT lagrangian *)
 
-LNP := LC0;
+LNP := LA0 + LB0;
