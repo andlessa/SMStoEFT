@@ -1,0 +1,148 @@
+(*********************************************************************)
+(*********************************************************************)
+(** FeynRules model file for a simplified colored scalar-dark ********)
+(** fermion model including dim-6 EFT operators for the       ********)
+(** top-top-gluon coupling induced at one loop  (for on-shell tops) **)
+(******                                                         ******)
+(****** A. Lessa                                                ******)
+(******                                                         ******)
+(****** Feel free to use this model file!                       ******)
+(*********************************************************************)
+(*********************************************************************)
+
+M$ModelName = "Top-EFToffshell";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "16.07.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+(* Renormalization parameters (for divergent coefficients) *)
+
+(* New Physics (UV) Parameters *)
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+  kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
+  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
+    
+
+
+  A1  == { TeX->Subscript[A,1],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          Value-> (yDM^2/(32.*Pi^2))*((1/2)*(mST^2-3*mChi^2)/(mST^2-mChi^2) + Log[muR^2/mST^2] + mChi^4*Log[mST^2/mChi^2]/((mChi^2-mST^2)^2)),           
+          InteractionOrder->{{NP,2},{QCD,0}},
+          Description->"Effective on-shell g-top-top coupling"
+        },
+  
+
+  A2  == { TeX->Subscript[A,2],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          Value-> (yDM^2/(96.*Pi^2))*(mChi^4*mST^2/((mChi^2-mST^2)^4))*(6 mST^2/mChi^2 - 2*mChi^2/mST^2 - mST^4/mChi^4 -3 -6*Log[mST^2/mChi^2]),         
+          InteractionOrder->{{NP,2},{QCD,0}},
+          Description->"Effective on-shell g-top-top coupling"
+        },
+
+  A3  == { TeX->Subscript[A,3],  
+          ComplexParameter -> False, 
+          ParameterType->Internal, 
+          Value-> (gs*yDM^2/(576.*Pi^2))*(mChi^6/((mChi^2-mST^2)^4))*(18 mST^2/mChi^2 - 9*mST^4/mChi^4 + 2*mST^6/mChi^6 -11 -6*Log[mST^2/mChi^2]),           
+          InteractionOrder->{{NP,2},{QCD,1}},
+          Description->"Effective on-shell g-top-top coupling"
+        }    
+
+};
+
+
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+(* The dark fermion *)
+F[16] == { 
+         ClassName -> chi, 
+         SelfConjugate-> True, 
+         QuantumNumbers -> {}, 
+         Mass->{mChi,  100.0},  
+         Width->{wChi,0.}, 
+         ParticleName-> "~chi", 
+         PDG->5000012, 
+         PropagatorLabel->"chi", 
+         PropagatorType->Straight, 
+         ParticleName     -> {"~chi" },
+         FullName         -> {"Dark fermion"} },
+
+(* Colored Scalar *)
+S[5] == { 
+          ClassName        -> ST,
+          Indices          -> {Index[Colour]},
+          SelfConjugate    -> False,
+          Unphysical       -> False,
+          Mass             -> {mST, 400.},
+          Width            -> {wST, 1.},
+          QuantumNumbers   -> {Q -> 2/3},
+          PropagatorLabel  -> {"ST"},
+          PropagatorType   -> ScalarDash, 
+          PDG              -> {5000002},
+          ParticleName     -> {"~ST" },
+          AntiParticleName -> {"~ST~"},
+          FullName         -> {"Colored Scalar"} }
+};
+
+
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+
+(* DM-Scalar-Top coupling *)
+LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
+
+
+(* EFT operators - obtained from MatchMaker SMEFT_Green_Bpreserving.fr *)
+(* top_R-D_\mu(top_R) *)
+LA1 := Block[{mu,sp1,sp2,cc},
+      ExpandIndices[
+              A1*I*Ga[mu,sp1,sp2] uRbar[sp1,3,cc].DC[uR[sp2,3,cc], mu]]
+            ];
+
+(* EFT operator D_\mu(top)-D^2(top) *)
+(* It was necessary to split the derivatives in 3 terms *)
+(* in order to FeynRules to properly handle the operator *)
+
+LA2 := Block[{mu,nu,sp1,sp2,jj,cc},
+      ExpandIndices[
+          A2*I/2*(uRbar[sp1,3,cc].DC[DC[DC[uR[sp2,3,cc],nu],nu],mu]+uRbar[sp1,3,cc].DC[DC[DC[uR[sp2,3,cc],mu],nu],nu])*Ga[mu,sp1,sp2]]
+         ];
+
+(* EFT operator D_\mu(G^\mu\nu)-top-top *)
+(* It was necessary to split the derivatives in 2 terms *)
+(* in order to FeynRules to properly handle the operator *)
+
+LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
+       ExpandIndices[
+               A3*T[aa,cc1,cc2] uRbar[sp1,3,cc1].uR[sp2,3,cc2]*Ga[mu,sp1,sp2] DC[FS[G,mu,nu,aa],nu]]
+             ];
+
+(* Total EFT lagrangian *)
+(* OBS: LA2 and HC[LA2] are equal if one uses integration by parts. *)
+(* However, FeynRules complains about hermiticity if the hermitian conjugate is not added. *)
+(* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
+
+LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;
