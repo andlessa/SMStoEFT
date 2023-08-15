@@ -174,7 +174,7 @@ if __name__ == "__main__":
     
     import argparse    
     ap = argparse.ArgumentParser( description=
-            "Read a LHE event file generate by MG5 and convert is to a SLHA file with cross-section blocks." )
+            "Read a LHE event file generate by MG5 and convert it to a SLHA file with cross-section blocks." )
     ap.add_argument('-f', '--input',
             help='path to the LHE input file.')
     ap.add_argument('-o', '--output',
