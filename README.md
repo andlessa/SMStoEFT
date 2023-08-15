@@ -78,9 +78,9 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
 
  * [smodels_parameters.ini](./smodels_parameters.ini): parameters for running SModelS
 
- *[Refs](./Refs): folder listing several relevant references
+ * [Refs](./Refs): folder listing several relevant references
 
- *[Recast](./Recast): folder to store the recasting code for the [CMS-EXO-20-004](https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-20-004/) monojet search and the [ATLAS-SUSY-2018-042](https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/SUSY-2018-42/) HSCP search
+ * [Recast](./Recast): folder to store the recasting code for the [CMS-EXO-20-004](https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-20-004/) monojet search and the [ATLAS-SUSY-2018-042](https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/SUSY-2018-42/) HSCP search
 
  * [runScanMG5.py](./runScanMG5.py): python code for running scans over the parameter space and generating events with MadGraph
 
