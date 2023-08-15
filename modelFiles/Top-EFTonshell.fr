@@ -1,14 +1,18 @@
-(*********************************************************************)
-(*********************************************************************)
-(** FeynRules model file for the on-shell topEFT matched to a simplified colored scalar-dark fermion model ******)
-(******                                                         ******)
-(****** A. Lessa ******)
-(******                                                         ******)
-(****** Feel free to use this model file!                       ******)
-(*********************************************************************)
-(*********************************************************************)
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for top EFT couplings induced  ********)
+(** by a scalar top partner and a fermion singlet (DM).  *******)
+(** Only the operators relevant for q q > t t are included. ****)
+(** The on-shell (physical) basis is assumed                  **)
+(** The heavy mass limit (mST,mChi >> mTop,s) has been assumed *)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
 
-M$ModelName = "Top-EFT";
+M$ModelName = "Top-EFTonshell";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
@@ -24,12 +28,15 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 M$Parameters = {
 
+(* Renormalization parameters (for divergent coefficients) *)
+
+  kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
+  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-  mChi  == { TeX->Subscript[m,\[Chi]],  ComplexParameter -> False, ParameterType->External, Value->100.0, Description->"Dark fermion mass"},
-  mST  == { TeX->Subscript[m,ST],  ComplexParameter -> False, ParameterType->External, Value->400.0, Description->"Colored scalar mass"},  
 
-(* EFT coefficient *)
+
+
 
   A0  == { TeX->Subscript[A,0],  
           ComplexParameter -> False, 
@@ -52,13 +59,57 @@ M$Parameters = {
 
 
 (* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+(* The dark fermion *)
+F[16] == { 
+         ClassName -> chi, 
+         SelfConjugate-> True, 
+         QuantumNumbers -> {}, 
+         Mass->{mChi,  100.0},  
+         Width->{wChi,0.}, 
+         ParticleName-> "~chi", 
+         PDG->5000012, 
+         PropagatorLabel->"chi", 
+         PropagatorType->Straight, 
+         ParticleName     -> {"~chi" },
+         FullName         -> {"Dark fermion"} },
+
+(* Colored Scalar *)
+S[5] == { 
+          ClassName        -> ST,
+          Indices          -> {Index[Colour]},
+          SelfConjugate    -> False,
+          Unphysical       -> False,
+          Mass             -> {mST, 400.},
+          Width            -> {wST, 1.},
+          QuantumNumbers   -> {Q -> 2/3},
+          PropagatorLabel  -> {"ST"},
+          PropagatorType   -> ScalarDash, 
+          PDG              -> {5000002},
+          ParticleName     -> {"~ST" },
+          AntiParticleName -> {"~ST~"},
+          FullName         -> {"Colored Scalar"} }
+};
+
+
+(* ************************** *)
 (* *****   Lagrangian   ***** *)
 (* ************************** *)
-(* gauge kinetic and mass terms *)
-
 
 (* Convenience function *)
 sigmamunu[mu_,nu_,sp_,sp2_]:=Module[{sp1},(I/2)*(Ga[mu,sp,sp1]*Ga[nu,sp1,sp2]-Ga[nu,sp,sp1]*Ga[mu,sp1,sp2])];
+
+
+(* gauge kinetic and mass terms *)
+
+Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+
+(* DM-Scalar-Top coupling *)
+LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 
 
 (* EFT operator G_{\mu\nu} tbar.sigma[\mu,\nu].Ta.t *)
@@ -84,4 +135,4 @@ LB0 := Block[{mu,nu,cc1,cc2,cc3,cc4,aa,sp1,sp2,sp3,sp4},
 
 (* Total EFT lagrangian *)
 
-LNP := LA0 + LB0;
+LNP := Lkin + LYDM + HC[LYDM] + LA0 + LB0;

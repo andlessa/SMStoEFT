@@ -1,14 +1,16 @@
-(*********************************************************************)
-(*********************************************************************)
-(** FeynRules model file for a simplified colored scalar-dark ********)
-(** fermion model including dim-6 EFT operators for the       ********)
-(** top-top-gluon coupling induced at one loop  (for on-shell tops) **)
-(******                                                         ******)
-(****** A. Lessa                                                ******)
-(******                                                         ******)
-(****** Feel free to use this model file!                       ******)
-(*********************************************************************)
-(*********************************************************************)
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for top EFT couplings induced  ********)
+(** by a scalar top partner and a fermion singlet (DM).  *******)
+(** Only the operators relevant for q q > t t are included. ****)
+(** The off-shell (Green) basis is assumed                    **)
+(** The heavy mass limit (mST,mChi >> mTop,s) has been assumed *)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
 
 M$ModelName = "Top-EFToffshell";
 
@@ -28,10 +30,11 @@ M$Parameters = {
 
 (* Renormalization parameters (for divergent coefficients) *)
 
-(* New Physics (UV) Parameters *)
-  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
   kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
   muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
+
+(* New Physics (UV) Parameters *)
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
     
 
 
@@ -107,6 +110,7 @@ S[5] == {
 (* ************************** *)
 (* *****   Lagrangian   ***** *)
 (* ************************** *)
+
 (* gauge kinetic and mass terms *)
 
 Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
@@ -146,3 +150,6 @@ LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
 (* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
 
 LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;
+
+
+

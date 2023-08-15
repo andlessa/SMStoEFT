@@ -1,16 +1,18 @@
-(*********************************************************************)
-(*********************************************************************)
-(** FeynRules model file for a simplified colored scalar-dark ********)
-(** fermion model including dim-6 EFT operators for the       ********)
-(** top-top-gluon coupling induced at one loop  (for on-shell tops) **)
-(******                                                         ******)
-(****** A. Lessa                                                ******)
-(******                                                         ******)
-(****** Feel free to use this model file!                       ******)
-(*********************************************************************)
-(*********************************************************************)
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for top dim-6 couplings induced *******)
+(** by a scalar top partner and a fermion singlet (DM).  *******)
+(** The couplings should be replaced by form factors, so the ***)
+(** full one loop calculation is reproduced.             *******)
+(** Only the operators relevant for q q > t t are included. ****)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
 
-M$ModelName = "SMS-Top-EFT";
+M$ModelName = "Top-FormFactors";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
@@ -135,3 +137,5 @@ LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
 (* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
 
 LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;
+
+
