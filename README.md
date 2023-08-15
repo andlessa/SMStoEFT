@@ -96,7 +96,8 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
 
     * [loadModels](./mathematicaNBs/loadModels): notebooks for loading the FeynRules models and exporting to FeynArts and UFO formats
 
-       * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb): loads the UV simplified model
+        * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb): loads the UV simplified model
+        * [SMS-stopNLO](./mathematicaNBs/loadModels/SMS-stopNLO.nb): loads the UV simplified model with QCD counter-terms (used for the loop induced process $ p + p \to \chi + \chi$)
         * [Top-FormFactors](./mathematicaNBs/loadModels/Top-FormFactors.nb): loads the EFT on-shell model
         * [Top-EFTonshell](./mathematicaNBs/loadModels/Top-EFTonshell.nb): loads the EFT on-shell model
         * [Top-EFToffshell](./mathematicaNBs/loadModels/Top-EFToffshell.nb): loads the EFT off-shell model
