@@ -1,0 +1,25 @@
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c      written by the UFO converter
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+loop 1 MU_R
+
+sminputs 1 aEWM1
+
+sminputs 3 aS
+
+frblock 1 mdl_yDM
+
+mass 6 mdl_MT
+
+mass 5 mdl_MB
+
+mass 5000012 mdl_mChi
+
+mass 5000002 mdl_mST
+
+decay 6 mdl_WT
+
+decay 5000012 mdl_wChi
+
+decay 5000002 mdl_wST
