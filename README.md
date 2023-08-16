@@ -24,9 +24,9 @@ In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://
 We consider the simple case of a scalar top partner ($\phi_T$), singlet under $SU(2)_L$, and a singlet fermion ($\chi$),
 which is a Dark Matter candidate. In addition we impose a $\mathcal{Z}_2$ symmetry, under which the BSM fields are odd and the SM are even. Under this assumptions the renormalizable (UV) BSM lagrangian is:
 
-$$
+```math
     \mathcal{L}_{SMS} = \bar{\chi}\left( i \gamma^\mu \partial_\mu -\frac{1}{2} m_{\chi} \right) \chi + |D_\mu \phi_T|^2 - m_{T}^2 |\phi_T|^2 - y_{\mathrm{DM}} \phi_T^\dagger \bar{\chi} t_R 
-$$
+```
 
 In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 
@@ -36,10 +36,9 @@ In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 
 The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $ q + q \to t + \bar{t}$ production.  and corresponds to the lagrangian:
 
-$$
+```math
     \mathcal{L}_{FF} = \mathcal{L}_{SMS} + i A_1\ \bar{t}_R \gamma^\mu D_\mu t_R + \frac{i}{2} A_2\ \bar{t}_R \gamma^\mu \left( D^\nu D_\nu D_\mu + D_\mu D^\nu D_\nu \right)  t_R + A_3\ D^\nu G_{\mu \nu}^A \bar{t}_R T^A \gamma^\mu t_R
-
-$$
+```
 
 The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced. The model
 
@@ -56,10 +55,9 @@ The model is identical to the Top-FormFactor model, except that the coefficients
 
 The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $ q + q \to t + \bar{t}$ production. The model lagrangian is:
 
-$$
+```math
     \mathcal{L}_{ttG} = \mathcal{L}_{SMS} + 2 i A_0\ G^{\mu\nu} \bar{t}\gamma^\mu \gamma^\nu t
-
-$$
+```
 
 The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{\chi}$) in the EFT limit: $m_T,m_{\chi} \gg m_t,\hat{s}$.
 
@@ -116,7 +114,10 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
          * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
          * [matchMakerReader](./mathematicaNBs/matching/matchMakerReader.nb): reads the MatchMaker output
          * [numericalLoops](): compute numerical values for the loop integrals (for debugging) as well as the high mass limit
-    * [Models](./Models): store the UFO and FeynArts output for the models described above
+    
+    * [modelFiles](./modelFiles): stores the FeynRules files for the models described above
+
+    * [Models](./Models): stores the UFO and FeynArts output for the models described above
 
     * [notebooks](./notebooks): several jupyter notebooks for plotting and analyzing the data
     
