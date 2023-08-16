@@ -34,7 +34,7 @@ In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 
  * The model is defined in [modelFiles/Top-FormFactors.fr](./modelFiles/Top-FormFactors.fr)
 
-The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $ q + q \to t + \bar{t}$ production.  and corresponds to the lagrangian:
+The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $q + q \to t + \bar{t}$ production.  and corresponds to the lagrangian:
 
 ```math
     \mathcal{L}_{FF} = \mathcal{L}_{SMS} + i A_1\ \bar{t}_R \gamma^\mu D_\mu t_R + \frac{i}{2} A_2\ \bar{t}_R \gamma^\mu \left( D^\nu D_\nu D_\mu + D_\mu D^\nu D_\nu \right)  t_R + A_3\ D^\nu G_{\mu \nu}^A \bar{t}_R T^A \gamma^\mu t_R
@@ -53,7 +53,7 @@ The model is identical to the Top-FormFactor model, except that the coefficients
 
  * The model is defined in [modelFiles/Top-EFTonshell.fr](./modelFiles/Top-EFTonshell.fr)
 
-The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $ q + q \to t + \bar{t}$ production. The model lagrangian is:
+The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $q + q \to t + \bar{t}$ production. The model lagrangian is:
 
 ```math
     \mathcal{L}_{ttG} = \mathcal{L}_{SMS} + 2 i A_0\ G^{\mu\nu} \bar{t}\gamma^\mu \gamma^\nu t
@@ -102,10 +102,10 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
     
     * [amplitudes](./mathematicaNBs/oneLoop): notebooks for computing the amplitudes both at 1-loop (UV models) or "tree level" (EFT models)
 
-        * [TopEFTonshell-effectiveCouplings](./mathematicaNBs/amplitudes/TopEFTonshell-effectiveCouplings.nb): computes the amplitudes for $ u + u \rightarrow t + \bar{t}$ using the on-shell EFT model
+        * [TopEFTonshell-effectiveCouplings](./mathematicaNBs/amplitudes/TopEFTonshell-effectiveCouplings.nb): computes the amplitudes for $u + u \rightarrow t + \bar{t}$ using the on-shell EFT model
         * [SMS-oneLoop-diagrams](./mathematicaNBs/amplitudes/SMS-oneLoop-diagrams.nb): all 1-loop diagrams relevant for top EFT
-         * [diagrams-SMEFT-stop](./mathematicaNBs/amplitudes/diagrams-SMEFT-stop.nb): all 1-loop diagrams relevant for $ p + p \to t + \bar{t}$ production
-        * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for $ p + p \to \chi + \chi$ production         
+         * [diagrams-SMEFT-stop](./mathematicaNBs/amplitudes/diagrams-SMEFT-stop.nb): all 1-loop diagrams relevant for $p + p \to t + \bar{t}$ production
+        * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for $p + p \to \chi + \chi$ production         
     
     * [matching](./mathematicaNBs/matching): notebooks for computing the matching between the UV and EFT models.
 
