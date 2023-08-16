@@ -1,0 +1,97 @@
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for a simplified model          *******)
+(** with a scalar top partner and a fermion singlet (DM).  *****)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
+
+M$ModelName = "SMS-stop";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "18.03.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+ (* External NP parameters*)
+  yDM  == {ParameterType -> Internal, ComplexParameter -> True, Indices -> {Generation}},
+  mChi == {ParameterType -> Internal,  ComplexParameter -> False},
+  mST == {ParameterType -> Internal,  ComplexParameter -> False}
+};
+
+(* ************************** *)
+(* **** Particle classes **** *)
+(* ************************** *)
+M$ClassesDescription = {
+
+
+  (* The dark fermion *)
+  F[16] == {
+    ClassName -> chi,
+    SelfConjugate-> True,
+    QuantumNumbers -> {Y -> 0},
+    Mass-> mChi,
+    Width -> 0,
+    FullName -> "heavy",
+    Indices -> {}
+  },
+
+  F[17] == {
+    ClassName -> chiL,
+    SelfConjugate-> True,
+    QuantumNumbers -> {Y -> 0},
+    Mass-> mChi,
+    Width -> 0,
+    FullName -> "heavy",
+    Unphysical -> True,
+    Indices -> {},
+    Definitions -> {chiL[s0_] :> left[chi[s0]]}
+  },
+
+  F[18] == {
+    ClassName -> chiR,
+    SelfConjugate-> True,
+    QuantumNumbers -> {Y -> 0},
+    Mass-> mChi,
+    Width -> 0,
+    FullName -> "heavy",
+    Unphysical -> True,
+    Indices -> {},
+    Definitions -> {chiR[s0_] :> right[chi[s0]]}
+  },
+
+(* Colored Scalar *)
+S[5] == { 
+  ClassName        -> ST,
+  Indices          -> {Index[Colour]},
+  SelfConjugate    -> False,
+  Mass             -> mST,
+  Width            -> 0,
+  QuantumNumbers   -> {Y -> 2/3},
+  FullName         -> "heavy"
+  }
+};
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+LHeavy := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+
+(* DM-Scalar-Top coupling *)
+LHeavylight := Block[{cc, g0, sp1}, -yDM[g0] (anti[ST][cc] chiLbar[sp1].UR[sp1,g0,cc])];
+
+Ltot := LSM + LHeavy + LHeavylight + HC[LHeavylight];

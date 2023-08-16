@@ -96,7 +96,7 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
 
     * [loadModels](./mathematicaNBs/loadModels): notebooks for loading the FeynRules models and exporting to FeynArts and UFO formats
 
-        * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb): loads the UV simplified model
+        * test [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb) : loads the UV simplified model
         * [SMS-stopNLO](./mathematicaNBs/loadModels/SMS-stopNLO.nb): loads the UV simplified model with QCD counter-terms (used for the loop induced process $pp \to \chi \chi$)
         * [Top-FormFactors](./mathematicaNBs/loadModels/Top-FormFactors.nb): loads the EFT on-shell model
         * [Top-EFTonshell](./mathematicaNBs/loadModels/Top-EFTonshell.nb): loads the EFT on-shell model
@@ -120,6 +120,8 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
     * [modelFiles](./modelFiles): stores the FeynRules files for the models described above
 
     * [Models](./Models): stores the UFO and FeynArts output for the models described above
+
+    * [matchmakerModels](./matchmakerModels): stores models used for matching with MatchMaker
 
     * [notebooks](./notebooks): several jupyter notebooks for plotting and analyzing the data
     
