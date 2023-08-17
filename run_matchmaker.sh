@@ -2,8 +2,8 @@
 
 currentDIR="$( pwd )"
 
-smModelFile=$currentDIR/matchmakerModels/MatchMakerEFT/UnbrokenSM_BFM.fr
-eftModel=$currentDIR/matchmakerModels/MatchMakerEFT/SMEFT_Green_Bpreserving_MM
+smModelFile=$currentDIR/matchmakerModels/UnbrokenSM_BFM.fr
+eftModel=$currentDIR/matchmakerModels/SMEFT_Green_Bpreserving_MM
 
 Help()
 {
@@ -43,8 +43,6 @@ if [ -d "$outputFolder" ]; then
   if echo "$answer" | grep -iq "^y" ;then
     rm -rf $outputFolder;
     mkdir $outputFolder;
-  else
-    exit;    
   fi
 else
   mkdir $outputFolder;
@@ -60,4 +58,8 @@ echo "match_model_to_eft $outputFolder/$modelName $eftModel" >> tmp_cmds
 echo "Running MatchMakerEFT in $outputFolder"
 matchmakereft < tmp_cmds
 rm tmp_cmds
+rm $filename
 cd $currentDIR
+
+
+
