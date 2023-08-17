@@ -12,8 +12,17 @@ The following Mathematica packages must be installed (in <home folder>/.Mathemat
   * [Package-X](https://gitlab.com/mule-tools/package-x) (use this [tarball](./packageX.tar.gz))
   * [MatchMakerEFT](https://ftae.ugr.es/matchmakereft/)
   * [Matchete](https://gitlab.com/matchete/matchete)
+  * [SModelS](https://smodels.github.io/)
 
-In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/) must also be installed.
+In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/) must also be installed
+as well as [Form](https://launchpad.net/ubuntu/+source/form) and [QGraf](http://cfif.tecnico.ulisboa.pt/~paulo/qgraf.html).
+Running:
+
+```
+./installer.sh
+```
+
+Should install the relevant (non-Mathematica) packages.
 
 ## Models Description
 

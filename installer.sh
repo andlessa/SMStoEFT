@@ -25,6 +25,12 @@ if test $PKG_OK = "0" ; then
   echo "bzr not found. Install it with sudo apt-get install bzr."
   exit
 fi
+PKG_OK=$(dpkg-query -W -f='${Status}' form 2>/dev/null | grep -c "ok installed")
+if test $PKG_OK = "0" ; then
+  echo "form not found. Install it with sudo apt-get install form."
+  exit
+fi
+
 
 cd $homeDIR
 
@@ -53,6 +59,31 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] getting SModelS"; git clone git@github.com:SModelS/smodels.git smodels;
 	echo "[installer] Done"
 fi
+
+qgraf="qgraf-3.6.6.tgz"
+URL=http://qgraf.tecnico.ulisboa.pt/v3.6/$qgraf
+echo -n "Install MatchMaker (y/n)? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	path_to_executable=$(which qgraf)
+	if [ -x "$path_to_executable" ] ; then
+		echo "QGraf found at $path_to_executable"
+	else
+		echo "[installer] getting QGraf"; wget --user anonymous --password anonymous $URL 2>/dev/null || curl -O $URL; 
+		mkdir qgraf_tmp
+		mv $qgraf qgraf_tmp
+		cd qgraf_tmp		
+		tar -xzf $qgraf
+        mkdir fmodules
+		gfortran -o qgraf -Os -J fmodules qgraf-3.6.6.f08
+		mv qgraf ~/.local/bin/
+	fi
+	cd $homeDIR
+	rm -rf qgraf_tmp
+	pip3 install --user matchmakereft
+	echo "[installer] MatchMaker has been installed. Run it once (>matchmakereft) to set the path to FeynRules."
+fi
+
 
 
 cd $homeDIR
