@@ -127,10 +127,14 @@ sigmamunu[mu_,nu_,sp_,sp2_]:=Module[{sp1},(I/2)*(Ga[mu,sp,sp1]*Ga[nu,sp1,sp2]-Ga
 
 (* gauge kinetic and mass terms *)
 
-Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+Lkin :=  Block[{mu,aa,bb},
+               I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[bb] ST[bb]
+              ];
 
 (* DM-Scalar-Top coupling *)
-LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
+LYDM := Block[{cc,sp1,sp2},
+            -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc])
+            ];
 
 
 (* EFT operator alphaOuG: G_{\mu\nu} tbar.sigma[\mu,\nu].Ta.t *)
