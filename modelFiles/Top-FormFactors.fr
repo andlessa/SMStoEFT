@@ -28,12 +28,22 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 M$Parameters = {
 
-(* Renormalization parameters (for divergent coefficients) *)
+(* Counter-term parameters *)
+(* (the divergent term has been set to zero) *)
 
-  kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
-  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
-  deltaUV == { TeX->Subscript[\[Delta],UV],  ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Renormalization condition (zero value corresponds to MSbar)"},
+FRCTdeltaZxttL  == { TeX->Subscript[\delta,L],  
+                      ComplexParameter -> False, ParameterType->Internal, 
+                      InteractionOrder->{NP ,2}, 
+                      Value -> 
+                    },
+                      
+FRCTdeltaZxttR  == { TeX->Subscript[\delta,R],  
+                      ComplexParameter -> False, ParameterType->Internal, 
+                      InteractionOrder->{NP ,2}, 
+                      Value -> 
+                    },
 
+  
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
 
@@ -131,11 +141,18 @@ LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
                A3*T[aa,cc1,cc2] uRbar[sp1,3,cc1].uR[sp2,3,cc2]*Ga[mu,sp1,sp2] DC[FS[G,mu,nu,aa],nu]]
              ];
 
-(* Total EFT lagrangian *)
+(* Counter-terms from on-shell renormalization *)
+LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
+       ExpandIndices[
+               gs*G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(FRCTdeltaZxttL*ProjM[sp2,sp3]+FRCTdeltaZxttR*ProjP[sp2,sp3])
+             ]
+            ];
+
+(* Total lagrangian *)
 (* OBS: LA2 and HC[LA2] are equal if one uses integration by parts. *)
 (* However, FeynRules complains about hermiticity if the hermitian conjugate is not added. *)
 (* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
 
-LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;
+LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3 + LCT;
 
 
