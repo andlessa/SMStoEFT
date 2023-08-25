@@ -28,24 +28,75 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 M$Parameters = {
 
-(* Counter-term parameters *)
-(* (the divergent term has been set to zero) *)
-
-FRCTdeltaZxttL  == { TeX->Subscript[\delta,L],  
-                      ComplexParameter -> False, ParameterType->Internal, 
-                      InteractionOrder->{NP ,2}, 
-                      Value -> 
-                    },
-                      
-FRCTdeltaZxttR  == { TeX->Subscript[\delta,R],  
-                      ComplexParameter -> False, ParameterType->Internal, 
-                      InteractionOrder->{NP ,2}, 
-                      Value -> 
-                    },
 
   
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+  mChi == {ParameterType -> External, ComplexParameter -> False, Value -> 100.},
+  mST == {ParameterType -> External,  ComplexParameter -> False, Value -> 400.},
+
+(* Counter-term parameters *)
+(* (the divergent term has been set to zero) *)
+
+xC == { TeX->Subscript[x,C],  
+        ComplexParameter -> False, ParameterType->Internal, 
+        Value -> mChi^2/mST^2
+      },
+
+xT == { TeX->Subscript[x,T],
+        ComplexParameter -> False, ParameterType->Internal, 
+        Value -> MT^2/mST^2
+      },
+
+lA  == { TeX->Subscript[\lambda,A],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> 1 + xC^2 + xT^2 - 2*xC - 2*xT - 2*xT*xC
+         },
+
+lB  == { TeX->Subscript[\lambda,A],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> -lA
+         },
+
+(* On-shell counter-terms (mST > mChi + MT) *)
+deltaCT1L = { TeX->Subscript[\delta,1L],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> (yDM^2*gs/(64*xT^2*Sqrt[la]*Pi^2))*((2*Sqrt[xL]*(xT*(-2 + 2 xC + xT) + (-(-1 + xC)^2 + xT)*Log[xC]) -  4*(-(-1 + xC)^3 + (-2 + xC + xC^2) xT + xT^2)*Log[(1 + xC + Sqrt[xL] - xT)/(2*Sqrt[xC])])),
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
+
+deltaCT1R = { TeX->Subscript[\delta,1R],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> (yDM^2*gs/(64*xT^2*Sqrt[la]*Pi^2))*((-1 + xC - xT)*(Sqrt[xL]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[xL] - xT)/(2*Sqrt[xC])])),
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
+
+(* Off-shell counter-terms (mST < mChi + MT) *)
+deltaCT2L = { TeX->Subscript[\delta,2L],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> (yDM^2*gs/(64*xT^2*Pi^2))*(2*(xT*(-2 + 2*xC + xT) + (1/Sqrt[lB])(lB*(-1 + xC) - (-1 + xC)^3 + 2*(-1 + xC)*xT + (1 + xC) xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]] + (-(-1 + xC)^2 + xT)*Log[xC])),
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
+
+deltaCT2R = { TeX->Subscript[\delta,2R],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> (yDM^2*gs/(64*xT^2*Pi^2))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]])/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC]))),
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
+
+(* Use delta_1 or delta_2 depending on the mass relations *)
+
+deltaCTL = { TeX->Subscript[\delta,L],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> If[mST > mChi + MT, deltaCT1L, deltaCT2L],
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
+
+deltaCTR = { TeX->Subscript[\delta,R],  
+         ComplexParameter -> False, ParameterType->Internal, 
+         Value -> If[mST > mChi + MT, deltaCT1R, deltaCT2R],
+         InteractionOrder->{{NP ,2},{QCD,1}} 
+         },
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)
@@ -144,7 +195,7 @@ LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
 (* Counter-terms from on-shell renormalization *)
 LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
        ExpandIndices[
-               gs*G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(FRCTdeltaZxttL*ProjM[sp2,sp3]+FRCTdeltaZxttR*ProjP[sp2,sp3])
+               G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(deltaCTL*ProjM[sp2,sp3]+deltaCTR*ProjP[sp2,sp3])
              ]
             ];
 
