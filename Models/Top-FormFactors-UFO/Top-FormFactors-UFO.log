@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:26:01
+# Date: Fri 25 Aug 2023 20:27:15
 
 
 # 
@@ -34,7 +34,12 @@
 # Parameter definitions
 #
 
-   * All parameters are ok.
+   * Parameter deltaCT1L has no value. Default value 1 assigned.
+   * Parameter deltaCT1R has no value. Default value 1 assigned.
+   * Parameter deltaCTL has no value. Default value 1 assigned.
+   * Parameter deltaCTR has no value. Default value 1 assigned.
+   * Parameter deltaCT2L is complex, but declared as real. Changing type to complex.
+   * Parameter deltaCT2R is complex, but declared as real. Changing type to complex.
 
 
 # Vertices
@@ -65,7 +70,7 @@
 # Coupling definitions
 #
 
-   * 98 couplings written.
+   * 99 couplings written.
    * couplings.py written.
 #
 # Coupling order definitions
