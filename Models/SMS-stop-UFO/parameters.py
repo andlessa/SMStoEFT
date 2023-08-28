@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 14:44:21
+# Date: Mon 28 Aug 2023 17:12:03
 
 
 
@@ -72,22 +72,6 @@ yDM = Parameter(name = 'yDM',
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
                 lhacode = [ 1 ])
-
-mChi = Parameter(name = 'mChi',
-                 nature = 'external',
-                 type = 'real',
-                 value = 100.,
-                 texname = '\\text{mChi}',
-                 lhablock = 'FRBlock',
-                 lhacode = [ 2 ])
-
-mST = Parameter(name = 'mST',
-                nature = 'external',
-                type = 'real',
-                value = 400.,
-                texname = '\\text{mST}',
-                lhablock = 'FRBlock',
-                lhacode = [ 3 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -235,18 +219,6 @@ ee = Parameter(name = 'ee',
                value = '2*cmath.sqrt(aEW)*cmath.sqrt(cmath.pi)',
                texname = 'e')
 
-lB = Parameter(name = 'lB',
-               nature = 'internal',
-               type = 'real',
-               value = '-lA',
-               texname = 'l_B')
-
-sw2 = Parameter(name = 'sw2',
-                nature = 'internal',
-                type = 'real',
-                value = '1 - MW**2/MZ**2',
-                texname = '\\text{sw2}')
-
 deltaCT1L = Parameter(name = 'deltaCT1L',
                       nature = 'internal',
                       type = 'real',
@@ -259,11 +231,35 @@ deltaCT1R = Parameter(name = 'deltaCT1R',
                       value = '((-1 + xC - xT)*(cmath.sqrt(lA)*(2*xT - (-1 + xC + xT)*cmath.log(xC)) + 2*((-2 + xC)*xC + (-1 + xT)**2)*cmath.log((1 + xC - xT + cmath.sqrt(lA))/(2.*cmath.sqrt(xC)))))/(128.*cmath.pi**4*xT**2*cmath.sqrt(lA))',
                       texname = '\\text{deltaCT1R}')
 
+lB = Parameter(name = 'lB',
+               nature = 'internal',
+               type = 'real',
+               value = '-lA',
+               texname = 'l_B')
+
+sw2 = Parameter(name = 'sw2',
+                nature = 'internal',
+                type = 'real',
+                value = '1 - MW**2/MZ**2',
+                texname = '\\text{sw2}')
+
 cw = Parameter(name = 'cw',
                nature = 'internal',
                type = 'real',
                value = 'cmath.sqrt(1 - sw2)',
                texname = 'c_w')
+
+deltaCT2L = Parameter(name = 'deltaCT2L',
+                      nature = 'internal',
+                      type = 'complex',
+                      value = '(xT*(-2 + 2*xC + xT) + ((lB*(-1 + xC) - (-1 + xC)**3 + 2*(-1 + xC)*xT + (1 + xC)*xT**2)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + (-(-1 + xC)**2 + xT)*cmath.log(xC))/(64.*cmath.pi**4*xT**2)',
+                      texname = '\\text{deltaCT2L}')
+
+deltaCT2R = Parameter(name = 'deltaCT2R',
+                      nature = 'internal',
+                      type = 'complex',
+                      value = '((2*(-(-1 + xC)**3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT**2)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*cmath.log(xC)))/(128.*cmath.pi**4*xT**2)',
+                      texname = '\\text{deltaCT2R}')
 
 sw = Parameter(name = 'sw',
                nature = 'internal',
@@ -271,17 +267,17 @@ sw = Parameter(name = 'sw',
                value = 'cmath.sqrt(sw2)',
                texname = 's_w')
 
-deltaCT2L = Parameter(name = 'deltaCT2L',
-                      nature = 'internal',
-                      type = 'complex',
-                      value = '(xT*(-2 + 2*xC + xT) + ((lB*(-1 + xC) - (-1 + xC)**3 + 2*(-1 + xC)*xT + (1 + xC)*xT**2)*ACOT((1 + xC - xT)/cmath.sqrt(lB)))/cmath.sqrt(lB) + (-(-1 + xC)**2 + xT)*cmath.log(xC))/(64.*cmath.pi**4*xT**2)',
-                      texname = '\\text{deltaCT2L}')
+deltaCTL = Parameter(name = 'deltaCTL',
+                     nature = 'internal',
+                     type = 'real',
+                     value = '( deltaCT1L if mST>mChi + MT else deltaCT2L )',
+                     texname = '\\delta _L')
 
-deltaCT2R = Parameter(name = 'deltaCT2R',
-                      nature = 'internal',
-                      type = 'complex',
-                      value = '((2*(-(-1 + xC)**3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT**2)*ACOT((1 + xC - xT)/cmath.sqrt(lB)))/cmath.sqrt(lB) + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*cmath.log(xC)))/(128.*cmath.pi**4*xT**2)',
-                      texname = '\\text{deltaCT2R}')
+deltaCTR = Parameter(name = 'deltaCTR',
+                     nature = 'internal',
+                     type = 'real',
+                     value = '( deltaCT1R if mST>mChi + MT else deltaCT2R )',
+                     texname = '\\delta _R')
 
 g1 = Parameter(name = 'g1',
                nature = 'internal',
@@ -300,18 +296,6 @@ vev = Parameter(name = 'vev',
                 type = 'real',
                 value = '(2*MW*sw)/ee',
                 texname = '\\text{vev}')
-
-deltaCTL = Parameter(name = 'deltaCTL',
-                     nature = 'internal',
-                     type = 'real',
-                     value = '( deltaCT1L if mST>mChi + MT else deltaCT2L )',
-                     texname = '\\delta _L')
-
-deltaCTR = Parameter(name = 'deltaCTR',
-                     nature = 'internal',
-                     type = 'real',
-                     value = '( deltaCT1R if mST>mChi + MT else deltaCT2R )',
-                     texname = '\\delta _R')
 
 lam = Parameter(name = 'lam',
                 nature = 'internal',

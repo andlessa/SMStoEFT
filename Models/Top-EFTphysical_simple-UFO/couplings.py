@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:06:22
+# Date: Mon 28 Aug 2023 16:57:25
 
 
 from object_library import all_couplings, Coupling
@@ -14,7 +14,7 @@ GC_1 = Coupling(name = 'GC_1',
                 order = {'NP':2,'QCD':1})
 
 GC_2 = Coupling(name = 'GC_2',
-                value = '(-3*B0*complex(0,1))/2.',
+                value = '6*B0*complex(0,1)',
                 order = {'NP':2,'QCD':2})
 
 GC_3 = Coupling(name = 'GC_3',

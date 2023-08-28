@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:06:22
+# Date: Mon 28 Aug 2023 16:57:25
 
 
 
@@ -65,21 +65,13 @@ ymtau = Parameter(name = 'ymtau',
                   lhablock = 'YUKAWA',
                   lhacode = [ 15 ])
 
-kmuR = Parameter(name = 'kmuR',
-                 nature = 'external',
-                 type = 'real',
-                 value = 1.,
-                 texname = '\\kappa _R',
-                 lhablock = 'FRBlock',
-                 lhacode = [ 1 ])
-
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
                 type = 'real',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 2 ])
+                lhacode = [ 1 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -185,12 +177,6 @@ wST = Parameter(name = 'wST',
                 lhablock = 'DECAY',
                 lhacode = [ 5000002 ])
 
-muR = Parameter(name = 'muR',
-                nature = 'internal',
-                type = 'real',
-                value = 'kmuR*mST',
-                texname = '\\mu _R')
-
 aEW = Parameter(name = 'aEW',
                 nature = 'internal',
                 type = 'real',
@@ -224,7 +210,7 @@ A0 = Parameter(name = 'A0',
 B0 = Parameter(name = 'B0',
                nature = 'internal',
                type = 'real',
-               value = '0.000014658736059365999*( -mChi**2/(10.*mST**4) + (4*mChi)/(5.*mST**3) - 11/(5.*mST**2) if 1 - mChi**2/mST**2<0.1 else (11 - (18*mST**2)/mChi**2 + (9*mST**4)/mChi**4 - (2*mST**6)/mChi**6 + 6*cmath.log(mST**2/mChi**2))/(mChi**2*(1 - mST**2/mChi**2)**4) )*G**2*yDM**2',
+               value = '0.000029317472118731998*( mChi**2/(10.*mST**4) - (4*mChi)/(5.*mST**3) + 11/(5.*mST**2) if 1 - mChi**2/mST**2<0.1 else (-11*mChi**6 + 18*mChi**4*mST**2 - 9*mChi**2*mST**4 + 2*mST**6 + 6*mChi**6*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**4 )*G**2*yDM**2',
                texname = 'B_0')
 
 sw2 = Parameter(name = 'sw2',

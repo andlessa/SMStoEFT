@@ -33,8 +33,6 @@ M$Parameters = {
   
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
-  mChi == {ParameterType -> External, ComplexParameter -> False, Value -> 100.},
-  mST == {ParameterType -> External,  ComplexParameter -> False, Value -> 400.},
 
 (* Counter-term parameters *)
 (* (the divergent term has been set to zero) *)
@@ -78,13 +76,13 @@ deltaCT1R == {
 deltaCT2L == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (1/(128*xT^2*Pi^4))*(2*(xT*(-2 + 2*xC + xT) + (1/Sqrt[lB])(lB*(-1 + xC) - (-1 + xC)^3 + 2*(-1 + xC)*xT + (1 + xC) xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]] + (-(-1 + xC)^2 + xT)*Log[xC]))
+              Value -> (1/(128*xT^2*Pi^4))*(2*(xT*(-2 + 2*xC + xT) + (1/Sqrt[lB])(lB*(-1 + xC) - (-1 + xC)^3 + 2*(-1 + xC)*xT + (1 + xC) xT^2)*(-ArcTan[Sqrt[lB]/(1 + xC - xT)]) + (-(-1 + xC)^2 + xT)*Log[xC]))
              },
 
 deltaCT2R == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (1/(128*xT^2*Pi^4))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]])/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC])))
+              Value -> (1/(128*xT^2*Pi^4))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*(-ArcTan[Sqrt[lB]/(1 + xC - xT)]))/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC])))
              },
 
 (* Use delta_1 or delta_2 depending on the mass relations *)
@@ -127,7 +125,7 @@ F[16] == {
          ClassName -> chi, 
          SelfConjugate-> True, 
          QuantumNumbers -> {}, 
-         Mass->{mChi,  100.0},  
+         Mass->{mChi,  100.0},
          Width->{wChi,0.}, 
          ParticleName-> "~chi", 
          PDG->5000012, 

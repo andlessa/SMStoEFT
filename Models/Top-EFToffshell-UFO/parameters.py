@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 12:15:22
+# Date: Mon 28 Aug 2023 16:25:02
 
 
 
@@ -65,21 +65,13 @@ ymtau = Parameter(name = 'ymtau',
                   lhablock = 'YUKAWA',
                   lhacode = [ 15 ])
 
-kmuR = Parameter(name = 'kmuR',
-                 nature = 'external',
-                 type = 'real',
-                 value = 1.,
-                 texname = '\\kappa _R',
-                 lhablock = 'FRBlock',
-                 lhacode = [ 1 ])
-
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
                 type = 'real',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 2 ])
+                lhacode = [ 1 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -184,12 +176,6 @@ wST = Parameter(name = 'wST',
                 texname = '\\text{wST}',
                 lhablock = 'DECAY',
                 lhacode = [ 5000002 ])
-
-muR = Parameter(name = 'muR',
-                nature = 'internal',
-                type = 'real',
-                value = 'kmuR*mST',
-                texname = '\\mu _R')
 
 aEW = Parameter(name = 'aEW',
                 nature = 'internal',

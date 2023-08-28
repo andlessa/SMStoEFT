@@ -29,10 +29,6 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 
 M$Parameters = {
 
-(* Renormalization parameters (for divergent coefficients) *)
-
-  kmuR == { TeX->Subscript[\[Kappa],R],  ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Multiplicative factor for the renormalization scale"},
-  muR == { TeX->Subscript[\[Mu],R],  ComplexParameter -> False, ParameterType->Internal, Value->(mST*kmuR), Description->"Renormalization scale for the regularization of the top-top-gluon loop"},
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
 
@@ -50,6 +46,7 @@ M$Parameters = {
            ComplexParameter -> False, 
            ParameterType->Internal, 
            Value -> (gs^2*yDM^2/(3456.*Pi^2))*If[1-mChi^2/mST^2 < 0.1,mChi^2/(10*mST^4)-4*mChi/(5*mST^3)+11/(5*mST^2),(6*mChi^6*Log[mChi^2/mST^2] - 11*mChi^6 + 18*mST^2*mChi^4 - 9*mST^4*mChi^2 + 2*mST^6)/((mChi^2-mST^2)^4)],
+           InteractionOrder->{{NP,2},{QCD,2}},
            Description->"Auxiliar coupling for computing coefficients"
   }  
   

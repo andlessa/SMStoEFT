@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 15:01:48
+# Date: Mon 28 Aug 2023 18:35:45
 
 
 
@@ -73,29 +73,13 @@ yDM = Parameter(name = 'yDM',
                 lhablock = 'FRBlock',
                 lhacode = [ 1 ])
 
-mChi = Parameter(name = 'mChi',
-                 nature = 'external',
-                 type = 'real',
-                 value = 100.,
-                 texname = '\\text{mChi}',
-                 lhablock = 'FRBlock',
-                 lhacode = [ 2 ])
-
-mST = Parameter(name = 'mST',
-                nature = 'external',
-                type = 'real',
-                value = 400.,
-                texname = '\\text{mST}',
-                lhablock = 'FRBlock',
-                lhacode = [ 3 ])
-
 C00ren = Parameter(name = 'C00ren',
                    nature = 'external',
                    type = 'real',
                    value = 1.,
                    texname = '\\text{Cren}_0',
                    lhablock = 'FRBlock',
-                   lhacode = [ 4 ])
+                   lhacode = [ 2 ])
 
 C1 = Parameter(name = 'C1',
                nature = 'external',
@@ -103,7 +87,7 @@ C1 = Parameter(name = 'C1',
                value = 1.,
                texname = 'C_1',
                lhablock = 'FRBlock',
-               lhacode = [ 5 ])
+               lhacode = [ 3 ])
 
 C11 = Parameter(name = 'C11',
                 nature = 'external',
@@ -111,7 +95,7 @@ C11 = Parameter(name = 'C11',
                 value = 1.,
                 texname = 'C_{11}',
                 lhablock = 'FRBlock',
-                lhacode = [ 6 ])
+                lhacode = [ 4 ])
 
 C12 = Parameter(name = 'C12',
                 nature = 'external',
@@ -119,7 +103,7 @@ C12 = Parameter(name = 'C12',
                 value = 1.,
                 texname = 'C_{12}',
                 lhablock = 'FRBlock',
-                lhacode = [ 7 ])
+                lhacode = [ 5 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -300,13 +284,13 @@ cw = Parameter(name = 'cw',
 deltaCT2L = Parameter(name = 'deltaCT2L',
                       nature = 'internal',
                       type = 'complex',
-                      value = '(xT*(-2 + 2*xC + xT) + ((lB*(-1 + xC) - (-1 + xC)**3 + 2*(-1 + xC)*xT + (1 + xC)*xT**2)*ACOT((1 + xC - xT)/cmath.sqrt(lB)))/cmath.sqrt(lB) + (-(-1 + xC)**2 + xT)*cmath.log(xC))/(64.*cmath.pi**4*xT**2)',
+                      value = '(xT*(-2 + 2*xC + xT) - ((lB*(-1 + xC) - (-1 + xC)**3 + 2*(-1 + xC)*xT + (1 + xC)*xT**2)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + (-(-1 + xC)**2 + xT)*cmath.log(xC))/(64.*cmath.pi**4*xT**2)',
                       texname = '\\text{deltaCT2L}')
 
 deltaCT2R = Parameter(name = 'deltaCT2R',
                       nature = 'internal',
                       type = 'complex',
-                      value = '((2*(-(-1 + xC)**3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT**2)*ACOT((1 + xC - xT)/cmath.sqrt(lB)))/cmath.sqrt(lB) + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*cmath.log(xC)))/(128.*cmath.pi**4*xT**2)',
+                      value = '((-2*(-(-1 + xC)**3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT**2)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*cmath.log(xC)))/(128.*cmath.pi**4*xT**2)',
                       texname = '\\text{deltaCT2R}')
 
 sw = Parameter(name = 'sw',
