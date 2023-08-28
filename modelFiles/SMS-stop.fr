@@ -60,14 +60,14 @@ lB  == { TeX->Subscript[l,B],
 deltaCT1L == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Sqrt[lA]*Pi^2))*((2*Sqrt[lA]*(xT*(-2 + 2 xC + xT) + (-(-1 + xC)^2 + xT)*Log[xC]) -  4*(-(-1 + xC)^3 + (-2 + xC + xC^2) xT + xT^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
+              Value -> (1/(128*xT^2*Sqrt[lA]*Pi^4))*((2*Sqrt[lA]*(xT*(-2 + 2 xC + xT) + (-(-1 + xC)^2 + xT)*Log[xC]) -  4*(-(-1 + xC)^3 + (-2 + xC + xC^2) xT + xT^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
               InteractionOrder->{{NP ,2},{QCD,1}} 
          },
 
 deltaCT1R == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Sqrt[lA]*Pi^2))*((-1 + xC - xT)*(Sqrt[lA]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
+              Value -> (1/(128*xT^2*Sqrt[lA]*Pi^4))*((-1 + xC - xT)*(Sqrt[lA]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
               InteractionOrder->{{NP ,2},{QCD,1}} 
          },
 
@@ -75,14 +75,14 @@ deltaCT1R == {
 deltaCT2L == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Pi^2))*(2*(xT*(-2 + 2*xC + xT) + (1/Sqrt[lB])(lB*(-1 + xC) - (-1 + xC)^3 + 2*(-1 + xC)*xT + (1 + xC) xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]] + (-(-1 + xC)^2 + xT)*Log[xC])),
+              Value -> (1/(128*xT^2*Pi^4))*(2*(xT*(-2 + 2*xC + xT) + (1/Sqrt[lB])(lB*(-1 + xC) - (-1 + xC)^3 + 2*(-1 + xC)*xT + (1 + xC) xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]] + (-(-1 + xC)^2 + xT)*Log[xC])),
               InteractionOrder->{{NP ,2},{QCD,1}} 
              },
 
 deltaCT2R == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Pi^2))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]])/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC]))),
+              Value -> (1/(128*xT^2*Pi^4))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*ArcCot[(1 + xC - xT)/Sqrt[lB]])/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC]))),
               InteractionOrder->{{NP ,2},{QCD,1}} 
              },
 
@@ -155,7 +155,7 @@ LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 (* Counter-terms from on-shell renormalization *)
 LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
        ExpandIndices[
-               G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(deltaCTL*ProjM[sp2,sp3]+deltaCTR*ProjP[sp2,sp3])
+               2*yDM^2*gs*Pi^2*G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(deltaCTL*ProjM[sp2,sp3]+deltaCTR*ProjP[sp2,sp3])
              ]
             ];
 

@@ -278,7 +278,7 @@ end function
 ! ------------------------------------------------------------
 ! Define the form factors in terms of the loop functions:
 ! ------------------------------------------------------------
-double complex function formFactorC00eff(s)
+double complex function formFactorC00ren(s)
 
     use collier
 
@@ -287,8 +287,8 @@ double complex function formFactorC00eff(s)
     double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
     integer rank
     double complex mt2,mst2,mchi2
-    double precision c00effvalue,deltaUV,muR2
-    double complex C00,C1,C11,C12,ScalarC00eff
+    double precision c00renvalue,deltaUV,muR2
+    double complex C00,C1,C11,C12,ScalarC00ren,deltaCTR
     double complex loopIntegralC00,loopIntegralC1,loopIntegralC11,loopIntegralC12
     double complex, allocatable :: Ccoeff(:,:,:),Ccoeffuv(:,:,:)
     include 'input.inc' ! include all external model parameter
@@ -299,24 +299,25 @@ double complex function formFactorC00eff(s)
     mt2 = MDL_MT**2
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
-    c00effvalue = MDL_C00EFF ! Numerical value for C00eff, which should be replaced by the form factor
+    c00renvalue = MDL_C00REN ! Numerical value for C00ren, which should be replaced by the form factor
  
-    if (c00effvalue == 0d0) then
-        formFactorC00eff = 0.0 ! If the default C00eff value is zero, do nothing (it can be used to turn off this term) 
+    if (c00renvalue == 0d0) then
+        formFactorC00ren = 0.0 ! If the default C00ren value is zero, do nothing (it can be used to turn off this term) 
     else
         C00 = loopIntegralC00(s,mt2,mchi2,mst2,muR2,deltaUV)
         C1 = loopIntegralC1(s,mt2,mchi2,mst2,muR2,deltaUV)
         C11 = loopIntegralC11(s,mt2,mchi2,mst2,muR2,deltaUV)
         C12 = loopIntegralC12(s,mt2,mchi2,mst2,muR2,deltaUV)
+        deltaCTR = MLD_DELTACTR
         
 
 
-        ! Compute effective C00 value:
-        ! Note that:  C_{00} - MT^2 (C_{1} + C_{11} + C_{12}) + (s/2)*(C_{11} - C_{12})
-        ScalarC00eff = C00 - mt2*(C1 + C11 + C12) + (s/2)*(C11 - C12)
+        ! Compute renormalizable and effective C00 value:
+        ! Note that:  C_{00} - MT^2 (C_{1} + C_{11} + C_{12}) + (s/2)*(C_{11} - C_{12}) + deltaCTR
+        ScalarC00ren = C00 - mt2*(C1 + C11 + C12) + (s/2)*(C11 - C12) + deltaCTR
                 
         ! New value to be used to replace the default value:
-        formFactorC00eff = ScalarC00eff/c00effvalue
+        formFactorC00ren = ScalarC00ren/c00renvalue
     end if 
 
     return 

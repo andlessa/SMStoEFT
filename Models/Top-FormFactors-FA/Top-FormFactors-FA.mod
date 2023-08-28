@@ -9,7 +9,7 @@ FR$ModelInformation={
   ModelName->"Top-FormFactors",
   Authors -> {"Andre Lessa"},
   Version -> "1.0",
-  Date -> "16.07.2023"};
+  Date -> "28.08.2023"};
 
 FR$ClassesTranslation={A -> V[1], Z -> V[2], W -> V[3], G -> V[4], ghA -> U[1], ghZ -> U[2], ghWp -> U[3], ghWm -> U[4], ghG -> U[5], ve -> F[1], vm -> F[2], vt -> F[3], e -> F[4], mu -> F[5], ta -> F[6], u -> F[7], c -> F[8], t -> F[9], d -> F[10], s -> F[11], b -> F[12], H -> S[1], G0 -> S[2], GP -> S[3], chi -> F[13], ST -> S[4]};
 
@@ -638,14 +638,14 @@ M$FACouplings = {
      gc72 -> -(cw*EL)/(2*sw) + (EL*sw)/(2*cw),
      gc79 -> (cw*EL^2)/sw,
      gc84 -> -((cw^2*EL^2)/sw^2),
-     gc85L -> deltaCTL + GS,
-     gc85R -> deltaCTR + GS + 2*C00eff*GS*Pi^2*yDM^2,
+     gc85L -> GS + 2*deltaCTL*GS*Pi^2*yDM^2,
+     gc85R -> GS + 2*C00ren*GS*Pi^2*yDM^2,
      gc86 -> -EL,
      gc87 -> -EL,
      gc88 -> -EL,
      gc89 -> (2*EL)/3,
      gc90L -> (2*EL)/3,
-     gc90R -> (2*(EL + 2*C00eff*EL*Pi^2*yDM^2))/3,
+     gc90R -> (2*(EL + 2*C00ren*EL*Pi^2*yDM^2))/3,
      gc91 -> (2*EL)/3,
      gc92 -> -EL/3,
      gc93 -> -EL/3,
@@ -670,7 +670,7 @@ M$FACouplings = {
      gc112L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
      gc112R -> (-2*EL*sw)/(3*cw),
      gc113L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
-     gc113R -> (-2*EL*sw*(1 + 2*C00eff*Pi^2*yDM^2))/(3*cw),
+     gc113R -> (-2*EL*sw*(1 + 2*C00ren*Pi^2*yDM^2))/(3*cw),
      gc114L -> (cw*EL)/(2*sw) - (EL*sw)/(6*cw),
      gc114R -> (-2*EL*sw)/(3*cw),
      gc115L -> -(EL*(3*cw^2 + sw^2))/(6*cw*sw),
