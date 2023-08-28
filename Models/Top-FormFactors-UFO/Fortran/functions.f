@@ -297,8 +297,8 @@ double complex function formFactorC00eff(s)
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
     mt2 = MDL_MT**2
-    muR2 = MDL_MUR**2
-    deltaUV = MDL_DELTAUV  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c00effvalue = MDL_C00EFF ! Numerical value for C00eff, which should be replaced by the form factor
  
     if (c00effvalue == 0d0) then
@@ -340,8 +340,8 @@ double complex function formFactorC1(s)
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
     mt2 = MDL_MT**2
-    muR2 = MDL_MUR**2
-    deltaUV = MDL_DELTAUV  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
 
     if (c1value == 0.0) then
@@ -374,8 +374,8 @@ double complex function formFactorC11(s)
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
     mt2 = MDL_MT**2
-    muR2 = MDL_MUR**2
-    deltaUV = MDL_DELTAUV  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the loop integral
 
     if (c11value == 0.0) then
@@ -408,8 +408,8 @@ double complex function formFactorC12(s)
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
     mt2 = MDL_MT**2
-    muR2 = MDL_MUR**2   
-    deltaUV = MDL_DELTAUV  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c12value = MDL_C12 ! Numerical value for C12, which should be replaced by the loop integral
 
     if (c12value == 0.0) then
