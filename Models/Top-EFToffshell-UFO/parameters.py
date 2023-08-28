@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:02:33
+# Date: Mon 28 Aug 2023 12:15:22
 
 
 
@@ -203,11 +203,11 @@ G = Parameter(name = 'G',
               value = '2*cmath.sqrt(aS)*cmath.sqrt(cmath.pi)',
               texname = 'G')
 
-A2 = Parameter(name = 'A2',
+B0 = Parameter(name = 'B0',
                nature = 'internal',
                type = 'real',
-               value = '(0.0010554289962743518*mChi**4*mST**2*yDM**2*(-3 - (2*mChi**2)/mST**2 + (6*mST**2)/mChi**2 - mST**4/mChi**4 - 6*cmath.log(mST**2/mChi**2)))/(mChi**2 - mST**2)**4',
-               texname = 'A_2')
+               value = '0.000029317472118731998*( mChi**2/(10.*mST**4) - (4*mChi)/(5.*mST**3) + 11/(5.*mST**2) if 1 - mChi**2/mST**2<0.1 else (-11*mChi**6 + 18*mChi**4*mST**2 - 9*mChi**2*mST**4 + 2*mST**6 + 6*mChi**6*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**4 )*G**2*yDM**2',
+               texname = 'B_0')
 
 MW = Parameter(name = 'MW',
                nature = 'internal',
@@ -221,17 +221,11 @@ ee = Parameter(name = 'ee',
                value = '2*cmath.sqrt(aEW)*cmath.sqrt(cmath.pi)',
                texname = 'e')
 
-A1 = Parameter(name = 'A1',
+A0 = Parameter(name = 'A0',
                nature = 'internal',
                type = 'real',
-               value = '0.0031662869888230555*yDM**2*((-3*mChi**2 + mST**2)/(2.*(-mChi**2 + mST**2)) + (mChi**4*cmath.log(mST**2/mChi**2))/(mChi**2 - mST**2)**2 + cmath.log(muR**2/mST**2))',
-               texname = 'A_1')
-
-A3 = Parameter(name = 'A3',
-               nature = 'internal',
-               type = 'real',
-               value = '(0.00017590483271239196*G*mChi**6*yDM**2*(-11 + (18*mST**2)/mChi**2 - (9*mST**4)/mChi**4 + (2*mST**6)/mChi**6 - 6*cmath.log(mST**2/mChi**2)))/(mChi**2 - mST**2)**4',
-               texname = 'A_3')
+               value = '-0.00026385724906858796*( mChi**2/(5.*mST**4) - (4*mChi)/(5.*mST**3) + 11/(10.*mST**2) if 1 - mChi**2/mST**2<0.1 else (mST**6/mChi**6 + 2*(1 - (3*mST**4)/mChi**4) + (3*mST**2*(1 + 4*cmath.log(mST/mChi)))/mChi**2)/(mChi**2*(1 - mST**2/mChi**2)**4) )*G*MT*yDM**2',
+               texname = 'A_0')
 
 sw2 = Parameter(name = 'sw2',
                 nature = 'internal',

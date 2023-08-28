@@ -1,10 +1,10 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:01:03
+# Date: Mon 28 Aug 2023 12:15:06
 
 
 # 
-# This is the logfile for the model Top-EFToffshell
+# This is the logfile for the model Top-EFTphysical_simple
 
 # Authors: Andre Lessa
 # Model version: 1.0
@@ -34,13 +34,14 @@
 # Parameter definitions
 #
 
-   * All parameters are ok.
+   * Parameter B0 has no value. Default value 1 assigned.
+   * Parameter A0 has no value. Default value 1 assigned.
 
 
 # Vertices
    * Calling FeynmanRules for 1 Lagrangians.
-   * Number of classes vertices: 116
-   * Number of flavored vertices: 139
+   * Number of classes vertices: 105
+   * Number of flavored vertices: 130
    * Saved vertices in InterfaceRun[ 1 ].
    * Checked QNumber conservation.
       - Quantum number GhostNumber conserved in all vertices.
@@ -53,19 +54,19 @@
 # Vertex definitions
 #
 
-   * 139 vertices written.
+   * 130 vertices written.
    * vertices.py written.
 #
 # Lorentz structure definitions
 #
 
-   * 37 lorentz structures written.
+   * 27 lorentz structures written.
    * lorentz.py written.
 #
 # Coupling definitions
 #
 
-   * 96 couplings written.
+   * 73 couplings written.
    * couplings.py written.
 #
 # Coupling order definitions

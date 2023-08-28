@@ -17,7 +17,7 @@ M$ModelName = "Top-EFTphysical_simple";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "11.07.2023"};
+                 Date -> "28.08.2023"};
 
 FeynmanGauge = True;
 
@@ -124,11 +124,11 @@ LA0 := Block[{lag,mu,nu,sp1,sp2,aa,cc1,cc2},
 
 (* EFT operator QLQL-tRtR + dRdR-tRtR + uRuR-tRtR  *)
 (* Four-quark *)
-LB0 := Block[{sp1,sp2,sp3,sp4,cc1,cc2,mu,lagh},
+LB0 := Block[{aa,sp1,sp2,sp3,sp4,ff1,ff2,cc1,cc2,cc3,cc4,mu,lagh},
        lagh=ExpandIndices[
-                          B0*(
-                              3*(uRbar[sp1,3,cc1].uR[sp2,3,cc2])*(uqbar[sp3,1,cc2].uq[sp4,1,cc1])
-                              - (uRbar[sp1,3,cc1].uR[sp2,3,cc1])*(uqbar[sp3,1,cc2].uq[sp4,1,cc2])
+                          6*T[aa,cc2,cc1]*T[aa,cc3,cc4]*B0*(
+                            uRbar[sp1,3,cc2].uR[sp2,3,cc1]*uqbar[sp3,ff1,cc3].uq[sp4,ff1,cc4]
+                          + uRbar[sp1,3,cc2].uR[sp2,3,cc1]*dqbar[sp3,ff2,cc3].dq[sp4,ff2,cc4]
                             )*Ga[mu,sp1,sp2]*Ga[mu,sp3,sp4]
                           ]       
 ];

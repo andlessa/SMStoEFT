@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:39:25
+# Date: Mon 28 Aug 2023 11:48:28
 
 
 from object_library import all_decays, Decay

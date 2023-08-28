@@ -14,7 +14,7 @@ M$ModelName = "SMS-stop";
 
 M$Information = {Authors -> {"Andre Lessa"}, 
                  Version -> "1.0",
-                 Date -> "18.03.2023"};
+                 Date -> "28.08.2023"};
 
 FeynmanGauge = True;
 
@@ -60,14 +60,14 @@ lB  == { TeX->Subscript[l,B],
 deltaCT1L == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Sqrt[la]*Pi^2))*((2*Sqrt[xL]*(xT*(-2 + 2 xC + xT) + (-(-1 + xC)^2 + xT)*Log[xC]) -  4*(-(-1 + xC)^3 + (-2 + xC + xC^2) xT + xT^2)*Log[(1 + xC + Sqrt[xL] - xT)/(2*Sqrt[xC])])),
+              Value -> (yDM^2*gs/(64*xT^2*Sqrt[lA]*Pi^2))*((2*Sqrt[lA]*(xT*(-2 + 2 xC + xT) + (-(-1 + xC)^2 + xT)*Log[xC]) -  4*(-(-1 + xC)^3 + (-2 + xC + xC^2) xT + xT^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
               InteractionOrder->{{NP ,2},{QCD,1}} 
          },
 
 deltaCT1R == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (yDM^2*gs/(64*xT^2*Sqrt[la]*Pi^2))*((-1 + xC - xT)*(Sqrt[xL]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[xL] - xT)/(2*Sqrt[xC])])),
+              Value -> (yDM^2*gs/(64*xT^2*Sqrt[lA]*Pi^2))*((-1 + xC - xT)*(Sqrt[lA]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])])),
               InteractionOrder->{{NP ,2},{QCD,1}} 
          },
 

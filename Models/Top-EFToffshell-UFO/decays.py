@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 15 Aug 2023 17:02:33
+# Date: Mon 28 Aug 2023 12:15:22
 
 
 from object_library import all_decays, Decay
@@ -55,7 +55,7 @@ Decay_Z = Decay(name = 'Decay_Z',
                                   (P.mu__minus__,P.mu__plus__):'(MZ**2*(-(ee**2*MZ**2) + (cw**2*ee**2*MZ**2)/(2.*sw**2) + (5*ee**2*MZ**2*sw**2)/(2.*cw**2)))/(48.*cmath.pi*abs(MZ)**3)',
                                   (P.s,P.s__tilde__):'(MZ**2*(ee**2*MZ**2 + (3*cw**2*ee**2*MZ**2)/(2.*sw**2) + (5*ee**2*MZ**2*sw**2)/(6.*cw**2)))/(48.*cmath.pi*abs(MZ)**3)',
                                   (P.ta__minus__,P.ta__plus__):'((-5*ee**2*MTA**2 - ee**2*MZ**2 - (cw**2*ee**2*MTA**2)/(2.*sw**2) + (cw**2*ee**2*MZ**2)/(2.*sw**2) + (7*ee**2*MTA**2*sw**2)/(2.*cw**2) + (5*ee**2*MZ**2*sw**2)/(2.*cw**2))*cmath.sqrt(-4*MTA**2*MZ**2 + MZ**4))/(48.*cmath.pi*abs(MZ)**3)',
-                                  (P.t,P.t__tilde__):'((-11*ee**2*MT**2 - 12*A1*ee**2*MT**2 + 20*A2*ee**2*MT**4 - ee**2*MZ**2 + 10*A2*ee**2*MT**2*MZ**2 - (3*cw**2*ee**2*MT**2)/(2.*sw**2) + (3*cw**2*ee**2*MZ**2)/(2.*sw**2) + (7*ee**2*MT**2*sw**2)/(6.*cw**2) - (4*A1*ee**2*MT**2*sw**2)/(3.*cw**2) - (8*A1**2*ee**2*MT**2*sw**2)/(3.*cw**2) - (12*A2*ee**2*MT**4*sw**2)/cw**2 - (16*A1*A2*ee**2*MT**4*sw**2)/(3.*cw**2) + (56*A2**2*ee**2*MT**6*sw**2)/(3.*cw**2) + (17*ee**2*MZ**2*sw**2)/(6.*cw**2) + (16*A1*ee**2*MZ**2*sw**2)/(3.*cw**2) + (8*A1**2*ee**2*MZ**2*sw**2)/(3.*cw**2) - (2*A2*ee**2*MT**2*MZ**2*sw**2)/(3.*cw**2) + (8*A1*A2*ee**2*MT**2*MZ**2*sw**2)/(3.*cw**2) - (16*A2*ee**2*MZ**4*sw**2)/(3.*cw**2) - (16*A1*A2*ee**2*MZ**4*sw**2)/(3.*cw**2) + (2*A2**2*ee**2*MT**2*MZ**4*sw**2)/(3.*cw**2) + (8*A2**2*ee**2*MZ**6*sw**2)/(3.*cw**2))*cmath.sqrt(-4*MT**2*MZ**2 + MZ**4))/(48.*cmath.pi*abs(MZ)**3)',
+                                  (P.t,P.t__tilde__):'((-11*ee**2*MT**2 - ee**2*MZ**2 - (3*cw**2*ee**2*MT**2)/(2.*sw**2) + (3*cw**2*ee**2*MZ**2)/(2.*sw**2) + (7*ee**2*MT**2*sw**2)/(6.*cw**2) + (17*ee**2*MZ**2*sw**2)/(6.*cw**2))*cmath.sqrt(-4*MT**2*MZ**2 + MZ**4))/(48.*cmath.pi*abs(MZ)**3)',
                                   (P.u,P.u__tilde__):'(MZ**2*(-(ee**2*MZ**2) + (3*cw**2*ee**2*MZ**2)/(2.*sw**2) + (17*ee**2*MZ**2*sw**2)/(6.*cw**2)))/(48.*cmath.pi*abs(MZ)**3)',
                                   (P.ve,P.ve__tilde__):'(MZ**2*(ee**2*MZ**2 + (cw**2*ee**2*MZ**2)/(2.*sw**2) + (ee**2*MZ**2*sw**2)/(2.*cw**2)))/(48.*cmath.pi*abs(MZ)**3)',
                                   (P.vm,P.vm__tilde__):'(MZ**2*(ee**2*MZ**2 + (cw**2*ee**2*MZ**2)/(2.*sw**2) + (ee**2*MZ**2*sw**2)/(2.*cw**2)))/(48.*cmath.pi*abs(MZ)**3)',

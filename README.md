@@ -109,8 +109,9 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
      * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb) : loads the UV simplified model
      * [SMS-stopNLO](./mathematicaNBs/loadModels/SMS-stopNLO.nb): loads the UV simplified model with QCD counter-terms (used for the loop induced DM production)
      * [Top-FormFactors](./mathematicaNBs/loadModels/Top-FormFactors.nb): loads the EFT on-shell model
-     * [Top-EFTonshell](./mathematicaNBs/loadModels/Top-EFTonshell.nb): loads the EFT on-shell model
-     * [Top-EFToffshell](./mathematicaNBs/loadModels/Top-EFToffshell.nb): loads the EFT off-shell model
+     * [Top-EFTphysical](./mathematicaNBs/loadModels/Top-EFTphysical.nb): loads the EFT model from MatchMaker in the physical (on-shell) basis
+     * [Top-EFTphysical_simple](./mathematicaNBs/loadModels/Top-EFTphysical_simple.nb): loads the EFT model in the physical basis after several simplifications
+     * [Top-EFToffshell](./mathematicaNBs/loadModels/Top-EFToffshell.nb): loads the EFT model in the off-shell model
    ***
    * [amplitudes](./mathematicaNBs/oneLoop): notebooks for computing the amplitudes both at 1-loop (UV models) or "tree level" (EFT models)
         * [TopEFTonshell-effectiveCouplings](./mathematicaNBs/amplitudes/TopEFTonshell-effectiveCouplings.nb): computes the amplitudes for qq > ttbar using the on-shell EFT model
@@ -118,9 +119,9 @@ The coefficient $A_0$ is defined as a function of the heavy BSM masses ($m_T,m_{
         * [diagrams-SMEFT-stop](./mathematicaNBs/amplitudes/diagrams-SMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
         * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
     ***
-    * [matching](./mathematicaNBs/matching): notebooks for computing the matching between the UV and EFT models.
-         * [SMS-stop-ttG-loop](./mathematicaNBs/matching/SMS-stop-ttG-loop.nb): calculation of the full 1-loop effective coupling (gluon-top-top) form factors using the UV model
-         * [TopEFT-ttG](./mathematicaNBs/matching/TopEFT-ttG.nb): calculation of the tree level effective coupling (gluon-top-top) using the  model
+    * [matching](./mathematicaNBs/matching): notebooks for computing and checking the matching between the UV and EFT models.
+         * [SMS-stop-uutt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (u+u to top+top) form factors using the UV model as well as the EFT limit
+         * [Top-EFTphysical_simple-uutt-EFT](./mathematicaNBs/matching/Top-EFTphysical_simple-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation
          * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
          * [matchMakerReader](./mathematicaNBs/matching/matchMakerReader.nb): reads the MatchMaker output
          * [numericalLoops](): compute numerical values for the loop integrals (for debugging) as well as the high mass limit
