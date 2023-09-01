@@ -1,296 +1,77 @@
 
 
+
 ! ------------------------------------------------------------
-! Define the relevant loop integrals:
+! Directly uses COLLIER to compute all needed integrals
 ! ------------------------------------------------------------
-double complex function loopIntegralC00(s,mt2,mchi2,mst2,muR2,deltaUV)
+!
+!               p21               
+!                |                
+!                |                
+!               / \               
+!              /   \              
+!       m12   /1   2\   m22       
+!            /       \            
+!           /    0    \           
+! p10  ---------------------  p20 
+!               m02               
+!
+! m02,m12,m22 -> masses squared
+! p10 = p1^2, p20 = p2^2, p21 = p3^3 = s 
+
+subroutine getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+
+    ! Return the 3-point integrals. Note that the normalization includes the 1/(2*pi)^4 factor!
 
     use collier
 
     implicit none
 
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
-    double complex mchi2,mst2,mt2
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq 
+    double complex mchi2,mst2
     double precision muR2,deltaUV
-    double complex a,b,c,d,e,f
-    double complex xS,xT,xC,C0a,ScalarC00,lamb
+    double complex Ccoeff(0:1,0:3,0:3),Ccoeffuv(0:1,0:3,0:3)
+    double precision Cerr(0:3)
+    integer N,rank
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
 
-    ! Make sure masses and S are real 
-    ! (divide by mST to deal with dimensionless quantities)
-    xS = DCMPLX(real(s)/real(mst2),0d0)
-    xT = DCMPLX(real(mt2)/real(mst2),0d0)
-    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
+    N = 3 ! Maximum number for loop (3-point function)
+    rank = 3 ! Maximum rank for loop (=N)
 
-    ! Make sure the tops can be on-shell:
-    if (real(xS) < 4*real(xT)) then
-        loopIntegralC00 = 0.0
-        return
-    end if
-
-    call Init_cll(4,0,'',.true.)
-    call InitCacheSystem_cll(1,4)
+    call Init_cll(N,rank,'',.true.)
+    call InitCacheSystem_cll(1,N)
     call InitEvent_cll     
     call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
     call SetMuUV2_cll(muR2) ! Set the renormalization scale
-
-    ! open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    ! WRITE(10,*) 'INPUT-C00 = ',mt2,mchi2,mst2,s
-
-    ! Compute the scalar loop integrals:
-    call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
-
-    ! WRITE(10,*) 'C0a (coll) = ',C0a
     
-    ! Square-root of Kallen function:
-    lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
-    ! Multiply by mst2 to make the coefficient dimensionless
-    C0a = C0a*mst2
-    ! Compute the C00 integral (expression obtained with Package-X)
-    ! (Note that the integral is divergent and the renormalization scheme is MSbar, 
-    ! so,following the Collier definitions we set deltaUV =  (1/epsilon +log(4*pi) - gamma_E) = 0
-    ! in the expression below. This should be consistent with the C0 result using SetDeltaUV_cll(0d0))
-    ScalarC00 = deltaUV
-    ScalarC00 = ScalarC00 + 2*(xC**2 + xC*(xS-2*(xT+1)) + (xT-1)**2)*C0a/(xS-4*xT)
-    ScalarC00 = ScalarC00 + CDLOG(muR2/mst2)
-    ScalarC00 = ScalarC00 + lamb*(xC+xT-1)*(CDLOG(4*xC) - 2*CDLOG(lamb + xC - xT + 1))/(xT*(xS-4*xT))
-    ScalarC00 = ScalarC00 + ((xC+xT-1)**2)*CDLOG(xC)/(xT*(xS-4*xT))
-    ScalarC00 = ScalarC00 + CDSQRT(xS*(xS-4))*CDLOG((2-xS + CDSQRT(xS*(xS-4)))/2)*(2*xC+xS-2*(xT+1))/(xS*(xS-4*xT))
-    ScalarC00 = ScalarC00 + 3d0
-    ScalarC00 = ScalarC00/(64*pi**4)
-
-    ! Loop integral value:
-    loopIntegralC00 = ScalarC00
+    call C_cll(Ccoeff,Ccoeffuv,p1sq,s,p2sq,mchi2,mst2,mst2,rank,Cerr)    
     
-    ! write(10,*) 'ScalarC00 = ',ScalarC00
-    ! write(10,*) 'Returning = ',loopIntegralC00
-    ! write(10,*)
-    ! write(10,*)
-    ! write(10,*)
-    ! close(10) 
-
-    return
-
-end function
-
-
-double complex function loopIntegralC1(s,mt2,mchi2,mst2,muR2,deltaUV)
-
-    use collier
-
-    implicit none
-
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
-    double complex mchi2,mst2,mt2
-    double precision muR2,deltaUV
-    double complex xS,xT,xC,C0a,ScalarC1,lamb
-    double precision Pi
-    parameter  (Pi=3.141592653589793D0)
-
-    ! Make sure masses and S are real 
-    ! (divide by mST to deal with dimensionless quantities)
-    xS = DCMPLX(real(s)/real(mst2),0d0)
-    xT = DCMPLX(real(mt2)/real(mst2),0d0)
-    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
-
-    ! Make sure the tops can be on-shell:
-    if (real(xS) < 4*real(xT)) then
-        loopIntegralC1 = 0.0
-        return
-    end if
-     
-    call Init_cll(4,0,'',.true.)
-    call InitCacheSystem_cll(1,4)
-    call InitEvent_cll     
-    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
-    call SetMuUV2_cll(muR2) ! Set the renormalization scale
-
-    ! open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    ! WRITE(10,*) 'INPUT-C1 = ',mt2,mchi2,mst2,s
-
-    ! Compute the scalar loop integrals:
-    call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
-
-    ! WRITE(10,*) 'C0a (coll) = ',C0a
+    Ccoeff = Ccoeff/((2*Pi)**4)
     
-    ! Square-root of Kallen function:
-    lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
-    ! Multiply by mst2 to make the coefficient dimensionless
-    C0a = C0a*mst2
-    ! Compute the C12 integral (expression obtained with Package-X)
-    ScalarC1 = 2*xS*xT*(xC+xT-1)*C0a
-    ScalarC1 = ScalarC1 + xS*lamb*(CDLOG(4*xC) - 2*CDLOG(lamb+xC-xT+1))
-    ScalarC1 = ScalarC1 + xS*(xC+xT-1)*CDLOG(xC)
-    ScalarC1 = ScalarC1 + 2*xT*CDSQRT(xS*(xS-4))*CDLOG((CDSQRT(xS*(xS-4)) + 2 - xS)/2)
-    ScalarC1 = ScalarC1/(32*Pi**4*mst2*xS*xT*(xS-4*xT))
-
-    ! Loop integral value:
-    loopIntegralC1 = ScalarC1
-
-    
-    ! write(10,*) 'ScalarC1 = ',ScalarC1
-    ! write(10,*) 'Returning = ',loopIntegralC1
-    ! write(10,*)
-    ! write(10,*)
-    ! write(10,*)
-    ! close(10)
-
-    return 
-
-end function
-
-double complex function loopIntegralC11(s,mt2,mchi2,mst2,muR2,deltaUV)
-
-    use collier
-
-    implicit none
-
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
-    double complex mchi2,mst2,mt2
-    double precision muR2,deltaUV
-    double complex xS,xT,xC,C0a,ScalarC11,lamb
-    double precision Pi
-    parameter  (Pi=3.141592653589793D0)
-
-    ! Make sure masses and S are real 
-    ! (divide by mST to deal with dimensionless quantities)
-    xS = DCMPLX(real(s)/real(mst2),0d0)
-    xT = DCMPLX(real(mt2)/real(mst2),0d0)
-    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
-
-    ! Make sure the tops can be on-shell:
-    if (real(xS) < 4*real(xT)) then
-        loopIntegralC11 = 0.0
-        return
-    end if
-
-    call Init_cll(4,0,'',.true.)
-    call InitCacheSystem_cll(1,4)
-    call InitEvent_cll     
-    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
-    call SetMuUV2_cll(muR2) ! Set the renormalization scale
-
-    ! open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    ! WRITE(10,*) 'INPUT-C11 = ',mt2,mchi2,mst2,s
-
-    ! Compute the scalar loop integrals:
-    call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
-
-    ! WRITE(10,*) 'C0a (coll) = ',C0a
-
-    ! Square-root of Kallen function:
-    lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
-    ! Multiply by mst2 to make the coefficient dimensionless
-    C0a = C0a*mst2
-    ! Compute the C12 integral (expression obtained with Package-X)
-    ScalarC11 = 4*xS*C0a*xT**2*(xS*(xC**2 + xC*(4*xT-2) + (xT-1)**2) + 2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2))
-    ScalarC11 = ScalarC11 - xS*CDLOG(xC)*(-4*xS*xT*(2*xC**2 + xC*(xT-4) + 2*(xT-1)**2) + 4*xT**2*(xC**2 - 2*xC*(xT+1) + (xT-1)**2) + xS**2*(xC*(xC-2) + (xT-1)**2))
-    ScalarC11 = ScalarC11 + 2*xS*(xC+xT-1)*lamb*(xS**2-8*xS*xT + 4*xT**2)*CDLOG((1+xC-xT + lamb)/(2*CDSQRT(xC)))
-    ScalarC11 = ScalarC11 - 2*CDSQRT(xS*(xS-4))*xT**2*CDLOG((2-xS + CDSQRT(xS*(xS-4)))/2)*(-2*xS*(xC+4*xT-1) + 4*xT*(1+xT-xC) +xS**2)
-    ScalarC11 = ScalarC11 + 2*xS*xT*(xS-4*xT)*(xS*(xC-1) + 2*xT*(1+xT-xC))
-    ScalarC11 = ScalarC11/(64*Pi**4*mst2*xS**2*xT**2*(xS-4*xT)**2)
-
-    ! Loop integral value:
-    loopIntegralC11 = ScalarC11
-    
-    ! write(10,*) 'ScalarC11 = ',ScalarC11
-    ! write(10,*) 'Returning = ',loopIntegralC11
-    ! write(10,*)
-    ! write(10,*)
-    ! write(10,*)
-    ! close(10)
-
-    return 
-
-end function
-
-double complex function loopIntegralC12(s,mt2,mchi2,mst2,muR2,deltaUV)
-
-    use collier
-
-    implicit none
-
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
-    double complex mchi2,mst2,mt2
-    double precision muR2,deltaUV
-    double complex xS,xT,xC,C0a,ScalarC12,lamb
-    double precision Pi
-    parameter  (Pi=3.141592653589793D0)
-    include 'input.inc' ! include all external model parameter
-
-    
-    ! Make sure masses and S are real 
-    ! (divide by mST to deal with dimensionless quantities)
-    xS = DCMPLX(real(s)/real(mst2),0d0)
-    xT = DCMPLX(real(mt2)/real(mst2),0d0)
-    xC = DCMPLX(real(mchi2)/real(mst2),0d0)
-
-    ! Make sure the tops can be on-shell:
-    if (real(xS) < 4*real(xT)) then
-        loopIntegralC12 = 0.0
-        return
-    end if
-
-    call Init_cll(4,0,'',.true.)
-    call InitCacheSystem_cll(1,4)
-    call InitEvent_cll     
-    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
-    call SetMuUV2_cll(muR2) ! Set the renormalization scale
-
-    ! open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    ! WRITE(10,*) 'INPUT-C12 = ',mt2,mchi2,mst2,s
-
-
-    ! Compute the scalar loop integrals:
-    call C0_cll(C0a,mt2,mt2,s,mst2,mchi2,mst2)
-
-    ! WRITE(10,*) 'C0a (coll) = ',C0a
-
-    ! Square-root of Kallen function:
-    lamb = CDSQRT(xC**2 - 2*xC*(xT+1) + (xT-1)**2)
-    ! Multiply by mst2 to make the coefficient dimensionless
-    C0a = C0a*mst2
-    ! Compute the C12 integral (expression obtained with Package-X)
-    ScalarC12 = 2*xS*xT*C0a*(2*xS*(xC**2 - xC*(xT+2) + (xT-1)**2) -2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2) + xC*xS**2)
-    ScalarC12 = ScalarC12 + 2*xS*(1-xC-xT)*lamb*(xS+2*xT)*CDLOG((lamb+xC-xT+1)/(2*CDSQRT(xC)))
-    ScalarC12 = ScalarC12 + xS*CDLOG(xC)*(xS*(xC**2 + xC*(4*xT-2) + (xT-1)**2) + 2*xT*(xC**2 - 2*xC*(xT+1) + (xT-1)**2))
-    ScalarC12 = ScalarC12 + xS*xT*(xS-4*xT)*(2*xC+xS-2*(xT+1))
-    ScalarC12 = ScalarC12 + 2*xT*CDSQRT(xS*(xS-4))*CDLOG((2+CDSQRT(xS*(xS-4))-xS)/2)*(xS*(2*xC+xT-2) + 2*xT*(1+xT-xC))
-    ScalarC12 = ScalarC12/(32*Pi**4*mst2*xS**2*xT*((xS-4*xT)**2))
-
-    ! Loop integral value:
-    loopIntegralC12 = ScalarC12
-    
-    ! write(10,*) 'ScalarC12 = ',ScalarC12
-    ! write(10,*) 'Returning = ',loopIntegralC12
-    ! write(10,*)
-    ! write(10,*)
-    ! write(10,*)
-    ! close(10)
-
-    return 
-
-end function
-
+end subroutine getCIntegrals
 
 
 ! ------------------------------------------------------------
 ! Define the form factors in terms of the loop functions:
 ! ------------------------------------------------------------
-double complex function formFactorC00ren(s)
+double complex function formFactorC00ren(s,p1sq,p2sq)
 
     use collier
 
     implicit none
 
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
     integer rank
     double complex mt2,mst2,mchi2
     double precision c00renvalue,deltaUV,muR2
     double complex C00,C1,C11,C12,ScalarC00ren,deltaCTR
     double complex loopIntegralC00,loopIntegralC1,loopIntegralC11,loopIntegralC12
-    double complex, allocatable :: Ccoeff(:,:,:),Ccoeffuv(:,:,:)
+    double complex Ccoeff(0:1,0:3,0:3)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -304,17 +85,22 @@ double complex function formFactorC00ren(s)
     if (c00renvalue == 0d0) then
         formFactorC00ren = 0.0 ! If the default C00ren value is zero, do nothing (it can be used to turn off this term) 
     else
-        C00 = loopIntegralC00(s,mt2,mchi2,mst2,muR2,deltaUV)
-        C1 = loopIntegralC1(s,mt2,mchi2,mst2,muR2,deltaUV)
-        C11 = loopIntegralC11(s,mt2,mchi2,mst2,muR2,deltaUV)
-        C12 = loopIntegralC12(s,mt2,mchi2,mst2,muR2,deltaUV)
+        ! C00 = loopIntegralC00(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C00 = Ccoeff(1,0,0)
+        C1 = Ccoeff(0,1,0)
+        C11 = Ccoeff(0,2,0)
+        C12 = Ccoeff(0,1,1)
         deltaCTR = MDL_DELTACTR
-        
-
 
         ! Compute renormalizable and effective C00 value:
-        ! Note that:  C_{00} - MT^2 (C_{1} + C_{11} + C_{12}) + (s/2)*(C_{11} - C_{12}) + deltaCTR
-        ScalarC00ren = C00 - mt2*(C1 + C11 + C12) + (s/2)*(C11 - C12) + deltaCTR
+        ! Note that:  
+        ! C00ren = C_{00} - (p1^2 + p2^2)*C_{1}/2  + (p1.p2)*(C_{11} - C_{12}) - (p1^2 + p2^2)*C_{12} + deltaCTR
+        p1p2 = (s-p1sq-p2sq)/2d0
+        ScalarC00ren = C00 + deltaCTR + (C11-C12)*p1p2 - C1*(p1sq+p2sq)/2d0 - C12*(p1sq + p2sq)
                 
         ! New value to be used to replace the default value:
         formFactorC00ren = ScalarC00ren/c00renvalue
@@ -325,16 +111,19 @@ double complex function formFactorC00ren(s)
 end function
 
 
-double complex function formFactorC1(s)
+double complex function formFactorC1(s,p1sq,p2sq)
 
     use collier
 
     implicit none
 
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c1value,deltaUV,muR2
     double complex C1,loopIntegralC1
+    double complex Ccoeff(0:1,0:3,0:3)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -348,7 +137,9 @@ double complex function formFactorC1(s)
     if (c1value == 0.0) then
         formFactorC1 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        C1 = loopIntegralC1(s,mt2,mchi2,mst2,muR2,deltaUV)
+        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C1 = Ccoeff(0,1,0)
         
         ! New value to be used to replace the default value:
         formFactorC1 = C1/c1value
@@ -359,16 +150,19 @@ double complex function formFactorC1(s)
 end function
 
 
-double complex function formFactorC11(s)
+double complex function formFactorC11(s,p1sq,p2sq)
 
     use collier
 
     implicit none
 
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
     double complex C11,loopIntegralC11
+    double complex Ccoeff(0:1,0:3,0:3)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -382,7 +176,9 @@ double complex function formFactorC11(s)
     if (c11value == 0.0) then
         formFactorC11 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
     else            
-        C11 = loopIntegralC11(s,mt2,mchi2,mst2,muR2,deltaUV)
+        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C11 = Ccoeff(0,2,0)
         
         ! New value to be used to replace the default value:
         formFactorC11 = C11/c11value
@@ -393,16 +189,19 @@ double complex function formFactorC11(s)
 end function
 
 
-double complex function formFactorC12(s)
+double complex function formFactorC12(s,p1sq,p2sq)
 
     use collier
 
     implicit none
 
-    double complex s ! invariant s=(p1+p2)**2 (gluon momentum squared)
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c12value,deltaUV,muR2
     double complex C12,loopIntegralC12
+    double complex Ccoeff(0:1,0:3,0:3)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
 
@@ -416,7 +215,9 @@ double complex function formFactorC12(s)
     if (c12value == 0.0) then
         formFactorC12 = 0.0 ! If the default C12 value is zero, do nothing (it can be used to turn off this term)
     else            
-        C12 = loopIntegralC12(s,mt2,mchi2,mst2,muR2,deltaUV)
+        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C12 = Ccoeff(0,1,1)
         
         ! New value to be used to replace the default value:
         formFactorC12 = C12/c12value
