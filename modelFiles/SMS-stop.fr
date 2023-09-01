@@ -152,5 +152,5 @@ LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
             ];
 
 
-(* LNP := Lkin + LYDM + HC[LYDM]; *)
-LNP := Lkin + LYDM + HC[LYDM] + LCT;
+LNPnoCT := Lkin + LYDM + HC[LYDM];
+LNP :=  LNPnoCT + LCT;
