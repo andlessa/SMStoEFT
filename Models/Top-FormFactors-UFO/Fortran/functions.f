@@ -69,11 +69,11 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     integer rank
     double complex mt2,mst2,mchi2
     double precision c00renvalue,deltaUV,muR2
-    double complex C00,C1,C11,C12,ScalarC00ren,deltaCTR
-    double complex loopIntegralC00,loopIntegralC1,loopIntegralC11,loopIntegralC12
+    double complex C00,ScalarC00ren,deltaCTR
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
+
    
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
@@ -89,22 +89,14 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     if (c00renvalue == 0d0) then
         formFactorC00ren = 0.0 ! If the default C00ren value is zero, do nothing (it can be used to turn off this term) 
     else
-        ! C00 = loopIntegralC00(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C00 = Ccoeff(1,0,0)
-        C1 = Ccoeff(0,1,0)
-        C11 = Ccoeff(0,2,0)
-        C12 = Ccoeff(0,1,1)
         deltaCTR = MDL_DELTACTR
 
         ! Compute renormalizable and effective C00 value:
         ! Note that:  
-        ! C00ren = C_{00} - (p1^2 + p2^2)*C_{1}/2  + (p1.p2)*(C_{11} - C_{12}) - (p1^2 + p2^2)*C_{12} + deltaCTR
-        p1p2 = (s-p1sq-p2sq)/2d0
-        ScalarC00ren = C00 + deltaCTR + (C11-C12)*p1p2 - C1*(p1sq+p2sq)/2d0 - C12*(p1sq + p2sq)
+        ! C00ren = C_{00} + deltaCTR
+        ScalarC00ren = C00 + deltaCTR
                 
         ! New value to be used to replace the default value:
         formFactorC00ren = ScalarC00ren/c00renvalue
@@ -130,10 +122,10 @@ double complex function formFactorC1(s,p1sq,p2sq)
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
     ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
-    double complex s, p1sq, p2sq, p1p2
+    double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c1value,deltaUV,muR2
-    double complex C1,loopIntegralC1
+    double complex C1
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -152,7 +144,6 @@ double complex function formFactorC1(s,p1sq,p2sq)
     if (c1value == 0.0) then
         formFactorC1 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C1 = Ccoeff(0,1,0)
         
@@ -171,6 +162,52 @@ double complex function formFactorC1(s,p1sq,p2sq)
 
 end function
 
+double complex function formFactorC2(s,p1sq,p2sq)
+
+    use collier
+
+    implicit none
+
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
+    double complex mt2,mst2,mchi2
+    double precision c1value,deltaUV,muR2
+    double complex Ccoeff(0:1,0:2,0:2),C2
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
+
+    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+    WRITE(10,*) 'INPUT-C2 = ',p1sq,p2sq,mchi2,mst2,s
+
+
+    if (c1value == 0.0) then
+        formFactorC2 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
+    else            
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C2 = Ccoeff(0,0,1)
+        
+        ! New value to be used to replace the default value:
+        formFactorC2 = C2/c1value
+    end if 
+
+    write(10,*) 'formFactorC2 = ',formFactorC2
+    write(10,*)
+    write(10,*)
+    write(10,*)
+    close(10) 
+
+
+    return 
+
+end function
 
 
 double complex function formFactorC11(s,p1sq,p2sq)
@@ -184,7 +221,7 @@ double complex function formFactorC11(s,p1sq,p2sq)
     double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
-    double complex C11,loopIntegralC11
+    double complex C11
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -203,7 +240,6 @@ double complex function formFactorC11(s,p1sq,p2sq)
     if (c11value == 0.0) then
         formFactorC11 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C11 = Ccoeff(0,2,0)
         
@@ -218,7 +254,55 @@ double complex function formFactorC11(s,p1sq,p2sq)
     close(10) 
 
 
-    return  
+    return 
+
+end function
+
+double complex function formFactorC22(s,p1sq,p2sq)
+
+    use collier
+
+    implicit none
+
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq, p1p2
+    double complex mt2,mst2,mchi2
+    double precision c11value,deltaUV,muR2
+    double complex C22
+    double complex Ccoeff(0:1,0:2,0:2)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the loop integral
+
+    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
+    WRITE(10,*) 'INPUT-C22 = ',p1sq,p2sq,mchi2,mst2,s
+
+
+    if (c11value == 0.0) then
+        formFactorC22 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
+    else
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C22 = Ccoeff(0,0,2)
+        
+        ! New value to be used to replace the default value:
+        formFactorC22 = C22/c11value
+    end if 
+
+    write(10,*) 'formFactorC22 = ',formFactorC22
+    write(10,*)
+    write(10,*)
+    write(10,*)
+    close(10) 
+
+
+    return 
 
 end function
 
@@ -234,7 +318,7 @@ double complex function formFactorC12(s,p1sq,p2sq)
     double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c12value,deltaUV,muR2
-    double complex C12,loopIntegralC12
+    double complex C12
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -253,7 +337,6 @@ double complex function formFactorC12(s,p1sq,p2sq)
     if (c12value == 0.0) then
         formFactorC12 = 0.0 ! If the default C12 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C12 = Ccoeff(0,1,1)
         

@@ -74,7 +74,7 @@ FFV7 = Lorentz(name = 'FFV7',
 
 FFVC12 = Lorentz(name = 'FFVC12',
                spins = [ 2, 2, 3 ],
-               structure = '(formFactorC12(P(-5,3)*P(-5,3),P(-6,2)*P(-6,2),P(-7,1)*P(-7,1)))*(P(-1,1)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + P(-1,2)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + (P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + (P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + (P(-1,1)**2*Gamma(3,2,-2)*ProjP(-2,1))/2. + (P(-1,2)**2*Gamma(3,2,-2)*ProjP(-2,1))/2. + (P(-1,1)*P(-1,3)*Gamma(3,2,-2)*ProjP(-2,1))/2. + (P(-1,2)*P(-1,3)*Gamma(3,2,-2)*ProjP(-2,1))/2. + P(-1,3)**2*Gamma(3,2,-2)*ProjP(-2,1))')
+               structure = '(formFactorC12(P(-5,3)*P(-5,3),P(-6,2)*P(-6,2),P(-7,1)*P(-7,1)))*(P(-1,1)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,1)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + P(-1,2)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1) + (P(-1,3)*P(3,2)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + (P(-1,1)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2. + (P(-1,2)*P(3,3)*Gamma(-1,2,-2)*ProjP(-2,1))/2.)')
 
 FFV8 = Lorentz(name = 'FFV8',
                spins = [ 2, 2, 3 ],
