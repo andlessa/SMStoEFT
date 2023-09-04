@@ -804,7 +804,7 @@ V_132 = Vertex(name = 'V_132',
 V_133 = Vertex(name = 'V_133',
                particles = [ P.t__tilde__, P.t, P.g, P.g ],
                color = [ 'f(-1,3,4)*T(-1,2,1)', 'T(3,-1,1)*T(4,2,-1)', 'T(3,2,-1)*T(4,-1,1)' ],
-               lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
+               lorentz = [ L.FFVVC1, L.FFVV3C, L.FFVV4C, L.FFVVC12, L.FFVVC11 ],
                couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
 
 V_134 = Vertex(name = 'V_134',

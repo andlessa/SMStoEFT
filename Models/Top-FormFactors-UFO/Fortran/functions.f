@@ -19,7 +19,7 @@
 ! m02,m12,m22 -> masses squared
 ! p10 = p1^2, p20 = p2^2, p21 = p3^3 = s 
 
-subroutine getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+subroutine getCIntegrals(Ccoeff,s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
 
     ! Return the 3-point integrals. Note that the normalization includes the 1/(2*pi)^4 factor!
 
