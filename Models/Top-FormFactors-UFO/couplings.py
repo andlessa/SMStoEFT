@@ -405,3 +405,6 @@ GC_99 = Coupling(name = 'GC_99',
                  value = '-((complex(0,1)*ytau)/cmath.sqrt(2))',
                  order = {'QED':1})
 
+GC_100 = Coupling(name = 'GC_100',
+                 value = 'complex(0,1)*cmath.pi**2*G**2*yDM**2',
+                 order = {'NP':2,'QCD':2})

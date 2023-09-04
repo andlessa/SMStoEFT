@@ -52,6 +52,106 @@ end subroutine getCIntegrals
 
 
 ! ------------------------------------------------------------
+! Directly uses COLLIER to compute all needed integrals
+! ------------------------------------------------------------
+!                  p31                  
+!          ------------------           
+!         /                   \         
+!                  m22                  
+!    p21  ---------------------  p32 \  
+!              |    2    |            \ 
+!              |         |             |
+!          m12 |1       3| m32         | p20
+!              |         |             |
+!              |    0    |            / 
+!    p10  ---------------------  p30 /  
+!                  m02                  
+!
+
+subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+
+    ! Return the 4-point integrals. Note that the normalization includes the 1/(2*pi)^4 factor!
+    ! On-shell relations:
+    !   p10 = k1^2 = 0 (gluon momentum)
+    !   p21 = k2^2 = 0 (gluon momentum)
+    !   p32 = p1^2 = MT^2 (top momentum)
+    !   p30 = p2^2 = MT^2 (top momentum)
+    !   p20 = (p1+p2)^2 = s
+    !   p31 = (k1-p1)^2 = t
+    !   m02 = mST^2 (Stop mass squared)
+    !   m12 = mST^2 (Stop mass squared)
+    !   m22 = mST^2 (Stop mass squared)
+    !   m32 = mChi^2 (DM mass squared)
+
+    ! D0 = Dcoeff(0,0,0,0)
+    ! D1 = Dcoeff(0,1,0,0)
+    ! D2 = Dcoeff(0,0,1,0)
+    ! D3 = Dcoeff(0,0,0,1)
+    ! D00 = Dcoeff(1,0,0,0)
+    ! D11 = Dcoeff(0,2,0,0)
+    ! D12 = Dcoeff(0,1,1,0)
+    ! D13 = Dcoeff(0,1,0,1)
+    ! D22 = Dcoeff(0,0,2,0)
+    ! D23 = Dcoeff(0,0,1,1)
+    ! D33 = Dcoeff(0,0,0,2)
+    ! D001 = Dcoeff(1,1,0,0)
+    ! D002 = Dcoeff(1,0,1,0)
+    ! D003 = Dcoeff(1,0,0,1)
+    ! D111 = Dcoeff(0,3,0,0)
+    ! D112 = Dcoeff(0,2,1,0)
+    ! D113 = Dcoeff(0,2,0,1)
+    ! D122 = Dcoeff(0,1,2,0)
+    ! D123 = Dcoeff(0,1,1,1)
+    ! D133 = Dcoeff(0,1,0,2)
+    ! D222 = Dcoeff(0,0,3,0)
+    ! D223 = Dcoeff(0,0,2,1)
+    ! D233 = Dcoeff(0,0,1,2)
+    ! D333 = Dcoeff(0,0,0,3)
+
+    use collier
+
+    implicit none
+
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex p10,p21,p32,p30,p20,p31,m02,m12,m22,m32
+    double complex s,t,mchi2,mst2,mt2
+    double precision muR2,deltaUV
+    double complex Dcoeff(0:1,0:3,0:3,0:3),Dcoeffuv(0:1,0:3,0:3,0:3)
+    double precision Derr(0:3)
+    integer N,rank
+    double precision Pi
+    parameter  (Pi=3.141592653589793D0)
+
+    p10 = 0d0
+    p21 = 0d0
+    p32 = mt2
+    p30 = mt2
+    p20 = s
+    p31 = t
+    m02 = mst2
+    m12 = mst2
+    m22 = mst2
+    m32 = mchi2
+
+
+    N = 4 ! Maximum number for loop (3-point function)
+    rank = 3 ! Maximum rank for loop (=N)
+
+    call Init_cll(N,rank,'',.true.)
+    call InitCacheSystem_cll(1,N)
+    call InitEvent_cll     
+    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+    call SetMuUV2_cll(muR2) ! Set the renormalization scale
+    
+    call D_cll(Dcoeff,Dcoeffuv,p10,p21,p32,p30,p20,p31,m02,m12,m22,m32,rank,Derr)  
+    
+    Dcoeff = Dcoeff/((2*Pi)**4)
+    
+end subroutine getDIntegralsOnShell
+
+
+! ------------------------------------------------------------
 ! Define the form factors in terms of the loop functions:
 ! ------------------------------------------------------------
 
@@ -93,7 +193,7 @@ double complex function formFactorCTOT(s,p1sq,p2sq)
         CTOT = C1+C11+C12
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'CTOT')
     end if
 
@@ -145,7 +245,7 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
         formFactorC00ren = ScalarC00ren/c00renvalue
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C00ren')
     end if
 
@@ -188,7 +288,7 @@ double complex function formFactorC1(s,p1sq,p2sq)
         formFactorC1 = C1/c1value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C1')
     end if
 
@@ -229,7 +329,7 @@ double complex function formFactorC2(s,p1sq,p2sq)
         formFactorC2 = C2/c1value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C2')
     end if
 
@@ -271,7 +371,7 @@ double complex function formFactorC11(s,p1sq,p2sq)
         formFactorC11 = C11/c11value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
     end if
 
@@ -312,7 +412,7 @@ double complex function formFactorC22(s,p1sq,p2sq)
         formFactorC22 = C22/c11value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
     end if
 
@@ -355,10 +455,43 @@ double complex function formFactorC12(s,p1sq,p2sq)
         formFactorC12 = C12/c12value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C12')
     end if
 
+
+    return 
+
+end function
+
+double complex function D0(s)
+
+    use collier
+
+    implicit none
+
+    double complex s
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D0 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,0d0,mst2,mchi2,mt2,muR2,deltaUV)
+        D0 = Dcoeff(0,0,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D0')
+    end if
 
     return 
 
@@ -392,3 +525,54 @@ subroutine writedebug(s,p1sq,p2sq,Ccoeff,header)
     close(50)
     
 end subroutine writedebug
+
+
+
+subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
+
+    implicit none
+   
+    double complex s,t
+    double complex mst2,mchi2,mt2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    character(len=99) :: fname
+    character(len=*) :: header
+    character(len=*) fmt1,fmt10,fmt2
+    parameter (fmt1 = '(A22,2(es11.3,SP,es9.1,A2))')
+    parameter (fmt2 = '(A13,3(es11.3,SP,es9.1,A2))')
+    parameter (fmt10 = '(A6,es12.4,SP,es12.4,A2)')
+
+    fname='myLogD.log'
+    open(unit=50,file=trim(fname),action='WRITE',position='APPEND',status='unknown')
+    write(50,*) '------------ ',trim(header),': -------------------------'
+    write (50, fmt2) 'mst^2,mchi^2,mt^2 = ',mst2,'*i',mchi2,'*i',mt2,'*i'
+    write (50,fmt1) 's,t = ',s,'*i',t,'*i',u,'*i'
+    write (50,fmt10) 'D0 = ',Dcoeff(0,0,0,0),'*i'
+    write (50,fmt10) 'D1 = ',Dcoeff(0,1,0,0),'*i'
+    write (50,fmt10) 'D2 = ',Dcoeff(0,0,1,0),'*i'
+    write (50,fmt10) 'D3 = ',Dcoeff(0,0,0,1),'*i'
+    write (50,fmt10) 'D00 = ',Dcoeff(1,0,0,0),'*i'
+    write (50,fmt10) 'D11 = ',Dcoeff(0,2,0,0),'*i'
+    write (50,fmt10) 'D12 = ',Dcoeff(0,1,1,0),'*i'
+    write (50,fmt10) 'D13 = ',Dcoeff(0,1,0,1),'*i'
+    write (50,fmt10) 'D22 = ',Dcoeff(0,0,2,0),'*i'
+    write (50,fmt10) 'D23 = ',Dcoeff(0,0,1,1),'*i'
+    write (50,fmt10) 'D33 = ',Dcoeff(0,0,0,2),'*i'
+    write (50,fmt10) 'D001 = ',Dcoeff(1,1,0,0),'*i'
+    write (50,fmt10) 'D002 = ',Dcoeff(1,0,1,0),'*i'
+    write (50,fmt10) 'D003 = ',Dcoeff(1,0,0,1),'*i'
+    write (50,fmt10) 'D111 = ',Dcoeff(0,3,0,0),'*i'
+    write (50,fmt10) 'D112 = ',Dcoeff(0,2,1,0),'*i'
+    write (50,fmt10) 'D113 = ',Dcoeff(0,2,0,1),'*i'
+    write (50,fmt10) 'D122 = ',Dcoeff(0,1,2,0),'*i'
+    write (50,fmt10) 'D123 = ',Dcoeff(0,1,1,1),'*i'
+    write (50,fmt10) 'D133 = ',Dcoeff(0,1,0,2),'*i'
+    write (50,fmt10) 'D222 = ',Dcoeff(0,0,3,0),'*i'
+    write (50,fmt10) 'D223 = ',Dcoeff(0,0,2,1),'*i'
+    write (50,fmt10) 'D233 = ',Dcoeff(0,0,1,2),'*i'
+    write (50,fmt10) 'D333 = ',Dcoeff(0,0,0,3),'*i'
+    write(50,*) '-------------------------------------'
+    write(50,*)
+    close(50)
+    
+end subroutine writedebugD
