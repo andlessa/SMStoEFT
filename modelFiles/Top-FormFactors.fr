@@ -30,9 +30,7 @@ M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
 M$Parameters = {
 
 (* Auxiliary external parameters *)
-  idebug  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the printout of loop integral results"},
-  v3turnon  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the t-t-G coupling"},
-  v4turnon  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the t-t-G-G coupling"},
+  idebug  == {ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Turns on/off the printout of loop integral results"},
 
 (* New Physics (UV) Parameters *)
   yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},

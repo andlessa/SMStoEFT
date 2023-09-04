@@ -125,7 +125,7 @@ FFVV3 = Lorentz(name = 'FFVV3',
                 spins = [ 2, 2, 3, 3 ],
                 structure = 'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
 
-FFVV3C = Lorentz(name = 'FFVV3CTOT',
+FFVV3CTOT = Lorentz(name = 'FFVV3CTOT',
                 spins = [ 2, 2, 3, 3 ],
                 structure = '(formFactorCTOT(P(-4,1)*P(-4,1)+P(-5,2)*P(-5,2)+2*P(-6,1)*P(-6,2),P(-6,2)*P(-6,2),P(-7,1)*P(-7,1)))*(P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1))')
 
@@ -133,7 +133,7 @@ FFVV4 = Lorentz(name = 'FFVV4',
                 spins = [ 2, 2, 3, 3 ],
                 structure = 'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) + P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
 
-FFVV4C = Lorentz(name = 'FFVV4CTOT',
+FFVV4CTOT = Lorentz(name = 'FFVV4CTOT',
                 spins = [ 2, 2, 3, 3 ],
                 structure = '(formFactorCTOT(P(-4,1)*P(-4,1)+P(-5,2)*P(-5,2)+2*P(-6,1)*P(-6,2),P(-6,2)*P(-6,2),P(-7,1)*P(-7,1)))*(P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) + P(3,4)*Gamma(4,2,-1)*ProjP(-1,1))')
 

@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 18:35:45
+# Date: Mon 4 Sep 2023 09:25:12
 
 
 
@@ -65,13 +65,21 @@ ymtau = Parameter(name = 'ymtau',
                   lhablock = 'YUKAWA',
                   lhacode = [ 15 ])
 
+idebug = Parameter(name = 'idebug',
+                   nature = 'external',
+                   type = 'real',
+                   value = 0.,
+                   texname = '\\text{idebug}',
+                   lhablock = 'FRBlock',
+                   lhacode = [ 1 ])
+
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
                 type = 'real',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 1 ])
+                lhacode = [ 2 ])
 
 C00ren = Parameter(name = 'C00ren',
                    nature = 'external',
@@ -79,7 +87,7 @@ C00ren = Parameter(name = 'C00ren',
                    value = 1.,
                    texname = '\\text{Cren}_0',
                    lhablock = 'FRBlock',
-                   lhacode = [ 2 ])
+                   lhacode = [ 3 ])
 
 C1 = Parameter(name = 'C1',
                nature = 'external',
@@ -87,7 +95,7 @@ C1 = Parameter(name = 'C1',
                value = 1.,
                texname = 'C_1',
                lhablock = 'FRBlock',
-               lhacode = [ 3 ])
+               lhacode = [ 4 ])
 
 C11 = Parameter(name = 'C11',
                 nature = 'external',
@@ -95,7 +103,7 @@ C11 = Parameter(name = 'C11',
                 value = 1.,
                 texname = 'C_{11}',
                 lhablock = 'FRBlock',
-                lhacode = [ 4 ])
+                lhacode = [ 5 ])
 
 C12 = Parameter(name = 'C12',
                 nature = 'external',
@@ -103,7 +111,7 @@ C12 = Parameter(name = 'C12',
                 value = 1.,
                 texname = 'C_{12}',
                 lhablock = 'FRBlock',
-                lhacode = [ 5 ])
+                lhacode = [ 6 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',

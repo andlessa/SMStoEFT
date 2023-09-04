@@ -86,10 +86,6 @@ double complex function formFactorCTOT(s,p1sq,p2sq)
     if (ctotvalue == 0d0) then
         formFactorCTOT = 0.0 ! If the default ctot value is zero, do nothing (it can be used to turn off this term) 
     else
-        ! C00 = loopIntegralC00(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C1 = Ccoeff(0,1,0)
         C11 = Ccoeff(0,2,0)
@@ -97,7 +93,7 @@ double complex function formFactorCTOT(s,p1sq,p2sq)
         CTOT = C1+C11+C12
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'CTOT')
     end if
 
@@ -122,7 +118,6 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     double complex mt2,mst2,mchi2
     double precision c00renvalue,deltaUV,muR2
     double complex C00,C1,C11,C12,ScalarC00ren,deltaCTR
-    double complex loopIntegralC00,loopIntegralC1,loopIntegralC11,loopIntegralC12
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -137,10 +132,6 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     if (c00renvalue == 0d0) then
         formFactorC00ren = 0.0 ! If the default C00ren value is zero, do nothing (it can be used to turn off this term) 
     else
-        ! C00 = loopIntegralC00(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
-        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C00 = Ccoeff(1,0,0)
         C1 = Ccoeff(0,1,0)
@@ -158,7 +149,7 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
         formFactorC00ren = ScalarC00ren/c00renvalue
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C00ren')
     end if
 
@@ -179,7 +170,7 @@ double complex function formFactorC1(s,p1sq,p2sq)
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c1value,deltaUV,muR2
-    double complex C1,loopIntegralC1
+    double complex C1
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -194,7 +185,6 @@ double complex function formFactorC1(s,p1sq,p2sq)
     if (c1value == 0.0) then
         formFactorC1 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C1 = loopIntegralC1(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C1 = Ccoeff(0,1,0)
         
@@ -202,7 +192,7 @@ double complex function formFactorC1(s,p1sq,p2sq)
         formFactorC1 = C1/c1value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C1')
     end if
 
@@ -224,7 +214,7 @@ double complex function formFactorC11(s,p1sq,p2sq)
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
-    double complex C11,loopIntegralC11
+    double complex C11
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -239,7 +229,6 @@ double complex function formFactorC11(s,p1sq,p2sq)
     if (c11value == 0.0) then
         formFactorC11 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C11 = loopIntegralC11(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C11 = Ccoeff(0,2,0)
         
@@ -247,7 +236,7 @@ double complex function formFactorC11(s,p1sq,p2sq)
         formFactorC11 = C11/c11value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
     end if
 
@@ -267,7 +256,7 @@ double complex function formFactorC12(s,p1sq,p2sq)
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c12value,deltaUV,muR2
-    double complex C12,loopIntegralC12
+    double complex C12
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -282,7 +271,6 @@ double complex function formFactorC12(s,p1sq,p2sq)
     if (c12value == 0.0) then
         formFactorC12 = 0.0 ! If the default C12 value is zero, do nothing (it can be used to turn off this term)
     else            
-        ! C12 = loopIntegralC12(s,p1sq,p2sq,mchi2,mst2,muR2,deltaUV)
         call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         C12 = Ccoeff(0,1,1)
         
@@ -290,7 +278,7 @@ double complex function formFactorC12(s,p1sq,p2sq)
         formFactorC12 = C12/c12value
     end if 
 
-    if real(MDL_IDEBUG) > 0d0 then
+    if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C12')
     end if
 
@@ -308,19 +296,20 @@ subroutine writedebug(s,p1sq,p2sq,Ccoeff,header)
     double complex Ccoeff(0:1,0:2,0:2)
     character(len=99) :: fname
     character(len=*) :: header
-    character(len=*),parameter :: fmt1 = "(A10,' = ',3(es11.3,SP,es9.1,'*i'))"    
-    character(len=*),parameter :: fmt10 = "(A3,' = ',es12.4,SP,es12.4,'*i')"
+    character(len=*) fmt1,fmt10
+    parameter (fmt1 = '(A13,3(es11.3,SP,es9.1,A2))')
+    parameter (fmt10 = '(A6,es12.4,SP,es12.4,A2)')
 
     fname='myLog.log'
     open(unit=50,file=trim(fname),action='WRITE',position='APPEND',status='unknown')
     write(50,*) '------------ ',trim(header),': -------------------------'
-    write (50,fmt1) 's,p1sq,p2sq',s,p1sq,p2sq
-    write (50,fmt10) 'C00',Ccoeff(1,0,0)
-    write (50,fmt10) 'C1',Ccoeff(0,1,0)
-    write (50,fmt10) 'C2',Ccoeff(0,0,1)     
-    write (50,fmt10) 'C11',Ccoeff(0,2,0) 
-    write (50,fmt10) 'C12',Ccoeff(0,1,1)
-    write (50,fmt10) 'C22',Ccoeff(0,0,2)         
+    write (50,fmt1) 's,p1sq,p2sq = ',s,'*i',p1sq,'*i',p2sq,'*i'
+    write (50,fmt10) 'C00 = ',Ccoeff(1,0,0),'*i'
+    write (50,fmt10) 'C1 = ',Ccoeff(0,1,0),'*i'
+    write (50,fmt10) 'C2 = ',Ccoeff(0,0,1),'*i'
+    write (50,fmt10) 'C11 = ',Ccoeff(0,2,0),'*i'
+    write (50,fmt10) 'C12 = ',Ccoeff(0,1,1),'*i'
+    write (50,fmt10) 'C22 = ',Ccoeff(0,0,2),'*i'
     write(50,*) '-------------------------------------'
     write(50,*)
     close(50)

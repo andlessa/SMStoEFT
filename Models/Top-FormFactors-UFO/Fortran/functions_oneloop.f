@@ -1,6 +1,3 @@
-
-
-
 ! ------------------------------------------------------------
 ! Directly uses COLLIER to compute all needed integrals
 ! ------------------------------------------------------------
@@ -57,6 +54,57 @@ end subroutine getCIntegrals
 ! ------------------------------------------------------------
 ! Define the form factors in terms of the loop functions:
 ! ------------------------------------------------------------
+
+double complex function formFactorCTOT(s,p1sq,p2sq)
+
+    use collier
+
+    implicit none
+
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s, p1sq, p2sq
+    integer rank
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex c1value,c11value,c12value,ctotvalue
+    double complex C1,C11,C12,CTOT
+    double complex Ccoeff(0:1,0:2,0:2)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
+    c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the form factor
+    c12value = MDL_C12 ! Numerical value for C12, which should be replaced by the form factor
+    ctotvalue = c1value + c11value + c12value
+    
+    if (ctotvalue == 0d0) then
+        formFactorCTOT = 0.0 ! If the default ctot value is zero, do nothing (it can be used to turn off this term) 
+    else
+        call getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
+        C1 = Ccoeff(0,1,0)
+        C11 = Ccoeff(0,2,0)
+        C12 = Ccoeff(0,1,1)
+        CTOT = C1+C11+C12
+    end if 
+
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'CTOT')
+    end if
+
+
+    formFactorCTOT = CTOT
+
+    return 
+
+end function
+
+
 double complex function formFactorC00ren(s,p1sq,p2sq)
 
     use collier
@@ -73,7 +121,6 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
-
    
     mchi2 = MDL_MCHI**2
     mst2 = MDL_MST**2
@@ -81,10 +128,6 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c00renvalue = MDL_C00REN ! Numerical value for C00ren, which should be replaced by the form factor
-
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C00 = ',p1sq,p2sq,mchi2,mst2,s
-
 
     if (c00renvalue == 0d0) then
         formFactorC00ren = 0.0 ! If the default C00ren value is zero, do nothing (it can be used to turn off this term) 
@@ -102,11 +145,9 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
         formFactorC00ren = ScalarC00ren/c00renvalue
     end if 
 
-    write(10,*) 'formFactorC00ren = ',formFactorC00ren
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C00ren')
+    end if
 
 
     return 
@@ -137,10 +178,6 @@ double complex function formFactorC1(s,p1sq,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
 
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C1 = ',p1sq,p2sq,mchi2,mst2,s
-
-
     if (c1value == 0.0) then
         formFactorC1 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
@@ -151,11 +188,9 @@ double complex function formFactorC1(s,p1sq,p2sq)
         formFactorC1 = C1/c1value
     end if 
 
-    write(10,*) 'formFactorC1 = ',formFactorC1
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C1')
+    end if
 
 
     return 
@@ -184,10 +219,6 @@ double complex function formFactorC2(s,p1sq,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
 
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C2 = ',p1sq,p2sq,mchi2,mst2,s
-
-
     if (c1value == 0.0) then
         formFactorC2 = 0.0 ! If the default C1 value is zero, do nothing (it can be used to turn off this term)
     else            
@@ -198,12 +229,9 @@ double complex function formFactorC2(s,p1sq,p2sq)
         formFactorC2 = C2/c1value
     end if 
 
-    write(10,*) 'formFactorC2 = ',formFactorC2
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
-
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C2')
+    end if
 
     return 
 
@@ -218,7 +246,7 @@ double complex function formFactorC11(s,p1sq,p2sq)
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
     ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
-    double complex s, p1sq, p2sq, p1p2
+    double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
     double complex C11
@@ -233,10 +261,6 @@ double complex function formFactorC11(s,p1sq,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the loop integral
 
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C11 = ',p1sq,p2sq,mchi2,mst2,s
-
-
     if (c11value == 0.0) then
         formFactorC11 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
     else            
@@ -247,14 +271,11 @@ double complex function formFactorC11(s,p1sq,p2sq)
         formFactorC11 = C11/c11value
     end if 
 
-    write(10,*) 'formFactorC11 = ',formFactorC11
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
+    end if
 
-
-    return 
+    return  
 
 end function
 
@@ -281,10 +302,6 @@ double complex function formFactorC22(s,p1sq,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c11value = MDL_C11 ! Numerical value for C11, which should be replaced by the loop integral
 
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C22 = ',p1sq,p2sq,mchi2,mst2,s
-
-
     if (c11value == 0.0) then
         formFactorC22 = 0.0 ! If the default C11 value is zero, do nothing (it can be used to turn off this term)
     else
@@ -295,11 +312,9 @@ double complex function formFactorC22(s,p1sq,p2sq)
         formFactorC22 = C22/c11value
     end if 
 
-    write(10,*) 'formFactorC22 = ',formFactorC22
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
+    end if
 
 
     return 
@@ -315,7 +330,7 @@ double complex function formFactorC12(s,p1sq,p2sq)
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
     ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
-    double complex s, p1sq, p2sq, p1p2
+    double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c12value,deltaUV,muR2
     double complex C12
@@ -330,10 +345,6 @@ double complex function formFactorC12(s,p1sq,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c12value = MDL_C12 ! Numerical value for C12, which should be replaced by the loop integral
 
-    open(10,FILE='myLog.log',ACTION='WRITE',POSITION='APPEND')
-    WRITE(10,*) 'INPUT-C12 = ',p1sq,p2sq,mchi2,mst2,s
-
-
     if (c12value == 0.0) then
         formFactorC12 = 0.0 ! If the default C12 value is zero, do nothing (it can be used to turn off this term)
     else            
@@ -344,13 +355,40 @@ double complex function formFactorC12(s,p1sq,p2sq)
         formFactorC12 = C12/c12value
     end if 
 
-    write(10,*) 'formFactorC12 = ',formFactorC12
-    write(10,*)
-    write(10,*)
-    write(10,*)
-    close(10) 
+    if real(MDL_IDEBUG) > 0d0 then
+        call writedebug(s,p1sq,p2sq,Ccoeff,'C12')
+    end if
 
 
     return 
 
 end function
+
+
+subroutine writedebug(s,p1sq,p2sq,Ccoeff,header)
+
+    implicit none
+   
+    double complex s,p1sq,p2sq
+    double complex Ccoeff(0:1,0:2,0:2)
+    character(len=99) :: fname
+    character(len=*) :: header
+    character(len=*) fmt1,fmt10
+    parameter (fmt1 = '(A13,3(es11.3,SP,es9.1,A2))')
+    parameter (fmt10 = '(A6,es12.4,SP,es12.4,A2)')
+
+    fname='myLog.log'
+    open(unit=50,file=trim(fname),action='WRITE',position='APPEND',status='unknown')
+    write(50,*) '------------ ',trim(header),': -------------------------'
+    write (50,fmt1) 's,p1sq,p2sq = ',s,'*i',p1sq,'*i',p2sq,'*i'
+    write (50,fmt10) 'C00 = ',Ccoeff(1,0,0),'*i'
+    write (50,fmt10) 'C1 = ',Ccoeff(0,1,0),'*i'
+    write (50,fmt10) 'C2 = ',Ccoeff(0,0,1),'*i'
+    write (50,fmt10) 'C11 = ',Ccoeff(0,2,0),'*i'
+    write (50,fmt10) 'C12 = ',Ccoeff(0,1,1),'*i'
+    write (50,fmt10) 'C22 = ',Ccoeff(0,0,2),'*i'
+    write(50,*) '-------------------------------------'
+    write(50,*)
+    close(50)
+    
+end subroutine writedebug
