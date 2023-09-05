@@ -30,23 +30,61 @@ subroutine getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
     double complex mchi2,mst2
     double precision muR2,deltaUV
     double complex Ccoeff(0:1,0:2,0:2),Ccoeffuv(0:1,0:2,0:2)
-    double precision Cerr(0:2)
     integer N,rank
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
 
+    double complex newInputC(0:4)
+    logical differs
+
+    ! Internal cache for storing the results of the D integrals
+    ! (for u and t ) and avoiding duplicated calculations
+    double complex OutPutC(1:2,0:1,0:2,0:2)
+    double complex InputVarsC(1:2,0:4)
+    integer cachedC
+    common/colliercacheC/OutPutC,InputVarsC,cachedC
+
     N = 3 ! Maximum number for loop (3-point function)
     rank = 2 ! Maximum rank for loop (=N)
 
-    call Init_cll(N,rank,'',.true.)
-    call InitCacheSystem_cll(1,N)
-    call InitEvent_cll     
-    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
-    call SetMuUV2_cll(muR2) ! Set the renormalization scale
+    ! Store new input variables
+    newInputC = (/ s,p1sq,p2sq,mchi2,mst2 /)
+
+    ! Check if the given input variables matches any
+    ! of the cached ones
+    if (cachedC > 0) then
+        if (.not.differs(InputVarsC(1,:),newInputC)) then
+            cachedC = 1
+        else if (.not.differs(InputVarsC(2,:),newInputC)) then
+            cachedC = 2
+        else
+            cachedC = 0
+        endif
+    endif
     
-    call C_cll(Ccoeff,Ccoeffuv,p1sq,s,p2sq,mchi2,mst2,mst2,rank,Cerr)    
-    
-    Ccoeff = Ccoeff/((2*Pi)**4)
+    ! If cachedC = 0, we need to compute it and cache
+    if (cachedC == 0) then
+        cachedC = 1
+        call Init_cll(N,rank,'',.true.)
+        call InitEvent_cll
+        call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+        call SetMuUV2_cll(muR2) ! Set the renormalization scale    
+        ! Compute the input for the given variables
+        InputVarsC(1,:) = (/ s,p1sq,p2sq,mchi2,mst2 /)
+        call C_cll(Ccoeff,Ccoeffuv,p1sq,s,p2sq,mchi2,mst2,mst2,rank)        
+        Ccoeff = Ccoeff/((2*Pi)**4)
+        ! Store the result in the first entry
+        OutPutC(1,:,:,:) = Ccoeff
+        ! Compute the input changing p1<->p2 (t<->u)
+        InputVarsC(2,:) = (/ s,p2sq,p1sq,mchi2,mst2 /)
+        call C_cll(Ccoeff,Ccoeffuv,p2sq,s,p1sq,mchi2,mst2,mst2,rank)        
+        Ccoeff = Ccoeff/((2*Pi)**4)
+        ! Store the result in the second entry
+        OutPutC(2,:,:,:) = Ccoeff
+    endif
+
+    ! We can finally return the cached input
+    Ccoeff = OutPutC(cachedC,:,:,:)
     
 end subroutine getCIntegrals
 
@@ -110,14 +148,28 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
     ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
     double complex p10,p21,p32,p30,p20,p31,m02,m12,m22,m32
-    double complex s,t,mchi2,mst2,mt2
+    double complex s,t,u,mchi2,mst2,mt2
     double precision muR2,deltaUV
     double complex Dcoeff(0:1,0:3,0:3,0:3),Dcoeffuv(0:1,0:3,0:3,0:3)
-    double precision Derr(0:3)
     integer N,rank
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
 
+    double complex newInputD(0:4)
+    logical differs
+
+    ! Internal cache for storing the results of the D integrals
+    ! (for u and t ) and avoiding duplicated calculations
+    double complex OutPutD(1:2,0:1,0:3,0:3,0:3)
+    double complex InputVarsD(1:2,0:4)
+    integer cachedD
+    common/colliercacheD/OutPutD,InputVarsD,cachedD
+
+    N = 4 ! Maximum number for loop (3-point function)
+    rank = 3 ! Maximum rank for loop (=N)
+
+    ! Store new input variables
+    newInputD = (/ s,t,mst2,mchi2,mt2 /)
     p10 = 0d0
     p21 = t
     p32 = mt2
@@ -129,19 +181,42 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
     m22 = mchi2
     m32 = mst2
 
+    ! Check if the given input variables matches any
+    ! of the cached ones
+    if (cachedD > 0) then
+        if (.not.differs(InputVarsD(1,:),newInputD)) then
+            cachedD = 1
+        else if (.not.differs(InputVarsD(2,:),newInputD)) then
+            cachedD = 2
+        else
+            cachedD = 0
+        endif
+    endif
 
-    N = 4 ! Maximum number for loop (3-point function)
-    rank = 3 ! Maximum rank for loop (=N)
+    ! If cachedD = 0, we need to compute it and cache
+    if (cachedD == 0) then
+        cachedD = 1
+        call Init_cll(N,rank,'',.true.)
+        call InitEvent_cll
+        call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+        call SetMuUV2_cll(muR2) ! Set the renormalization scale    
+        ! Compute the input for the given variables
+        InputVarsD(1,:) = (/ s,t,mst2,mchi2,mt2 /)
+        call D_cll(Dcoeff,Dcoeffuv,p10,t,p32,p30,p20,p31,m02,m12,m22,m32,rank)     
+        Dcoeff = Dcoeff/((2*Pi)**4)
+        ! Store the result in the first entry
+        OutPutD(1,:,:,:,:) = Dcoeff
+        ! Compute the input changing p1<->p2 (t<->u)
+        u = -(s+t) + 2*mt2
+        InputVarsD(2,:) = (/ s,u,mst2,mchi2,mt2 /)
+        call D_cll(Dcoeff,Dcoeffuv,p10,u,p32,p30,p20,p31,m02,m12,m22,m32,rank)     
+        Dcoeff = Dcoeff/((2*Pi)**4)
+        ! Store result in the second entry
+        OutPutD(2,:,:,:,:) = Dcoeff
+    endif
 
-    call Init_cll(N,rank,'',.true.)
-    call InitCacheSystem_cll(1,N)
-    call InitEvent_cll     
-    call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
-    call SetMuUV2_cll(muR2) ! Set the renormalization scale
-    
-    call D_cll(Dcoeff,Dcoeffuv,p10,p21,p32,p30,p20,p31,m02,m12,m22,m32,rank,Derr)  
-    
-    Dcoeff = Dcoeff/((2*Pi)**4)
+    ! We can finally return the cached input
+    Dcoeff = OutPutD(cachedD,:,:,:,:)
     
 end subroutine getDIntegralsOnShell
 
@@ -1357,3 +1432,30 @@ subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
     close(50)
     
 end subroutine writedebugD
+
+logical function differs(oldVars,newVars)
+
+  implicit none
+
+  double complex oldVars(0:4),newVars(0:4)
+  double complex vold,vnew
+  double precision diff_real, diff_imag
+  integer ii
+
+  differs = .false.
+  do ii=0,size(oldVars)-1
+    vold = oldVars(ii)
+    vnew = newVars(ii)
+    if (vold == vnew) then
+      continue
+    endif
+    diff_real = DSQRT((real(vold)-real(vnew))**2/(real(vold)**2))
+    diff_imag = DSQRT((aimag(vold)-aimag(vnew))**2/(aimag(vold)**2))
+    if (diff_real > 1d-4 .or. diff_imag > 1d-4) then
+      differs = .true.
+      exit
+    endif
+  enddo  
+
+  return
+end function differs
