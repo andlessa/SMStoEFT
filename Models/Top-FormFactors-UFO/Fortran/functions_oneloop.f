@@ -70,19 +70,14 @@ end subroutine getCIntegrals
 
 subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
 
-    ! Return the 4-point integrals. Note that the normalization includes the 1/(2*pi)^4 factor!
-    ! On-shell relations:
-    !   p10 = k1^2 = 0 (gluon momentum)
-    !   p21 = k2^2 = 0 (gluon momentum)
-    !   p32 = p1^2 = MT^2 (top momentum)
-    !   p30 = p2^2 = MT^2 (top momentum)
-    !   p20 = (p1+p2)^2 = s
-    !   p31 = (k1-p1)^2 = t
-    !   m02 = mST^2 (Stop mass squared)
-    !   m12 = mST^2 (Stop mass squared)
-    !   m22 = mST^2 (Stop mass squared)
-    !   m32 = mChi^2 (DM mass squared)
+    ! Return the 4-point integrals for the external momenta onshell.
+    ! The order of the arguments is defined by the loop integrals provided by FeynCalc:
+    ! D_{ijk} (0,t or u, MT^2, s, MT^2, 0, mST^2, mST^2, mChi^2, mST^2)
 
+    ! The Collier function follows the same argument ordering as FeynCalc/PackageX
+    ! (except that PackageX takes the propagator masses without squares)    
+    ! Note that the normalization includes the 1/(2*pi)^4 factor!
+    
     ! D0 = Dcoeff(0,0,0,0)
     ! D1 = Dcoeff(0,1,0,0)
     ! D2 = Dcoeff(0,0,1,0)
@@ -124,15 +119,15 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
     parameter  (Pi=3.141592653589793D0)
 
     p10 = 0d0
-    p21 = 0d0
+    p21 = t
     p32 = mt2
-    p30 = mt2
-    p20 = s
-    p31 = t
+    p30 = s
+    p20 = mt2
+    p31 = 0d0
     m02 = mst2
     m12 = mst2
-    m22 = mst2
-    m32 = mchi2
+    m22 = mchi2
+    m32 = mst2
 
 
     N = 4 ! Maximum number for loop (3-point function)
@@ -464,13 +459,14 @@ double complex function formFactorC12(s,p1sq,p2sq)
 
 end function
 
-double complex function D0(s)
+
+double complex function D0(s,t)
 
     use collier
 
     implicit none
 
-    double complex s
+    double complex s,t
     double complex mt2,mst2,mchi2
     double precision deltaUV,muR2
     double complex Dcoeff(0:1,0:3,0:3,0:3)
@@ -486,11 +482,770 @@ double complex function D0(s)
     if (MDL_IBOX <= 0d0) then
         D0 = 0d0
     else            
-        call getDIntegralsOnShell(Dcoeff,s,0d0,mst2,mchi2,mt2,muR2,deltaUV)
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D0 = Dcoeff(0,0,0,0)
 
     if (MDL_IDEBUG > 0d0) then
         call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D0')
+    end if
+
+    return 
+
+end function
+
+double complex function D1(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D1 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D1 = Dcoeff(0,1,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D1')
+    end if
+
+    return 
+
+end function
+
+double complex function D2(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D2 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D2 = Dcoeff(0,0,1,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D2')
+    end if
+
+    return 
+
+end function
+
+double complex function D3(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D3 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D3 = Dcoeff(0,0,0,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D3')
+    end if
+
+    return 
+
+end function
+
+double complex function D00(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D00 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D00 = Dcoeff(1,0,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D00')
+    end if
+
+    return 
+
+end function
+
+double complex function D11(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D11 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D11 = Dcoeff(0,2,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D11')
+    end if
+
+    return 
+
+end function
+
+double complex function D12(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D12 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D12 = Dcoeff(0,1,1,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D12')
+    end if
+
+    return 
+
+end function
+
+double complex function D13(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D13 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D13 = Dcoeff(0,1,0,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D13')
+    end if
+
+    return 
+
+end function
+
+double complex function D22(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D22 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D22 = Dcoeff(0,0,2,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D22')
+    end if
+
+    return 
+
+end function
+
+double complex function D23(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D23 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D23 = Dcoeff(0,0,1,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D23')
+    end if
+
+    return 
+
+end function
+
+double complex function D33(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D33 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D33 = Dcoeff(0,0,0,2)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D33')
+    end if
+
+    return 
+
+end function
+
+double complex function D001(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D001 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D001 = Dcoeff(1,1,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D001')
+    end if
+
+    return 
+
+end function
+
+double complex function D002(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D002 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D002 = Dcoeff(1,0,1,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D002')
+    end if
+
+    return 
+
+end function
+
+double complex function D003(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D003 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D003 = Dcoeff(1,0,0,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D003')
+    end if
+
+    return 
+
+end function
+
+double complex function D111(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D111 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D111 = Dcoeff(0,3,0,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D111')
+    end if
+
+    return 
+
+end function
+
+double complex function D112(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D112 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D112 = Dcoeff(0,2,1,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D112')
+    end if
+
+    return 
+
+end function
+
+double complex function D113(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D113 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D113 = Dcoeff(0,2,0,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D113')
+    end if
+
+    return 
+
+end function
+
+double complex function D122(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D122 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D122 = Dcoeff(0,1,2,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D122')
+    end if
+
+    return 
+
+end function
+
+double complex function D123(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D123 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D123 = Dcoeff(0,1,1,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D123')
+    end if
+
+    return 
+
+end function
+
+double complex function D133(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D133 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D133 = Dcoeff(0,1,0,2)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D133')
+    end if
+
+    return 
+
+end function
+
+double complex function D222(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D222 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D222 = Dcoeff(0,0,3,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D222')
+    end if
+
+    return 
+
+end function
+
+double complex function D223(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D223 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D223 = Dcoeff(0,0,2,1)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D223')
+    end if
+
+    return 
+
+end function
+
+double complex function D233(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D233 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D233 = Dcoeff(0,0,1,2)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D233')
+    end if
+
+    return 
+
+end function
+
+double complex function D333(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_IBOX <= 0d0) then
+        D333 = 0d0
+    else            
+        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D333 = Dcoeff(0,0,0,3)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D333')
     end if
 
     return 
@@ -546,7 +1301,7 @@ subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
     open(unit=50,file=trim(fname),action='WRITE',position='APPEND',status='unknown')
     write(50,*) '------------ ',trim(header),': -------------------------'
     write (50, fmt2) 'mst^2,mchi^2,mt^2 = ',mst2,'*i',mchi2,'*i',mt2,'*i'
-    write (50,fmt1) 's,t = ',s,'*i',t,'*i',u,'*i'
+    write (50,fmt1) 's,t,u = ',s,'*i',t,'*i',u,'*i'
     write (50,fmt10) 'D0 = ',Dcoeff(0,0,0,0),'*i'
     write (50,fmt10) 'D1 = ',Dcoeff(0,1,0,0),'*i'
     write (50,fmt10) 'D2 = ',Dcoeff(0,0,1,0),'*i'

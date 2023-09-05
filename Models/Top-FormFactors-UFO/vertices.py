@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 15:40:01
+# Date: Tue 5 Sep 2023 10:27:27
 
 
 from object_library import all_vertices, Vertex
@@ -516,7 +516,7 @@ V_84 = Vertex(name = 'V_84',
 V_85 = Vertex(name = 'V_85',
               particles = [ P.t__tilde__, P.t, P.g ],
               color = [ 'T(3,2,1)' ],
-              lorentz = [ L.FFV1, L.FFV2, L.FFVC00REN, L.FFVC12, L.FFVC1, L.FFVC11 ],
+              lorentz = [ L.FFV1, L.FFV2, L.FFV3, L.FFV7, L.FFV8, L.FFV9 ],
               couplings = {(0,0):C.GC_12,(0,1):C.GC_68,(0,2):C.GC_64,(0,4):C.GC_65,(0,5):C.GC_66,(0,3):C.GC_67})
 
 V_86 = Vertex(name = 'V_86',
@@ -804,7 +804,7 @@ V_132 = Vertex(name = 'V_132',
 V_133 = Vertex(name = 'V_133',
                particles = [ P.t__tilde__, P.t, P.g, P.g ],
                color = [ 'f(-1,3,4)*T(-1,2,1)', 'T(3,-1,1)*T(4,2,-1)', 'T(3,2,-1)*T(4,-1,1)' ],
-               lorentz = [ L.FFVVC1, L.FFVV3CTOT, L.FFVV4CTOT, L.FFVVC12, L.FFVVC11 ],
+               lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
                couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
 
 V_134 = Vertex(name = 'V_134',

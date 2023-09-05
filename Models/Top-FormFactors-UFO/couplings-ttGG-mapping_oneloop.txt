@@ -30,7 +30,7 @@ V_133 = Vertex(name = 'V_133',
 
 ### ADDED NEW COUPLING:
 GC_100 = Coupling(name = 'GC_100',
-                 value = 'complex(0,1)*cmath.pi**2*G**2*yDM**2',
+                 value = 'IBOX*complex(0,1)*cmath.pi**2*G**2*yDM**2',
                  order = {'NP':2,'QCD':2})
 
 t = (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2))
