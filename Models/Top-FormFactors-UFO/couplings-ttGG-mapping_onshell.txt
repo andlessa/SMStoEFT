@@ -9,7 +9,7 @@ Gamma(a,b,c) -> a = Lorentz index, b,c-> spinor indices
 
 The couplings matrix contracts the color with the lorentz fields:
 
-coupling = (a,b):C.GC_xx -> lorentz[a]*color[b]*C.GC_xx
+coupling = (a,b):C.GC_xx -> color[a]*lorentz[b]*C.GC_xx
 
 
 ### UFO Vertices:

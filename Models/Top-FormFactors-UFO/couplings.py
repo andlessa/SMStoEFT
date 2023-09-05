@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 5 Sep 2023 10:27:27
+# Date: Mon 4 Sep 2023 09:25:12
 
 
 from object_library import all_couplings, Coupling
@@ -405,3 +405,6 @@ GC_99 = Coupling(name = 'GC_99',
                  value = '-((complex(0,1)*ytau)/cmath.sqrt(2))',
                  order = {'QED':1})
 
+GC_100 = Coupling(name = 'GC_100',
+                 value = 'complex(0,1)*cmath.pi**2*G**2*yDM**2',
+                 order = {'NP':2,'QCD':2})

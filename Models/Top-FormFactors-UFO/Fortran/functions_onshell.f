@@ -91,11 +91,11 @@ double complex function formFactorCTOT(s,p1sq,p2sq)
         C11 = Ccoeff(0,2,0)
         C12 = Ccoeff(0,1,1)
         CTOT = C1+C11+C12
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'CTOT')
-    end if
+    endif
 
 
     formFactorCTOT = CTOT
@@ -147,11 +147,11 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
                 
         ! New value to be used to replace the default value:
         formFactorC00ren = ScalarC00ren/c00renvalue
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C00ren')
-    end if
+    endif
 
 
     return 
@@ -190,11 +190,11 @@ double complex function formFactorC1(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC1 = C1/c1value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C1')
-    end if
+    endif
 
 
     return 
@@ -234,11 +234,11 @@ double complex function formFactorC11(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC11 = C11/c11value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
-    end if
+    endif
 
     return  
 
@@ -276,11 +276,11 @@ double complex function formFactorC12(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC12 = C12/c12value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C12')
-    end if
+    endif
 
 
     return 

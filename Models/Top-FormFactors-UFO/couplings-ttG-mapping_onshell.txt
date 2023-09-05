@@ -7,6 +7,12 @@ E.g: P(-2,1)*P(-2,1) = p1(mu)*p1(mu)
        dummy index for sum
 Gamma(a,b,c) -> a = Lorentz index, b,c-> spinor indices
 
+
+The couplings matrix contracts the color with the lorentz fields:
+
+coupling = (a,b):C.GC_xx -> color[a]*lorentz[b]*C.GC_xx
+
+
 ### C00 effective coefficient ###
 
 From the loop calculation the term proportional to Gamma^mu*P_L should come multiplied by the C00 loop integral.

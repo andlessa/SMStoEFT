@@ -186,11 +186,11 @@ double complex function formFactorCTOT(s,p1sq,p2sq)
         C11 = Ccoeff(0,2,0)
         C12 = Ccoeff(0,1,1)
         CTOT = C1+C11+C12
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'CTOT')
-    end if
+    endif
 
 
     formFactorCTOT = CTOT
@@ -238,11 +238,11 @@ double complex function formFactorC00ren(s,p1sq,p2sq)
                 
         ! New value to be used to replace the default value:
         formFactorC00ren = ScalarC00ren/c00renvalue
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C00ren')
-    end if
+    endif
 
 
     return 
@@ -281,11 +281,11 @@ double complex function formFactorC1(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC1 = C1/c1value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C1')
-    end if
+    endif
 
 
     return 
@@ -322,11 +322,11 @@ double complex function formFactorC2(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC2 = C2/c1value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C2')
-    end if
+    endif
 
     return 
 
@@ -364,11 +364,11 @@ double complex function formFactorC11(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC11 = C11/c11value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
-    end if
+    endif
 
     return  
 
@@ -405,11 +405,11 @@ double complex function formFactorC22(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC22 = C22/c11value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C11')
-    end if
+    endif
 
 
     return 
@@ -448,11 +448,11 @@ double complex function formFactorC12(s,p1sq,p2sq)
         
         ! New value to be used to replace the default value:
         formFactorC12 = C12/c12value
-    end if 
+    endif 
 
     if (MDL_IDEBUG > 0d0) then
         call writedebug(s,p1sq,p2sq,Ccoeff,'C12')
-    end if
+    endif
 
 
     return 
@@ -484,10 +484,11 @@ double complex function D0(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D0 = Dcoeff(0,0,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D0')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D0')
+    endif
 
     return 
 
@@ -517,10 +518,11 @@ double complex function D1(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D1 = Dcoeff(0,1,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D1')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D1')
+    endif
 
     return 
 
@@ -550,10 +552,11 @@ double complex function D2(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D2 = Dcoeff(0,0,1,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D2')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D2')
+    endif
 
     return 
 
@@ -583,10 +586,11 @@ double complex function D3(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D3 = Dcoeff(0,0,0,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D3')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D3')
+    endif
 
     return 
 
@@ -616,10 +620,11 @@ double complex function D00(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D00 = Dcoeff(1,0,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D00')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D00')
+    endif
 
     return 
 
@@ -649,10 +654,11 @@ double complex function D11(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D11 = Dcoeff(0,2,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D11')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D11')
+    endif
 
     return 
 
@@ -682,10 +688,11 @@ double complex function D12(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D12 = Dcoeff(0,1,1,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D12')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D12')
+    endif
 
     return 
 
@@ -715,10 +722,11 @@ double complex function D13(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D13 = Dcoeff(0,1,0,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D13')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D13')
+    endif
 
     return 
 
@@ -748,10 +756,11 @@ double complex function D22(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D22 = Dcoeff(0,0,2,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D22')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D22')
+    endif
 
     return 
 
@@ -781,10 +790,11 @@ double complex function D23(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D23 = Dcoeff(0,0,1,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D23')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D23')
+    endif
 
     return 
 
@@ -814,10 +824,11 @@ double complex function D33(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D33 = Dcoeff(0,0,0,2)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D33')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D33')
+    endif
 
     return 
 
@@ -847,10 +858,11 @@ double complex function D001(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D001 = Dcoeff(1,1,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D001')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D001')
+    endif
 
     return 
 
@@ -880,10 +892,11 @@ double complex function D002(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D002 = Dcoeff(1,0,1,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D002')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D002')
+    endif
 
     return 
 
@@ -913,10 +926,11 @@ double complex function D003(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D003 = Dcoeff(1,0,0,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D003')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D003')
+    endif
 
     return 
 
@@ -946,10 +960,11 @@ double complex function D111(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D111 = Dcoeff(0,3,0,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D111')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D111')
+    endif
 
     return 
 
@@ -979,10 +994,11 @@ double complex function D112(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D112 = Dcoeff(0,2,1,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D112')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D112')
+    endif
 
     return 
 
@@ -1012,10 +1028,11 @@ double complex function D113(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D113 = Dcoeff(0,2,0,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D113')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D113')
+    endif
 
     return 
 
@@ -1045,10 +1062,11 @@ double complex function D122(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D122 = Dcoeff(0,1,2,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D122')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D122')
+    endif
 
     return 
 
@@ -1078,10 +1096,11 @@ double complex function D123(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D123 = Dcoeff(0,1,1,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D123')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D123')
+    endif
 
     return 
 
@@ -1111,10 +1130,11 @@ double complex function D133(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D133 = Dcoeff(0,1,0,2)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D133')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D133')
+    endif
 
     return 
 
@@ -1144,10 +1164,11 @@ double complex function D222(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D222 = Dcoeff(0,0,3,0)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D222')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D222')
+    endif
 
     return 
 
@@ -1177,10 +1198,11 @@ double complex function D223(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D223 = Dcoeff(0,0,2,1)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D223')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D223')
+    endif
 
     return 
 
@@ -1210,10 +1232,11 @@ double complex function D233(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D233 = Dcoeff(0,0,1,2)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D233')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D233')
+    endif
 
     return 
 
@@ -1243,10 +1266,11 @@ double complex function D333(s,t)
     else            
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D333 = Dcoeff(0,0,0,3)
-
+    endif
+    
     if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,0d0,mst2,mchi2,mt2,Dcoeff,'D333')
-    end if
+        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D333')
+    endif
 
     return 
 
@@ -1287,7 +1311,7 @@ subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
 
     implicit none
    
-    double complex s,t
+    double complex s,t,u
     double complex mst2,mchi2,mt2
     double complex Dcoeff(0:1,0:3,0:3,0:3)
     character(len=99) :: fname
@@ -1297,10 +1321,12 @@ subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
     parameter (fmt2 = '(A13,3(es11.3,SP,es9.1,A2))')
     parameter (fmt10 = '(A6,es12.4,SP,es12.4,A2)')
 
+    u = -(s+t) + 2*mt2
+
     fname='myLogD.log'
     open(unit=50,file=trim(fname),action='WRITE',position='APPEND',status='unknown')
     write(50,*) '------------ ',trim(header),': -------------------------'
-    write (50, fmt2) 'mst^2,mchi^2,mt^2 = ',mst2,'*i',mchi2,'*i',mt2,'*i'
+    write (50, fmt2) 'mst,mchi,mt = ',CDSQRT(mst2),'*i',CDSQRT(mchi2),'*i',CDSQRT(mt2),'*i'
     write (50,fmt1) 's,t,u = ',s,'*i',t,'*i',u,'*i'
     write (50,fmt10) 'D0 = ',Dcoeff(0,0,0,0),'*i'
     write (50,fmt10) 'D1 = ',Dcoeff(0,1,0,0),'*i'
