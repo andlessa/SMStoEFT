@@ -48,7 +48,12 @@ In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $q q \to t \bar{t}$ production.  and corresponds to the lagrangian:
 
 ```math
-    \mathcal{L}_{FF} = \mathcal{L}_{SMS} + i A_1\ \bar{t}_R \gamma^\mu D_\mu t_R + \frac{i}{2} A_2\ \bar{t}_R \gamma^\mu \left( D^\nu D_\nu D_\mu + D_\mu D^\nu D_\nu \right)  t_R + A_3\ D^\nu G_{\mu \nu}^A \bar{t}_R T^A \gamma^\mu t_R + G_\mu^A \bar{t} \gamma^\mu T^A \left( P_L \delta_{CT,L} + P_R \delta_{CT,R} \right) t
+    \begin{aligned}
+      \mathcal{L}_{FF} = \mathcal{L}_{SMS} + & i A_1\ \bar{t}_R \gamma^\mu D_\mu t_R\\
+     + & \frac{i}{2} A_2\ \bar{t}_R \gamma^\mu \left( D^\nu D_\nu D_\mu + D_\mu D^\nu D_\nu \right)  t_R \\
+     + &A_3\ D^\nu G_{\mu \nu}^A \bar{t}_R T^A \gamma^\mu t_R \\
+     + & G_\mu^A \bar{t} \gamma^\mu T^A \left( P_L \delta_{CT,L} + P_R \delta_{CT,R} \right) t
+    \end{aligned}
 ```
 
 The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced. The model
@@ -123,7 +128,7 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
     ***
     * [matching](./mathematicaNBs/matching): notebooks for computing and checking the matching between the UV and EFT models.
     
-      $q + q \to \bar{t} + t$:
+      $q + q \to \bar{t} + t$ :
          * [SMS-stop-uutt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (u+u to top+top) form factors using the UV model as well as the EFT limit, used for matching the **OnShell** UFO model.
 
          * [SMS-stop-ttG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttG-loop.nb): calculation of the full 1-loop t-t-g effective coupling assuming off-shell tops and gluon (used for the **OneLoop** UFO model).
@@ -134,7 +139,7 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
 
          * [numericalLoops_Triangles](./mathematicaNBs/matching/numericalLoops_Triangles.nb): compute numerical values for the triangle loop integrals (for debugging) as well as the high mass limit
     
-      $g + g \to \bar{t} + t$
+      $g + g \to \bar{t} + t$ :
          * [SMS-stop-ggtt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (g+g to top+top) form factors using the UV model as well as the EFT limit.
 
          * [SMS-stop-ttGG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGG-loop.nb): calculation of the full 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
@@ -144,7 +149,7 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
          * [numericalLoops_Boxes](./mathematicaNBs/matching/numericalLoops_Boxes.nb): compute numerical values for the box loop integrals (for debugging) as well as the high mass limit
 
 
-      *EFT matching*
+      *EFT matching* :
          * [matchMakerReader](./mathematicaNBs/matching/matchMakerReader.nb): reads the MatchMaker output
 
          * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
