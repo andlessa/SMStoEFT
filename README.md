@@ -37,12 +37,13 @@ which is a Dark Matter candidate. In addition we impose a $\mathcal{Z}_2$ symmet
     \mathcal{L}_{SMS} = \bar{\chi}\left( i \gamma^\mu \partial_\mu -\frac{1}{2} m_{\chi} \right) \chi + |D_\mu \phi_T|^2 - m_{T}^2 |\phi_T|^2 - y_{\mathrm{DM}} \phi_T^\dagger \bar{\chi} t_R + G_\mu^A \bar{t} \gamma^\mu T^A \left( P_L \delta_{CT,L} + P_R \delta_{CT,R} \right) t
 ```
 
-where the terms $\delta_{CT,a}$ correspond to the counter-terms (in the on-shell renormalization scheme) for the $t-t-g$ coupling (computed using [NLOCT](https://arxiv.org/abs/1406.3030)) needed for the loop calculations and are functions of $m_T,m_{\chi},m_t$.
+where the terms $\delta_{CT,a}$ correspond to the counter-terms (in the on-shell renormalization scheme) for the $t-t-g$ coupling (computed using [NLOCT](https://arxiv.org/abs/1406.3030)) needed for the loop calculations and are functions of $m_T,m_{\chi},m_t$. Note that this is the only divergence which needs to be taken care of at 1-loop.
 In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 
 ### Top Couplings with Form Factors (Top-FormFactors)
 
  * The model is defined in [modelFiles/Top-FormFactors.fr](./modelFiles/Top-FormFactors.fr)
+
 
 The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $q q \to t \bar{t}$ production.  and corresponds to the lagrangian:
 
@@ -51,6 +52,13 @@ The model includes the dim-6 EFT operators in the *off-shell* (Green) basis rele
 ```
 
 The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced. The model
+
+There are two UFO versions of this implementation:
+
+ 1. [**On-shell**](./Models/Top-FormFactors-UFO/lorentz_onshell.py): the tops appearing in the vertices are assumed to be on-shell. The $t-t-g-g$ vertex is related to the $t-t-g$ vertex as determined by the effective lagrangian. This version should give the full 1-loop result for $q \bar{q} \to \bar{t} t$ production.
+ 2. [**OneLoop**](./Models/Top-FormFactors-UFO/lorentz_oneloop.py): the tops in the $t-t-g$ vertex are assumed to be off-shell and the $t-t-g-g$ vertex is given by the 1-loop diagrams (with on-shell tops ang gluons). This version should fully reproduce the results of the **on-shell** version for $q q \to t \bar{t}$ production. In addition it provides the full 1-loop results for $g g \to t \bar{t}$ production.
+ 
+#### 
 
 ### Top EFT physical (Top-EFTphysical)
 
@@ -114,11 +122,34 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
         * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
     ***
     * [matching](./mathematicaNBs/matching): notebooks for computing and checking the matching between the UV and EFT models.
-         * [SMS-stop-uutt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (u+u to top+top) form factors using the UV model as well as the EFT limit
-         * [Top-EFTphysical_simple-uutt-EFT](./mathematicaNBs/matching/Top-EFTphysical_simple-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation
-         * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
+    
+      $q + q \to \bar{t} + t$:
+         * [SMS-stop-uutt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (u+u to top+top) form factors using the UV model as well as the EFT limit, used for matching the **OnShell** UFO model.
+
+         * [SMS-stop-ttG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttG-loop.nb): calculation of the full 1-loop t-t-g effective coupling assuming off-shell tops and gluon (used for the **OneLoop** UFO model).
+
+         * [Top-FormFactors-ttG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttG-loop.nb): calculation of the t-t-g effective coupling within the FormFactors model (assumes on-shell tops), used for matching the **OnShell** UFO model.
+
+         * [Top-EFTphysical_simple-uutt-EFT](./mathematicaNBs/matching/Top-EFTphysical_simple-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation.
+
+         * [numericalLoops_Triangles](./mathematicaNBs/matching/numericalLoops_Triangles.nb): compute numerical values for the triangle loop integrals (for debugging) as well as the high mass limit
+    
+      $g + g \to \bar{t} + t$
+         * [SMS-stop-ggtt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (g+g to top+top) form factors using the UV model as well as the EFT limit.
+
+         * [SMS-stop-ttGG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGG-loop.nb): calculation of the full 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
+
+         * [Top-FormFactors-ttGG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttGG-loop.nb): calculation of the t-t-g-g effective coupling within the FormFactors model (assumes this vertex is fixed by the t-t-g matching).
+
+         * [numericalLoops_Boxes](./mathematicaNBs/matching/numericalLoops_Boxes.nb): compute numerical values for the box loop integrals (for debugging) as well as the high mass limit
+
+
+      *EFT matching*
          * [matchMakerReader](./mathematicaNBs/matching/matchMakerReader.nb): reads the MatchMaker output
-         * [numericalLoops](): compute numerical values for the loop integrals (for debugging) as well as the high mass limit
+
+         * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
+
+         
 
 
 ## Form Factors
