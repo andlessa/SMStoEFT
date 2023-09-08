@@ -41,13 +41,21 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 |-----------|-----------|
 | SMS-stop 1 loop | <img src="../mathematicaNBs/matching/SMS-stop-ggtt-loop.png" width="450" height="600"> |
 | FormFactors | <img src="../mathematicaNBs/matching/Top-FormFactors-ggtt-loop.png" width="600" height="150"> |
-| FormFactors | <img src="../mathematicaNBs/matching/Top-EFTphysical_simple-ggtt-loop.png" height="150"> |
+| EFT | <img src="../mathematicaNBs/matching/Top-EFTphysical_simple-ggtt-loop.png" height="150"> |
 
 #### Results
 
-  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OnShell | OneLoop |   EFT  | NLO (MG5) |
+  All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
+
+  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) | OnShell (pb) |   EFT (pb)  | NLO-MG5  (pb) |
   | ----------- | ------------- | ---------------- | ------- | ------- | ------ | --------- |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |   x pb  |   x pb  |   x pb | x pb |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |     5000      |         1000     |   y pb  |   y pb  |   y pb | x pb |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-4.755 \pm 0.009)\times10^{-1}$   |      |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(33.91 \pm 0.007)\times10^{-5}$    |      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
+  |  |  |  |  |   |   |  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         1000      |      |      |  $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         1000     |      |      | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
+  
+
+
   
 

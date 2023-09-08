@@ -41,6 +41,6 @@ define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-import model /home/lessa/SMStoEFT/Models/Top-EFTphysical_simple-UFO
-generate q q > t t~ QCD^2==4 NP^2==2 QED^2<=0
-output ../../validation/top_eft/qq2tt_onlyInter
+import model /home/lessa/SMStoEFT/Models/Top-FormFactorsOnShell-UFO
+generate g g > t t~ QCD^2<=4 NP^2<=2 QED^2<=0
+output ../../validation/top_formFactorsOnShell/gg2tt_bornPlusInter
