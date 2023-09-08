@@ -5,12 +5,12 @@ Below we present the validation of the distinct implementations of the SMS model
 
  1. UV Simplified Model (SMS-stop): UV simplified model
  1. Top Couplings with Form Factors (Top-FormFactors):
-    - OnShell: assumes on-shell tops (valid for $ q + q \to \bar{t} + t$ production)
-    - OneLoop: assumes off-shell tops for the $t-t-g$ vertex and the 1 loop calculation for the $t-t-g-g$ vertex with on-shell tops and gluons (valid for $ g + g \to \bar{t} + t$ production)
+    - OnShell: assumes on-shell tops (valid for $q + q \to \bar{t} + t$ production)
+    - OneLoop: assumes off-shell tops for the $t-t-g$ vertex and the 1 loop calculation for the $t-t-g-g$ vertex with on-shell tops and gluons (valid for $g + g \to \bar{t} + t$ production)
   1. Top EFT physical (Top-EFTphysical): EFT matched model in the physical Basis.
 
 
-### Top Pair Production: $ q + q \to \bar{t} + t$
+### Top Pair Production: $q + q \to \bar{t} + t$
 
 
 | Model     | Diagrams  |
@@ -21,15 +21,18 @@ Below we present the validation of the distinct implementations of the SMS model
 
 #### Results
 
+All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
+
   | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OnShell | OneLoop |   EFT  | NLO (MG5) |
   | ----------- | ------------- | ---------------- | ------- | ------- | ------ | --------- |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |   x pb  |   x pb  |   x pb | x pb |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |     5000      |         1000     |   y pb  |   y pb  |   y pb | x pb |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         1000     |   y pb  |   y pb  |   y pb | x pb |
   
 
 
 
-### Top Pair Production: $ g + g \to \bar{t} + t$
+### Top Pair Production: $g + g \to \bar{t} + t$
 
 
 | Model     | Diagrams  |
