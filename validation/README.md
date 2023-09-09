@@ -49,11 +49,11 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
   | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) | OnShell (pb) |   EFT (pb)  | NLO-MG5  (pb) |
   | ----------- | ------------- | ---------------- | ------- | ------- | ------ | --------- |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-4.755 \pm 0.009)\times10^{-1}$   |      |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(33.91 \pm 0.007)\times10^{-5}$    |      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-4.755 \pm 0.009)\times10^{-1}$   |   $(-0.372 \pm 0.008)\times10^{-1}$    |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(33.91 \pm 0.007)\times10^{-5}$    |   $(131.4 \pm 0.4)\times10^{-5}$   |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         1000      |      |      |  $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         1000     |      |      | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         1000      |  $(-13.31 \pm 4.7)\times10^{-4}$    | $(-8.257 \pm 0.02)\times10^{-4}$     |  $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         1000     |  $(34.56 \pm 0.1)\times10^{-10}$    |   $(49.12 \pm 0.1)\times10^{-10}$   | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
   
 
 
