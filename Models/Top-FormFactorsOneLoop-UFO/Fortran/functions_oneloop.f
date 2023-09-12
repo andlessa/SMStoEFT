@@ -69,6 +69,8 @@ subroutine getCIntegrals(Ccoeff,s,p2sq,p1sq,mchi2,mst2,muR2,deltaUV)
         cachedC = 1
         call Init_cll(N,rank,'',.true.)
         call InitEvent_cll
+        ! Using mode=3 computes with the DD and COLI branches and return the most precise results
+        call SetMode_cll(3) 
         call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale    
         ! Compute the input for the given variables
@@ -149,11 +151,12 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
     ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
-    double complex p10,p21,p32,p30,p20,p31,m02,m12,m22,m32
+    double complex k1sq,k2sq
     double complex s,t,u,mchi2,mst2,mt2
+    double complex xs,xt,xu,xmchi2,xmst2,xmt2
     double precision muR2,deltaUV
     double complex Dcoeff(0:1,0:3,0:3,0:3),Dcoeffuv(0:1,0:3,0:3,0:3)
-    integer N,rank
+    integer N,rank,i,j,k
     double precision Pi
     parameter  (Pi=3.141592653589793D0)
 
@@ -170,29 +173,29 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
     N = 4 ! Maximum number for loop (3-point function)
     rank = 3 ! Maximum rank for loop (=N)
 
+    u = -(s+t) + 2*mt2
+    ! Rescale invariants by mst2 to improve stability
+    xs = s/mst2
+    xt = t/mst2
+    xu = u/mst2
+    xmst2 = 1d0
+    xmchi2 = mchi2/mst2
+    xmt2 = mt2/mst2
+
+
     ! Store new input variables
-    newInputD = (/ s,t,mst2,mchi2,mt2 /)
-    p10 = 0d0
-    p21 = t
-    p32 = mt2
-    p30 = s
-    p20 = mt2
-    p31 = 0d0
-    m02 = mst2
-    m12 = mst2
-    m22 = mchi2
-    m32 = mst2
+    newInputD = (/ xs,xt,xmst2,xmchi2,xmt2 /)
+    k1sq = 0d0
+    k2sq = 0d0
 
     ! Check if the given input variables matches any
     ! of the cached ones
-    if (cachedD > 0) then
-        if (.not.differs(InputVarsD(1,:),newInputD)) then
-            cachedD = 1
-        else if (.not.differs(InputVarsD(2,:),newInputD)) then
-            cachedD = 2
-        else
-            cachedD = 0
-        endif
+    if (.not.differs(InputVarsD(1,:),newInputD)) then
+        cachedD = 1
+    else if (.not.differs(InputVarsD(2,:),newInputD)) then
+        cachedD = 2
+    else
+        cachedD = 0
     endif
 
     ! If cachedD = 0, we need to compute it and cache
@@ -202,19 +205,39 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         cachedD = 1
         call Init_cll(N,rank,'',.true.)
         call InitEvent_cll
+        ! Using mode=3 computes with the DD and COLI branches and return the most precise results
+        call SetMode_cll(3)
         call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale    
         ! Compute the input for the given variables
-        InputVarsD(1,:) = (/ s,t,mst2,mchi2,mt2 /)
-        call D_cll(Dcoeff,Dcoeffuv,p10,t,p32,p30,p20,p31,m02,m12,m22,m32,rank)     
+        InputVarsD(1,:) = (/ xs,xt,xmst2,xmchi2,xmt2 /)
+        call D_cll(Dcoeff,Dcoeffuv,k1sq,xt,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
         Dcoeff = Dcoeff/((2*Pi)**4)
+        ! Rescale coefficients
+        do i=0,3
+            do j=0,3
+              do k =0,3
+                Dcoeff(0,i,j,k) = Dcoeff(0,i,j,k)/mst2**2
+                Dcoeff(1,i,j,k) = Dcoeff(1,i,j,k)/mst2
+              enddo
+            enddo
+        enddo    
+      
         ! Store the result in the first entry
         OutPutD(1,:,:,:,:) = Dcoeff
         ! Compute the input changing p1<->p2 (t<->u)
-        u = -(s+t) + 2*mt2
-        InputVarsD(2,:) = (/ s,u,mst2,mchi2,mt2 /)
-        call D_cll(Dcoeff,Dcoeffuv,p10,u,p32,p30,p20,p31,m02,m12,m22,m32,rank)     
+        InputVarsD(2,:) = (/ xs,xu,xmst2,xmchi2,xmt2 /)
+        call D_cll(Dcoeff,Dcoeffuv,k1sq,xu,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
         Dcoeff = Dcoeff/((2*Pi)**4)
+        ! Rescale coefficients
+        do i=0,3
+            do j=0,3
+              do k =0,3
+                Dcoeff(0,i,j,k) = Dcoeff(0,i,j,k)/mst2**2
+                Dcoeff(1,i,j,k) = Dcoeff(1,i,j,k)/mst2
+              enddo
+            enddo
+
         ! Store result in the second entry
         OutPutD(2,:,:,:,:) = Dcoeff
     endif
@@ -1342,7 +1365,7 @@ double complex function D333(s,t)
 
     if (MDL_IBOX <= 0d0) then
         D333 = 0d0
-    else            
+    else
         call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         D333 = Dcoeff(0,0,0,3)
     endif
@@ -1396,7 +1419,7 @@ subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
     character(len=99) :: fname
     character(len=*) :: header
     character(len=*) fmt1,fmt10,fmt2
-    parameter (fmt1 = '(A22,2(es11.3,SP,es9.1,A2))')
+    parameter (fmt1 = '(A22,3(es11.3,SP,es9.1,A2))')
     parameter (fmt2 = '(A13,3(es11.3,SP,es9.1,A2))')
     parameter (fmt10 = '(A6,es12.4,SP,es12.4,A2)')
 
