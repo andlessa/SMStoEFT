@@ -237,7 +237,7 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
                 Dcoeff(1,i,j,k) = Dcoeff(1,i,j,k)/mst2
               enddo
             enddo
-
+        enddo
         ! Store result in the second entry
         OutPutD(2,:,:,:,:) = Dcoeff
     endif
