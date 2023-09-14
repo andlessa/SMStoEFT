@@ -126,6 +126,10 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
         * [diagrams-SMEFT-stop](./mathematicaNBs/amplitudes/diagrams-SMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
         * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
     ***
+   * [nlo](./mathematicaNBs/nlo): notebooks for automated NLO calculations
+        * [SMS-stop-BSM-CTs.nb](./mathematicaNBs/nlo/SMS-stop-BSM-CTs.nb): uses NLOCT to compute the BSM counter-terms for the top couplings and self energy
+        * [SMS-stop-NLO.nb](./mathematicaNBs/nlo/SMS-stop-NLO.nb): creates a NLO version of the model (*only seems to work with loop-induced processes*)
+    ***
     * [matching](./mathematicaNBs/matching): notebooks for computing and checking the matching between the UV and EFT models.
     
       $q + q \to \bar{t} + t$ :
@@ -143,6 +147,8 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
          * [SMS-stop-ggtt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (g+g to top+top) form factors using the UV model as well as the EFT limit.
 
          * [SMS-stop-ttGG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGG-loop.nb): calculation of the full 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
+
+         * [SMS-stop-ttGGSelf-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGGSelf-loop.nb): calculation of the self-energy diagrams to the 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
 
          * [Top-FormFactors-ttGG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttGG-loop.nb): calculation of the t-t-g-g effective coupling within the FormFactors model (assumes this vertex is fixed by the t-t-g matching).
 

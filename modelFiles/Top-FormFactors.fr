@@ -75,6 +75,18 @@ deltaCT1R == {
               Value -> (1/(128*xT^2*Sqrt[lA]*Pi^4))*((-1 + xC - xT)*(Sqrt[lA]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])]))
          },
 
+deltaS1 = {
+              ComplexParameter -> False, 
+              ParameterType->Internal, 
+              Value -> (-mST/(32*Pi^4*xT^(3/2)))*( xT*(2*xC+xT-2)/Sqrt[xT] + (-xC^2 + 2 xC + xT - 1)*Log[xC] - 2*(-xC^3 + (3+xT)*xC^2 + (xT-3)*xC + (xT-1)^2)*Log[(xC-xT+Sqrt[lA]+1)/(2*Sqrt[xC])]/(Sqrt[lA]) )
+         },
+
+deltaSp1 = {
+              ComplexParameter -> False, 
+              ParameterType->Internal, 
+              Value -> (1/(64*Pi^4*xT^2))*( 2*xT*(xC-xT-1)/xT + (-xC^2 + 2 xC + xT^2 - 1)*Log[xC] + 2*(xC^3 - (3+xT)*xC^2 + (xT^2+3)*xC - (xT+1)*(xT-1)^2)*Log[(xC-xT+Sqrt[lA]+1)/(2*Sqrt[xC])]/(Sqrt[lA]) )
+         },         
+
 (* Off-shell counter-terms (mST < mChi + MT) *)
 deltaCT2L == {
               ComplexParameter -> False, 
@@ -87,6 +99,18 @@ deltaCT2R == {
               ParameterType->Internal, 
               Value -> (1/(128*xT^2*Pi^4))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*(-ArcTan[Sqrt[lB]/(1 + xC - xT)]))/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC])))
              },
+
+deltaS2 = {
+              ComplexParameter -> False, 
+              ParameterType->Internal, 
+              Value -> (-mST/(32*Pi^4*xT^(3/2)))*( xT*(xC-1) + xT*(xC + xT -1) - Sqrt[lB]*(xC-1)*ArcTan[Sqrt[lB]/(1 + xC - xT)] + (xC+xT-1)*(xC^2 -(2+xT)*xC - xT + 1)*ArcTan[Sqrt[lB]/(1 + xC - xT)]/Sqrt[lB] - (xC^2 - 2*xC - xT + 1)*Log[xC] )
+         },
+
+deltaSp2 = {
+              ComplexParameter -> False, 
+              ParameterType->Internal, 
+              Value -> (1/(32*Pi^4*xT^2))*( -2*xT^2 + xT*(xC+xT-1) + Sqrt[lB]*xT*[Sqrt[lB]/(1 + xC - xT)] + (xC+xT-1)*(xC^2 -(xT+2)*xC -xT + 1)*ArcTan[Sqrt[lB]/(1 + xC - xT)]/Sqrt[lB] + (xC^2 -2*xC -xT^2 + 1)*Log[xC]/xT^2 )
+         },               
 
 (* Use delta_1 or delta_2 depending on the mass relations *)
 
@@ -103,6 +127,20 @@ deltaCTR == {
              ParameterType->Internal, 
              Value -> If[mST > mChi + MT, deltaCT1R, deltaCT2R]
             },
+
+deltaS == {
+             TeX->Subscript[\[Delta],S],  
+             ComplexParameter -> False, 
+             ParameterType->Internal, 
+             Value -> If[mST > mChi + MT, deltaS1, deltaS2]
+            },
+
+deltaSp == { 
+             TeX->Subscript[\[Delta],Sp],  
+             ComplexParameter -> False, 
+             ParameterType->Internal, 
+             Value -> If[mST > mChi + MT, deltaSp1, deltaSp2]
+            },            
 
 (* EFT coefficients *)
 (* Cij = Passarino-Veltman integral C_{ij}(MT^2,s,MT^2,mChi^2,mST^2,mST^2)  *)
