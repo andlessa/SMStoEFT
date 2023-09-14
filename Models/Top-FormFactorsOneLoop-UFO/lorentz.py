@@ -184,6 +184,8 @@ FFVVV7 = Lorentz(name = 'FFVVV7',
                  spins = [ 2, 2, 3, 3, 3 ],
                  structure = 'Gamma(5,2,-1)*Metric(3,4)*ProjP(-1,1) + Gamma(4,2,-1)*Metric(3,5)*ProjP(-1,1) + Gamma(3,2,-1)*Metric(4,5)*ProjP(-1,1)')
 
+### top-top-gluon-gluon vertices from box loops  (including the triangle diagram from g-g-stop-stop coupling)
+
 FFVVNP1 = Lorentz(name = 'FFVVNP1',
                 spins = [ 2, 2, 3, 3 ],
                 structure = '( Gamma(3,2,-1)*ProjP(-1,1) )*(\
@@ -314,3 +316,54 @@ FFVVNP10 = Lorentz(name = 'FFVVNP10',
                                   + (-P(3,1))*(-P(4,2))*(-2*(D23( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) ) + 2*D233( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) ) + D33( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) ) + 2*D333( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))\
                                   + (-P(3,1))*(-P(4,1))*(-2*(D33( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) ) + 2*D333( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))\
                                  )')
+
+### top-top-gluon-gluon vertices from self-energy loops (t-channel)
+
+FFVVNP21 = Lorentz(name = 'FFVVNP21',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(3,2,-1)*Gamma(4,-1,1) )*( (-ab1( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2)) )))')
+
+
+FFVVNP22 = Lorentz(name = 'FFVVNP22',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(3,2,-1)*P(-2,4)*Gamma(-2,-1,-3)*Gamma(4,-3,1) )*( (-ab2( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2)) )))')
+
+
+FFVVNP23 = Lorentz(name = 'FFVVNP23',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(3,2,-1)*P(-2,1)*Gamma(-2,-1,-3)*Gamma(4,-3,1) )*( (ab2( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2)) )))')
+
+
+FFVVNP24 = Lorentz(name = 'FFVVNP24',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(3,2,-1)*P(-2,4)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (-ab3( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2)) )))')
+
+
+FFVVNP25 = Lorentz(name = 'FFVVNP25',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(3,2,-1)*P(-2,1)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (ab3( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,3)**2 + P(-1,2)**2 + 2*P(-1,3)*P(-1,2)) )))')
+
+
+FFVVNP26 = Lorentz(name = 'FFVVNP26',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(4,2,-1)*Gamma(3,-1,1) )*( (-ab1( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))')
+
+
+FFVVNP27 = Lorentz(name = 'FFVVNP27',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(4,2,-1)*P(-2,4)*Gamma(-2,-1,-3)*Gamma(3,-3,1) )*( (ab2( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))')
+
+
+FFVVNP28 = Lorentz(name = 'FFVVNP28',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(4,2,-1)*P(-2,2)*Gamma(-2,-1,-3)*Gamma(3,-3,1) )*( (-ab2( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))')
+
+
+FFVVNP29 = Lorentz(name = 'FFVVNP29',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(4,2,-1)*P(-2,4)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (ab3( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))')
+
+
+FFVVNP30 = Lorentz(name = 'FFVVNP30',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '( Gamma(4,2,-1)*P(-2,2)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (-ab3( (P(-1,1)**2 + P(-1,2)**2 + 2*P(-2,1)*P(-2,2)), (P(-1,4)**2 + P(-1,2)**2 + 2*P(-1,4)*P(-1,2)) )))')

@@ -1,3 +1,90 @@
+
+
+subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
+
+    ! Return the combination of 1-point and 2-point integrals required
+    ! for computing the self-energy contributions
+    ! ab(s,t) = (mST**2 - mChi**2 - t)*B0(t,mChi**2,mST**2) - A0(mST**2) + A0(mChi**2)
+    ! (s and mt2 are required to automatically compute and cache the t and u integrals)
+
+    use collier
+
+    implicit none
+
+    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
+    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    double complex s,t,u,mt2 
+    double complex mchi2,mst2
+    double precision muR2,deltaUV
+    double complex ab
+    integer N,rank
+    double precision Pi
+    parameter  (Pi=3.141592653589793D0)
+
+    double complex newInputAB(0:4)
+    logical differs
+
+    ! Internal cache for storing the results of the D integrals
+    ! (for u and t ) and avoiding duplicated calculations
+    double complex OutPutAB(1:2)
+    double complex InputVarsAB(1:2,0:4)
+    double complex A0chi,A0st,B0
+    integer cachedAB
+    common/colliercacheC/OutPutAB,InputVarsAB,cachedAB
+
+    N = 2
+    rank = 1
+
+    ! Store new input variables
+    newInputAB = (/ s,t,mt2,mchi2,mst2 /)
+
+    ! Check if the given input variables matches any
+    ! of the cached ones
+    if (.not.differs(InputVarsAB(1,:),newInputAB)) then
+        cachedAB = 1
+    else if (.not.differs(InputVarsAB(2,:),newInputAB)) then
+        cachedAB = 2
+    else
+        cachedAB = 0
+    endif
+    
+    ! If cachedAB = 0, we need to compute it and cache
+    ! (we know the values for p1,p2 and p1<->p2 will have to be computed
+    ! so we already do both and cache)
+    if (cachedAB == 0) then
+        cachedAB = 1
+        call Init_cll(N,rank,'',.true.)
+        call InitEvent_cll
+        ! Using mode=3 computes with the DD and COLI branches and return the most precise results
+        call SetMode_cll(3) 
+        call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+        call SetMuUV2_cll(muR2) ! Set the renormalization scale    
+        call A0_cll(A0chi,mchi2)
+        call A0_cll(A0st,mst2)  
+        A0chi = A0chi/((2*Pi)**4)
+        A0st = A0st/((2*Pi)**4)
+
+        ! Compute the input for the given variables
+        InputVarsAB(1,:) = (/ s,t,mt2,mchi2,mst2 /)
+        call B0_cll(B0,t,mchi2,mst2)
+        B0 = B0/((2*Pi)**4)
+        ! Store the result in the first entry
+        OutPutAB(1) = (mst2-mchi2-t)*B0- A0st + A0chi
+        
+        ! Compute the input changing p1<->p2 (t<->u)
+        u = -(s+t) + 2*mt2
+        InputVarsAB(2,:) = (/ s,u,mt2,mchi2,mst2 /)
+        call B0_cll(B0,u,mchi2,mst2)
+        B0 = B0/((2*Pi)**4)
+        ! Store the result in the second entry
+        OutPutAB(2) = (mst2-mchi2-u)*B0- A0st + A0chi
+    endif
+
+    ! We can finally return the cached input
+    ab = OutPutAB(cachedAB)
+    
+end subroutine getABIntegral
+
 ! ------------------------------------------------------------
 ! Directly uses COLLIER to compute all needed integrals
 ! ------------------------------------------------------------
@@ -1379,6 +1466,144 @@ double complex function D333(s,t)
 end function
 
 
+double complex function ab1(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2,mt
+    double precision deltaS,deltaSp
+    double precision deltaUV,muR2
+    double complex ab
+    double precision sCheck
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt = MDL_MT
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
+    deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
+
+    ! Flag to turn-off the corrections:
+    if (MDL_ISELF <= 0d0) then
+        ab1 = 0d0
+        return
+    endif
+
+    ! Check if t = MT^2 (possible divergent terms, which cancel out)
+    sCheck = abs(real(mt2)-real(t))/real(mt2)
+    if (sCheck.lt.1d-5) then
+        ab1 = 0d0
+        return
+    endif
+
+    ! Compute the relevant combination of A0 and B0 integrals:
+    call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
+    ! Compute the coefficient including the counter-terms
+    ab1 = (2*deltaS*mt2 + 4*deltaS*t + 2*deltaSp*mt*t - mt*ab)/(2*(mt2-t)**2)
+
+    return 
+
+end function
+
+double complex function ab2(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2,mt
+    double precision deltaS,deltaSp
+    double precision deltaUV,muR2
+    double complex ab
+    double precision sCheck
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt = MDL_MT
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
+    deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
+
+    ! Flag to turn-off the corrections:
+    if (MDL_ISELF <= 0d0) then
+        ab2 = 0d0
+        return
+    endif
+
+    ! Check if t = MT^2 (possible divergent terms, which cancel out)
+    sCheck = abs(real(mt2)-real(t))/real(mt2)
+    if (sCheck.lt.1d-5) then
+        ab2 = 0d0
+        return
+    endif
+
+    ! Compute the relevant combination of A0 and B0 integrals:
+    call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
+    ! Compute the coefficient including the counter-terms
+    ab2 = (2*t*(deltaSp*mt*mt2 + deltaS*(2*mt2 + t)) - mt*mt***ab)/(2.*mt*(mt2 - t)**2*t)
+
+    return 
+
+end function
+
+double complex function ab3(s,t)
+
+    use collier
+
+    implicit none
+
+    double complex s,t
+    double complex mt2,mst2,mchi2,mt
+    double precision deltaS,deltaSp
+    double precision deltaUV,muR2
+    double complex ab
+    double precision sCheck
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt = MDL_MT
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+    deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
+    deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
+
+    ! Flag to turn-off the corrections:
+    if (MDL_ISELF <= 0d0) then
+        ab3 = 0d0
+        return
+    endif
+
+    ! Check if t = MT^2 (possible divergent terms, which cancel out)
+    sCheck = abs(real(mt2)-real(t))/real(mt2)
+    if (sCheck.lt.1d-5) then
+        ab3 = 0d0
+        return
+    endif
+
+    ! Compute the relevant combination of A0 and B0 integrals:
+    call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
+    ! Compute the coefficient including the counter-terms
+    ab3 = (2*(deltaS - deltaSp*mt)*t + mt*ab)/(2.*mt*(mt2 - t)*t)
+
+    return 
+
+end function
+
 subroutine writedebug(s,p1sq,p2sq,Ccoeff,header)
 
     implicit none
@@ -1406,8 +1631,6 @@ subroutine writedebug(s,p1sq,p2sq,Ccoeff,header)
     close(50)
     
 end subroutine writedebug
-
-
 
 subroutine writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,header)
 

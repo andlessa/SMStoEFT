@@ -32,6 +32,7 @@ M$Parameters = {
 (* Auxiliary external parameters *)
   idebug  == {ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Turns on/off the printout of loop integral results"},
   ibox  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the box integrals (only for the oneloop functions)"},
+  iself  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the self-energy integrals (only for the oneloop functions)"},
 
 
 (* New Physics (UV) Parameters *)
@@ -75,13 +76,13 @@ deltaCT1R == {
               Value -> (1/(128*xT^2*Sqrt[lA]*Pi^4))*((-1 + xC - xT)*(Sqrt[lA]*(2*xT - (-1 + xC + xT)*Log[xC]) + 2*((-2 + xC)*xC + (-1 + xT)^2)*Log[(1 + xC + Sqrt[lA] - xT)/(2*Sqrt[xC])]))
          },
 
-deltaS1 = {
+deltaS1 == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
               Value -> (-mST/(32*Pi^4*xT^(3/2)))*( xT*(2*xC+xT-2)/Sqrt[xT] + (-xC^2 + 2 xC + xT - 1)*Log[xC] - 2*(-xC^3 + (3+xT)*xC^2 + (xT-3)*xC + (xT-1)^2)*Log[(xC-xT+Sqrt[lA]+1)/(2*Sqrt[xC])]/(Sqrt[lA]) )
          },
 
-deltaSp1 = {
+deltaSp1 == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
               Value -> (1/(64*Pi^4*xT^2))*( 2*xT*(xC-xT-1)/xT + (-xC^2 + 2 xC + xT^2 - 1)*Log[xC] + 2*(xC^3 - (3+xT)*xC^2 + (xT^2+3)*xC - (xT+1)*(xT-1)^2)*Log[(xC-xT+Sqrt[lA]+1)/(2*Sqrt[xC])]/(Sqrt[lA]) )
@@ -100,16 +101,16 @@ deltaCT2R == {
               Value -> (1/(128*xT^2*Pi^4))*(((2*(-(-1 + xC)^3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT^2)*(-ArcTan[Sqrt[lB]/(1 + xC - xT)]))/Sqrt[lB] + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*Log[xC])))
              },
 
-deltaS2 = {
+deltaS2 == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
               Value -> (-mST/(32*Pi^4*xT^(3/2)))*( xT*(xC-1) + xT*(xC + xT -1) - Sqrt[lB]*(xC-1)*ArcTan[Sqrt[lB]/(1 + xC - xT)] + (xC+xT-1)*(xC^2 -(2+xT)*xC - xT + 1)*ArcTan[Sqrt[lB]/(1 + xC - xT)]/Sqrt[lB] - (xC^2 - 2*xC - xT + 1)*Log[xC] )
          },
 
-deltaSp2 = {
+deltaSp2 == {
               ComplexParameter -> False, 
               ParameterType->Internal, 
-              Value -> (1/(32*Pi^4*xT^2))*( -2*xT^2 + xT*(xC+xT-1) + Sqrt[lB]*xT*[Sqrt[lB]/(1 + xC - xT)] + (xC+xT-1)*(xC^2 -(xT+2)*xC -xT + 1)*ArcTan[Sqrt[lB]/(1 + xC - xT)]/Sqrt[lB] + (xC^2 -2*xC -xT^2 + 1)*Log[xC]/xT^2 )
+              Value -> (1/(32*Pi^4*xT^2))*( -2*xT^2 + xT*(xC+xT-1) + Sqrt[lB]*xT*ArcTan[Sqrt[lB]/(1 + xC - xT)] + (xC+xT-1)*(xC^2 -(xT+2)*xC -xT + 1)*ArcTan[Sqrt[lB]/(1 + xC - xT)]/Sqrt[lB] + (xC^2 -2*xC -xT^2 + 1)*Log[xC]/xT^2 )
          },               
 
 (* Use delta_1 or delta_2 depending on the mass relations *)

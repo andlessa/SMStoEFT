@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 5 Sep 2023 10:27:27
+# Date: Thu 14 Sep 2023 12:21:18
 
 
 
@@ -81,13 +81,21 @@ ibox = Parameter(name = 'ibox',
                  lhablock = 'FRBlock',
                  lhacode = [ 2 ])
 
+iself = Parameter(name = 'iself',
+                  nature = 'external',
+                  type = 'real',
+                  value = 1.,
+                  texname = '\\text{iself}',
+                  lhablock = 'FRBlock',
+                  lhacode = [ 3 ])
+
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
                 type = 'real',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 3 ])
+                lhacode = [ 4 ])
 
 C00ren = Parameter(name = 'C00ren',
                    nature = 'external',
@@ -95,7 +103,7 @@ C00ren = Parameter(name = 'C00ren',
                    value = 1.,
                    texname = '\\text{Cren}_0',
                    lhablock = 'FRBlock',
-                   lhacode = [ 4 ])
+                   lhacode = [ 5 ])
 
 C1 = Parameter(name = 'C1',
                nature = 'external',
@@ -103,7 +111,7 @@ C1 = Parameter(name = 'C1',
                value = 1.,
                texname = 'C_1',
                lhablock = 'FRBlock',
-               lhacode = [ 5 ])
+               lhacode = [ 6 ])
 
 C11 = Parameter(name = 'C11',
                 nature = 'external',
@@ -111,7 +119,7 @@ C11 = Parameter(name = 'C11',
                 value = 1.,
                 texname = 'C_{11}',
                 lhablock = 'FRBlock',
-                lhacode = [ 6 ])
+                lhacode = [ 7 ])
 
 C12 = Parameter(name = 'C12',
                 nature = 'external',
@@ -119,7 +127,7 @@ C12 = Parameter(name = 'C12',
                 value = 1.,
                 texname = 'C_{12}',
                 lhablock = 'FRBlock',
-                lhacode = [ 7 ])
+                lhacode = [ 8 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',
@@ -279,6 +287,18 @@ deltaCT1R = Parameter(name = 'deltaCT1R',
                       value = '((-1 + xC - xT)*(cmath.sqrt(lA)*(2*xT - (-1 + xC + xT)*cmath.log(xC)) + 2*((-2 + xC)*xC + (-1 + xT)**2)*cmath.log((1 + xC - xT + cmath.sqrt(lA))/(2.*cmath.sqrt(xC)))))/(128.*cmath.pi**4*xT**2*cmath.sqrt(lA))',
                       texname = '\\text{deltaCT1R}')
 
+deltaS1 = Parameter(name = 'deltaS1',
+                    nature = 'internal',
+                    type = 'real',
+                    value = '-(mST*((-2 + 2*xC + xT)*cmath.sqrt(xT) + (-1 + 2*xC - xC**2 + xT)*cmath.log(xC) - (2*(-xC**3 + xC*(-3 + xT) + (-1 + xT)**2 + xC**2*(3 + xT))*cmath.log((1 + xC - xT + cmath.sqrt(lA))/(2.*cmath.sqrt(xC))))/cmath.sqrt(lA)))/(32.*cmath.pi**4*xT**1.5)',
+                    texname = '\\text{deltaS1}')
+
+deltaSp1 = Parameter(name = 'deltaSp1',
+                     nature = 'internal',
+                     type = 'real',
+                     value = '(2*(-1 + xC - xT) + (-1 + 2*xC - xC**2 + xT**2)*cmath.log(xC) + (2*(xC**3 - (-1 + xT)**2*(1 + xT) - xC**2*(3 + xT) + xC*(3 + xT**2))*cmath.log((1 + xC - xT + cmath.sqrt(lA))/(2.*cmath.sqrt(xC))))/cmath.sqrt(lA))/(64.*cmath.pi**4*xT**2)',
+                     texname = '\\text{deltaSp1}')
+
 lB = Parameter(name = 'lB',
                nature = 'internal',
                type = 'real',
@@ -309,6 +329,18 @@ deltaCT2R = Parameter(name = 'deltaCT2R',
                       value = '((-2*(-(-1 + xC)**3 - (2 + lB - 2*xC)*xT + (1 + xC)*xT**2)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + (1 - xC + xT)*(-2*xT + (-1 + xC + xT)*cmath.log(xC)))/(128.*cmath.pi**4*xT**2)',
                       texname = '\\text{deltaCT2R}')
 
+deltaS2 = Parameter(name = 'deltaS2',
+                    nature = 'internal',
+                    type = 'complex',
+                    value = '-(mST*((-1 + xC)*xT + xT*(-1 + xC + xT) + ((-1 + xC + xT)*(1 + xC**2 - xT - xC*(2 + xT))*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) - (-1 + xC)*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT))*cmath.sqrt(lB) - (1 - 2*xC + xC**2 - xT)*cmath.log(xC)))/(32.*cmath.pi**4*xT**1.5)',
+                    texname = '\\text{deltaS2}')
+
+deltaSp2 = Parameter(name = 'deltaSp2',
+                     nature = 'internal',
+                     type = 'complex',
+                     value = '(-2*xT**2 + xT*(-1 + xC + xT) + ((-1 + xC + xT)*(1 + xC**2 - xT - xC*(2 + xT))*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT)))/cmath.sqrt(lB) + xT*cmath.atan(cmath.sqrt(lB)/(1 + xC - xT))*cmath.sqrt(lB) + ((1 - 2*xC + xC**2 - xT**2)*cmath.log(xC))/xT**2)/(32.*cmath.pi**4*xT**2)',
+                     texname = '\\text{deltaSp2}')
+
 sw = Parameter(name = 'sw',
                nature = 'internal',
                type = 'real',
@@ -326,6 +358,18 @@ deltaCTR = Parameter(name = 'deltaCTR',
                      type = 'real',
                      value = '( deltaCT1R if mST>mChi + MT else deltaCT2R )',
                      texname = '\\delta _R')
+
+deltaS = Parameter(name = 'deltaS',
+                   nature = 'internal',
+                   type = 'real',
+                   value = '( deltaS1 if mST>mChi + MT else deltaS2 )',
+                   texname = '\\delta _S')
+
+deltaSp = Parameter(name = 'deltaSp',
+                    nature = 'internal',
+                    type = 'real',
+                    value = '( deltaSp1 if mST>mChi + MT else deltaSp2 )',
+                    texname = '\\delta _{\\text{Sp}}')
 
 g1 = Parameter(name = 'g1',
                nature = 'internal',
