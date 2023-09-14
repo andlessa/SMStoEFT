@@ -807,11 +807,17 @@ V_132 = Vertex(name = 'V_132',
 #                lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
 #                couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
 
+# V_133 = Vertex(name = 'V_133',
+#                particles = [ P.t__tilde__, P.t, P.g, P.g ],
+#                color = [ 'T(3,2,-1)*T(4,-1,1)', 'T(4,2,-1)*T(3,-1,1)' ],
+#                lorentz = [ L.FFVVNP1, L.FFVVNP2, L.FFVVNP3, L.FFVVNP4, L.FFVVNP5, L.FFVVNP6, L.FFVVNP7, L.FFVVNP8, L.FFVVNP9, L.FFVVNP10, L.FFVVNP21, L.FFVVNP22, L.FFVVNP23, L.FFVVNP24, L.FFVVNP25, L.FFVVNP26, L.FFVVNP27, L.FFVVNP28, L.FFVVNP29, L.FFVVNP30 ],
+#                couplings = {(0,0):C.GC_100, (0,1):C.GC_100, (0,2):C.GC_100, (0,3):C.GC_100, (0,4):C.GC_100, (1,5):C.GC_100, (1,6):C.GC_100, (1,7):C.GC_100, (1,8):C.GC_100, (1,9):C.GC_100, (0,10):C.GC_100, (0,11):C.GC_100, (0,12):C.GC_100, (0,13):C.GC_100, (0,14):C.GC_100, (1,15):C.GC_100, (1,16):C.GC_100, (1,17):C.GC_100, (1,18):C.GC_100, (1,19):C.GC_100})
+
 V_133 = Vertex(name = 'V_133',
                particles = [ P.t__tilde__, P.t, P.g, P.g ],
                color = [ 'T(3,2,-1)*T(4,-1,1)', 'T(4,2,-1)*T(3,-1,1)' ],
-               lorentz = [ L.FFVVNP1, L.FFVVNP2, L.FFVVNP3, L.FFVVNP4, L.FFVVNP5, L.FFVVNP6, L.FFVVNP7, L.FFVVNP8, L.FFVVNP9, L.FFVVNP10 ],
-               couplings = {(0,0):C.GC_100, (0,1):C.GC_100, (0,2):C.GC_100, (0,3):C.GC_100, (0,4):C.GC_100, (1,5):C.GC_100, (1,6):C.GC_100, (1,7):C.GC_100, (1,8):C.GC_100, (1,9):C.GC_100})
+               lorentz = [ L.FFVVNP1, L.FFVVNP2, L.FFVVNP3, L.FFVVNP4, L.FFVVNP5, L.FFVVNP6, L.FFVVNP7, L.FFVVNP8, L.FFVVNP9, L.FFVVNP10, L.FFVVNP21 ],
+               couplings = {(0,0):C.GC_100, (0,1):C.GC_100, (0,2):C.GC_100, (0,3):C.GC_100, (0,4):C.GC_100, (1,5):C.GC_100, (1,6):C.GC_100, (1,7):C.GC_100, (1,8):C.GC_100, (1,9):C.GC_100, (0,10):C.GC_100})
 
 
 V_134 = Vertex(name = 'V_134',
