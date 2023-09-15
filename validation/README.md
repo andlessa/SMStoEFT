@@ -58,7 +58,7 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     5000      |         4000     |  $(20.79 \pm 0.04)\times10^{-10}$    |   $( 114 \pm 0.2 )\times10^{-10}$   |  ---   | $(20.83 \pm 0.03)\times10^{-10}$  |
   |  |  |  |  |   |   |  |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $(-4.727 \pm 0.007)\times10^{-4}$    | $(-1.911 \pm 0.004)\times10^{-4}$     |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  14.04 \pm 0.1 )\times10^{-11}$    |   $(25.95 \pm 0.05)\times10^{-10}$   | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  13.99 \pm 0.06 )\times10^{-11}$    |   $(25.95 \pm 0.05)\times10^{-10}$   | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
   |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     10000      |         9000     |  $( 11.47 \pm 0.07 )\times10^{-11}$    |   $( 60.68 \pm 0.1 )\times10^{-11}$   |  ---   | $(11.48 \pm 0.02)\times10^{-11}$  |
 
 
