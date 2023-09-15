@@ -30,7 +30,7 @@ subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
     double complex InputVarsAB(1:2,0:4)
     double complex A0chi,A0st,B0
     integer cachedAB
-    common/colliercacheC/OutPutAB,InputVarsAB,cachedAB
+    common/colliercacheAB/OutPutAB,InputVarsAB,cachedAB
 
     N = 2
     rank = 1
