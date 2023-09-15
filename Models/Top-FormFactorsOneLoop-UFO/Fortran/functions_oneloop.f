@@ -69,7 +69,7 @@ subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
         call B0_cll(B0,t,mchi2,mst2)
         B0 = B0/((2*Pi)**4)
         ! Store the result in the first entry
-        OutPutAB(1) = (mst2-mchi2-t)*B0- A0st + A0chi
+        OutPutAB(1) = (mst2-mchi2-t)*B0 - A0st + A0chi
         
         ! Compute the input changing p1<->p2 (t<->u)
         u = -(s+t) + 2*mt2
@@ -77,7 +77,7 @@ subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
         call B0_cll(B0,u,mchi2,mst2)
         B0 = B0/((2*Pi)**4)
         ! Store the result in the second entry
-        OutPutAB(2) = (mst2-mchi2-u)*B0- A0st + A0chi
+        OutPutAB(2) = (mst2-mchi2-u)*B0 - A0st + A0chi
     endif
 
     ! We can finally return the cached input
