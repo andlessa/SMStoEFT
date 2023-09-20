@@ -236,8 +236,6 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
 
     implicit none
 
-    ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
     double complex k1sq,k2sq
     double complex s,t,u,mchi2,mst2,mt2
     double complex xs,xt,xu,xmchi2,xmst2,xmt2
@@ -298,7 +296,6 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale    
         ! Compute the input for the given variables
         InputVarsD(1,:) = (/ xs,xt,xmst2,xmchi2,xmt2 /)
-        ! call D_cll(Dcoeff,Dcoeffuv,k1sq,xt,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
         call D_cll(Dcoeff,Dcoeffuv,xmt2,xt,k1sq,xs,k2sq,xmt2,xmst2,xmchi2,xmst2,xmst2,rank)
         Dcoeff = Dcoeff/((2*Pi)**4)
         ! Rescale coefficients
@@ -315,7 +312,6 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         OutPutD(1,:,:,:,:) = Dcoeff
         ! Compute the input changing p1<->p2 (t<->u)
         InputVarsD(2,:) = (/ xs,xu,xmst2,xmchi2,xmt2 /)
-        ! call D_cll(Dcoeff,Dcoeffuv,k1sq,xu,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
         call D_cll(Dcoeff,Dcoeffuv,xmt2,xu,k1sq,xs,k2sq,xmt2,xmst2,xmchi2,xmst2,xmst2,rank)
         Dcoeff = Dcoeff/((2*Pi)**4)
         ! Rescale coefficients
@@ -364,6 +360,11 @@ double complex function C00effFunc(p1sq,s,p2sq)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
+    if (MDL_ITRI == 0d0) then
+        C00effFunc = 0d0 ! Turn off coefficients
+        return
+    endif
+
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C00 = Ccoeff(1,0,0)
     deltaCTR = MDL_DELTACTR
@@ -406,6 +407,11 @@ double complex function C1Func(p1sq,s,p2sq)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
 
+    if (MDL_ITRI == 0d0) then
+        C1Func = 0d0 ! Turn off coefficients
+        return
+    endif
+
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C1Func = Ccoeff(0,1,0)
 
@@ -437,6 +443,11 @@ double complex function C2Func(p1sq,s,p2sq)
     mt2 = MDL_MT**2
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_ITRI == 0d0) then
+        C2Func = 0d0 ! Turn off coefficients
+        return
+    endif
 
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C2Func = Ccoeff(0,0,1)
@@ -471,6 +482,11 @@ double complex function C11Func(p1sq,s,p2sq)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
+    if (MDL_ITRI == 0d0) then
+        C11Func = 0d0 ! Turn off coefficients
+        return
+    endif
+
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C11Func = Ccoeff(0,2,0)
 
@@ -502,6 +518,11 @@ double complex function C22Func(p1sq,s,p2sq)
     mt2 = MDL_MT**2
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_ITRI == 0d0) then
+        C22Func = 0d0 ! Turn off coefficients
+        return
+    endif
 
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C22Func = Ccoeff(0,0,2)
@@ -536,6 +557,11 @@ double complex function C12Func(p1sq,s,p2sq)
     mt2 = MDL_MT**2
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_ITRI == 0d0) then
+        C12Func = 0d0 ! Turn off coefficients
+        return
+    endif
 
     call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     C12Func = Ccoeff(0,1,1)
@@ -1415,6 +1441,12 @@ double complex function ab1(s,t)
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
 
+    if (MDL_ISELF == 0d0) then
+        ab1 = 0d0 ! Turn off coefficients
+        return
+    endif
+
+
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
     if (sCheck.lt.1d-5) then
@@ -1460,6 +1492,12 @@ double complex function ab2(s,t)
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
 
+    if (MDL_ISELF == 0d0) then
+        ab2 = 0d0 ! Turn off coefficients
+        return
+    endif
+
+
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
     if (sCheck.lt.1d-5) then
@@ -1503,6 +1541,12 @@ double complex function ab3(s,t)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
+
+    if (MDL_ISELF == 0d0) then
+        ab3 = 0d0 ! Turn off coefficients
+        return
+    endif
+
 
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
