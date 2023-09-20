@@ -298,7 +298,8 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         call SetMuUV2_cll(muR2) ! Set the renormalization scale    
         ! Compute the input for the given variables
         InputVarsD(1,:) = (/ xs,xt,xmst2,xmchi2,xmt2 /)
-        call D_cll(Dcoeff,Dcoeffuv,k1sq,xt,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
+        ! call D_cll(Dcoeff,Dcoeffuv,k1sq,xt,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
+        call D_cll(Dcoeff,Dcoeffuv,xmt2,xt,k1sq,xs,k2sq,xmt2,xmst2,xmchi2,xmst2,xmst2,rank)
         Dcoeff = Dcoeff/((2*Pi)**4)
         ! Rescale coefficients
         do i=0,3
@@ -314,7 +315,8 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
         OutPutD(1,:,:,:,:) = Dcoeff
         ! Compute the input changing p1<->p2 (t<->u)
         InputVarsD(2,:) = (/ xs,xu,xmst2,xmchi2,xmt2 /)
-        call D_cll(Dcoeff,Dcoeffuv,k1sq,xu,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
+        ! call D_cll(Dcoeff,Dcoeffuv,k1sq,xu,xmt2,xs,xmt2,k2sq,xmst2,xmst2,xmchi2,xmst2,rank)     
+        call D_cll(Dcoeff,Dcoeffuv,xmt2,xu,k1sq,xs,k2sq,xmt2,xmst2,xmchi2,xmst2,xmst2,rank)
         Dcoeff = Dcoeff/((2*Pi)**4)
         ! Rescale coefficients
         do i=0,3
@@ -1413,12 +1415,6 @@ double complex function ab1(s,t)
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
 
-    ! Flag to turn-off the corrections:
-    if (MDL_ISELF <= 0d0) then
-        ab1 = 0d0
-        return
-    endif
-
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
     if (sCheck.lt.1d-5) then
@@ -1464,12 +1460,6 @@ double complex function ab2(s,t)
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
 
-    ! Flag to turn-off the corrections:
-    if (MDL_ISELF <= 0d0) then
-        ab2 = 0d0
-        return
-    endif
-
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
     if (sCheck.lt.1d-5) then
@@ -1513,12 +1503,6 @@ double complex function ab3(s,t)
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
     deltaS = MDL_DELTAS ! Counter-terms for the self-energy corrections
     deltaSp = MDL_DELTASP ! Counter-terms for the self-energy corrections
-
-    ! Flag to turn-off the corrections:
-    if (MDL_ISELF <= 0d0) then
-        ab3 = 0d0
-        return
-    endif
 
     ! Check if t = MT^2 (possible divergent terms, which cancel out)
     sCheck = abs(real(mt2)-real(t))/real(mt2)
