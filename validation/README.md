@@ -61,6 +61,21 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  13.99 \pm 0.06 )\times10^{-11}$    |   $(25.95 \pm 0.05)\times10^{-10}$   | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
   |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     10000      |         9000     |  $( 11.47 \pm 0.07 )\times10^{-11}$    |   $( 60.68 \pm 0.1 )\times10^{-11}$   |  ---   | $(11.48 \pm 0.02)\times10^{-11}$  |
 
-
+#### Breakdown of the contributions to $\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$
   
 
+All the results below take $m_{T} = 400$ GeV, $m_{\chi} = 400$ GeV,  $y_{DM} =1$ and $m_{t} = 172$ GeV and are in units of $10^{-5}$ pb. The numbers are for (NLO-MG5/OneLoop)
+
+  |        |  Self              | Tri                 | Box                 |
+  | ------ | ----------         | ----------          | ----------          |   
+  | Self   | $(0.0)$/$(10.85)$  | $(29.59)$/$(36.08)$ | $(0.0)$/$(41.12)$   |
+  | Tri    | --                 | $(66.05)$/$(68.43)$ | $(32.62)$/$(33.78)$ |
+  | Box    | --                 | --                  | $(11.84)$/$(11.88)$ |
+
+  Tri (no intermediate t or g) = $(21.1)/(21.1)$
+
+  Tri+Box (no intermediate t or g) = $(18.46)/(18.45)$
+
+  Tri+Box (no intermediate t) = $(17.09)/(17.12)$
+
+  Tri (only t-channel) =  $(46.73)/(49.42)$

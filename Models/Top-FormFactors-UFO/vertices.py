@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 15:40:01
+# Date: Tue 19 Sep 2023 22:16:23
 
 
 from object_library import all_vertices, Vertex
@@ -513,18 +513,11 @@ V_84 = Vertex(name = 'V_84',
               lorentz = [ L.VVVV2 ],
               couplings = {(0,0):C.GC_23})
 
-# V_85 = Vertex(name = 'V_85',
-#               particles = [ P.t__tilde__, P.t, P.g ],
-#               color = [ 'T(3,2,1)' ],
-#               lorentz = [ L.FFV1, L.FFV2, L.FFV3, L.FFV7, L.FFV8, L.FFV9 ],
-#               couplings = {(0,0):C.GC_12,(0,1):C.GC_68,(0,2):C.GC_64,(0,4):C.GC_65,(0,5):C.GC_66,(0,3):C.GC_67})
-
-
 V_85 = Vertex(name = 'V_85',
               particles = [ P.t__tilde__, P.t, P.g ],
               color = [ 'T(3,2,1)' ],
-              lorentz = [ L.FFV1, L.FFVNP1, L.FFVNP2, L.FFVNP3, L.FFVNP4 ],
-              couplings = {(0,0):C.GC_12,(0,1):C.GC_103,(0,2):C.GC_103,(0,3):C.GC_104,(0,4):C.GC_103})
+              lorentz = [ L.FFV1, L.FFV2, L.FFV3, L.FFV7, L.FFV8, L.FFV9 ],
+              couplings = {(0,0):C.GC_12,(0,1):C.GC_68,(0,2):C.GC_64,(0,4):C.GC_65,(0,5):C.GC_66,(0,3):C.GC_67})
 
 V_86 = Vertex(name = 'V_86',
               particles = [ P.e__plus__, P.e__minus__, P.a ],
@@ -808,23 +801,11 @@ V_132 = Vertex(name = 'V_132',
                lorentz = [ L.FFVV2 ],
                couplings = {(0,0):C.GC_87})
 
-# V_133 = Vertex(name = 'V_133',
-#                particles = [ P.t__tilde__, P.t, P.g, P.g ],
-#                color = [ 'f(-1,3,4)*T(-1,2,1)', 'T(3,-1,1)*T(4,2,-1)', 'T(3,2,-1)*T(4,-1,1)' ],
-#                lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
-#                couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
-
 V_133 = Vertex(name = 'V_133',
                particles = [ P.t__tilde__, P.t, P.g, P.g ],
-               color = [ 'T(3,2,-1)*T(4,-1,1)', 'T(4,2,-1)*T(3,-1,1)' ],
-               lorentz = [ L.FFVVNP1, L.FFVVNP2, L.FFVVNP3, L.FFVVNP4, L.FFVVNP5, L.FFVVNP6, L.FFVVNP7, L.FFVVNP8, L.FFVVNP9, L.FFVVNP10, 
-                           L.FFVVNP11, L.FFVVNP12, L.FFVVNP13, L.FFVVNP14,                          
-                           L.FFVVNP21, L.FFVVNP22, L.FFVVNP23, L.FFVVNP24, L.FFVVNP25, L.FFVVNP26, L.FFVVNP27, L.FFVVNP28, L.FFVVNP29, L.FFVVNP30 ],
-               couplings = {(0,0):C.GC_100, (0,1):C.GC_100, (0,2):C.GC_100, (0,3):C.GC_100, (0,4):C.GC_100, (1,5):C.GC_100, (1,6):C.GC_100, (1,7):C.GC_100, (1,8):C.GC_100, (1,9):C.GC_100,
-                            (0,10):C.GC_101,(0,11):C.GC_101,(1,12):C.GC_101,(1,13):C.GC_101,                            
-                            (0,14):C.GC_102, (0,15):C.GC_102, (0,16):C.GC_102, (0,17):C.GC_102, (0,18):C.GC_102, (1,19):C.GC_102, (1,20):C.GC_102, (1,21):C.GC_102, (1,22):C.GC_102, (1,23):C.GC_102}
-                            )
-
+               color = [ 'f(-1,3,4)*T(-1,2,1)', 'T(3,-1,1)*T(4,2,-1)', 'T(3,2,-1)*T(4,-1,1)' ],
+               lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
+               couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
 
 V_134 = Vertex(name = 'V_134',
                particles = [ P.t__tilde__, P.t, P.a, P.a, P.g ],

@@ -207,9 +207,9 @@ Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC
 (* DM-Scalar-Top coupling *)
 LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);
 
-A1 := 2*(Pi^2)*(yDM^2)*C00ren;
-A2 := -2*(Pi^2)*(yDM^2)*(C1+C11+C12);
-A3 := (Pi^2)*(gs*yDM^2)*(C12-C11);
+A1 := itri*2*(Pi^2)*(yDM^2)*C00ren;
+A2 := itri*(-2)*(Pi^2)*(yDM^2)*(C1+C11+C12);
+A3 := itri*(Pi^2)*(gs*yDM^2)*(C12-C11);
 
 
 
@@ -242,7 +242,7 @@ LA3 := Block[{aa,cc1,cc2,mu,nu,sp1,sp2,cc},
 (* (the counter-term for the right0-handed coupling is already added to C00ren) *)
 LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
        ExpandIndices[
-               2*yDM^2*gs*Pi^2*G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(deltaCTL*ProjM[sp2,sp3])
+               itri*2*yDM^2*gs*Pi^2*G[mu,aa]*T[aa,cc1,cc2]*Ga[mu,sp1,sp2]*(uqbar[sp1,3,cc1].uq[sp3,3,cc2])*(deltaCTL*ProjM[sp2,sp3])
              ]
             ];
 
