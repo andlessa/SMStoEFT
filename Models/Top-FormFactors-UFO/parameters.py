@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Tue 19 Sep 2023 22:16:23
+# Date: Thu 21 Sep 2023 15:48:35
 
 
 
@@ -81,13 +81,21 @@ itri = Parameter(name = 'itri',
                  lhablock = 'FRBlock',
                  lhacode = [ 2 ])
 
+itrib = Parameter(name = 'itrib',
+                  nature = 'external',
+                  type = 'real',
+                  value = 1.,
+                  texname = '\\text{itrib}',
+                  lhablock = 'FRBlock',
+                  lhacode = [ 3 ])
+
 ibox = Parameter(name = 'ibox',
                  nature = 'external',
                  type = 'real',
                  value = 1.,
                  texname = '\\text{ibox}',
                  lhablock = 'FRBlock',
-                 lhacode = [ 3 ])
+                 lhacode = [ 4 ])
 
 iself = Parameter(name = 'iself',
                   nature = 'external',
@@ -95,7 +103,7 @@ iself = Parameter(name = 'iself',
                   value = 1.,
                   texname = '\\text{iself}',
                   lhablock = 'FRBlock',
-                  lhacode = [ 4 ])
+                  lhacode = [ 5 ])
 
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
@@ -103,7 +111,7 @@ yDM = Parameter(name = 'yDM',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 5 ])
+                lhacode = [ 6 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',

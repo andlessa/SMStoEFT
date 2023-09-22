@@ -10,7 +10,7 @@ Below we present the validation of the distinct implementations of the SMS model
   1. Top EFT physical (Top-EFTphysical): EFT matched model in the physical Basis.
 
 
-### Top Pair Production: $q + q \to \bar{t} + t$
+### Top Pair Production: q + q > t + t
 
 
 | Model     | Diagrams  |
@@ -28,13 +28,13 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |   $(1.756 \pm 0.009)\times10^{-2}$   |   $(1.756 \pm 0.009)\times10^{-2}$   |   $(1.101 \pm 0.006)\times10^{-2}$  | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |   $(3.785 \pm 0.013)\times10^{-5}$   |   $(3.785 \pm 0.013)\times10^{-5}$   |   $(1.431 \pm 0.005)\times10^{-5}$  | $(3.800 \pm 0.006)\times10^{-5}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         1000      |   $(9.156 \pm 0.05)\times10^{-5}$   |   $(9.156 \pm 0.05)\times10^{-5}$   |   $(9.212 \pm 0.01)\times10^{-5}$  | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         1000     |   $(4.31 \pm 0.005)\times10^{-10}$   |   $(4.30 \pm 0.02)\times10^{-10}$   |   $(4.236 \pm 0.006)\times10^{-10}$  | $(4.326 \pm 0.012)\times10^{-10}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |   $(9.245 \pm 0.05)\times10^{-5}$   |   $(9.156 \pm 0.05)\times10^{-5}$   |   $(9.212 \pm 0.01)\times10^{-5}$  | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |   $(4.31 \pm 0.005)\times10^{-10}$   |   $(4.30 \pm 0.02)\times10^{-10}$   |   $(4.236 \pm 0.006)\times10^{-10}$  | $(4.326 \pm 0.012)\times10^{-10}$  |
   
 
 
 
-### Top Pair Production: $g + g \to \bar{t} + t$
+### Top Pair Production: g + g > t + t
 
 
 | Model     | Diagrams  |
@@ -47,35 +47,35 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
   All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
-  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) | OnShell (pb) |   EFT (pb)  | NLO-MG5  (pb) |
-  | ----------- | ------------- | ---------------- | ------- | ------- | ------ | --------- |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-4.755 \pm 0.009)\times10^{-1}$   |   $(-0.372 \pm 0.008)\times10^{-1}$    |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(20.18 \pm 0.03)\times10^{-5}$    |   $(131.4 \pm 0.4)\times10^{-5}$   |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     400      |         100     |  $(18.41 \pm 0.002)\times10^{-5}$    |   $( 191.8 \pm 0.2)\times10^{-5}$   |  ---   | $(18.46 \pm 0.05)\times10^{-5}$  |
+  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) |   EFT (pb)  | NLO-MG5  (pb) |
+  | ----------- | ------------- | ---------------- | ------- | ------ | --------- |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-3.814 \pm 0.007)\times10^{-1}$   |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(20.01 \pm 0.04)\times10^{-5}$      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
+  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     400      |         100     |  $(18.39 \pm 0.002)\times10^{-5}$     |  ---   | $(18.46 \pm 0.05)\times10^{-5}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |  $(-20.45 \pm 0.03)\times10^{-4}$    | $(-8.257 \pm 0.02)\times10^{-4}$     |  $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |  $(26.6 \pm 0.1)\times10^{-10}$    |   $(49.12 \pm 0.1)\times10^{-10}$   | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     5000      |         4000     |  $(20.79 \pm 0.04)\times10^{-10}$    |   $( 114 \pm 0.2 )\times10^{-10}$   |  ---   | $(20.83 \pm 0.03)\times10^{-10}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |  $( \pm )\times10^{-4}$    |   $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |  $( \pm )\times10^{-10}$    | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
+  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     5000      |         4000     |  $( \pm )\times10^{-10}$   |  ---   | $(20.83 \pm 0.03)\times10^{-10}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $(-4.727 \pm 0.007)\times10^{-4}$    | $(-1.911 \pm 0.004)\times10^{-4}$     |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  13.99 \pm 0.06 )\times10^{-11}$    |   $(25.95 \pm 0.05)\times10^{-10}$   | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     10000      |         9000     |  $( 11.47 \pm 0.07 )\times10^{-11}$    |   $( 60.68 \pm 0.1 )\times10^{-11}$   |  ---   | $(11.48 \pm 0.02)\times10^{-11}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $( \pm )\times10^{-4}$   |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  \pm  )\times10^{-11}$     | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
+  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     10000      |         9000     |  $(  \pm  )\times10^{-11}$  |  ---   | $(11.48 \pm 0.02)\times10^{-11}$  |
 
-#### Breakdown of the contributions to $\lvert \mathcal{M}_{1}^{NP} \rvert^2$
+#### Breakdown of the contributions to |M1(NP)|^2
   
 
 All the results below take $m_{T} = 400$ GeV, $m_{\chi} = 400$ GeV,  $y_{DM} =1$ and $m_{t} = 172$ GeV and are in units of $10^{-5}$ pb. The numbers are for (NLO-MG5/OneLoop). "Self" refers to the diagrams with self-energy (with counter-terms), "Tri" refers to all diagrams with triangle loops (with counter-terms) and "Box" refers to all box diagrams.
 
-  |        |  Self              | Tri                 | Box                 |
-  | ------ | ----------         | ----------          | ----------          |   
-  | Self   | $(0.0)$/$(9.58)$   | $(29.59)$/$(60.98)$ | $(0.0)$/$(33.94)$   |
-  | Tri    | --                 | $(66.05)$/$(57.12)$ | $(32.62)$/$(49.43)$ |
-  | Box    | --                 | --                  | $(11.84)$/$(11.87)$ |
+  |        |  Self               | Tri                   | Box                   |
+  | ------ | ----------          | ----------            | ----------            |   
+  | Self   | $(0.0)$ / $(10.80)$ | $(29.59)$ / $(34.86)$ | $(0.0)$ / $(41.12)$   |
+  | Tri    | --                  | $(66.05)$ / $(66.00)$ | $(32.62)$ / $(32.66)$ |
+  | Box    | --                  | --                    | $(11.84)$ / $(11.88)$ |
 
-  Tri (no intermediate t or g) = $(21.1)/(21.1)$
+  Tri (no intermediate t or g) = $(21.1)/( )$
 
-  Tri+Box (no intermediate t or g) = $(18.46)/(18.45)$
+  Tri+Box (no intermediate t or g) = $(18.46)/( )$
 
-  Tri+Box (no intermediate t) = $(17.09)/(17.08)$
+  Tri+Box (no intermediate t) = $(17.09)/( )$
 
-  Tri (only t-channel) =  $(46.73)/(28.15)$
+  Tri (only t-channel) =  $(46.73)/( )$

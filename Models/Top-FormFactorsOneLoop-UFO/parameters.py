@@ -81,13 +81,20 @@ itri = Parameter(name = 'itri',
                  lhablock = 'FRBlock',
                  lhacode = [ 2 ])
 
+itrib = Parameter(name = 'itrib',
+                  nature = 'external',
+                  type = 'real',
+                  value = 1.,
+                  texname = '\\text{itrib}',
+                  lhablock = 'FRBlock',
+                  lhacode = [ 3 ])
 ibox = Parameter(name = 'ibox',
                  nature = 'external',
                  type = 'real',
                  value = 1.,
                  texname = '\\text{ibox}',
                  lhablock = 'FRBlock',
-                 lhacode = [ 3 ])
+                 lhacode = [ 4 ])
 
 iself = Parameter(name = 'iself',
                   nature = 'external',
@@ -95,7 +102,7 @@ iself = Parameter(name = 'iself',
                   value = 1.,
                   texname = '\\text{iself}',
                   lhablock = 'FRBlock',
-                  lhacode = [ 4 ])
+                  lhacode = [ 5 ])
 
 yDM = Parameter(name = 'yDM',
                 nature = 'external',
@@ -103,7 +110,7 @@ yDM = Parameter(name = 'yDM',
                 value = 1.,
                 texname = 'y_{\\text{DM}}',
                 lhablock = 'FRBlock',
-                lhacode = [ 5 ])
+                lhacode = [ 6 ])
 
 MZ = Parameter(name = 'MZ',
                nature = 'external',

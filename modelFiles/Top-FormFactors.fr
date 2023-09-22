@@ -32,6 +32,7 @@ M$Parameters = {
 (* Auxiliary external parameters *)
   idebug  == {ComplexParameter -> False, ParameterType->External, Value->0.0, Description->"Turns on/off the printout of loop integral results"},
   itri  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the triangle integrals (only for the oneloop functions)"},
+  itrib  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the s-channel triangle integral (only for the  oneloop functions)"},  
   ibox  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the box integrals (only for the oneloop functions)"},
   iself  == {ComplexParameter -> False, ParameterType->External, Value->1.0, Description->"Turns on/off the self-energy integrals (only for the oneloop functions)"},
 

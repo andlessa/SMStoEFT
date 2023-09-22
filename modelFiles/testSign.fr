@@ -1,0 +1,61 @@
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for checking the correct sign   *******)
+(** assignments when going from FeynArts amplitudes to   *******)
+(** UFO vertices                                             ***)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
+
+M$ModelName = "TestSign";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "28.08.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
+
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+
+(* New Physics (UV) Parameters *)
+  aL  == { TeX->Subscript[a,L],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}},
+  aR  == { TeX->Subscript[a,R],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}},
+  bV  == { TeX->Subscript[b,V],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}},
+  bL  == { TeX->Subscript[b,L],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}},
+  bR  == { TeX->Subscript[b,R],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}}
+}
+
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+(* gauge kinetic and mass terms *)
+
+(* EFT operators - obtained from MatchMaker SMEFT_Green_Bpreserving.fr *)
+(* top_R-D_\mu(top_R) *)
+LFFV := Block[{mu,sp1,sp2,sp3,aa,cc1,cc2},
+      ExpandIndices[
+              aL*Ga[mu,sp1,sp2]*G[mu,aa]*ProjM[sp2,sp3]*T[aa,cc1,cc2]*uqbar[sp1,3,cc1].uq[sp3,3,cc2]+
+              aR*Ga[mu,sp1,sp2]*G[mu,aa]*ProjP[sp2,sp3]*T[aa,cc1,cc2]*uqbar[sp1,3,cc1].uq[sp3,3,cc2]
+            ]];
+LFFVV := Block[{mu,nu,sp1,sp2,sp3,sp4,sp5,aa,bb,cc1,cc2,cc3},
+      ExpandIndices[
+              bV*(Ga[mu,sp1,sp2]*G[mu,aa]*T[aa,cc1,cc2])*(Ga[nu,sp2,sp3]*G[nu,bb]*T[bb,cc2,cc3])*ProjM[sp3,sp4]*uqbar[sp1,3,cc1].uq[sp4,3,cc3]+
+              bV*(Ga[mu,sp1,sp2]*G[mu,aa]*T[aa,cc1,cc2])*(Ga[nu,sp2,sp3]*G[nu,bb]*T[bb,cc2,cc3])*ProjP[sp3,sp4]*uqbar[sp1,3,cc1].uq[sp4,3,cc3]
+            ]];
+
+LNP := LFFV+LFFVV;
+
+

@@ -12,7 +12,7 @@ subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s,t,u,mt2 
     double complex mchi2,mst2
     double precision muR2,deltaUV
@@ -37,6 +37,13 @@ subroutine getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
 
     ! Store new input variables
     newInputAB = (/ s,t,mt2,mchi2,mst2 /)
+    ! Set to zero small variable values
+    call setSmallToZero(newInputAB,1d-5)
+    s = newInputAB(0)
+    t = newInputAB(1)
+    mt2 = newInputAB(2)
+    mchi2 = newInputAB(3)
+    mst2 = newInputAB(4)
 
     ! Check if the given input variables matches any
     ! of the cached ones
@@ -103,6 +110,7 @@ end subroutine getABIntegral
 ! m02,m12,m22 -> masses squared
 ! p10 = p1^2, p20 = p2^2, p21 = p3^3 = s 
 
+! THE CORRECT ORDERING OF THE ARGUMENTS SHOULD BE p1sq,s,p2sq TO MATCH THE LOOP INTEGRALS
 subroutine getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
 
     ! Return the 3-point integrals. Note that the normalization includes the 1/(2*pi)^4 factor!
@@ -112,7 +120,7 @@ subroutine getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq 
     double complex mchi2,mst2
     double precision muR2,deltaUV
@@ -136,6 +144,13 @@ subroutine getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
 
     ! Store new input variables
     newInputC = (/ p1sq,s,p2sq,mchi2,mst2 /)
+    ! Set to zero small variable values
+    call setSmallToZero(newInputC,1d-5)
+    p1sq = newInputC(0)
+    s = newInputC(1)
+    p2sq = newInputC(2)
+    mchi2 = newInputC(3)
+    mst2 = newInputC(4)
 
     ! Check if the given input variables matches any
     ! of the cached ones
@@ -257,6 +272,14 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
 
     N = 4 ! Maximum number for loop (3-point function)
     rank = 3 ! Maximum rank for loop (=N)
+    ! Set to zero small variable values
+    newInputD = (/ s,t,mst2,mchi2,mt2 /)
+    call setSmallToZero(newInputD,1d-5)
+    s = newInputD(0)
+    t = newInputD(1)
+    mst2 = newInputD(2)
+    mchi2 = newInputD(3)
+    mt2 = newInputD(4)
 
     u = -(s+t) + 2*mt2
     ! Rescale invariants by mst2 to improve stability
@@ -268,7 +291,7 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
     xmt2 = mt2/mst2
 
 
-    ! Store new input variables
+    ! Store new (rescaled) input variables
     newInputD = (/ xs,xt,xmst2,xmchi2,xmt2 /)
     k1sq = 0d0
     k2sq = 0d0
@@ -344,7 +367,7 @@ double complex function C00effFunc(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq
     integer rank
     double complex mt2,mst2,mchi2
@@ -391,11 +414,10 @@ double complex function C1Func(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
-    double precision c1value,deltaUV,muR2
-    double complex C1
+    double precision deltaUV,muR2
     double complex Ccoeff(0:1,0:2,0:2)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
@@ -405,7 +427,6 @@ double complex function C1Func(p1sq,s,p2sq)
     mt2 = MDL_MT**2
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
-    c1value = MDL_C1 ! Numerical value for C1, which should be replaced by the form factor
 
     if (MDL_ITRI == 0d0) then
         C1Func = 0d0 ! Turn off coefficients
@@ -423,6 +444,44 @@ double complex function C1Func(p1sq,s,p2sq)
 
 end function
 
+double complex function C1FuncB(p1sq,s,p2sq)
+
+    use collier
+
+    implicit none
+
+    ! Same as C1Func, but it is only used by t-t-g-g effective couplings
+    ! so its contribution can be turned off using ITRIB
+    
+    double complex s, p1sq, p2sq
+    double complex mt2,mst2,mchi2
+    double precision deltaUV,muR2
+    double complex Ccoeff(0:1,0:2,0:2)
+    include 'input.inc' ! include all external model parameter
+    include 'coupl.inc' ! include other parameters
+   
+    mchi2 = MDL_MCHI**2
+    mst2 = MDL_MST**2
+    mt2 = MDL_MT**2
+    muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
+    deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
+
+    if (MDL_ITRIB == 0d0) then
+        C1FuncB = 0d0 ! Turn off coefficients
+        return
+    endif
+
+    call getCIntegrals(Ccoeff,p1sq,s,p2sq,mchi2,mst2,muR2,deltaUV)
+    C1FuncB = Ccoeff(0,1,0)
+
+    if (MDL_IDEBUG > 0d0) then
+        call writedebugC(s,p1sq,p2sq,Ccoeff,'C1B')
+    endif
+
+    return 
+
+end function
+
 double complex function C2Func(p1sq,s,p2sq)
 
     use collier
@@ -430,7 +489,7 @@ double complex function C2Func(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c1value,deltaUV,muR2
@@ -468,7 +527,7 @@ double complex function C11Func(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
@@ -505,7 +564,7 @@ double complex function C22Func(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq, p1p2
     double complex mt2,mst2,mchi2
     double precision c11value,deltaUV,muR2
@@ -543,7 +602,7 @@ double complex function C12Func(p1sq,s,p2sq)
     implicit none
 
     ! Invariants s=(p1+p2)**2 (gluon momentum squared), p1sq  and p2sq (top and anti-top momenta squared)
-    ! (we assume the physical amplitude is always symmetric under p1<->p2 (top<->anti-top), so the ordering does not matter)
+    
     double complex s, p1sq, p2sq
     double complex mt2,mst2,mchi2
     double precision c12value,deltaUV,muR2
@@ -595,7 +654,7 @@ double complex function D0(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D0 = 0d0
         return
     else            
@@ -630,7 +689,7 @@ double complex function D1(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D1 = 0d0
         return
     else            
@@ -665,7 +724,7 @@ double complex function D2(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D2 = 0d0
         return
     else            
@@ -700,7 +759,7 @@ double complex function D3(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D3 = 0d0
         return
     else            
@@ -735,7 +794,7 @@ double complex function D00(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D00 = 0d0
         return
     else            
@@ -770,7 +829,7 @@ double complex function D11(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D11 = 0d0
         return
     else            
@@ -805,7 +864,7 @@ double complex function D12(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D12 = 0d0
         return
     else            
@@ -840,7 +899,7 @@ double complex function D13(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D13 = 0d0
         return
     else            
@@ -875,7 +934,7 @@ double complex function D22(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D22 = 0d0
         return
     else            
@@ -910,7 +969,7 @@ double complex function D23(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D23 = 0d0
         return
     else            
@@ -945,7 +1004,7 @@ double complex function D33(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D33 = 0d0
         return
     else            
@@ -980,7 +1039,7 @@ double complex function D001(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D001 = 0d0
         return
     else            
@@ -1015,7 +1074,7 @@ double complex function D002(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D002 = 0d0
         return
     else            
@@ -1050,7 +1109,7 @@ double complex function D003(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D003 = 0d0
         return
     else            
@@ -1085,7 +1144,7 @@ double complex function D111(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D111 = 0d0
         return
     else            
@@ -1120,7 +1179,7 @@ double complex function D112(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D112 = 0d0
         return
     else            
@@ -1155,7 +1214,7 @@ double complex function D113(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D113 = 0d0
         return
     else            
@@ -1190,7 +1249,7 @@ double complex function D122(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D122 = 0d0
         return
     else            
@@ -1225,7 +1284,7 @@ double complex function D123(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D123 = 0d0
         return
     else            
@@ -1260,7 +1319,7 @@ double complex function D133(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D133 = 0d0
         return
     else            
@@ -1295,7 +1354,7 @@ double complex function D222(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D222 = 0d0
         return
     else            
@@ -1330,7 +1389,7 @@ double complex function D223(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D223 = 0d0
         return
     else            
@@ -1365,7 +1424,7 @@ double complex function D233(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D233 = 0d0
         return
     else            
@@ -1400,7 +1459,7 @@ double complex function D333(s,t)
     muR2 = MDL_MST**2 ! The counter-terms were computing under this assumption 
     deltaUV = 0d0  ! deltaUV = 1/eps + log(4*Pi) - gammaE
 
-    if (MDL_IBOX <= 0d0) then
+    if (MDL_IBOX == 0d0) then
         D333 = 0d0
         return
     else
@@ -1704,3 +1763,19 @@ logical function differs(oldVars,newVars)
 
   return
 end function differs
+
+subroutine setSmallToZero(vars,vmin)
+
+  implicit none
+
+  double complex vars(0:4)
+  double precision vmin
+  integer ii
+
+  do ii=0,size(vars)-1
+    if (abs(vars(ii)) < vmin) then
+        vars(ii) = 0d0
+    endif
+  enddo
+
+end subroutine setSmallToZero  
