@@ -406,7 +406,7 @@ GC_99 = Coupling(name = 'GC_99',
                  order = {'QED':1})
 
 GC_100 = Coupling(name = 'GC_100',
-                 value = '-ibox*complex(0,1)*cmath.pi**2*G**2*yDM**2',
+                 value = 'ibox*complex(0,1)*cmath.pi**2*G**2*yDM**2',
                  order = {'NP':2,'QCD':2})
 
 GC_101 = Coupling(name = 'GC_101',
@@ -414,7 +414,7 @@ GC_101 = Coupling(name = 'GC_101',
                  order = {'NP':2,'QCD':2})
 
 GC_102 = Coupling(name = 'GC_102',
-                 value = '-iself*complex(0,1)*cmath.pi**2*G**2*yDM**2',
+                 value = 'iself*complex(0,1)*cmath.pi**2*G**2*yDM**2',
                  order = {'NP':2,'QCD':2})
 
 GC_103 = Coupling(name = 'GC_103',
