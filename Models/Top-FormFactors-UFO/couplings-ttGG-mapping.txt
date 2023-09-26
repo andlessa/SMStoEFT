@@ -1,0 +1,77 @@
+### Aloha definitions
+
+Momenta of particle N = P(mu,N)
+This includes the momenta P(x,y). The first index is the lorentz index which should be contracted, while the second index refers to the particle ordering of the vertex.
+E.g: P(-2,1)*P(-2,1) = p1(mu)*p1(mu)
+       ^
+       dummy index for sum
+Gamma(a,b,c) -> a = Lorentz index, b,c-> spinor indices
+
+The couplings matrix contracts the color with the lorentz fields:
+
+coupling = (a,b):C.GC_xx -> color[a]*lorentz[b]*C.GC_xx
+
+
+### UFO Vertices:
+Top-Top-Gluon-Gluon vertex:
+V_133 = Vertex(name = 'V_133',
+               particles = [ P.t__tilde__, P.t, P.g, P.g ],
+               color = [ 'f(-1,3,4)*T(-1,2,1)', 'T(3,-1,1)*T(4,2,-1)', 'T(3,2,-1)*T(4,-1,1)' ],
+               lorentz = [ L.FFVV1, L.FFVV3, L.FFVV4, L.FFVV5, L.FFVV6 ],
+               couplings = {(2,1):C.GC_78,(1,2):C.GC_78,(0,0):C.GC_69,(0,3):C.GC_71,(0,4):C.GC_70})
+
+GC_69 = Coupling(name = 'GC_69',
+                 value = '-2*C1*cmath.pi**2*G**2*itri*yDM**2',
+                 order = {'NP':2,'QCD':2})
+
+GC_70 = Coupling(name = 'GC_70',
+                 value = 'C11*cmath.pi**2*G**2*itri*yDM**2',
+                 order = {'NP':2,'QCD':2})
+
+GC_71 = Coupling(name = 'GC_71',
+                 value = '-4*C12*cmath.pi**2*G**2*itri*yDM**2',
+                 order = {'NP':2,'QCD':2})
+
+GC_78 = Coupling(name = 'GC_78',
+                 value = '-(C1*cmath.pi**2*complex(0,1)*G**2*itri*yDM**2) - C11*cmath.pi**2*complex(0,1)*G**2*itri*yDM**2 - C12*cmath.pi**2*complex(0,1)*G**2*itri*yDM**2',
+                 order = {'NP':2,'QCD':2})
+
+FFVV1 = Lorentz(name = 'FFVV1',
+                spins = [ 2, 2, 3, 3 ],
+                structure = 'P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
+
+FFVV3 = Lorentz(name = 'FFVV3',
+                spins = [ 2, 2, 3, 3 ],
+                structure = 'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
+
+FFVV4 = Lorentz(name = 'FFVV4',
+                spins = [ 2, 2, 3, 3 ],
+                structure = 'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) + P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
+
+FFVV5 = Lorentz(name = 'FFVV5',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '-(P(-1,3)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1))/4. + (P(-1,4)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1))/4. + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + (P(4,4)*Gamma(3,2,-1)*ProjP(-1,1))/4. - (P(3,3)*Gamma(4,2,-1)*ProjP(-1,1))/4. - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)')
+
+FFVV6 = Lorentz(name = 'FFVV6',
+                spins = [ 2, 2, 3, 3 ],
+                structure = '-(P(-1,3)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1)) + P(-1,4)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,4)*Gamma(3,2,-1)*ProjP(-1,1) - P(3,3)*Gamma(4,2,-1)*ProjP(-1,1)')
+
+
+ttGG =  'f(-1,3,4)*T(-1,2,1)'*(L.FFVV1*C.GC_69 + L.FFVV6*C.GC_70 + L.FFVV5*C.GC_71)  +'T(3,2,-1)*T(4,-1,1)'*L.FFVV3*C.GC_78 + 'T(4,2,-1)*T(3,-1,1)'*L.FFVV4*C.GC_78
+     
+     = 'f(-1,3,4)*T(-1,2,1)'*(
+       
+                              'P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)'*(-2*C1*cmath.pi**2*G**2*itri*yDM**2)
+                            + '-(P(-1,3)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1)) + P(-1,4)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,4)*Gamma(3,2,-1)*ProjP(-1,1) - P(3,3)*Gamma(4,2,-1)*ProjP(-1,1)'*(C11*cmath.pi**2*G**2*itri*yDM**2)
+                            + '-(P(-1,3)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1))/4. + (P(-1,4)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1))/4. + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + (P(4,4)*Gamma(3,2,-1)*ProjP(-1,1))/4. - (P(3,3)*Gamma(4,2,-1)*ProjP(-1,1))/4. - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)'*(-4*C12*cmath.pi**2*G**2*itri*yDM**2)
+
+     )
+
+     + 'T(3,2,-1)*T(4,-1,1)'*cmath.pi**2*complex(0,1)*G**2*itri*yDM**2*(
+                             'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) + P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,4)*Gamma(4,2,-1)*ProjP(-1,1))'*(-C1 - C11 - C12)
+
+     )
+
+     + 'T(4,2,-1)*T(3,-1,1)'*cmath.pi**2*complex(0,1)*G**2*itri*yDM**2*(
+                            'P(-1,1)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) - P(-1,2)*Gamma(-1,2,-2)*Metric(3,4)*ProjP(-2,1) + P(4,1)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,2)*Gamma(3,2,-1)*ProjP(-1,1) - P(4,3)*Gamma(3,2,-1)*ProjP(-1,1) + P(3,1)*Gamma(4,2,-1)*ProjP(-1,1) - P(3,2)*Gamma(4,2,-1)*ProjP(-1,1) + P(3,4)*Gamma(4,2,-1)*ProjP(-1,1)'*(-C1 - C11 - C12)
+     )
