@@ -50,16 +50,13 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) |   EFT (pb)  | NLO-MG5  (pb) |
   | ----------- | ------------- | ---------------- | ------- | ------ | --------- |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-3.814 \pm 0.007)\times10^{-1}$   |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(19.98 \pm 0.04)\times10^{-5}$      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     400      |         100     |  $(18.39 \pm 0.002)\times10^{-5}$     |  ---   | $(18.46 \pm 0.05)\times10^{-5}$  |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(20.01 \pm 0.04)\times10^{-5}$      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
   |  |  |  |  |   |   |  |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |  $( \pm )\times10^{-4}$    |   $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |  $( \pm )\times10^{-10}$    | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     5000      |         4000     |  $( \pm )\times10^{-10}$   |  ---   | $(20.83 \pm 0.03)\times10^{-10}$  |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |  $(26.30 \pm 0.05)\times10^{-10}$    | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
   |  |  |  |  |   |   |  |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $( \pm )\times10^{-4}$   |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(  \pm  )\times10^{-11}$     | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
-  |$\lvert \mathcal{M}_{\rm box}^{NP} \rvert^2$ |     10000      |         9000     |  $(  \pm  )\times10^{-11}$  |  ---   | $(11.48 \pm 0.02)\times10^{-11}$  |
 
 #### Breakdown of the contributions to |M1(NP)|^2
   
