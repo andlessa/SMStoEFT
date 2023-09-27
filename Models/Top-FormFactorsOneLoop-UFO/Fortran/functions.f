@@ -742,7 +742,8 @@ double complex function D0(s,t)
     double complex s,t
     double complex mt2,mst2,mchi2
     double precision deltaUV,muR2
-    double complex D0coeff
+    double complex D0c
+    double complex Dcoeff(0:1,0:3,0:3,0:3)
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -756,8 +757,10 @@ double complex function D0(s,t)
         D0 = 0d0
         return
     else            
-        call getD0IntegralOnShell(D0coeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
-        D0 = D0coeff
+        call getD0IntegralOnShell(D0c,s,t,mst2,mchi2,mt2,muR2,deltaUV) ! Use dedicated function with correct ordering
+        D0 = D0c
+        ! call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV) ! Use generic function (wrong order of arguments)
+        ! D0 = Dcoeff(0,0,0,0)
     endif
     
     ! if (MDL_IDEBUG > 0d0) then
