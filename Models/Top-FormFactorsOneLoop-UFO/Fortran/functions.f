@@ -356,6 +356,104 @@ subroutine getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
 end subroutine getDIntegralsOnShell
 
 
+subroutine getD0IntegralOnShell(D0coeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+
+    ! Return the 4-point integrals for the external momenta onshell.
+    ! The order of the arguments is defined by the loop integrals provided by FeynCalc
+    ! The D0 integral has to be defined separately, because the order of the arguments
+    ! is different
+
+    use collier
+
+    implicit none
+
+    double complex k1sq,k2sq
+    double complex s,t,u,mchi2,mst2,mt2
+    double complex xs,xt,xu,xmchi2,xmst2,xmt2
+    double precision muR2,deltaUV
+    double complex D0coeff
+    integer N,rank,i,j,k
+    double precision Pi
+    parameter  (Pi=3.141592653589793D0)
+
+    double complex newInputD0(0:4)
+    logical differs
+
+    ! Internal cache for storing the results of the D integrals
+    ! (for u and t ) and avoiding duplicated calculations
+    double complex OutPutD0(1:2)
+    double complex InputVarsD0(1:2,0:4)
+    integer cachedD0
+    common/colliercacheD0/OutPutD0,InputVarsD0,cachedD0
+
+    N = 4 ! Maximum number for loop (3-point function)
+    rank = 3 ! Maximum rank for loop (=N)
+    ! Set to zero small variable values
+    newInputD0 = (/ s,t,mst2,mchi2,mt2 /)
+    call setSmallToZero(newInputD0,1d-5)
+    s = newInputD0(0)
+    t = newInputD0(1)
+    mst2 = newInputD0(2)
+    mchi2 = newInputD0(3)
+    mt2 = newInputD0(4)
+
+    u = -(s+t) + 2*mt2
+    ! Rescale invariants by mst2 to improve stability
+    xs = s/mst2
+    xt = t/mst2
+    xu = u/mst2
+    xmst2 = 1d0
+    xmchi2 = mchi2/mst2
+    xmt2 = mt2/mst2
+
+
+    ! Store new (rescaled) input variables
+    newInputD0 = (/ xs,xt,xmst2,xmchi2,xmt2 /)
+    k1sq = 0d0
+    k2sq = 0d0
+
+    ! Check if the given input variables matches any
+    ! of the cached ones
+    if (.not.differs(InputVarsD0(1,:),newInputD0)) then
+        cachedD0 = 1
+    else if (.not.differs(InputVarsD0(2,:),newInputD0)) then
+        cachedD0 = 2
+    else
+        cachedD0 = 0
+    endif
+
+    ! If cachedD = 0, we need to compute it and cache
+    ! (we know the values for pq,p2 and p1<->p2 (t<->u) will have to be computed
+    ! so we already do both and cache)
+    if (cachedD0 == 0) then
+        cachedD0 = 1
+        call Init_cll(N,rank,'',.true.)
+        call InitEvent_cll
+        ! Using mode=3 computes with the DD and COLI branches and return the most precise results
+        call SetMode_cll(3)
+        call SetDeltaUV_cll(deltaUV) ! Remove the divergence (MSbar)
+        call SetMuUV2_cll(muR2) ! Set the renormalization scale    
+        ! Compute the input for the given variables
+        InputVarsD0(1,:) = (/ xs,xt,xmst2,xmchi2,xmt2 /)
+        call D0_cll(D0coeff,xmt2,xmt2,k1sq,k2sq,xs,xt,xmst2,xmchi2,xmst2,xmst2)
+        D0coeff = D0coeff/((2*Pi)**4)
+        D0coeff = D0coeff/mst2**2
+      
+        ! Store the result in the first entry
+        OutPutD0(1) = D0coeff
+        ! Compute the input changing p1<->p2 (t<->u)
+        InputVarsD0(2,:) = (/ xs,xu,xmst2,xmchi2,xmt2 /)
+        call D0_cll(D0coeff,xmt2,xmt2,k1sq,k2sq,xs,xu,xmst2,xmchi2,xmst2,xmst2)
+        D0coeff = D0coeff/((2*Pi)**4)
+        D0coeff = D0coeff/mst2**2
+        ! Store result in the second entry
+        OutPutD0(2) = D0coeff
+    endif
+
+    ! We can finally return the cached input
+    D0coeff = OutPutD0(cachedD0)
+    
+end subroutine getD0IntegralOnShell
 ! ------------------------------------------------------------
 ! Define the form factors in terms of the loop functions:
 ! ------------------------------------------------------------
@@ -644,7 +742,7 @@ double complex function D0(s,t)
     double complex s,t
     double complex mt2,mst2,mchi2
     double precision deltaUV,muR2
-    double complex Dcoeff(0:1,0:3,0:3,0:3)
+    double complex D0coeff
     include 'input.inc' ! include all external model parameter
     include 'coupl.inc' ! include other parameters
    
@@ -658,13 +756,13 @@ double complex function D0(s,t)
         D0 = 0d0
         return
     else            
-        call getDIntegralsOnShell(Dcoeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
-        D0 = Dcoeff(0,0,0,0)
+        call getD0IntegralOnShell(D0coeff,s,t,mst2,mchi2,mt2,muR2,deltaUV)
+        D0 = D0coeff
     endif
     
-    if (MDL_IDEBUG > 0d0) then
-        call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D0')
-    endif
+    ! if (MDL_IDEBUG > 0d0) then
+        ! call writedebugD(s,t,mst2,mchi2,mt2,Dcoeff,'D0')
+    ! endif
 
     return 
 
