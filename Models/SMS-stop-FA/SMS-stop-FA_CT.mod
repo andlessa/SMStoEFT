@@ -309,7 +309,7 @@ M$CouplingMatrices = {
 	                  omega[-], omega[+] } *)
 
 C[ -F[9, {e1x2}] , F[9, {e2x2}] ] == IndexDelta[e1x2, e2x2]*(I*yDM^2*Pi^2){
-    {0, -deltaS/MT}, 
+    {0, deltaS/MT}, 
     {0, deltaSp}, 
     {0, deltaS}, 
     {0, deltaS}

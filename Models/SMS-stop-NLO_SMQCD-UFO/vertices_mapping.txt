@@ -24,11 +24,25 @@ V_39 = CTVertex(name = 'V_39',
                 loop_particles = [ [ [P.g, P.t] ], [ [P.P__tilde__chi, P.P__tilde__ST] ] ],
                 couplings = {(0,0,1):C.UVGC_131_76,(0,0,0):C.UVGC_131_77,(0,2,1):C.UVGC_131_76,(0,2,0):C.UVGC_131_77,(0,1,1):C.UVGC_129_72,(0,1,0):C.UVGC_129_73,(0,3,1):C.UVGC_132_78,(0,3,0):C.UVGC_129_73})                                
 
+UVGC_131_76  = ( ( -(complex(0,1)*MT**3*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...))
+UVGC_129_72 =  ( ( -(complex(0,1)*MT**2*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...))
+UVGC_132_78 = (complex(0,1)*yDM**2)/(32.*cmath.pi**2*Epsilon) + ( ( (complex(0,1)*yDM**2)/(8.*cmath.pi**2) - ...))
+
 ### yDM^2 contributions:
 (0,0,1):C.UVGC_131_76 -> 'Identity(1,2)*L.FF2' = 'Identity(1,2)*ProjM(2,1)'
 (0,2,1):C.UVGC_131_76 -> 'Identity(1,2)*L.FF4' = 'Identity(1,2)*ProjP(2,1)'
 (0,1,1):C.UVGC_129_72 -> 'Identity(1,2)*L.FF3' = 'Identity(1,2)*P(-1,1)*Gamma(-1,2,-2)*ProjM(-2,1)'
 (0,3,1):C.UVGC_132_78 -> 'Identity(1,2)*L.FF5' = 'Identity(1,2)*P(-1,1)*Gamma(-1,2,-2)*ProjP(-2,1)'
+
+ttG_CT = Identity(1,2)*(
+
+                        (ProjM(2,1) + ProjP(2,1))*( ( ( -(complex(0,1)*MT**3*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...))  )
+
+                        + P(-1,1)*Gamma(-1,2,-2)*ProjM(-2,1)*( ( ( -(complex(0,1)*MT**2*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...)) )
+                        
+                        + P(-1,1)*Gamma(-1,2,-2)*ProjP(-2,1)*( (complex(0,1)*yDM**2)/(32.*cmath.pi**2*Epsilon) 
+                                                                    + ( ( (complex(0,1)*yDM**2)/(8.*cmath.pi**2) - ...))   )
+)
 
 
 
