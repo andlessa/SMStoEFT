@@ -1617,7 +1617,7 @@ double complex function ab1(s,t)
     ! Compute the relevant combination of A0 and B0 integrals:
     call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
     ! Compute the coefficient including the counter-terms
-    ab1 = (2*deltaS*mt2 + 4*deltaS*t + 2*deltaSp*mt*t - mt*ab)/(2*(mt2-t)**2)
+    ab1 = mt*(2*deltaS*mt + 2*deltaSp*t - ab)/(2*(mt2-t)**2)
 
     if (MDL_IDEBUG > 0d0) then
         call writedebugAB(s,t,mst2,mchi2,mt2,ab,ab1,'ab1')
@@ -1668,7 +1668,7 @@ double complex function ab2(s,t)
     ! Compute the relevant combination of A0 and B0 integrals:
     call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
     ! Compute the coefficient including the counter-terms
-    ab2 = (2*t*(deltaSp*mt*mt2 + deltaS*(2*mt2 + t)) - ab*mt*mt**2)/(2.*mt*(mt2 - t)**2*t)
+    ab2 = (2*t*(2*deltaS*mt2 - t*deltaS + deltaSp*mt**3) - ab*mt**3)/(2.*t*mt*(mt2 - t)**2)
 
     if (MDL_IDEBUG > 0d0) then
         call writedebugAB(s,t,mst2,mchi2,mt2,ab,ab2,'ab2')
@@ -1718,7 +1718,7 @@ double complex function ab3(s,t)
     ! Compute the relevant combination of A0 and B0 integrals:
     call getABIntegral(ab,s,t,mt2,mchi2,mst2,muR2,deltaUV)
     ! Compute the coefficient including the counter-terms
-    ab3 = (2*(deltaS - deltaSp*mt)*t + mt*ab)/(2.*mt*(mt2 - t)*t)
+    ab3 = (2*t*(deltaS + mt*deltaSp) - mt*ab)/(2.*mt*t*(mt2 - t))
 
     if (MDL_IDEBUG > 0d0) then
         call writedebugAB(s,t,mst2,mchi2,mt2,ab,ab3,'ab3')
