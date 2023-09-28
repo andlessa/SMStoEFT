@@ -23,13 +23,13 @@ Below we present the validation of the distinct implementations of the SMS model
 
 All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
-  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) | OnShell (pb) |   EFT (pb)  | NLO-MG5  (pb) |
-  | ----------- | ------------- | ---------------- | ------- | ------- | ------ | --------- |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |   $(1.756 \pm 0.009)\times10^{-2}$   |   $(1.756 \pm 0.009)\times10^{-2}$   |   $(1.101 \pm 0.006)\times10^{-2}$  | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |   $(3.785 \pm 0.013)\times10^{-5}$   |   $(3.785 \pm 0.013)\times10^{-5}$   |   $(1.431 \pm 0.005)\times10^{-5}$  | $(3.800 \pm 0.006)\times10^{-5}$  |
-  |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |   $(9.245 \pm 0.05)\times10^{-5}$   |   $(9.156 \pm 0.05)\times10^{-5}$   |   $(9.212 \pm 0.01)\times10^{-5}$  | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |   $(4.31 \pm 0.005)\times10^{-10}$   |   $(4.30 \pm 0.02)\times10^{-10}$   |   $(4.236 \pm 0.006)\times10^{-10}$  | $(4.326 \pm 0.012)\times10^{-10}$  |
+  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) | EFT (pb)  | NLO-MG5  (pb) |
+  | ----------- | ------------- | ---------------- | ------- | ------- | ------ |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |   $(1.756 \pm 0.009)\times10^{-2}$ |   $(1.101 \pm 0.006)\times10^{-2}$  | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |   $(3.785 \pm 0.013)\times10^{-5}$   |   $(1.431 \pm 0.005)\times10^{-5}$  | $(3.800 \pm 0.006)\times10^{-5}$  |
+  |  |  |  |  |   |   |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |   $(9.245 \pm 0.01)\times10^{-5}$    |   $(9.212 \pm 0.01)\times10^{-5}$  | --- |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |   $(4.31 \pm 0.005)\times10^{-10}$   |   $(4.236 \pm 0.006)\times10^{-10}$  | $(4.326 \pm 0.012)\times10^{-10}$  |
   
 
 
@@ -39,7 +39,7 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
 | Model     | Diagrams  |
 |-----------|-----------|
-| SMS-stop 1 loop | <img src="../mathematicaNBs/matching/SMS-stop-ggtt-loop.png" width="450" height="600"> |
+| SMS-stop 1 loop | <img src="../mathematicaNBs/matching/SMS-stop-ggtt-loop.png" width="600" height="600"> |
 | FormFactors | <img src="../mathematicaNBs/matching/Top-FormFactors-ggtt-loop.png" width="600" height="150"> |
 | EFT | <img src="../mathematicaNBs/matching/Top-EFTphysical_simple-ggtt-loop.png" width="600" height="150"> |
 
@@ -49,13 +49,13 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 
   | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | OneLoop (pb) |   EFT (pb)  | NLO-MG5  (pb) |
   | ----------- | ------------- | ---------------- | ------- | ------ | --------- |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $( \pm )\times10^{-1}$   |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      400      |         100      |  $(-1.815 \pm 0.004 )\times10^{-1}$   |  $(-2.188 \pm 0.004)\times10^{-1}$   | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     400      |         100     |  $(15.24 \pm 0.04)\times10^{-5}$      |  $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |  $( \pm )\times10^{-4}$    |   $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      5000      |         4000      |  $(-8.996 \pm 0.015)\times10^{-4}$    |   $(-9.005 \pm 0.02)\times10^{-4}$   | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     5000      |         4000     |  $(10.28 \pm 0.02)\times10^{-10}$    | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$  |
   |  |  |  |  |   |   |  |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $( \pm )\times10^{-4}$   |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ |      10000      |         9000      |  $(-2.082 \pm 0.003 )\times10^{-4}$   |  $(-2.083 \pm 0.02)\times10^{-4}$   | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$ |     10000      |         9000     |  $(5.442  \pm  0.009)\times10^{-11}$     | $(5.441 \pm 0.009)\times10^{-11}$  |  $(4.533 \pm 0.03)\times10^{-11}$  |
 <!-- 
 #### Breakdown of the contributions to |M1(NP)|^2
