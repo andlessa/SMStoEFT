@@ -352,7 +352,7 @@ FFVVNP14 = Lorentz(name = 'FFVVNP14',
 
 FFVVNP21 = Lorentz(name = 'FFVVNP21',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(3,2,-1)*Gamma(4,-1,1) )*( (-ab1(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
+                structure = '( Gamma(3,2,-1)*Gamma(4,-1,1) )*( (ab1(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
 
 
 FFVVNP22 = Lorentz(name = 'FFVVNP22',
@@ -367,17 +367,17 @@ FFVVNP23 = Lorentz(name = 'FFVVNP23',
 
 FFVVNP24 = Lorentz(name = 'FFVVNP24',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(3,2,-1)*P(-2,2)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
+                structure = '( Gamma(3,2,-1)*P(-2,2)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (-ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
 
 
 FFVVNP25 = Lorentz(name = 'FFVVNP25',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(3,2,-1)*P(-2,3)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
+                structure = '( Gamma(3,2,-1)*P(-2,3)*Gamma(-2,-1,-3)*Gamma(4,-3,-4)*ProjP(-4,1) )*( (-ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,2)**2 + P(-1,3)**2 + 2*P(-1,2)*P(-1,3))))')
 
 
 FFVVNP26 = Lorentz(name = 'FFVVNP26',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(4,2,-1)*Gamma(3,-1,1) )*( (-ab1(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
+                structure = '( Gamma(4,2,-1)*Gamma(3,-1,1) )*( (ab1(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
 
 
 FFVVNP27 = Lorentz(name = 'FFVVNP27',
@@ -392,9 +392,9 @@ FFVVNP28 = Lorentz(name = 'FFVVNP28',
 
 FFVVNP29 = Lorentz(name = 'FFVVNP29',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(4,2,-1)*P(-2,1)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (-ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
+                structure = '( Gamma(4,2,-1)*P(-2,1)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
 
 
 FFVVNP30 = Lorentz(name = 'FFVVNP30',
                 spins = [ 2, 2, 3, 3 ],
-                structure = '( Gamma(4,2,-1)*P(-2,3)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (-ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
+                structure = '( Gamma(4,2,-1)*P(-2,3)*Gamma(-2,-1,-3)*Gamma(3,-3,-4)*ProjP(-4,1) )*( (ab3(P(-1,1)**2 + P(-1,2)**2 + 2*P(-1,1)*P(-1,2), P(-1,1)**2 + P(-1,3)**2 + 2*P(-1,1)*P(-1,3))))')
