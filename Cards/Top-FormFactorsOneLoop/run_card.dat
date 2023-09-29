@@ -82,10 +82,12 @@
 			     ! 2 is new strategy (using only the denominator)
 # To see advanced option for Phase-Space optimization: type "update psoptim"			     
 #*********************************************************************
-# Customization (custom cuts/scale/bias/...)                         *
-# list of files containing fortran function that overwrite default   *
+# Generation bias, check the wiki page below for more information:   *
+#  'cp3.irmp.ucl.ac.be/projects/madgraph/wiki/LOEventGenerationBias' *
 #*********************************************************************
-  = custom_fcts ! List of files containing user hook function
+ None = bias_module  ! Bias type of bias, [None, ptj_bias, -custom_folder-]
+ {} = bias_parameters ! Specifies the parameters of the module.
+#
 #*******************************                                                 
 # Parton level cuts definition *
 #*******************************
@@ -135,7 +137,7 @@
 # Store info for systematics studies                                 *
 # WARNING: Do not use for interference type of computation           *
 #*********************************************************************
-   True  = use_syst      ! Enable systematics studies
+   False  = use_syst      ! Enable systematics studies
 #
 systematics = systematics_program ! none, systematics [python], SysCalc [depreceted, C++]
 ['--mur=0.5,1,2', '--muf=0.5,1,2', '--pdf=errorset'] = systematics_arguments ! see: https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/Systematics#Systematicspythonmodule
