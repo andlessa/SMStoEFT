@@ -246,10 +246,10 @@ def generateEvents(parser):
 
     
     if cleanOutput and runInfo and 'run number' in runInfo:
-        lheFile = os.path.join(runFolder,'Events',runInfo['run number'],'unweighted_events.lhe.gz')
-        logger.debug('Removing  %s' %lheFile)
-        if os.path.isfile(lheFile):
-            os.remove(lheFile)
+        # lheFile = os.path.join(runFolder,'Events',runInfo['run number'],'unweighted_events.lhe.gz')
+        # logger.debug('Removing  %s' %lheFile)
+        # if os.path.isfile(lheFile):
+            # os.remove(lheFile)
         hepmcFile = os.path.join(runFolder,'Events',runInfo['run number'], '%s_pythia8_events.hepmc.gz'  %runInfo['run tag'])
         logger.debug('Removing  %s' %hepmcFile)
         if os.path.isfile(hepmcFile):
