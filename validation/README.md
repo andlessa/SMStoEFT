@@ -60,7 +60,7 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 400   | 100  | $(15.24 \pm 0.04)\times10^{-5}$    | $(6.005 \pm 0.01)\times10^{-5}$   | $(11.94 \pm 0.02)\times10^{-5}$ |
   |  |  |  |  |   |   |  |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ | 600   | 550  | $(-5.248 \pm 0.009)\times10^{-2}$  | $(-5.683 \pm 0.009)\times10^{-2}$ | --- |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 600   | 550  | $( \pm )\times10^{-10}$   | $(4.088 \pm 0.008)\times10^{-6}$  |  $( \pm )\times10^{-10}$ |
+  |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 600   | 550  | $(6.388 \pm 0.02)\times10^{-6}$   | $(4.088 \pm 0.008)\times10^{-6}$  |  $( \pm )\times10^{-10}$ |
   |  |  |  |  |   |   |  |
   |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ | 5000  | 4000 | $(-8.996 \pm 0.015)\times10^{-4}$  | $(-9.005 \pm 0.02)\times10^{-4}$  | --- |
   |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 5000  | 4000 | $(10.28 \pm 0.02)\times10^{-10}$   | $(10.26 \pm 0.02)\times10^{-10}$  |  $(8.593 \pm 0.01)\times10^{-10}$ |
