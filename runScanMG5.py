@@ -68,7 +68,11 @@ def generateProcess(parser):
     logger.debug('MG5 process output:\n %s \n' %output.decode())
     logger.info("Finished process generation")
 
-    runFix = parser["options"]['runFixCollier']
+    if 'runFixCollier' in parser["options"]:
+        runFix = parser["options"]['runFixCollier']
+    else:
+        runFix = False
+
     if runFix:
         run = subprocess.Popen('./fixForCollier.sh  %s' %processFolder,shell=True,
                                 stdout=subprocess.PIPE,stderr=subprocess.PIPE)
