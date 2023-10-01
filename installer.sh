@@ -45,11 +45,13 @@ if echo "$answer" | grep -iq "^y" ;then
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
-        echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\nexit\n" > mad_install.txt;
+        echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall collier\nexit\n" > mad_install.txt;
 	./mg5_aMC -f mad_install.txt
 
 	rm mad_install.txt;
 	cd $homeDIR;
+	echo "[installer] copying bias folder"
+	cp -r auxFiles/mtt_bias ./MG5/Template/LO/Source/BIAS
 #    rm $madgraph;
 fi
 

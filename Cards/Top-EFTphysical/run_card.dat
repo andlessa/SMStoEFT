@@ -18,7 +18,7 @@
 #*********************************************************************
 # Tag name for the run (one word)                                    *
 #*********************************************************************
-  mST600_mChi550     = run_tag ! name of the run 
+  mST600_mChi550bias3     = run_tag ! name of the run 
 #*********************************************************************
 # Number of events and rnd seed                                      *
 # Warning: Do not generate more than 1M events in a single run       *
@@ -85,8 +85,9 @@
 # Generation bias, check the wiki page below for more information:   *
 #  'cp3.irmp.ucl.ac.be/projects/madgraph/wiki/LOEventGenerationBias' *
 #*********************************************************************
- None = bias_module  ! Bias type of bias, [None, ptj_bias, -custom_folder-]
- {} = bias_parameters ! Specifies the parameters of the module.
+ mtt_bias = bias_module  ! Bias type of bias, [None, ptj_bias, -custom_folder-]
+ {'mtt_bias_target_mtt': 2000.0, 'mtt_bias_enhancement_power': 2.0} = bias_parameters ! Specifies the parameters of the module.
+
 #
 #*******************************                                                 
 # Parton level cuts definition *
