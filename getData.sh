@@ -15,5 +15,5 @@ fi
 
 echo "Downloading data tarball to $homeDIR/$fdata"
 
-wget https://cernbox.cern.ch/index.php/s/----/download -O $homeDIR/$fdata
+wget https://cernbox.cern.ch/s/T8Se6eZBwPVDVTC/download -O $homeDIR/$fdata
 
