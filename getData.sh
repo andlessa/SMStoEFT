@@ -3,16 +3,19 @@
 homeDIR="$( pwd )"
 
 if [ "$1" = "" ]; then 
-  fdata="processFolders.tar.gz"
+  fdata="data"
 else
   fdata=$1
 fi
 
-if [ -f "$homeDIR/$fdata" ]; then
-  echo "File $homeDIR/$fdata already exists. Pass a new file name for the data as the first argument."
+if [ -d "$homeDIR/$fdata" ]; then
+  echo "Folder $homeDIR/$fdata already exists. Pass a new folder name as the first argument."
   exit
 fi
 
-echo "Downloading data tarball to $homeDIR/$fdata"
+echo "Downloading data tarballs to $homeDIR/$fdata"
 
-wget https://cernbox.cern.ch/s/B63F7DJu1rbRbxT/download -O $homeDIR/$fdata
+echo "Downloading processFolders.tar.gz"
+wget https://cernbox.cern.ch/remote.php/dav/public-files/B63F7DJu1rbRbxT/processFolders.tar.gz -O $homeDIR/$fdata/processFolders.tar.gz
+echo "Downloading xsecs.tar.gz"
+wget https://cernbox.cern.ch/remote.php/dav/public-files/B63F7DJu1rbRbxT/xsecs.tar.gz -O $homeDIR/$fdata/xsecs.tar.gz
