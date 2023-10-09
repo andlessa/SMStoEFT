@@ -252,6 +252,7 @@ LCT := Block[{aa,cc1,cc2,mu,sp1,sp2,sp3},
 (* However, FeynRules complains about hermiticity if the hermitian conjugate is not added. *)
 (* Therefore we are forced to add HC[LA2], which corresponds to adding LA2 twice, hence the 1/2 factor. *)
 
+LNPnoCT := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3;
 LNP := Lkin + LYDM + HC[LYDM] + LA1 + (1/2)*(LA2 + HC[LA2]) + LA3 + LCT;
 
 
