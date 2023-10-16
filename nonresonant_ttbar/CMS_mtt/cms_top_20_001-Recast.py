@@ -11,64 +11,66 @@ import tempfile,gzip,pylhe
 
 
 
-def getLHEevents(files=[]):
+def getLHEevents(fpath):
     """
     Reads a set of LHE files and returns a dictionary with the file labels as keys
     and the PyLHE Events object as values.
     """
 
     # It is necessary to remove the < signs from the LHE files (in the generate line) before parsing with pylhe
-    events = {}
-    for fpath in files:
-        fixedFile = tempfile.mkstemp(suffix='.lhe')
-        os.close(fixedFile[0])
-        fixedFile = fixedFile[1]
-        with  gzip.open(fpath,'rt') as f:
-            data = f.readlines()
-            with open(fixedFile,'w') as newF:
-                for l in data:
-                    if 'generate' in l:
-                        continue
-                    newF.write(l)
-            files[fpath] = fixedFile
-        events[fpath] = pylhe.read_lhe_with_attributes(fixedFile)        
+    fixedFile = tempfile.mkstemp(suffix='.lhe')
+    os.close(fixedFile[0])
+    fixedFile = fixedFile[1]
+    with  gzip.open(fpath,'rt') as f:
+        data = f.readlines()
+        with open(fixedFile,'w') as newF:
+            for l in data:
+                if 'generate' in l:
+                    continue
+                newF.write(l)
+        events = pylhe.read_lhe_with_attributes(fixedFile)        
 
     return events
 
 
-def getMTThist(eventsDict={}):
+def getMTThist(events):
     """
-    Reads a dictionary containing PyLHE Events objects and extracts the ttbar invariant
+    Reads a PyLHE Event object and extracts the ttbar invariant
     mass for each event.
     """
 
     cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
                 1150.,1300.,1500.,1700.,2000.,2300.,3500.]
-    mttDict = {}
-    for label,events in eventsDict.items():
-        mTT = []
-        weights = []
-        mcTotal = 0
-        for ev in events:
-            weights.append(ev.eventinfo.weight)
-            mcTotal += 1
-            for ptc in ev.particles:
-                if abs(ptc.id) != 6: continue
-                if ptc.id == 6:
-                    pA = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
-                else:
-                    pB = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
+    events = list(events)
+    progressbar = P.ProgressBar(widgets=["Reading %i Events: " %len(events), 
+                            P.Percentage(),P.Bar(marker=P.RotatingMarker()), P.ETA()])
+    progressbar.maxval = len(events)
+    progressbar.start()
 
-            mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
-        
-        weights = np.array(weights)/mcTotal
-        mttHist,_ = np.histogram(mTT,weights=weights,bins=cms_bins)
-        mttHistError,_ = np.sqrt(np.histogram(mTT,weights=weights**2,bins=cms_bins))
+    mTT = []
+    weights = []
+    mcTotal = 0
+    for ev in events:
+        weights.append(ev.eventinfo.weight)
+        mcTotal += 1
+        progressbar.update(mcTotal)
+        for ptc in ev.particles:
+            if abs(ptc.id) != 6: continue
+            if ptc.id == 6:
+                pA = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
+            else:
+                pB = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
 
-        data = np.array(list(zip(cms_bins[:-1],cms_bins[1:],mttHist,mttHistError)))
-        mttDict[label] = data
+        mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
+    
+    weights = np.array(weights)/mcTotal
+    mttHist,_ = np.histogram(mTT,weights=weights,bins=cms_bins)
+    mttHistError,_ = np.histogram(mTT,weights=weights**2,bins=cms_bins)
+    mttHistError = np.sqrt(mttHistError)
 
-    return mttDict
+    data = np.array(list(zip(cms_bins[:-1],cms_bins[1:],mttHist,mttHistError)))
+    
+    return data
 
 
 def getInfo(f):
@@ -118,32 +120,26 @@ def getInfo(f):
 
 def getRecastData(inputFiles):
 
-    if len(inputFiles) > 1:
-        print('Combining files:')
-        for f in inputFiles:
-            print(f)
-
-    filesInfo = {f : getInfo(f) for f in inputFiles}    
-    # Get events:
-    eventsDict = getLHEevents(inputFiles)
-    mttDict = getMTThist(eventsDict)
-
-    data = []
-    for f in filesInfo:
-    # Create a dictionary with the bin counts and their errors
-        dataDict = filesInfo[f]
-        mtthist = mttDict[f]
-        bins_left = mtthist[:,0]
-        bins_right = mtthist[:,1]
-        w = mtthist[:,2]
-        wError = mtthist[:,3]    
+    allData = []
+    for f in inputFiles:
+        print('\nReading file: %s' %f)
+        fileInfo = getInfo(f)
+        # Get events:
+        events = getLHEevents(f)
+        data = getMTThist(events)
+        # Create a dictionary with the bin counts and their errors
+        dataDict = fileInfo
+        bins_left = data[:,0]
+        bins_right = data[:,1]
+        w = data[:,2]
+        wError = data[:,3]    
         for ibin,b in enumerate(bins_left):
             label = 'bin_%1.0f_%1.0f'%(b,bins_right[ibin])
             dataDict[label] = w[ibin]
             dataDict[label+'_Error'] = wError[ibin]
-        data.append(dataDict)
+        allData.append(dataDict)
 
-    return data
+    return allData
 
 
 if __name__ == "__main__":
