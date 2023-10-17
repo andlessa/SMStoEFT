@@ -19,16 +19,16 @@ def csv_reader(filename):
 
     return output
 
-def read_HEPdata_SM():
+def read_HEPdata_SM(dataDir='./data'):
     '''
     Read data and covmat from hepdata
     '''
-    data = csv_reader('./data/parton_abs_ttm.csv')
+    data = csv_reader(os.path.join(dataDir,'parton_abs_ttm.csv'))
     cms_data  = []
     for item in data[9:24]:
         cms_data.append(float(item[3]))
 
-    covdata = csv_reader('./data/parton_abs_ttm_covariance.csv')
+    covdata = csv_reader(os.path.join(dataDir,'parton_abs_ttm_covariance.csv'))
     covmat = np.zeros(15*15).reshape(15,15)
 
     covmatlist = []
@@ -43,20 +43,20 @@ def read_HEPdata_SM():
 
     return np.array(cms_data), np.array(covmat)
 
-def getSMLO():
+def getSMLO(filename='./mtt_SM_ttbar_nnpdf4p0.txt'):
     """
     Use mtt computed at LO from arXiv:2303.17634
     """
 
-    sm = np.loadtxt('./mtt_SM_ttbar_nnpdf4p0.txt',usecols=(0,),dtype=float)
+    sm = np.loadtxt(filename,usecols=(0,),dtype=float)
     return sm
 
-def getKfactor():
+def getKfactor(filename='./kfac_nnlo_lo_highstats.txt'):
     """
     Use kfactors computed at NNLO from arXiv:2303.17634 (using HighTea)
     """
     
-    filename='./kfac_nnlo_lo_highstats.txt'
+    
     kfac = np.loadtxt(filename,dtype=float,usecols=(0,))
 
     return kfac
