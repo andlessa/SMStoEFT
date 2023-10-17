@@ -41,19 +41,12 @@ def getMTThist(events):
 
     cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
                 1150.,1300.,1500.,1700.,2000.,2300.,3500.]
-    events = list(events)
-    progressbar = P.ProgressBar(widgets=["Reading %i Events: " %len(events), 
-                            P.Percentage(),P.Bar(marker=P.RotatingMarker()), P.ETA()])
-    progressbar.maxval = len(events)
-    progressbar.start()
-
     mTT = []
     weights = []
     mcTotal = 0
     for ev in events:
         weights.append(ev.eventinfo.weight)
         mcTotal += 1
-        progressbar.update(mcTotal)
         for ptc in ev.particles:
             if abs(ptc.id) != 6: continue
             if ptc.id == 6:
@@ -121,6 +114,13 @@ def getInfo(f):
 def getRecastData(inputFiles):
 
     allData = []
+
+    progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(inputFiles), 
+                            P.Percentage(),P.Bar(marker=P.RotatingMarker()), P.ETA()])
+    progressbar.maxval = len(inputFiles)
+    progressbar.start()
+    nfiles = 0
+
     for f in inputFiles:
         print('\nReading file: %s' %f)
         fileInfo = getInfo(f)
@@ -138,7 +138,10 @@ def getRecastData(inputFiles):
             dataDict[label] = w[ibin]
             dataDict[label+'_Error'] = wError[ibin]
         allData.append(dataDict)
+        nfiles += 1
+        progressbar.update(nfiles)
 
+    progressbar.finish()
     return allData
 
 
