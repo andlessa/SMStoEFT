@@ -6,8 +6,8 @@ import time,os,sys
 import progressbar as P
 import numpy as np
 import csv 
-from statisticalTools.simplifiedLikelihoods import Data,UpperLimitComputer
 import pandas as pd
+from scipy.optimize import minimize, brentq
 
 def csv_reader(filename):
     output = []
@@ -23,12 +23,12 @@ def read_HEPdata_SM():
     '''
     Read data and covmat from hepdata
     '''
-    data = csv_reader('../data/HEPData-ins1901295-v1-parton_abs_ttm.csv')
+    data = csv_reader('./data/parton_abs_ttm.csv')
     cms_data  = []
     for item in data[9:24]:
         cms_data.append(float(item[3]))
 
-    covdata = csv_reader('../data/HEPData-ins1901295-v1-parton_abs_ttm_covariance.csv')
+    covdata = csv_reader('./data/parton_abs_ttm_covariance.csv')
     covmat = np.zeros(15*15).reshape(15,15)
 
     covmatlist = []
@@ -41,69 +41,104 @@ def read_HEPdata_SM():
             covmat[i,j] = covmatlist[count]
             count+=1
 
-    return cms_data, covmat
+    return np.array(cms_data), np.array(covmat)
 
-def kfactor():
-    '''
-    Get SM NNLO kfactor from hightea
-    '''
-    filename='./sm/kfac_nnlo_lo_highstats.txt'
+def getSMLO():
+    """
+    Use mtt computed at LO from arXiv:2303.17634
+    """
+
+    sm = np.loadtxt('./mtt_SM_ttbar_nnpdf4p0.txt',usecols=(0,),dtype=float)
+    return sm
+
+def getKfactor():
+    """
+    Use kfactors computed at NNLO from arXiv:2303.17634 (using HighTea)
+    """
+    
+    filename='./kfac_nnlo_lo_highstats.txt'
     kfac = np.loadtxt(filename,dtype=float,usecols=(0,))
-    kfac_unc = np.loadtxt(filename,dtype=float,usecols=(1,))
 
-    return kfac, kfac_unc
+    return kfac
 
-def chi2(yDM,signal,sm,data,covmat):
-    theory = sm + yDM**2*signal
+def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
+    theory = kfactor*(sm + yDM**2*signal)
     diff = (theory - data)[1:]
     Vinv = np.linalg.inv(covmat)[1:,1:]
     return ((diff).dot(Vinv)).dot(diff)
-
 
 
 def computeULs(inputFile,outputFile,deltas=0.0):
 
     cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
                 1150.,1300.,1500.,1700.,2000.,2300.,3500.]
-    cms_lumi = 137.
 
 
     # ### Load CMS data
-    bgxsecs,covMatrix = read_HEPdata_SM()
+    xsecsObs,covMatrix = read_HEPdata_SM()
+    
+    # ### Load SM prediction (LO)
+    smLO = getSMLO()
+    # ### Load k-factors
+    kfac = getKfactor()
+    # ### Leptonic BR
+    BR = 0.6741*(0.1071+0.1063)*2
 
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
 
     binCols = [c for c in recastData.columns 
-               if 'bin_' in c and not 'Error' in c]
-    bins_left = [eval(c.split('_')[1]) for c in binCols]
-    bins_right = [eval(c.split('_')[2]) for c in binCols]
+               if 'bin_' in c.lower() and not 'error' in c.lower()]
+    bins_left = np.array([eval(c.split('_')[1]) for c in binCols])
+    bins_right = np.array([eval(c.split('_')[2]) for c in binCols])
+    # Check that bins are consistent:
+    if not np.array_equal(bins_left,cms_bins[:-1]):
+        print('Bins from data do not match CMS')
+        return
+    if bins_right[-1] != cms_bins[-1]:
+        print('Bins from data do not match CMS')
+        return
 
-    
-    # ### Loop over model points and compute UL on mu
-    ulComp = UpperLimitComputer()
 
     progressbar = P.ProgressBar(widgets=["Computing upper limits: ", P.Percentage(),
                                 P.Bar(marker=P.RotatingMarker()), P.ETA()])
     progressbar.maxval = len(recastData)
     progressbar.start()
 
-
+    yDM95list = []
     for ipt,pt in recastData.iterrows():
 
         progressbar.update(ipt)
-        binWeights = [pt[c] for c in binCols]
-        signal = np.array(binWeights)
+        signal = list(zip(bins_left,pt[binCols].values))
+        signal = np.array(sorted(signal))[:,1]
         yDM = pt['yDM']
         # Make sure signal is normalized to yDM = 1
         signal = signal/yDM**2
 
-        #First find minima of the chi profile, such that the delta chi2 can then be calculated
-        def func_to_solve_deltachi2(ct):
-            return chi2(ct, signal, sm, data, covMatrix)
+        # Rescale predictions by bin-dependent k-factors 
+        # and leptonic BR
+        signal = kfac*BR*signal
+        sm = kfac*BR*smLO
 
+        # Finally, divide by the bin widths
+        signal = signal/(bins_right-bins_left)
+        sm = sm/(bins_right-bins_left)
         
+        #First find minima of the chi profile, such that the delta chi2 can then be calculated
+        def func_to_solve_deltachi2(yDMval):
+            return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
 
+        yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
+        chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
+
+        def func_to_solve_95(yDMval):
+            return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
+
+        yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
+        # Store result
+        yDM95list.append(yDM95)
+
+    recastData['yDM (95% C.L.)'] = yDM95list
     progressbar.finish()
     recastData.to_pickle(outputFile)
 
