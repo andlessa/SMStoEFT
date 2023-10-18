@@ -1,5 +1,9 @@
 
 import glob, pyslha,os
+import numpy as np
+import itertools
+from scipy.interpolate import  griddata
+from matplotlib import pyplot as plt
 
 
 def getInfo(f,labelsDict=None):
@@ -48,3 +52,58 @@ def getInfo(f,labelsDict=None):
                'xsec (pb)' : xsec, 'nevents' : nEvents}
     
     return fileInfo
+
+
+def interpolateData(x,y,z,nx=200,ny=200,method='linear'):
+
+    xnew = np.linspace(x.min(),x.max(),nx)
+    ynew = np.linspace(y.min(),y.max(),ny)
+    xi = np.array([list(v) for v in itertools.product(xnew,ynew)])
+    znew = griddata(list(zip(x,y)),z,xi=xi, method=method)
+    znew = np.reshape(znew,(len(xnew),len(ynew)))
+    xnew,ynew  = np.meshgrid(xnew,ynew,indexing='ij')
+
+    return xnew,ynew,znew
+
+
+def getContours(x,y,z,contourValues):
+    
+
+    contours = plt.contour(x, y, z, contourValues)
+    plt.close()
+
+    contoursDict = {}
+
+    for i,item in enumerate(contours.collections):
+        cV = contourValues[i]
+        xData = []
+        yData = []
+        for p in item.get_paths():
+            v = p.vertices
+            xData += list(v[:, 0])
+            yData += list(v[:, 1])
+        if len(xData) == 0:
+            continue
+        contoursDict[cV] = np.array(list(zip(xData,yData)))
+    
+    return contoursDict
+
+def saveContours(contoursDict,fname,header):
+
+    with open(fname,'w') as f:
+        for cV,data in contoursDict.items():
+            np.savetxt(f,data,fmt='%.4e',delimiter=',',header=header,comments='\n\n# Contour value=%1.2f \n' %cV)
+    print('Contours saved to %s' %fname)
+
+def readContours(fname):
+
+    contoursDict = {}
+    with open(fname,'r') as f:
+        dataBlocks = f.read().split('#')[1:]
+        for data in dataBlocks: 
+            data = data.splitlines()
+            cV = eval(data[0].split('=')[1])
+            dataPts = np.genfromtxt(data,delimiter=',',names=True,skip_header=1)
+            contoursDict[cV] = dataPts
+
+    return contoursDict

@@ -122,7 +122,7 @@ def getRecastData(inputFiles):
     nfiles = 0
 
     for f in inputFiles:
-        print('\nReading file: %s' %f)
+        # print('\nReading file: %s' %f)
         fileInfo = getInfo(f)
         # Get events:
         events = getLHEevents(f)
