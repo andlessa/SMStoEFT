@@ -15,8 +15,8 @@ Useful references:
  * [Feynrules Tutorial](https://indico.cern.ch/event/829653/contributions/3568516/attachments/1946141/3229625/feynrules_tutorial.pdf)
  * [Higgs-Gluon Fusion Thesis](https://www.thphys.uni-heidelberg.de/~plehn/includes/theses/bock_m.pdf)
  * [Stop ATLAS search summary](https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2023-005/fig_06.png)  
- * [V. Sanz - Dark Matter EFT](https://arxiv.org/pdf/2302.03485)
+ * [V. Sanz - Dark Matter EFT](https://arxiv.org/abs/2302.03485)
  * [MadGraph@NLO](https://arxiv.org/pdf/1405.0301)
  * [MadGraph Mixed Order](https://arxiv.org/pdf/1804.10017)
-   
+ * [V. Sanz - ALPS](https://arxiv.org/abs/2303.17634)
    
