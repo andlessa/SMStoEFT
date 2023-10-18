@@ -106,6 +106,7 @@ def computeULs(inputFile,outputFile,deltas=0.0):
     progressbar.start()
 
     yDM95list = []
+    deltaChi95list = []
     for ipt,pt in recastData.iterrows():
 
         progressbar.update(ipt)
@@ -135,10 +136,13 @@ def computeULs(inputFile,outputFile,deltas=0.0):
             return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
 
         yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
+        deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
         # Store result
         yDM95list.append(yDM95)
+        deltaChi95list.append(deltaChi95)
 
     recastData['yDM (95% C.L.)'] = yDM95list
+    recastData['$\Delta \chi^2$ (95% C.L.)'] = deltaChi95list
     progressbar.finish()
     recastData.to_pickle(outputFile)
 
