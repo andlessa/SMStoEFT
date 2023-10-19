@@ -17,39 +17,30 @@ def csv_reader(filename):
             output.append(row)
         csvfile.close()
 
+    output = [l for l in output if l and l[0][0] != '#']
     return output
 
 def read_HEPdata_SM(dataDir='./data'):
     '''
     Read data and covmat from hepdata
     '''
-    data = csv_reader(os.path.join(dataDir,'parton_abs_ttm.csv'))
-    cms_data  = []
-    for item in data[9:24]:
-        cms_data.append(float(item[3]))
+    data = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_2.csv'))
+    atlas_data  = []
+    for item in data[1:9]:
+        atlas_data.append(float(item[3]))
 
-    covdata = csv_reader(os.path.join(dataDir,'parton_abs_ttm_covariance.csv'))
-    covmat = np.zeros(15*15).reshape(15,15)
+    atlas_bg = []
+    for item in data[10:18]:
+        atlas_bg.append(float(item[3]))
 
-    covmatlist = []
-    count=0
-    for item in covdata[9:234]:
-        covmatlist.append(float(item[6]))
+    covdata = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_3.csv'))
+    for item in covdata[1:65]:
+        covmat.append(float(item[-1]))
 
-    for i in range(15):
-        for j in range(15):
-            covmat[i,j] = covmatlist[count]
-            count+=1
+    covmat = np.array(covmat).reshape(8,8)
 
-    return np.array(cms_data), np.array(covmat)
+    return np.array(atlas_data), np.array(atlas_bg), covmat
 
-def getSMLO(filename='./mtt_SM_ttbar_nnpdf4p0.txt'):
-    """
-    Use mtt computed at LO from arXiv:2303.17634
-    """
-
-    sm = np.loadtxt(filename,usecols=(0,),dtype=float)
-    return sm
 
 def getKfactor(filename='./kfac_nnlo_lo_highstats.txt'):
     """
@@ -75,10 +66,8 @@ def computeULs(inputFile,outputFile,deltas=0.0):
 
 
     # ### Load CMS data
-    xsecsObs,covMatrix = read_HEPdata_SM()
+    xsecsObs,sm,covMatrix = read_HEPdata_SM()
     
-    # ### Load SM prediction (LO)
-    smLO = getSMLO()
     # ### Load k-factors
     kfac = getKfactor()
     # ### Leptonic BR
@@ -93,10 +82,10 @@ def computeULs(inputFile,outputFile,deltas=0.0):
     bins_right = np.array([eval(c.split('_')[2]) for c in binCols])
     # Check that bins are consistent:
     if not np.array_equal(bins_left,cms_bins[:-1]):
-        print('Bins from data do not match CMS')
+        print('Bins from data do not match ATLAS')
         return
     if bins_right[-1] != cms_bins[-1]:
-        print('Bins from data do not match CMS')
+        print('Bins from data do not match ATLAS')
         return
 
 
@@ -119,11 +108,9 @@ def computeULs(inputFile,outputFile,deltas=0.0):
         # Rescale predictions by bin-dependent k-factors 
         # and leptonic BR
         signal = kfac*BR*signal
-        sm = kfac*BR*smLO
 
         # Finally, divide by the bin widths
         signal = signal/(bins_right-bins_left)
-        sm = sm/(bins_right-bins_left)
         
         #First find minima of the chi profile, such that the delta chi2 can then be calculated
         def func_to_solve_deltachi2(yDMval):
@@ -152,7 +139,7 @@ if __name__ == "__main__":
     
     import argparse    
     ap = argparse.ArgumentParser(description=
-            "Compute the upper limit on mu from CMS-EXO-20-004 for the recast data stored in the input file.")
+            "Compute the upper limit on mu from ATLAS-TOPQ-2019-23 for the recast data stored in the input file.")
     ap.add_argument('-f', '--inputFile', required=True,
             help='path to the pickle file containing the Pandas DataFrame with the recasting results for the models')
     ap.add_argument('-e', '--signalError', required=False, default = 0.0, type=float,
