@@ -52,7 +52,7 @@ def getPTThist(events,etamax=2.0,pTmin=355.0):
             if abs(ptc.id) != 6: continue
             pT = np.sqrt(ptc.px**2 + ptc.py**2) 
             p = np.sqrt(ptc.px**2 + ptc.py**2 + ptc.pz**2)
-            eta = (1./2.)*np.log((p+ptc.z)/(p-ptc.z))
+            eta = (1./2.)*np.log((p+ptc.pz)/(p-ptc.pz))
             pTlist.append(pT)
             etalist.append(np.abs(eta))
 
@@ -105,10 +105,16 @@ def getInfo(f):
     parsData = bannerData.split('<slha>')[1].split('</slha>')[0]
     parsSLHA = pyslha.readSLHA(parsData)
     
-    mST = parsSLHA.blocks['MASS'][5000002]
-    mChi = parsSLHA.blocks['MASS'][5000012]
+    if 5000002 in parsSLHA.blocks['MASS']:
+        mST = parsSLHA.blocks['MASS'][5000002]
+        mChi = parsSLHA.blocks['MASS'][5000012]
+        yDM = list(parsSLHA.blocks['FRBLOCK'].values())[-1]
+    else:
+        mST = 0.0
+        mChi = 0.0
+        yDM = 0.0
     mT  = parsSLHA.blocks['MASS'][6]
-    yDM = list(parsSLHA.blocks['FRBLOCK'].values())[-1]
+    
 
     
     # Get event data:

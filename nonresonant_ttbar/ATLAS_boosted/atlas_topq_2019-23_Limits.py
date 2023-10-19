@@ -34,6 +34,7 @@ def read_HEPdata_SM(dataDir='./data'):
         atlas_bg.append(float(item[3]))
 
     covdata = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_3.csv'))
+    covmat = []
     for item in covdata[1:65]:
         covmat.append(float(item[-1]))
 
