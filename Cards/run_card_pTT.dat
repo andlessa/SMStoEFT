@@ -47,7 +47,7 @@
 #          chff=ChFF in gamma-UPC            [eq.(13) in 2207.03012] *
 #          none=No PDF, same as lhapdf with lppx=0                   *
 #*********************************************************************
-     nnpdf30nlo    = pdlabel     ! PDF set 
+     lhapdf    = pdlabel     ! PDF set 
      260000    = lhaid     ! if pdlabel=lhapdf, this is the lhapdf number
 # To see heavy ion options: type "update ion_pdf"
 #*********************************************************************
