@@ -19,4 +19,5 @@ Useful references:
  * [MadGraph@NLO](https://arxiv.org/pdf/1405.0301)
  * [MadGraph Mixed Order](https://arxiv.org/pdf/1804.10017)
  * [V. Sanz - ALPS](https://arxiv.org/abs/2303.17634)
+ * [Top cross-sections](https://arxiv.org/abs/2306.06166)
    
