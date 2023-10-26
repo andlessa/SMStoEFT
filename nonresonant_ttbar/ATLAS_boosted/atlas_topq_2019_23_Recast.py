@@ -29,8 +29,8 @@ def getLHEevents(fpath):
                     continue
                 newF.write(l)
         events = pylhe.read_lhe_with_attributes(fixedFile)        
-
-    return events
+        nevents = pylhe.read_num_events(fixedFile)
+    return nevents,events
 
 
 def getPTThist(events,etamax=2.0,pTmin=355.0):
