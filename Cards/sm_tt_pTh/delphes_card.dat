@@ -1,0 +1,23 @@
+#######################################
+# Order of execution of various modules
+#######################################
+
+set ExecutionPath {
+  TreeWriter
+}
+
+
+
+##################
+# ROOT tree writer
+##################
+
+# tracks, towers and eflow objects are not stored by default in the output.
+# if needed (for jet constituent or other studies), uncomment the relevant
+# "add Branch ..." lines.
+
+module TreeWriter TreeWriter {
+# add Branch InputArray BranchName BranchClass
+  add Branch Delphes/allParticles Particle GenParticle
+
+}
