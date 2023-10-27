@@ -293,6 +293,13 @@ def generateEvents(parser):
     if runMadSpin:
         shutil.move(originalProcCard,
                     os.path.join(runFolder,'Cards/proc_card_mg5.dat'))
+        runDirs = list(glob.glob(os.path.join(runFolder,'Events','run_*')))
+        runDir_decayed = [r for r in runDirs if 'decayed' in r][0]
+        runDir_orig = [r for r in runDirs if 'decayed' not in r][0]
+        for f in glob.glob(os.path.join(runDir_decayed,'*')):
+            shutil.move(f,os.path.join(runDir_orig,os.path.basename(f)))
+        shutil.rmtree(runDir_decayed)
+        
 
     if cleanOutput:
         os.remove(commandsFile)
