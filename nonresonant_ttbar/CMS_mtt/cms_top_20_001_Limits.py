@@ -43,7 +43,7 @@ def read_HEPdata_SM(dataDir='./data'):
 
     return np.array(cms_data), np.array(covmat)
 
-def getSMLO(filename='./mtt_SM_ttbar_nnpdf4p0.txt'):
+def getSMLO(filename='./sm/mtt_SM_ttbar_nnpdf4p0.txt'):
     """
     Use mtt computed at LO from arXiv:2303.17634
     """
@@ -51,7 +51,7 @@ def getSMLO(filename='./mtt_SM_ttbar_nnpdf4p0.txt'):
     sm = np.loadtxt(filename,usecols=(0,),dtype=float)
     return sm
 
-def getKfactor(filename='./kfac_nnlo_lo_highstats.txt'):
+def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
     """
     Use kfactors computed at NNLO from arXiv:2303.17634 (using HighTea)
     """
@@ -70,8 +70,8 @@ def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
 
 def computeULs(inputFile,outputFile,deltas=0.0):
 
-    cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
-                1150.,1300.,1500.,1700.,2000.,2300.,3500.]
+    cms_bins = np.array([250.,400.,480.,560.,640.,720.,800.,900.,1000.,
+                1150.,1300.,1500.,1700.,2000.,2300.,3500.])
 
 
     # ### Load CMS data
@@ -81,8 +81,6 @@ def computeULs(inputFile,outputFile,deltas=0.0):
     smLO = getSMLO()
     # ### Load k-factors
     kfac = getKfactor()
-    # ### Leptonic BR
-    BR = 0.6741*(0.1071+0.1063)*2
 
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
@@ -116,10 +114,9 @@ def computeULs(inputFile,outputFile,deltas=0.0):
         # Make sure signal is normalized to yDM = 1
         signal = signal/yDM**2
 
-        # Rescale predictions by bin-dependent k-factors 
-        # and leptonic BR
-        signal = kfac*BR*signal
-        sm = kfac*BR*smLO
+        # Rescale predictions by bin-dependent k-factors
+        signal = kfac*signal
+        sm = kfac*smLO
 
         # Finally, divide by the bin widths
         signal = signal/(bins_right-bins_left)

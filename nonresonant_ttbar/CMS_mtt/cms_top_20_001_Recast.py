@@ -9,7 +9,8 @@ import time
 import progressbar as P
 import tempfile,gzip,pylhe
 
-
+cms_bins = np.array([250.,400.,480.,560.,640.,720.,800.,900.,1000.,
+                1150.,1300.,1500.,1700.,2000.,2300.,3500.])
 
 def getLHEevents(fpath):
     """
@@ -29,36 +30,59 @@ def getLHEevents(fpath):
                     continue
                 newF.write(l)
         events = pylhe.read_lhe_with_attributes(fixedFile)        
+        nevents = pylhe.read_num_events(fixedFile)
+    return nevents,events
 
-    return events
 
-
-def getMTThist(events):
+def getMTThist(nevents,events,weightMultiplier = 1.0):
     """
     Reads a PyLHE Event object and extracts the ttbar invariant
     mass for each event.
     """
-
-    cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
-                1150.,1300.,1500.,1700.,2000.,2300.,3500.]
+    
     mTT = []
     weights = []
-    mcTotal = 0
     for ev in events:
-        weights.append(ev.eventinfo.weight)
-        mcTotal += 1
-        for ptc in ev.particles:
-            if abs(ptc.id) != 6: continue
-            if ptc.id == 6:
-                pA = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
-            else:
-                pB = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
+        error = False
+        weightPB = weightMultiplier*ev.eventinfo.weight/nevents
+        weightAndError = np.array([weightPB,weightPB**2])
 
-        mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
+        # Add information to particles:
+        for ptc in ev.particles:
+            ptc.daughters = []
+            ptc.PID = int(ptc.id)
+            p = np.sqrt(ptc.px**2 + ptc.py**2 + ptc.pz**2)
+            ptc.PT = np.sqrt(ptc.px**2 + ptc.py**2)
+            if not ptc.PT: # Only for incoming partons
+                ptc.Eta = None
+                ptc.Phi = None
+            else:
+                ptc.Eta = (1./2.)*np.log((p+ptc.pz)/(p-ptc.pz))        
+                ptc.Phi = np.arctan2(ptc.py,ptc.px)
+            ptc.Px = ptc.px
+            ptc.Py = ptc.py
+            ptc.Pz = ptc.pz
+            ptc.E = ptc.e
+
+        # Get tops
+        tops = {}
+        for ptc in ev.particles:        
+            if abs(ptc.PID) == 6:
+                tops[ptc.PID] = ptc # Store only the last top/anti-top  
+
+        # Sum the top momenta
+        pTot = np.zeros(4)
+        for top in tops.values():
+            pTot += np.array([top.E,top.Px,top.Py,top.Pz])
+        # Compute invariant mass squared
+        m2 = np.dot(pTot[0],pTot[0]) - np.dot(pTot[1:4],pTot[1:4])
+
+        mTT.append(np.sqrt(m2))
+        weights.append(weightAndError)
     
-    weights = np.array(weights)/mcTotal
-    mttHist,_ = np.histogram(mTT,weights=weights,bins=cms_bins)
-    mttHistError,_ = np.histogram(mTT,weights=weights**2,bins=cms_bins)
+    weights = np.array(weights)
+    mttHist,_ = np.histogram(mTT,weights=weights[:,0],bins=cms_bins)
+    mttHistError,_ = np.histogram(mTT,weights=weights[:,1],bins=cms_bins)
     mttHistError = np.sqrt(mttHistError)
 
     data = np.array(list(zip(cms_bins[:-1],cms_bins[1:],mttHist,mttHistError)))
@@ -111,7 +135,7 @@ def getInfo(f):
     return fileInfo
 
 
-def getRecastData(inputFiles):
+def getRecastData(inputFiles,weightMultiplier=1.0):
 
     allData = []
 
@@ -125,8 +149,8 @@ def getRecastData(inputFiles):
         # print('\nReading file: %s' %f)
         fileInfo = getInfo(f)
         # Get events:
-        events = getLHEevents(f)
-        data = getMTThist(events)
+        nevents,events = getLHEevents(f)
+        data = getMTThist(nevents,events,weightMultiplier=weightMultiplier)
         # Create a dictionary with the bin counts and their errors
         dataDict = fileInfo
         bins_left = data[:,0]
@@ -158,21 +182,24 @@ if __name__ == "__main__":
             help='path to output file storing the DataFrame with the recasting data.'
                  + 'If not defined, will use the name of the first input file', 
             default = None)
-   
+    ap.add_argument('-w', '--weightMultiplier', required=True, type=float,
+                    help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch)', default =[])
+
     t0 = time.time()
 
     # # Set output file
     args = ap.parse_args()
     inputFiles = args.inputFile
     outputFile = args.outputFile
+    weightMultiplier = args.weightMultiplier
 
     if outputFile is None:
-        outputFile = inputFiles[0].replace('.lhe.gz','cms_exo_20_004.pcl')
+        outputFile = inputFiles[0].replace('.lhe.gz','cms_top_20_001.pcl')
 
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
 
-    dataDict = getRecastData(inputFiles)
+    dataDict = getRecastData(inputFiles,weightMultiplier)
 
     # #### Create pandas DataFrame
     df = pd.DataFrame.from_dict(dataDict)

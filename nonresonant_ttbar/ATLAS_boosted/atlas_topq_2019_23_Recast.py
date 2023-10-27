@@ -9,7 +9,7 @@ import progressbar as P
 import tempfile,gzip,pylhe
 import fastjet
 
-
+atlas_bins = np.array([355.0,381.0,420.0,478.0,549.0,633.0,720.0,836.0,2000.0])
 
 def getLHEevents(fpath):
     """
@@ -39,19 +39,17 @@ def getPTThist(nevents,events,etamax=2.0,pTmin=355.0,weightMultiplier = 1.0):
     mass for each event.
     """
 
-    atlas_bins = [355.0,381.0,420.0,478.0,549.0,633.0,720.0,836.0,2000.0]
+    
     jetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 0.4)
     fatjetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 1.0)
 
 
-    totalweightPB = 0.0
     pTT = []
     weights = []
     for ev in events:        
         error = False
         weightPB = weightMultiplier*ev.eventinfo.weight/nevents
         weightAndError = np.array([weightPB,weightPB**2])
-        totalweightPB += weightPB
 
         # Add information to particles:
         for ptc in ev.particles:

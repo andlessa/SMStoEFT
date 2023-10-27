@@ -112,6 +112,37 @@ def getInfoFromOutput(outputStr):
                'cross-section (pb)' : xsec, 'Number of events' : int(nevts)}
     return runInfo
 
+def hackForMadSpin(runFolder):
+    """
+    Replace the process card by a similar one, but for the SM
+    """
+
+    proc_card = os.path.join(runFolder,'Cards/proc_card_mg5.dat')
+    proc_card_copy = proc_card.replace('.dat','_original.dat')
+    shutil.copy(proc_card,proc_card_copy)    
+    with open(proc_card,'r') as f:
+        lines = f.readlines()
+    newLines = []
+    for l in lines:
+        l = l.strip()
+        fields = [f.strip() for f in l.split()]
+        if len(fields) <= 1:
+            pass
+        elif fields[0] == 'import' and fields[1] == 'model':
+            if fields[2].lower() != 'sm':
+                l = 'import model sm'
+        elif fields[0] == 'generate' or fields[0]+' '+fields[1] == 'add process':
+            fields = [f for f in fields if not any(x in f for x in ['NP','QCD','QED','==','=<'])]
+            l = fields[0] + ' ' + ' '.join(fields[1:])
+        newLines.append(l)
+    with open(proc_card,'w') as f:
+        for l in newLines:
+            f.write(l+'\n')
+
+
+
+    return proc_card_copy
+
 def generateEvents(parser):
     
     """
@@ -162,11 +193,15 @@ def generateEvents(parser):
     runPythia = parser['options']['runPythia']
     runDelphes = parser['options']['runDelphes']
     runConvert = parser['options']['runConvertSLHA']
+    runMadSpin = False
+    if 'runMadSpin' in parser['options']:
+        runMadSpin = parser['options']['runMadSpin']
     
     
 
     pythia8File = os.path.join(runFolder,'Cards/pythia8_card.dat')
     delphesFile = os.path.join(runFolder,'Cards/delphes_card.dat')
+    madspinFile = os.path.join(runFolder,'Cards/madspin_card.dat')
 
     if runPythia:
         if not 'pythia8card' in pars or not os.path.isfile(pars['pythia8card']):
@@ -183,6 +218,13 @@ def generateEvents(parser):
         else:
             shutil.copyfile(pars['delphescard'],delphesFile)
 
+    if runMadSpin:
+        if not 'madspincard' in pars or not os.path.isfile(pars['madspincard']):
+            logger.error("MadSpin file not defined or not found.")
+            return False
+        else:
+            shutil.copyfile(pars['madspincard'],madspinFile)             
+
 
     cleanOutput = parser['options']['cleanOutput']
     
@@ -198,6 +240,11 @@ def generateEvents(parser):
         commandsFileF.write('detector=Delphes\n')
     else:
         commandsFileF.write('detector=OFF\n')
+    if runMadSpin:
+        commandsFileF.write('madspin=ON\n')
+        originalProcCard = hackForMadSpin(runFolder)
+    else:
+        commandsFileF.write('madspin=OFF\n')
 
     commandsFileF.write('done\n')
     comms = parser["MadGraphSet"]
@@ -240,6 +287,12 @@ def generateEvents(parser):
             getSLHAFile(lheFile)
         else:
             logger.warning("Could not generate SLHA file for %s" %(runFolder))
+
+    # When running MadSpin for the top decays, the proc_card has to be replaced
+    # so the top decay is computed using only the SM
+    if runMadSpin:
+        shutil.move(originalProcCard,
+                    os.path.join(runFolder,'Cards/proc_card_mg5.dat'))
 
     if cleanOutput:
         os.remove(commandsFile)

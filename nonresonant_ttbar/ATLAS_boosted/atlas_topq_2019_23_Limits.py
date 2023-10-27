@@ -9,6 +9,10 @@ import csv
 import pandas as pd
 from scipy.optimize import minimize, brentq
 
+atlas_bins = np.array([355.0,381.0,420.0,478.0,549.0,633.0,720.0,836.0,2000.0])
+bin_width  = atlas_bins[1:]-atlas_bins[:-1]
+
+
 def csv_reader(filename):
     output = []
     with open(filename, "r") as csvfile:
@@ -20,7 +24,7 @@ def csv_reader(filename):
     output = [l for l in output if l and l[0][0] != '#']
     return output
 
-def read_HEPdata_SM(dataDir='./data'):
+def read_ATLASdata(dataDir='./data'):
     '''
     Read data and covmat from hepdata
     '''
@@ -29,9 +33,9 @@ def read_HEPdata_SM(dataDir='./data'):
     for item in data[1:9]:
         atlas_data.append(float(item[3]))
 
-    atlas_bg = []
-    for item in data[10:18]:
-        atlas_bg.append(float(item[3]))
+    atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))
+    # The digitized values are divided by the width
+    atlas_bg = atlas_bg*bin_width
 
     covdata = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_3.csv'))
     covmat = []
@@ -40,18 +44,34 @@ def read_HEPdata_SM(dataDir='./data'):
 
     covmat = np.array(covmat).reshape(8,8)
 
-    return np.array(atlas_data), np.array(atlas_bg), covmat
+    return np.array(atlas_data), atlas_bg, covmat
 
+def getSMLO(smFile='./sm/sm_tt_lo_atlas_topq_2019_23.pcl'):
 
-def getKfactor(filename='./kfac_nnlo_lo_highstats.txt'):
-    """
-    Use kfactors computed at NNLO from arXiv:2303.17634 (using HighTea)
-    """
+    # ### Load Recast Data
+    recastData = pd.read_pickle(smFile)
+
+    binCols = [c for c in recastData.columns 
+               if 'bin_' in c.lower() and not 'error' in c.lower()]
+    bins_left = np.array([eval(c.split('_')[1]) for c in binCols])
+    bins_right = np.array([eval(c.split('_')[2]) for c in binCols])
+    # Check that bins are consistent:
+    if not np.array_equal(bins_left,atlas_bins[:-1]):
+        print('Bins from data do not match ATLAS')
+        return
+    if bins_right[-1] != atlas_bins[-1]:
+        print('Bins from data do not match ATLAS')
+        return
+
+    if len(recastData) != 1:
+        print('SM LO file %s has multiple entries' %smFile)
+        return False
     
-    
-    kfac = np.loadtxt(filename,dtype=float,usecols=(0,))
+    pt = recastData.iloc[0]
+    smLO = list(zip(bins_left,pt[binCols].values))
+    smLO = np.array(sorted(smLO))[:,1]
 
-    return kfac
+    return smLO
 
 def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     theory = kfactor*(sm + yDM**2*signal)
@@ -60,20 +80,22 @@ def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     return ((diff).dot(Vinv)).dot(diff)
 
 
-def computeULs(inputFile,outputFile,deltas=0.0):
+def computeULs(inputFile,outputFile):
 
-    cms_bins = [250.,400.,480.,560.,640.,720.,800.,900.,1000.,
-                1150.,1300.,1500.,1700.,2000.,2300.,3500.]
-
-
-    # ### Load CMS data
-    xsecsObs,sm,covMatrix = read_HEPdata_SM()
     
-    # ### Load k-factors
-    kfac = getKfactor()
-    # ### Leptonic BR
-    BR = 0.6741*(0.1071+0.1063)*2
 
+    # ### Load ATLAS data and BG
+    xsecsObs,smNNLO,covMatrix = read_ATLASdata()
+    
+    # ### Load LO background from MG5
+    smLO = getSMLO()
+
+    # Get k-factor for each bin
+    kfac = np.divide(smNNLO,smLO)
+
+    # Rescale BG by bin width:
+    smNNLO = smNNLO/bin_width
+    
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
 
@@ -82,10 +104,10 @@ def computeULs(inputFile,outputFile,deltas=0.0):
     bins_left = np.array([eval(c.split('_')[1]) for c in binCols])
     bins_right = np.array([eval(c.split('_')[2]) for c in binCols])
     # Check that bins are consistent:
-    if not np.array_equal(bins_left,cms_bins[:-1]):
+    if not np.array_equal(bins_left,atlas_bins[:-1]):
         print('Bins from data do not match ATLAS')
         return
-    if bins_right[-1] != cms_bins[-1]:
+    if bins_right[-1] != atlas_bins[-1]:
         print('Bins from data do not match ATLAS')
         return
 
@@ -106,25 +128,21 @@ def computeULs(inputFile,outputFile,deltas=0.0):
         # Make sure signal is normalized to yDM = 1
         signal = signal/yDM**2
 
-        # Rescale predictions by bin-dependent k-factors 
-        # and leptonic BR
-        signal = kfac*BR*signal
-
-        # Finally, divide by the bin widths
-        signal = signal/(bins_right-bins_left)
+        # Rescale predictions by bin-dependent k-factors and divide by the bin widths
+        signal = kfac*signal/bin_width
         
         #First find minima of the chi profile, such that the delta chi2 can then be calculated
         def func_to_solve_deltachi2(yDMval):
-            return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
+            return chi2(yDMval, signal, smNNLO, xsecsObs, covMatrix)
 
         yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-        chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
+        chi2min = chi2(yDMmin, signal, smNNLO, xsecsObs, covMatrix)
 
         def func_to_solve_95(yDMval):
-            return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
+            return chi2(yDMval, signal, smNNLO, xsecsObs, covMatrix) - chi2min - 3.84
 
         yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-        deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
+        deltaChi95 = chi2(yDM95, signal, smNNLO, xsecsObs, covMatrix)-chi2min
         # Store result
         yDM95list.append(yDM95)
         deltaChi95list.append(deltaChi95)
