@@ -56,10 +56,13 @@ def getInfo(f,labelsDict=None):
 
 def interpolateData(x,y,z,nx=200,ny=200,method='linear'):
 
-    xnew = np.linspace(x.min(),x.max(),nx)
-    ynew = np.linspace(y.min(),y.max(),ny)
-    xi = np.array([list(v) for v in itertools.product(xnew,ynew)])
-    znew = griddata(list(zip(x,y)),z,xi=xi, method=method)
+    if x.min() == x.max() or y.min() == y.max(): # Can not interpolate
+        return None,None,None
+    else:
+        xnew = np.linspace(x.min(),x.max(),nx)
+        ynew = np.linspace(y.min(),y.max(),ny)
+        xi = np.array([list(v) for v in itertools.product(xnew,ynew)])
+        znew = griddata(list(zip(x,y)),z,xi=xi, method=method)
     znew = np.reshape(znew,(len(xnew),len(ynew)))
     xnew,ynew  = np.meshgrid(xnew,ynew,indexing='ij')
 

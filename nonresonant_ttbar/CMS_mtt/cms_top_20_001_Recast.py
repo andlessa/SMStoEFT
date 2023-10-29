@@ -183,7 +183,7 @@ if __name__ == "__main__":
                  + 'If not defined, will use the name of the first input file', 
             default = None)
     ap.add_argument('-w', '--weightMultiplier', required=True, type=float,
-                    help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch)', default =[])
+                    help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch) [default=2.0]', default =[2.0])
 
     t0 = time.time()
 
@@ -198,6 +198,8 @@ if __name__ == "__main__":
 
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
+
+    print('-----------------\n Running with weight multiplier = %1.1f\n -------------------------' %weightMultiplier)
 
     dataDict = getRecastData(inputFiles,weightMultiplier)
 

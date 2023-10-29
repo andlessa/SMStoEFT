@@ -48,7 +48,9 @@ def getSMLO(filename='./sm/mtt_SM_ttbar_nnpdf4p0.txt'):
     Use mtt computed at LO from arXiv:2303.17634
     """
 
+    BR = 0.2877
     sm = np.loadtxt(filename,usecols=(0,),dtype=float)
+    sm = BR*sm
     return sm
 
 def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
