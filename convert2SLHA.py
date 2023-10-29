@@ -111,7 +111,7 @@ def getSLHAFile(inputLHE,outputSLHA=None,pidList=None):
                 return False
             iproc += 1
     else:
-        finalStatesDict = {0 : sorted(pidList)}
+        finalStatesDict = {1 : sorted(pidList)}
 
     #Get total cross-section,number of events
     xsecTotal = banner.get_cross()
@@ -129,8 +129,10 @@ def getSLHAFile(inputLHE,outputSLHA=None,pidList=None):
             continue
         vals = [eval(x) for x in l.split()]
         xsec,xsecErr,_,procID = vals
+        print(xsec,xsecErr,procID)
+        print(finalStatesDict)
         if not procID in finalStatesDict:
-            logger.error("Process ID %i found in LHE file" %procID)
+            logger.error("Process ID %i not found in LHE file" %procID)
             return False
         if not procID in processXsecs:
             processXsecs[procID] = {'xsec (pb)' : xsec, 'xsecErr (pb)' : xsecErr}
