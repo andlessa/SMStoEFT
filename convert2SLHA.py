@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Extracts information from MadGraph output to create a SLHA file with cross-section blocks
 # 1) Run getSLHA to extract the information of the MadGraph output
@@ -129,8 +129,6 @@ def getSLHAFile(inputLHE,outputSLHA=None,pidList=None):
             continue
         vals = [eval(x) for x in l.split()]
         xsec,xsecErr,_,procID = vals
-        print(xsec,xsecErr,procID)
-        print(finalStatesDict)
         if not procID in finalStatesDict:
             logger.error("Process ID %i not found in LHE file" %procID)
             return False
@@ -183,7 +181,7 @@ if __name__ == "__main__":
             help='name of output (SLHA) file. If not given the input file name will be used.',default=None)
     ap.add_argument('-pids', '--pids',
             help='list of final state PIDs (e.g. -1000011 1000011). If not given, will try to guess from process card.',
-            default=None,nargs='+')
+            default=[-5000002,5000002],nargs='+')
     
     args = ap.parse_args()
     output = getSLHAFile(args.input,args.output,args.pids)
