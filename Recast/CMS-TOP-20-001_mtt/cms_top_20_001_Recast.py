@@ -215,10 +215,10 @@ if __name__ == "__main__":
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
 
+    skipParameters = []
     if os.path.isfile(outputFile):
         if args.overwrite:
             print('Output file %s will be overwritten!' %outputFile)
-            skipParameters = []
         else:
             df_orig = pd.read_pickle(outputFile)
             skipParameters = []
