@@ -210,7 +210,7 @@ if __name__ == "__main__":
     weightMultiplier = args.weightMultiplier
 
     if outputFile is None:
-        outputFile = inputFiles[0].replace('.lhe.gz','cms_top_20_001.pcl')
+        outputFile = inputFiles[0].replace('.lhe.gz','_cms_top_20_001.pcl')
 
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
