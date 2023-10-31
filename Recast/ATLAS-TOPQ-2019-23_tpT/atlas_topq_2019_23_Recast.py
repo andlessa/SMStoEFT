@@ -283,6 +283,9 @@ def getRecastData(inputFiles,weightMultiplier=1.0,skipParameters=[]):
             selectedFiles.append(f)
         print('Skipping %i files' %(len(inputFiles)-len(selectedFiles)))
 
+    if not selectedFiles:
+        return None
+    
     allData = []
 
     progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(selectedFiles), 
@@ -362,14 +365,14 @@ if __name__ == "__main__":
     print('-----------------\n Running with weight multiplier = %1.1f\n -------------------------' %weightMultiplier)
 
     dataDict = getRecastData(inputFiles,weightMultiplier)
+    if dataDict:
+        # #### Create pandas DataFrame
+        df = pd.DataFrame.from_dict(dataDict)
+        if os.path.isfile(outputFile) and skipParameters:
+            df = pd.concat([df_orig,df])
 
-    # #### Create pandas DataFrame
-    df = pd.DataFrame.from_dict(dataDict)
-    if os.path.isfile(outputFile) and skipParameters:
-        df = pd.concat([df_orig,df])
-
-    # ### Save DataFrame to pickle file
-    print('Saving to',outputFile)
-    df.to_pickle(outputFile)
+        # ### Save DataFrame to pickle file
+        print('Saving to',outputFile)
+        df.to_pickle(outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))
