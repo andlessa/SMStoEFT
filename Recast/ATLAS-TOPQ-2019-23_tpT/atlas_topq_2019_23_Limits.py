@@ -46,7 +46,7 @@ def read_ATLASdata(dataDir='./data'):
 
     return np.array(atlas_data), atlas_bg, covmat
 
-def getSMLO(smFile='./sm/sm_tt_lo_atlas_topq_2019_23.pcl'):
+def getSMLO(smFile='./sm/sm_atlas_topq_2019_23.pcl'):
 
     # ### Load Recast Data
     recastData = pd.read_pickle(smFile)
@@ -75,8 +75,8 @@ def getSMLO(smFile='./sm/sm_tt_lo_atlas_topq_2019_23.pcl'):
 
 def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     theory = kfactor*(sm + yDM**2*signal)
-    diff = (theory - data)[1:]
-    Vinv = np.linalg.inv(covmat)[1:,1:]
+    diff = (theory - data)
+    Vinv = np.linalg.inv(covmat)
     return ((diff).dot(Vinv)).dot(diff)
 
 
@@ -179,8 +179,7 @@ if __name__ == "__main__":
     if outputFile is None:
         outputFile = inputFile
 
-    deltas = args.signalError
-    computeULs(inputFile,outputFile,deltas)
+    computeULs(inputFile,outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))
 

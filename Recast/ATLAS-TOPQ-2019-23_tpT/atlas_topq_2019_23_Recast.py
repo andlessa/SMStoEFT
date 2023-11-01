@@ -28,8 +28,10 @@ def getLHEevents(fpath):
                 if 'generate' in l:
                     continue
                 newF.write(l)
-        events = pylhe.read_lhe_with_attributes(fixedFile)        
+        events = list(pylhe.read_lhe_with_attributes(fixedFile))
         nevents = pylhe.read_num_events(fixedFile)
+
+    os.remove(fixedFile)
     return nevents,events
 
 
@@ -209,6 +211,7 @@ def getPTThist(nevents,events,etamax=2.0,pTmin=355.0,weightMultiplier = 1.0):
     pTtHistError = np.sqrt(pTtHistError)
 
     data = np.array(list(zip(atlas_bins[:-1],atlas_bins[1:],pTtHist,pTtHistError)))
+    del events
     
     return data
 

@@ -29,8 +29,10 @@ def getLHEevents(fpath):
                 if 'generate' in l:
                     continue
                 newF.write(l)
-        events = pylhe.read_lhe_with_attributes(fixedFile)        
+        events = list(pylhe.read_lhe_with_attributes(fixedFile))
         nevents = pylhe.read_num_events(fixedFile)
+
+    os.remove(fixedFile)
     return nevents,events
 
 
@@ -43,7 +45,6 @@ def getMTThist(nevents,events,weightMultiplier = 1.0):
     mTT = []
     weights = []
     for ev in events:
-        error = False
         weightPB = weightMultiplier*ev.eventinfo.weight/nevents
         weightAndError = np.array([weightPB,weightPB**2])
 
@@ -86,7 +87,8 @@ def getMTThist(nevents,events,weightMultiplier = 1.0):
     mttHistError = np.sqrt(mttHistError)
 
     data = np.array(list(zip(cms_bins[:-1],cms_bins[1:],mttHist,mttHistError)))
-    
+    del events
+
     return data
 
 
