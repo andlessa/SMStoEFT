@@ -3,7 +3,6 @@
 import os,glob
 import numpy as np
 import pandas as pd
-import sys
 import pyslha
 import time
 import progressbar as P
@@ -29,9 +28,8 @@ def getLHEevents(fpath):
                 if 'generate' in l:
                     continue
                 newF.write(l)
-        events = list(pylhe.read_lhe_with_attributes(fixedFile))
-        nevents = pylhe.read_num_events(fixedFile)
-
+    events = list(pylhe.read_lhe_with_attributes(fixedFile))
+    nevents = pylhe.read_num_events(fixedFile)
     os.remove(fixedFile)
     return nevents,events
 
@@ -87,8 +85,7 @@ def getMTThist(nevents,events,weightMultiplier = 1.0):
     mttHistError = np.sqrt(mttHistError)
 
     data = np.array(list(zip(cms_bins[:-1],cms_bins[1:],mttHist,mttHistError)))
-    del events
-
+    
     return data
 
 
@@ -137,19 +134,36 @@ def getInfo(f):
     return fileInfo
 
 
-def getRecastData(inputFiles,weightMultiplier=1.0):
+def getRecastData(inputFiles,weightMultiplier=1.0,skipParameters=[]):
 
+    
+    # Filter files (if needed)
+    if not skipParameters:
+        selectedFiles = inputFiles[:]
+    else:
+        selectedFiles = []
+        for f in inputFiles:
+            # print('\nReading file: %s' %f)
+            fileInfo = getInfo(f)
+            parInfo = (fileInfo['mST'],fileInfo['mChi'],fileInfo['yDM'], 
+                        fileInfo['mT'], fileInfo['model'], fileInfo['process'])
+            if parInfo in skipParameters:
+                continue
+            selectedFiles.append(f)
+        print('Skipping %i files' %(len(inputFiles)-len(selectedFiles)))
+    
+    if not selectedFiles:
+        return None
+    
     allData = []
 
-    progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(inputFiles), 
+    progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(selectedFiles), 
                             P.Percentage(),P.Bar(marker=P.RotatingMarker()), P.ETA()])
-    progressbar.maxval = len(inputFiles)
+    progressbar.maxval = len(selectedFiles)
     progressbar.start()
     nfiles = 0
-
-    for f in inputFiles:
-        # print('\nReading file: %s' %f)
-        fileInfo = getInfo(f)
+    for f in selectedFiles:       
+        fileInfo = getInfo(f) 
         # Get events:
         nevents,events = getLHEevents(f)
         data = getMTThist(nevents,events,weightMultiplier=weightMultiplier)
@@ -159,13 +173,14 @@ def getRecastData(inputFiles,weightMultiplier=1.0):
         bins_right = data[:,1]
         w = data[:,2]
         wError = data[:,3]    
+        nfiles += 1
+        progressbar.update(nfiles)
         for ibin,b in enumerate(bins_left):
             label = 'bin_%1.0f_%1.0f'%(b,bins_right[ibin])
             dataDict[label] = w[ibin]
             dataDict[label+'_Error'] = wError[ibin]
         allData.append(dataDict)
-        nfiles += 1
-        progressbar.update(nfiles)
+        
 
     progressbar.finish()
     return allData
@@ -185,7 +200,9 @@ if __name__ == "__main__":
                  + 'If not defined, will use the name of the first input file', 
             default = None)
     ap.add_argument('-w', '--weightMultiplier', required=True, type=float,
-                    help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch) [default=2.0]', default =[2.0])
+                    help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch) [default=2.0]', default = 2.0)
+    ap.add_argument('-O', '--overwrite', required=False, action='store_true',
+                    help='If set, will overwrite the existing output file. Otherwise, it will simply add the points not yet present in the file', default = False)
 
     t0 = time.time()
 
@@ -196,20 +213,33 @@ if __name__ == "__main__":
     weightMultiplier = args.weightMultiplier
 
     if outputFile is None:
-        outputFile = inputFiles[0].replace('.lhe.gz','cms_top_20_001.pcl')
+        outputFile = inputFiles[0].replace('.lhe.gz','_cms_top_20_001.pcl')
 
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
 
+    skipParameters = []
+    if os.path.isfile(outputFile):
+        if args.overwrite:
+            print('Output file %s will be overwritten!' %outputFile)
+        else:
+            df_orig = pd.read_pickle(outputFile)
+            skipParameters = []
+            for irow,row in df_orig.iterrows():
+                skipParameters.append((row['mST'],row['mChi'],row['yDM'], row['mT'], row['model'], row['process']))
+
+
     print('-----------------\n Running with weight multiplier = %1.1f\n -------------------------' %weightMultiplier)
 
-    dataDict = getRecastData(inputFiles,weightMultiplier)
+    dataDict = getRecastData(inputFiles,weightMultiplier,skipParameters)
+    if dataDict:
+        # #### Create pandas DataFrame
+        df = pd.DataFrame.from_dict(dataDict)
+        if os.path.isfile(outputFile) and skipParameters:
+            df = pd.concat([df_orig,df])
 
-    # #### Create pandas DataFrame
-    df = pd.DataFrame.from_dict(dataDict)
-
-    # ### Save DataFrame to pickle file
-    print('Saving to',outputFile)
-    df.to_pickle(outputFile)
+        # ### Save DataFrame to pickle file
+        print('Saving to',outputFile)
+        df.to_pickle(outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))

@@ -28,9 +28,8 @@ def getLHEevents(fpath):
                 if 'generate' in l:
                     continue
                 newF.write(l)
-        events = list(pylhe.read_lhe_with_attributes(fixedFile))
-        nevents = pylhe.read_num_events(fixedFile)
-
+    events = list(pylhe.read_lhe_with_attributes(fixedFile))
+    nevents = pylhe.read_num_events(fixedFile)
     os.remove(fixedFile)
     return nevents,events
 
@@ -211,7 +210,6 @@ def getPTThist(nevents,events,etamax=2.0,pTmin=355.0,weightMultiplier = 1.0):
     pTtHistError = np.sqrt(pTtHistError)
 
     data = np.array(list(zip(atlas_bins[:-1],atlas_bins[1:],pTtHist,pTtHistError)))
-    del events
     
     return data
 
@@ -267,17 +265,36 @@ def getInfo(f):
     return fileInfo
 
 
-def getRecastData(inputFiles,weightMultiplier=1.0):
+def getRecastData(inputFiles,weightMultiplier=1.0,skipParameters=[]):
 
+    
+    # Filter files (if needed)
+    if not skipParameters:
+        selectedFiles = inputFiles[:]
+    else:
+        selectedFiles = []
+        for f in inputFiles:
+            # print('\nReading file: %s' %f)
+            fileInfo = getInfo(f)
+            parInfo = (fileInfo['mST'],fileInfo['mChi'],fileInfo['yDM'], 
+                        fileInfo['mT'], fileInfo['model'], fileInfo['process'])
+            if parInfo in skipParameters:
+                continue
+            selectedFiles.append(f)
+        print('Skipping %i files' %(len(inputFiles)-len(selectedFiles)))
+
+    if not selectedFiles:
+        return None
+    
     allData = []
 
-    progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(inputFiles), 
+    progressbar = P.ProgressBar(widgets=["Reading %i Files: " %len(selectedFiles), 
                             P.Percentage(),P.Bar(marker=P.RotatingMarker()), P.ETA()])
-    progressbar.maxval = len(inputFiles)
+    progressbar.maxval = len(selectedFiles)
     progressbar.start()
     nfiles = 0
 
-    for f in inputFiles:
+    for f in selectedFiles:
         # print('\nReading file: %s' %f)
         fileInfo = getInfo(f)
         # Get events:
@@ -316,6 +333,8 @@ if __name__ == "__main__":
             default = None)
     ap.add_argument('-w', '--weightMultiplier', required=True, type=float,
             help='Factor used to multiply the weights (in case events were generated with specific top decays in each branch)', default =[])
+    ap.add_argument('-O', '--overwrite', required=False, action='store_true',
+                    help='If set, will overwrite the existing output file. Otherwise, it will simply add the points not yet present in the file', default = False)
 
 
     t0 = time.time()
@@ -327,18 +346,33 @@ if __name__ == "__main__":
     weightMultiplier = args.weightMultiplier
 
     if outputFile is None:
-        outputFile = inputFiles[0].replace('.lhe.gz','atlas_topq_2019_23.pcl')
+        outputFile = inputFiles[0].replace('.lhe.gz','_atlas_topq_2019_23.pcl')
 
     if os.path.splitext(outputFile)[1] != '.pcl':
         outputFile = os.path.splitext(outputFile)[0] + '.pcl'
 
+
+    skipParameters = []
+    if os.path.isfile(outputFile):
+        if args.overwrite:
+            print('Output file %s will be overwritten!' %outputFile)
+        else:
+            df_orig = pd.read_pickle(outputFile)
+            skipParameters = []
+            for irow,row in df_orig.iterrows():
+                skipParameters.append((row['mST'],row['mChi'],row['yDM'], row['mT'], row['model'], row['process']))
+    
+    print('-----------------\n Running with weight multiplier = %1.1f\n -------------------------' %weightMultiplier)
+
     dataDict = getRecastData(inputFiles,weightMultiplier)
+    if dataDict:
+        # #### Create pandas DataFrame
+        df = pd.DataFrame.from_dict(dataDict)
+        if os.path.isfile(outputFile) and skipParameters:
+            df = pd.concat([df_orig,df])
 
-    # #### Create pandas DataFrame
-    df = pd.DataFrame.from_dict(dataDict)
-
-    # ### Save DataFrame to pickle file
-    print('Saving to',outputFile)
-    df.to_pickle(outputFile)
+        # ### Save DataFrame to pickle file
+        print('Saving to',outputFile)
+        df.to_pickle(outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))
