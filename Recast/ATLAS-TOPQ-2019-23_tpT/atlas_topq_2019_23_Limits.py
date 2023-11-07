@@ -9,9 +9,9 @@ import csv
 import pandas as pd
 from scipy.optimize import minimize, brentq
 
-atlas_bins = np.array([355.0,381.0,420.0,478.0,549.0,633.0,720.0,836.0,2000.0])
-bin_width  = atlas_bins[1:]-atlas_bins[:-1]
-
+atlas_bins = np.array([355.0,381.0,420.0,478.0,549.0,633.0,
+                        720.0,836.0,2000.0])
+bin_widths  = atlas_bins[1:]-atlas_bins[:-1]
 
 def csv_reader(filename):
     output = []
@@ -35,7 +35,7 @@ def read_ATLASdata(dataDir='./data'):
 
     atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))
     # The digitized values are divided by the width
-    atlas_bg = atlas_bg*bin_width
+    atlas_bg = atlas_bg*bin_widths
 
     covdata = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_3.csv'))
     covmat = []
@@ -73,6 +73,16 @@ def getSMLO(smFile='./sm/sm_atlas_topq_2019_23.pcl'):
 
     return smLO
 
+def getKfactor(smNNLO,smLO):
+    """
+    Compute bin-by-bin kfactors using the ATLAS NNLO and the LO xsecs
+    """
+    
+    # Get k-factor for each bin
+    kfac = np.divide(smNNLO,smLO)
+    
+    return kfac
+
 def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     theory = kfactor*(sm + yDM**2*signal)
     diff = (theory - data)
@@ -80,21 +90,15 @@ def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     return ((diff).dot(Vinv)).dot(diff)
 
 
-def computeULs(inputFile,outputFile):
-
-    
+def computeULs(inputFile,outputFile,full=False):
 
     # ### Load ATLAS data and BG
-    xsecsObs,smNNLO,covMatrix = read_ATLASdata()
+    xsecsObs,sm,covMatrix = read_ATLASdata()
     
     # ### Load LO background from MG5
     smLO = getSMLO()
-
     # Get k-factor for each bin
-    kfac = np.divide(smNNLO,smLO)
-
-    # Rescale BG by bin width:
-    smNNLO = smNNLO/bin_width
+    kfac = getKfactor(sm,smLO)
     
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
@@ -127,22 +131,49 @@ def computeULs(inputFile,outputFile):
         yDM = pt['yDM']
         # Make sure signal is normalized to yDM = 1
         signal = signal/yDM**2
+        # Rescale predictions by bin-dependent k-factors
+        signal = kfac*signal
 
-        # Rescale predictions by bin-dependent k-factors and divide by the bin widths
-        signal = kfac*signal/bin_width
+        if not full: # Use simplified chi-square
+            # Finally, divide by the bin widths
+            signal = signal/bin_widths
+            sm = sm/bin_widths
         
-        #First find minima of the chi profile, such that the delta chi2 can then be calculated
-        def func_to_solve_deltachi2(yDMval):
-            return chi2(yDMval, signal, smNNLO, xsecsObs, covMatrix)
+            #First find minima of the chi profile, such that the delta chi2 can then be calculated
+            def func_to_solve_deltachi2(yDMval):
+                return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
 
-        yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-        chi2min = chi2(yDMmin, signal, smNNLO, xsecsObs, covMatrix)
+            yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
+            chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
 
-        def func_to_solve_95(yDMval):
-            return chi2(yDMval, signal, smNNLO, xsecsObs, covMatrix) - chi2min - 3.84
+            def func_to_solve_95(yDMval):
+                return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
 
-        yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-        deltaChi95 = chi2(yDM95, signal, smNNLO, xsecsObs, covMatrix)-chi2min
+            yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
+            deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
+        else: # Use full CLs calculation
+            import sys
+            sys.path.append('../statisticalTools')
+            from simplifiedLikelihoods import Data,UpperLimitComputer,LikelihoodComputer
+            ulComp = UpperLimitComputer()
+
+            # ### Get number of observed and expected (BG) events
+            lumi = 137*1e3
+            nobs = xsecsObs*bin_widths*lumi
+            nbg = sm*lumi
+            ns = signal*lumi
+            cov = covMatrix*(lumi*bin_widths)**2
+            data = Data(observed=nobs, backgrounds=nbg, 
+                        covariance=cov, 
+                        nsignal=ns,deltas_rel=0.0)
+            ul = ulComp.getUpperLimitOnMu(data)
+            yDM95 = np.sqrt(ul)
+            # Signal for 95% C.L. limit:
+            data95 = Data(observed=nobs, backgrounds=nbg, 
+                          covariance=cov, 
+                          nsignal=ns*ul,deltas_rel=0.0)
+            computer = LikelihoodComputer(data95)
+            deltaChi95 = computer.chi2()            
         # Store result
         yDM95list.append(yDM95)
         deltaChi95list.append(deltaChi95)
@@ -161,8 +192,6 @@ if __name__ == "__main__":
             "Compute the upper limit on mu from ATLAS-TOPQ-2019-23 for the recast data stored in the input file.")
     ap.add_argument('-f', '--inputFile', required=True,
             help='path to the pickle file containing the Pandas DataFrame with the recasting results for the models')
-    ap.add_argument('-e', '--signalError', required=False, default = 0.0, type=float,
-            help='value for the relative error on the signal [default = 0.0]')
     ap.add_argument('-o', '--outputFile', required=False,
             help='path to output file. If not defined the upper limits will be stored in the input file.',
             default = None)

@@ -9,6 +9,10 @@ import csv
 import pandas as pd
 from scipy.optimize import minimize, brentq
 
+cms_bins = np.array([250.,400.,480.,560.,640.,720.,800.,900.,1000.,
+                1150.,1300.,1500.,1700.,2000.,2300.,3500.])
+bin_widths  = cms_bins[1:]-cms_bins[:-1]                
+
 def csv_reader(filename):
     output = []
     with open(filename, "r") as csvfile:
@@ -19,7 +23,7 @@ def csv_reader(filename):
 
     return output
 
-def read_HEPdata_SM(dataDir='./data'):
+def read_CMSdata(dataDir='./data'):
     '''
     Read data and covmat from hepdata
     '''
@@ -65,24 +69,21 @@ def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
 
 def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
     theory = kfactor*(sm + yDM**2*signal)
-    diff = (theory - data)[1:]
-    Vinv = np.linalg.inv(covmat)[1:,1:]
+    diff = (theory - data)
+    Vinv = np.linalg.inv(covmat)
     return ((diff).dot(Vinv)).dot(diff)
 
 
-def computeULs(inputFile,outputFile,deltas=0.0):
-
-    cms_bins = np.array([250.,400.,480.,560.,640.,720.,800.,900.,1000.,
-                1150.,1300.,1500.,1700.,2000.,2300.,3500.])
-
+def computeULs(inputFile,outputFile,full=False):
 
     # ### Load CMS data
-    xsecsObs,covMatrix = read_HEPdata_SM()
+    xsecsObs,covMatrix = read_CMSdata()
     
     # ### Load SM prediction (LO)
     smLO = getSMLO()
     # ### Load k-factors
     kfac = getKfactor()
+    sm = kfac*smLO
 
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
@@ -115,27 +116,50 @@ def computeULs(inputFile,outputFile,deltas=0.0):
         yDM = pt['yDM']
         # Make sure signal is normalized to yDM = 1
         signal = signal/yDM**2
-
         # Rescale predictions by bin-dependent k-factors
         signal = kfac*signal
-        sm = kfac*smLO
 
-        # Finally, divide by the bin widths
-        signal = signal/(bins_right-bins_left)
-        sm = sm/(bins_right-bins_left)
-        
-        #First find minima of the chi profile, such that the delta chi2 can then be calculated
-        def func_to_solve_deltachi2(yDMval):
-            return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
+        if not full: # Use simplified chi-square
+            # Finally, divide by the bin widths
+            signal = signal/bin_widths
+            sm = sm/bin_widths
+            
+            #First find minima of the chi profile, such that the delta chi2 can then be calculated
+            def func_to_solve_deltachi2(yDMval):
+                return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
 
-        yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-        chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
+            yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
+            chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
 
-        def func_to_solve_95(yDMval):
-            return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
+            def func_to_solve_95(yDMval):
+                return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
 
-        yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-        deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
+            yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
+            deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
+        else: # Use full CLs calculation
+            import sys
+            sys.path.append('../statisticalTools')
+            from simplifiedLikelihoods import Data,UpperLimitComputer,LikelihoodComputer
+            ulComp = UpperLimitComputer()
+
+            # ### Get number of observed and expected (BG) events
+            lumi = 137*1e3
+            nobs = xsecsObs*bin_widths*lumi
+            nbg = sm*lumi
+            ns = signal*lumi
+            cov = covMatrix*(lumi*bin_widths)**2
+            data = Data(observed=nobs, backgrounds=nbg, 
+                        covariance=cov, 
+                        nsignal=ns,deltas_rel=0.0)
+            ul = ulComp.getUpperLimitOnMu(data)
+            yDM95 = np.sqrt(ul)
+            # Signal for 95% C.L. limit:
+            data95 = Data(observed=nobs, backgrounds=nbg, 
+                          covariance=cov, 
+                          nsignal=ns*ul,deltas_rel=0.0)
+            computer = LikelihoodComputer(data95)
+            deltaChi95 = computer.chi2()
+
         # Store result
         yDM95list.append(yDM95)
         deltaChi95list.append(deltaChi95)
@@ -154,8 +178,6 @@ if __name__ == "__main__":
             "Compute the upper limit on mu from CMS-EXO-20-004 for the recast data stored in the input file.")
     ap.add_argument('-f', '--inputFile', required=True,
             help='path to the pickle file containing the Pandas DataFrame with the recasting results for the models')
-    ap.add_argument('-e', '--signalError', required=False, default = 0.0, type=float,
-            help='value for the relative error on the signal [default = 0.0]')
     ap.add_argument('-o', '--outputFile', required=False,
             help='path to output file. If not defined the upper limits will be stored in the input file.',
             default = None)
@@ -171,9 +193,8 @@ if __name__ == "__main__":
     outputFile = args.outputFile
     if outputFile is None:
         outputFile = inputFile
-
-    deltas = args.signalError
-    computeULs(inputFile,outputFile,deltas)
+    
+    computeULs(inputFile,outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))
 
