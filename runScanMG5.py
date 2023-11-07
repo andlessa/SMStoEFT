@@ -284,6 +284,7 @@ def generateEvents(parser):
     if runConvert:
         if 'run number' in runInfo:
             lheFile = os.path.join(runFolder,'Events',runInfo['run number'],'unweighted_events.lhe.gz')
+            logger.debug('Converting file %s' %lheFile)
             getSLHAFile(lheFile)
         else:
             logger.warning("Could not generate SLHA file for %s" %(runFolder))
