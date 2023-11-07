@@ -67,8 +67,8 @@ def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
 
     return kfac
 
-def chi2(yDM,signal,sm,data,covmat,kfactor=1.0):
-    theory = kfactor*(sm + yDM**2*signal)
+def chi2(yDM,signal,sm,data,covmat):
+    theory = (sm + yDM**2*signal)
     diff = (theory - data)
     Vinv = np.linalg.inv(covmat)
     return ((diff).dot(Vinv)).dot(diff)
@@ -122,20 +122,21 @@ def computeULs(inputFile,outputFile,full=False):
         if not full: # Use simplified chi-square
             # Finally, divide by the bin widths
             signal = signal/bin_widths
-            sm = sm/bin_widths
-            
+            sm_bin = sm/bin_widths
+
             #First find minima of the chi profile, such that the delta chi2 can then be calculated
             def func_to_solve_deltachi2(yDMval):
-                return chi2(yDMval, signal, sm, xsecsObs, covMatrix)
+                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix)
 
             yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-            chi2min = chi2(yDMmin, signal, sm, xsecsObs, covMatrix)
+            chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix)
 
             def func_to_solve_95(yDMval):
-                return chi2(yDMval, signal, sm, xsecsObs, covMatrix) - chi2min - 3.84
+                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix) - chi2min - 3.84
 
             yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-            deltaChi95 = chi2(yDM95, signal, sm, xsecsObs, covMatrix)-chi2min
+            deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix)-chi2min
+            
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
