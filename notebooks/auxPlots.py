@@ -110,3 +110,31 @@ def readContours(fname):
             contoursDict[cV] = dataPts
 
     return contoursDict
+
+def Cg(mChi,mST,yDM,gs):
+    
+    c = -gs*yDM**2/(384*np.pi**2)
+    if 1-mChi**2/mST**2 < 0.1:
+        r = mChi**2/(5*mST**4)-4*mChi/(5*mST**3) + 11/(10*mST**2)
+    else:
+        r = mST**6/mChi**6 
+        r += 2*(1 - (3*mST**4)/mChi**4) 
+        r += 3*mST**2*(1 + 4*np.log(mST/mChi))/mChi**2
+        r = r/(mChi**2*(1 - mST**2/mChi**2)**4)
+    
+    return c*r
+               
+def Cq(mChi,mST,yDM,gs):
+    
+    c = 6*gs**2*yDM**2/(3456*np.pi**2)
+    if 1-mChi**2/mST**2 < 0.1:
+        r = mChi**2/(10*mST**4)-4*mChi/(5*mST**3)+11/(5*mST**2)
+    else:
+        r = 6*(mChi**2/mST**2)*np.log(mChi**2/mST**2)
+        r += -11*mChi**2/mST**2 
+        r += 18
+        r += -9*mST**2/mChi**2 
+        r += 2*mST**4/mChi**4
+        r = r*mST**2*mChi**4/((mChi**2-mST**2)**4)
+    
+    return c*r               

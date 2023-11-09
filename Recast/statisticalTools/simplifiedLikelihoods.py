@@ -699,11 +699,11 @@ class LikelihoodComputer:
         ini = self.getThetaHat(
             self.model.observed, self.model.backgrounds, mu, self.model.covariance, 0
         )
-        self.cov_tot = self.model.V
+        # self.cov_tot = self.model.V
         # if self.model.n == 1:
         #    self.cov_tot = self.model.totalCovariance ( nsig )
         # if not self.model.isLinear():
-        # self.cov_tot = self.model.V + self.model.var_s(nsig)
+        self.cov_tot = self.model.V + self.model.var_s(nsig)
         # self.cov_tot = self.model.totalCovariance (nsig)
         self.weight = np.linalg.inv(self.cov_tot)
         # self.coeff = 1.

@@ -83,14 +83,15 @@ def getKfactor(smNNLO,smLO):
     
     return kfac
 
-def chi2(yDM,signal,sm,data,covmat):
+def chi2(yDM,signal,sm,data,covmat,deltas=0.0):
     theory = (sm + yDM**2*signal)
-    diff = (theory - data)
-    Vinv = np.linalg.inv(covmat)
+    diff = (theory - data)    
+    covariance = covmat + np.diag((yDM**2*signal*deltas)**2)
+    Vinv = np.linalg.inv(covariance)
     return ((diff).dot(Vinv)).dot(diff)
 
 
-def computeULs(inputFile,outputFile,full=False):
+def computeULs(inputFile,outputFile,full=False,deltas=0.0):
 
     # ### Load ATLAS data and BG
     xsecsObs,sm,covMatrix = read_ATLASdata()
@@ -141,16 +142,21 @@ def computeULs(inputFile,outputFile,full=False):
         
             #First find minima of the chi profile, such that the delta chi2 can then be calculated
             def func_to_solve_deltachi2(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix)
+                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas)
 
-            yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-            chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix)
+            yDMmin = minimize(func_to_solve_deltachi2, x0=0).x
+            chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
 
             def func_to_solve_95(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix) - chi2min - 3.84
+                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
 
-            yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-            deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix)-chi2min
+            yDMmax = min(20.,np.sqrt(np.abs(sum(0.1*sm)/sum(signal))))
+            print(ipt)
+            print('yDMmin=',yDMmin,'chi2(yDMmin)=',chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas))
+            print('yDMmax=',yDMmax,'chi2(yDMmax)=',chi2(yDMmax, signal, sm_bin, xsecsObs, covMatrix, deltas))
+            
+            yDM95 = brentq(func_to_solve_95, a=yDMmax,b=yDMmin)
+            deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
@@ -165,13 +171,13 @@ def computeULs(inputFile,outputFile,full=False):
             cov = covMatrix*(lumi*bin_widths)**2
             data = Data(observed=nobs, backgrounds=nbg, 
                         covariance=cov, 
-                        nsignal=ns,deltas_rel=0.0)
+                        nsignal=ns,deltas_rel=deltas)
             ul = ulComp.getUpperLimitOnMu(data)
             yDM95 = np.sqrt(ul)
             # Signal for 95% C.L. limit:
             data95 = Data(observed=nobs, backgrounds=nbg, 
                           covariance=cov, 
-                          nsignal=ns*ul,deltas_rel=0.0)
+                          nsignal=ns*ul,deltas_rel=deltas)
             computer = LikelihoodComputer(data95)
             deltaChi95 = computer.chi2()            
         # Store result
