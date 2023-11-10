@@ -30,19 +30,34 @@ def read_ATLASdata(dataDir='./data'):
     '''
     data = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_2.csv'))
     atlas_data  = []
+    systematic_error = []
+    sysCols = range(6,len(data[0]),2) # Only the plus sign errors
     for item in data[1:9]:
         atlas_data.append(float(item[3]))
+        sysTot2 = 0.0
+        for c in sysCols:
+            avgError = (np.abs(eval(item[c].replace('%','*1e-2')))
+                        +np.abs(eval(item[c+1].replace('%','*1e-2'))))/2.
+            sysTot2 += avgError**2
+        sysTot = np.sqrt(sysTot2)*eval(item[3])
+        systematic_error.append(sysTot)
+    systematic_error = np.array(systematic_error)
+
 
     atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))
     # The digitized values are divided by the width
     atlas_bg = atlas_bg*bin_widths
 
+    # Covariance matrix including only correlated statistical uncertainties
     covdata = csv_reader(os.path.join(dataDir,'HEPData-ins2037744-v2-Table_3.csv'))
-    covmat = []
+    covmat_stat = []
     for item in covdata[1:65]:
-        covmat.append(float(item[-1]))
+        covmat_stat.append(float(item[-1]))
 
-    covmat = np.array(covmat).reshape(8,8)
+    covmat_stat = np.array(covmat_stat).reshape(8,8)
+
+    # Total covariance matrix
+    covmat = covmat_stat + np.diag(systematic_error**2)
 
     return np.array(atlas_data), atlas_bg, covmat
 
@@ -90,6 +105,30 @@ def chi2(yDM,signal,sm,data,covmat,deltas=0.0):
     Vinv = np.linalg.inv(covariance)
     return ((diff).dot(Vinv)).dot(diff)
 
+
+def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
+
+    #First find minima of the chi profile, such that the delta chi2 can then be calculated
+    def func_to_solve_deltachi2(yDMval):
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas)
+
+    yDMmin = minimize(func_to_solve_deltachi2, x0=0).x
+    chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
+
+    def func_to_solve_95(yDMval):
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
+
+    yDMmax = min(20.,np.sqrt(np.abs(sum(0.1*sm_bin)/sum(signal))))
+    yDMmax = 1000.0
+    # print(ipt)
+    # print('yDMmin=',yDMmin,'chi2(yDMmin)=',chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas))
+    # print('yDMmax=',yDMmax,'chi2(yDMmax)=',chi2(yDMmax, signal, sm_bin, xsecsObs, covMatrix, deltas))
+    
+    yDM95 = brentq(func_to_solve_95, a=yDMmax,b=yDMmin)
+    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
+
+    return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
+            'yDM95' : yDM95, 'deltaChi95' : deltaChi95}
 
 def computeULs(inputFile,outputFile,full=False,deltas=0.0):
 
@@ -140,23 +179,9 @@ def computeULs(inputFile,outputFile,full=False,deltas=0.0):
             signal = signal/bin_widths
             sm_bin = sm/bin_widths
         
-            #First find minima of the chi profile, such that the delta chi2 can then be calculated
-            def func_to_solve_deltachi2(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas)
-
-            yDMmin = minimize(func_to_solve_deltachi2, x0=0).x
-            chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
-
-            def func_to_solve_95(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
-
-            yDMmax = min(20.,np.sqrt(np.abs(sum(0.1*sm)/sum(signal))))
-            print(ipt)
-            print('yDMmin=',yDMmin,'chi2(yDMmin)=',chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas))
-            print('yDMmax=',yDMmax,'chi2(yDMmax)=',chi2(yDMmax, signal, sm_bin, xsecsObs, covMatrix, deltas))
-            
-            yDM95 = brentq(func_to_solve_95, a=yDMmax,b=yDMmin)
-            deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
+            resDict = getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0)
+            yDM95 = resDict['yDM95']
+            deltaChi95 = resDict['deltaChi95']            
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
