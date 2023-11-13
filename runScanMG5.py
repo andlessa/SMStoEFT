@@ -73,9 +73,13 @@ def generateProcess(parser):
     else:
         runFix = False
 
-    if runFix:
+    if runFix:        
         run = subprocess.Popen('./fixForCollier.sh  %s' %processFolder,shell=True,
                                 stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        output,errorMsg = run.communicate()
+        if errorMsg:
+            logger.error('Error running fixForCollier.sh: \n %s \n' %errorMsg)
+            return False
 
     os.remove(procCard)
         

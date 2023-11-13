@@ -4,6 +4,58 @@ import numpy as np
 import itertools
 from scipy.interpolate import  griddata
 from matplotlib import pyplot as plt
+import tempfile
+import pylhe
+import gzip
+
+def getLHEevents(fpath):
+    """
+    Reads a set of LHE files and returns a dictionary with the file labels as keys
+    and the PyLHE Events object as values.
+    """
+
+    # It is necessary to remove the < signs from the LHE files (in the generate line) before parsing with pylhe
+    fixedFile = tempfile.mkstemp(suffix='.lhe')
+    os.close(fixedFile[0])
+    fixedFile = fixedFile[1]
+    with  gzip.open(fpath,'rt') as f:
+        data = f.readlines()
+        with open(fixedFile,'w') as newF:
+            for l in data:
+                if 'generate' in l:
+                    continue
+                newF.write(l)
+    events = list(pylhe.read_lhe_with_attributes(fixedFile))
+    nevents = pylhe.read_num_events(fixedFile)
+    os.remove(fixedFile)
+    return nevents,events
+
+def getDistributions(filename):
+
+    nevents,events = getLHEevents(filename)
+    pT1 = []
+    pT2 = []
+    mTT = []
+    weights = []
+    for ev in events:
+        w = ev.eventinfo.weight/nevents
+        weights.append(w)
+        for ptc in ev.particles:
+            if abs(ptc.id) != 6: continue
+            if ptc.id == 6:
+                pA = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
+            else:
+                pB = np.array([ptc.px,ptc.py,ptc.pz,ptc.e])
+
+        pT1.append(max(np.linalg.norm(pA[0:3]),np.linalg.norm(pB[0:3])))
+        pT2.append(min(np.linalg.norm(pA[0:3]),np.linalg.norm(pB[0:3])))
+        mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
+    
+    dists = {'mTT' : mTT, 'pT1' : pT1, 'pT2' : pT2, 
+             'weights' : np.array(weights), 'nevents' : nevents}
+
+    return dists
+
 
 
 def getInfo(f,labelsDict=None):
@@ -12,7 +64,8 @@ def getInfo(f,labelsDict=None):
         labelsDict = {'Top-FormFactorsOneLoop-UFO' : '1-loop', 'Top-EFTphysical_simple-UFO' : 'EFT', 
               'SMS-stop-UFO' : 'SM', 'SMS-stop-NLO_SMQCD-UFO' : 'SM',
               'g g > t t~' : r'$g g \to \bar{t} t$', 'g g > t~ t' : r'$g g \to \bar{t} t$',
-              'q q > t t~' : r'$q q \to \bar{t} t$', 'q q > t~ t' : r'$q q \to \bar{t} t$'
+              'q q > t t~' : r'$q q \to \bar{t} t$', 'q q > t~ t' : r'$q q \to \bar{t} t$',
+              'p p > t t~' : r'$p p \to \bar{t} t$', 'p p > t~ t' : r'$p p \to \bar{t} t$'
              }
     
     banner = list(glob.glob(os.path.join(os.path.dirname(f),'*banner*')))[0]
@@ -37,10 +90,19 @@ def getInfo(f,labelsDict=None):
     parsData = bannerData.split('<slha>')[1].split('</slha>')[0]
     parsSLHA = pyslha.readSLHA(parsData)
     
-    mST = parsSLHA.blocks['MASS'][5000002]
-    mChi = parsSLHA.blocks['MASS'][5000012]
     mT  = parsSLHA.blocks['MASS'][6]
-    yDM = list(parsSLHA.blocks['FRBLOCK'].values())[-1]
+    if 5000002 in parsSLHA.blocks['MASS']:
+        mST = parsSLHA.blocks['MASS'][5000002]
+        mChi = parsSLHA.blocks['MASS'][5000012]        
+        yDM = list(parsSLHA.blocks['FRBLOCK'].values())[-1]
+    else:
+        mST = 0.0
+        mChi = 0.0
+        yDM = 0.0
+
+    if yDM == 0.0:
+        model = 'SM'
+
 
     
     # Get event data:
@@ -52,7 +114,6 @@ def getInfo(f,labelsDict=None):
                'xsec (pb)' : xsec, 'nevents' : nEvents}
     
     return fileInfo
-
 
 def interpolateData(x,y,z,nx=200,ny=200,method='linear'):
 
@@ -67,7 +128,6 @@ def interpolateData(x,y,z,nx=200,ny=200,method='linear'):
     xnew,ynew  = np.meshgrid(xnew,ynew,indexing='ij')
 
     return xnew,ynew,znew
-
 
 def getContours(x,y,z,contourValues):
     
