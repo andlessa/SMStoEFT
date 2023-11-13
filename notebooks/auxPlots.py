@@ -7,6 +7,10 @@ from matplotlib import pyplot as plt
 import tempfile
 import pylhe
 import gzip
+import sys
+sys.path.append('../../Recast/ATLAS-TOPQ-2019-23_tpT/')
+from atlas_topq_2019_23_Recast import applyATLAScuts
+
 
 def getLHEevents(fpath):
     """
@@ -52,6 +56,35 @@ def getDistributions(filename):
         mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
     
     dists = {'mTT' : mTT, 'pT1' : pT1, 'pT2' : pT2, 
+             'weights' : np.array(weights), 'nevents' : nevents}
+
+    return dists
+
+def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
+
+    nevents,events = getLHEevents(filename)
+    pT1 = []
+    pT2 = []
+    mTT = []
+    weights = []
+    for iev,ev in enumerate(events):
+        w = ev.eventinfo.weight/nevents        
+        passCuts = applyATLAScuts(ev,etamax,pTmin)
+        if passCuts is False:
+            continue
+        topHadronic,topLeptonic = passCuts
+
+        pA = np.array([topHadronic.px,topHadronic.py,topHadronic.pz,topHadronic.e])
+        pB = np.array([topLeptonic.px,topLeptonic.py,topLeptonic.pz,topLeptonic.e])
+
+        pT1.append(np.linalg.norm(pA[0:3]))
+        pT2.append(np.linalg.norm(pB[0:3]))
+        mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
+        weights.append(w)
+        if mTT[-1] > 1400. and weights[-1] > 0:
+            print(iev,mTT[-1],weights[-1])
+    
+    dists = {'mTT' : mTT, 'pTh' : pT1, 'pTlep' : pT2, 
              'weights' : np.array(weights), 'nevents' : nevents}
 
     return dists

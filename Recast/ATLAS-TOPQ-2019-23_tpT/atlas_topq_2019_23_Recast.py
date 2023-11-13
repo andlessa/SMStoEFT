@@ -33,183 +33,190 @@ def getLHEevents(fpath):
     os.remove(fixedFile)
     return nevents,events
 
+def applyATLAScuts(event,etamax=2.0,pTmin=355.0):
 
-def getPTThist(nevents,events,etamax=2.0,pTmin=355.0,weightMultiplier = 1.0):
+    jetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 0.4)
+    fatjetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 1.0)
+    error = False
+
+    # Add information to particles:
+    for ptc in event.particles:
+        ptc.daughters = []
+        ptc.PID = int(ptc.id)
+        p = np.sqrt(ptc.px**2 + ptc.py**2 + ptc.pz**2)
+        ptc.PT = np.sqrt(ptc.px**2 + ptc.py**2)
+        if not ptc.PT: # Only for incoming partons
+            ptc.Eta = None
+            ptc.Phi = None
+        else:
+            ptc.Eta = (1./2.)*np.log((p+ptc.pz)/(p-ptc.pz))        
+            ptc.Phi = np.arctan2(ptc.py,ptc.px)
+        ptc.Px = ptc.px
+        ptc.Py = ptc.py
+        ptc.Pz = ptc.pz
+        ptc.E = ptc.e
+        
+    for ptc in event.particles:
+        for mom in ptc.mothers():
+            mom.daughters.append(ptc)
+    
+    # Get tops and their final decays:
+    tops = {}
+    topDecays = {}
+    for ptc in event.particles:        
+        if abs(ptc.PID) == 6:
+            tops[ptc.PID] = ptc # Store only the last top/anti-top            
+            daughters = {d.PID : d for d in ptc.daughters}
+            hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
+            while len(hasDaughters) > 0:
+                for pid in hasDaughters:
+                    d = daughters.pop(pid)
+                    for dd in d.daughters:
+                        daughters[dd.PID] = dd
+                hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
+            topDecays[ptc.PID] = list(daughters.values())
+    
+    # Select events with one lepton and one hadronic top:
+    topH = None
+    topLep = None
+    for topPID,daughters in topDecays.items():        
+        dPIDs =  [abs(ptc.PID) for ptc in daughters]
+        if len(dPIDs) != 3:
+            error = True
+            print('Error getting daughters:',dPIDs)
+            break
+        if not 5 in dPIDs:
+            continue # Skip rare decays to W+c
+        if (11 in dPIDs) or (13 in dPIDs):
+            topLep = topPID
+        elif max(dPIDs) <= 5:
+            topH = topPID
+
+    if error:
+        return False
+    
+    if topH is None or topLep is None:
+        return False
+
+    # Hadronic top:    
+    # Regular jets:
+    quarks = [ptc for ptc in topDecays[topH]]
+    jetArray = [fastjet.PseudoJet(q.Px,q.Py,q.Pz,q.E) for q in quarks if abs(q.Eta) < 4.5]
+    for ij,j in enumerate(jetArray):
+        j.set_user_index(quarks[ij].PID)
+    cluster = fastjet.ClusterSequence(jetArray, jetdef)
+    jets = cluster.inclusive_jets(ptmin = 26.0)
+    jets = [j for j in jets if abs(j.eta()) < 2.5]
+    if len(jets) == 0:
+        return False
+
+    # ## Fat jet:    
+    jetArray = [fastjet.PseudoJet(j.px(),j.py(),j.pz(),j.E()) for j in jets]
+    for ij,j in enumerate(jetArray):
+        for q in jets[ij].constituents():
+            if abs(q.user_index()) == 5:
+                j.set_user_index(5) # Tag the regular jets containing a b-quark
+    clusterFat = fastjet.ClusterSequence(jetArray, fatjetdef)
+    if len(clusterFat.inclusive_jets()) == 0:
+        return False
+    
+    # Use hardest fat jet
+    fatJet = sorted([j for j in clusterFat.inclusive_jets()], key = lambda j: j.pt(), reverse=True)[0]
+    # Invariant mass cut:
+    if not (120. < fatJet.m() < 220.):
+        return False
+    # PT cut
+    if fatJet.pt() < pTmin:
+        return False
+
+    # Eta cut
+    if abs(fatJet.eta()) > etamax:
+        return False
+
+    # Require a b inside the Fat jet
+    hasB = False
+    for q in fatJet.constituents():
+        if q.user_index() == 5:
+            hasB = True
+    if not hasB:
+        return False
+
+    # Leptonic top:
+    leptons = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [11,13]]
+    neutrinos = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [12,14]]
+    bLep = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) ==5]
+    if len(leptons) != 1:
+        error = True
+        print('Error getting leptons')
+    if len(neutrinos) != 1:
+        error = True
+        print('Error getting neutrinos')
+    if len(bLep) != 1:
+        error = True
+        print('Error getting b-jet')
+        return False
+    if error:
+        return False
+    lepton = leptons[0]
+    nu = neutrinos[0]
+    bLep = bLep[0]
+    
+    pTlepton = lepton.PT
+    etaLep = np.abs(lepton.Eta)
+    # Lepton pT cut
+    if pTlepton < 27.0:
+        return False
+    # Lepton eta cut
+    if etaLep > 2.5:
+        return False
+
+    # Require the b to be close to the lepton
+    dRlep = np.sqrt((lepton.Eta-bLep.Eta)**2 + (lepton.Phi-bLep.Phi)**2)
+    if dRlep > 2.0:
+        return False
+    # Invariant mass of lepton and b < 180:
+    mlb = np.sqrt((lepton.E+bLep.E)**2-(lepton.Px+bLep.Px)**2-(lepton.Py+bLep.Py)**2-(lepton.Pz+bLep.Pz)**2)
+    if mlb > 180.0:
+        return False
+    # Skip events where lepton overlaps to jet
+    dRlep = min([np.sqrt((lepton.Eta-j.eta())**2 + (lepton.Phi-j.phi())**2) for j in jets])    
+    if dRlep < 0.4:
+        return False
+    # MET cut
+    if (nu.PT < 20.0):
+        return False
+    
+    return tops[topH],tops[topLep]
+
+def getPTThist(nevents,events,
+               etamax=2.0,pTmin=355.0,weightMultiplier = 1.0,
+               bins=atlas_bins):
     """
     Reads a PyLHE Event object and extracts the ttbar invariant
     mass for each event.
     """
 
-    
-    jetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 0.4)
-    fatjetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 1.0)
-
-
     pTT = []
     weights = []
     for ev in events:        
-        error = False
         weightPB = weightMultiplier*ev.eventinfo.weight/nevents
         weightAndError = np.array([weightPB,weightPB**2])
+        passCuts = applyATLAScuts(ev,etamax,pTmin)
+        if passCuts is False:
+            continue
+        topHadronic,_ = passCuts
 
-        # Add information to particles:
-        for ptc in ev.particles:
-            ptc.daughters = []
-            ptc.PID = int(ptc.id)
-            p = np.sqrt(ptc.px**2 + ptc.py**2 + ptc.pz**2)
-            ptc.PT = np.sqrt(ptc.px**2 + ptc.py**2)
-            if not ptc.PT: # Only for incoming partons
-                ptc.Eta = None
-                ptc.Phi = None
-            else:
-                ptc.Eta = (1./2.)*np.log((p+ptc.pz)/(p-ptc.pz))        
-                ptc.Phi = np.arctan2(ptc.py,ptc.px)
-            ptc.Px = ptc.px
-            ptc.Py = ptc.py
-            ptc.Pz = ptc.pz
-            ptc.E = ptc.e
-            
-        for ptc in ev.particles:
-            for mom in ptc.mothers():
-                mom.daughters.append(ptc)
-        
-        # Get tops and their final decays:
-        tops = {}
-        topDecays = {}
-        for ptc in ev.particles:        
-            if abs(ptc.PID) == 6:
-                tops[ptc.PID] = ptc # Store only the last top/anti-top            
-                daughters = {d.PID : d for d in ptc.daughters}
-                hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
-                while len(hasDaughters) > 0:
-                    for pid in hasDaughters:
-                        d = daughters.pop(pid)
-                        for dd in d.daughters:
-                            daughters[dd.PID] = dd
-                    hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
-                topDecays[ptc.PID] = list(daughters.values())
-        
-        # Select events with one lepton and one hadronic top:
-        topH = None
-        topLep = None
-        for topPID,daughters in topDecays.items():        
-            dPIDs =  [abs(ptc.PID) for ptc in daughters]
-            if len(dPIDs) != 3:
-                error = True
-                print('Error getting daughters:',dPIDs)
-                break
-            if not 5 in dPIDs:
-                continue # Skip rare decays to W+c
-            if (11 in dPIDs) or (13 in dPIDs):
-                topLep = topPID
-            elif max(dPIDs) <= 5:
-                topH = topPID
-
-        if error:
-            break
-        
-        if topH is None or topLep is None:
-            continue
-
-        # Hadronic top:    
-        # Regular jets:
-        quarks = [ptc for ptc in topDecays[topH]]
-        jetArray = [fastjet.PseudoJet(q.Px,q.Py,q.Pz,q.E) for q in quarks if abs(q.Eta) < 4.5]
-        for ij,j in enumerate(jetArray):
-            j.set_user_index(quarks[ij].PID)
-        cluster = fastjet.ClusterSequence(jetArray, jetdef)
-        jets = cluster.inclusive_jets(ptmin = 26.0)
-        jets = [j for j in jets if abs(j.eta()) < 2.5]
-        if len(jets) == 0:
-            continue
-
-        # ## Fat jet:    
-        jetArray = [fastjet.PseudoJet(j.px(),j.py(),j.pz(),j.E()) for j in jets]
-        for ij,j in enumerate(jetArray):
-            for q in jets[ij].constituents():
-                if abs(q.user_index()) == 5:
-                    j.set_user_index(5) # Tag the regular jets containing a b-quark
-        clusterFat = fastjet.ClusterSequence(jetArray, fatjetdef)
-        if len(clusterFat.inclusive_jets()) == 0:
-            continue
-        
-        # Use hardest fat jet
-        fatJet = sorted([j for j in clusterFat.inclusive_jets()], key = lambda j: j.pt(), reverse=True)[0]
-        # Invariant mass cut:
-        if not (120. < fatJet.m() < 220.):
-            continue
-        # PT cut
-        if fatJet.pt() < pTmin:
-            continue
-
-        # Eta cut
-        if abs(fatJet.eta()) > etamax:
-            continue
-
-        # Require a b inside the Fat jet
-        hasB = False
-        for q in fatJet.constituents():
-            if q.user_index() == 5:
-                hasB = True
-        if not hasB:
-            continue
-    
-        # Leptonic top:
-        leptons = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [11,13]]
-        neutrinos = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [12,14]]
-        bLep = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) ==5]
-        if len(leptons) != 1:
-            error = True
-            print('Error getting leptons')
-        if len(neutrinos) != 1:
-            error = True
-            print('Error getting neutrinos')
-        if len(bLep) != 1:
-            error = True
-            print('Error getting b-jet')
-            break
-        if error:
-            break
-        lepton = leptons[0]
-        nu = neutrinos[0]
-        bLep = bLep[0]
-        
-        pTlepton = lepton.PT
-        etaLep = np.abs(lepton.Eta)
-        # Lepton pT cut
-        if pTlepton < 27.0:
-            continue
-        # Lepton eta cut
-        if etaLep > 2.5:
-            continue
-
-        # Require the b to be close to the lep'MET > 20'ton
-        dRlep = np.sqrt((lepton.Eta-bLep.Eta)**2 + (lepton.Phi-bLep.Phi)**2)
-        if dRlep > 2.0:
-            continue
-        # Invariant mass of lepton and b < 180:
-        mlb = np.sqrt((lepton.E+bLep.E)**2-(lepton.Px+bLep.Px)**2-(lepton.Py+bLep.Py)**2-(lepton.Pz+bLep.Pz)**2)
-        if mlb > 180.0:
-            continue
-        # Skip events where lepton overlaps to jet
-        dRlep = min([np.sqrt((lepton.Eta-j.eta())**2 + (lepton.Phi-j.phi())**2) for j in jets])    
-        if dRlep < 0.4:
-            continue
-        # MET cut
-        if (nu.PT < 20.0):
-            continue
-
-
-        pTT.append(tops[topH].PT)
+        pTT.append(topHadronic.PT)
         weights.append(weightAndError)
     
-
     weights = np.array(weights)
-    pTtHist,_ = np.histogram(pTT,weights=weights[:,0],bins=atlas_bins)
-    pTtHistError,_ = np.histogram(pTT,weights=weights[:,1],bins=atlas_bins)
-    pTtHistError = np.sqrt(pTtHistError)
-
-    data = np.array(list(zip(atlas_bins[:-1],atlas_bins[1:],pTtHist,pTtHistError)))
+    if bins is not None:
+        pTtHist,_ = np.histogram(pTT,weights=weights[:,0],bins=bins)
+        pTtHistError,_ = np.histogram(pTT,weights=weights[:,1],bins=bins)
+        pTtHistError = np.sqrt(pTtHistError)       
+        data = np.array(list(zip(bins[:-1],bins[1:],pTtHist,pTtHistError)))
+    else:
+        data = np.array(list(zip(pTT,weights[:,0])))
     
     return data
 
