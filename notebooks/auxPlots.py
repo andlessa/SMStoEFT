@@ -67,7 +67,7 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
     pT2 = []
     mTT = []
     weights = []
-    for iev,ev in enumerate(events):
+    for ev in events:
         w = ev.eventinfo.weight/nevents        
         passCuts = applyATLAScuts(ev,etamax,pTmin)
         if passCuts is False:
@@ -81,8 +81,6 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
         pT2.append(np.linalg.norm(pB[0:3]))
         mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
         weights.append(w)
-        if mTT[-1] > 1400. and weights[-1] > 0:
-            print(iev,mTT[-1],weights[-1])
     
     dists = {'mTT' : mTT, 'pTh' : pT1, 'pTlep' : pT2, 
              'weights' : np.array(weights), 'nevents' : nevents}
