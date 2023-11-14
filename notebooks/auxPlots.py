@@ -60,6 +60,191 @@ def getDistributions(filename):
 
     return dists
 
+
+def applyATLAScuts2(event,etamax=2.0,pTmin=355.0):
+    
+    import fastjet
+    jetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 0.4)
+    fatjetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 1.0)
+    error = False
+
+    cutFlow = { 'decays' : False,
+                'njets' : False, 
+               'FatJet' : False,
+               'FatJet Mass' : False,
+               'FatJet pT' : False,
+               'FatJet Eta' : False,
+               'FatJet hasB' : False,
+               'Lepton pT' : False,
+               'Lepton Eta' : False,
+               'Lepton dRb' : False,
+               'mlb' : False,
+               'mlj': False,
+               'MET cut' : False
+               }
+
+    # Add information to particles:
+    for ptc in event.particles:
+        ptc.daughters = []
+        ptc.PID = int(ptc.id)
+        p = np.sqrt(ptc.px**2 + ptc.py**2 + ptc.pz**2)
+        ptc.PT = np.sqrt(ptc.px**2 + ptc.py**2)
+        if not ptc.PT: # Only for incoming partons
+            ptc.Eta = None
+            ptc.Phi = None
+        else:
+            ptc.Eta = (1./2.)*np.log((p+ptc.pz)/(p-ptc.pz))        
+            ptc.Phi = np.arctan2(ptc.py,ptc.px)
+        ptc.Px = ptc.px
+        ptc.Py = ptc.py
+        ptc.Pz = ptc.pz
+        ptc.E = ptc.e
+        
+    for ptc in event.particles:
+        for mom in ptc.mothers():
+            mom.daughters.append(ptc)
+    
+    # Get tops and their final decays:
+    tops = {}
+    topDecays = {}
+    for ptc in event.particles:        
+        if abs(ptc.PID) == 6:
+            tops[ptc.PID] = ptc # Store only the last top/anti-top            
+            daughters = {d.PID : d for d in ptc.daughters}
+            hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
+            while len(hasDaughters) > 0:
+                for pid in hasDaughters:
+                    d = daughters.pop(pid)
+                    for dd in d.daughters:
+                        daughters[dd.PID] = dd
+                hasDaughters = [pid for pid,d in daughters.items() if d.daughters]
+            topDecays[ptc.PID] = list(daughters.values())
+    
+    # Select events with one lepton and one hadronic top:
+    topH = None
+    topLep = None
+    for topPID,daughters in topDecays.items():        
+        dPIDs =  [abs(ptc.PID) for ptc in daughters]
+        if len(dPIDs) != 3:
+            error = True
+            print('Error getting daughters:',dPIDs)
+            break
+        if not 5 in dPIDs:
+            continue # Skip rare decays to W+c
+        if (11 in dPIDs) or (13 in dPIDs):
+            topLep = topPID
+        elif max(dPIDs) <= 5:
+            topH = topPID
+
+    if error:
+        return False
+    
+    if topH is None or topLep is None:
+        return False
+    cutFlow['decays'] = True
+
+    # Hadronic top:    
+    # Regular jets:
+    quarks = [ptc for ptc in topDecays[topH]]
+    jetArray = [fastjet.PseudoJet(q.Px,q.Py,q.Pz,q.E) for q in quarks if abs(q.Eta) < 4.5]
+    for ij,j in enumerate(jetArray):
+        j.set_user_index(quarks[ij].PID)
+    cluster = fastjet.ClusterSequence(jetArray, jetdef)
+    jets = cluster.inclusive_jets(ptmin = 26.0)
+    jets = [j for j in jets if abs(j.eta()) < 2.5]
+    if len(jets) == 0:
+        return tops[topH],tops[topLep],cutFlow    
+    cutFlow['njets'] = True
+
+    # ## Fat jet:    
+    jetArray = [fastjet.PseudoJet(j.px(),j.py(),j.pz(),j.E()) for j in jets]
+    for ij,j in enumerate(jetArray):
+        for q in jets[ij].constituents():
+            if abs(q.user_index()) == 5:
+                j.set_user_index(5) # Tag the regular jets containing a b-quark
+    clusterFat = fastjet.ClusterSequence(jetArray, fatjetdef)
+    if len(clusterFat.inclusive_jets()) == 0:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['FatJet'] = True
+    
+    # Use hardest fat jet
+    fatJet = sorted([j for j in clusterFat.inclusive_jets()], key = lambda j: j.pt(), reverse=True)[0]
+    # Invariant mass cut:
+    if not (120. < fatJet.m() < 220.):
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['FatJet Mass'] = True
+    # PT cut
+    if fatJet.pt() < pTmin:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['FatJet pT'] = True
+
+    # Eta cut
+    if abs(fatJet.eta()) > etamax:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['FatJet Eta'] = True
+
+    # Require a b inside the Fat jet
+    hasB = False
+    for q in fatJet.constituents():
+        if q.user_index() == 5:
+            hasB = True
+    if not hasB:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['FatJet hasB'] = True
+
+    # Leptonic top:
+    leptons = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [11,13]]
+    neutrinos = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) in [12,14]]
+    bLep = [ptc for ptc in topDecays[topLep] if abs(ptc.PID) ==5]
+    if len(leptons) != 1:
+        error = True
+        print('Error getting leptons')
+    if len(neutrinos) != 1:
+        error = True
+        print('Error getting neutrinos')
+    if len(bLep) != 1:
+        error = True
+        print('Error getting b-jet')
+        return False
+    if error:
+        return False
+    lepton = leptons[0]
+    nu = neutrinos[0]
+    bLep = bLep[0]
+    
+    pTlepton = lepton.PT
+    etaLep = np.abs(lepton.Eta)
+    # Lepton pT cut
+    if pTlepton < 27.0:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['Lepton pT'] = True
+    # Lepton eta cut
+    if etaLep > 2.5:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['Lepton Eta'] = True
+
+    # Require the b to be close to the lepton
+    dRlep = np.sqrt((lepton.Eta-bLep.Eta)**2 + (lepton.Phi-bLep.Phi)**2)
+    if dRlep > 2.0:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['mlb'] = True
+    # Invariant mass of lepton and b < 180:
+    mlb = np.sqrt((lepton.E+bLep.E)**2-(lepton.Px+bLep.Px)**2-(lepton.Py+bLep.Py)**2-(lepton.Pz+bLep.Pz)**2)
+    if mlb > 180.0:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['mlb'] = True
+    # Skip events where lepton overlaps to jet
+    dRlep = min([np.sqrt((lepton.Eta-j.eta())**2 + (lepton.Phi-j.phi())**2) for j in jets])    
+    if dRlep < 0.4:
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['mlj'] = True
+    # MET cut
+    if (nu.PT < 20.0):
+        return tops[topH],tops[topLep],cutFlow
+    cutFlow['MET cut'] = True
+    
+    return tops[topH],tops[topLep],cutFlow
+
 def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
 
     nevents,events = getLHEevents(filename)
@@ -67,12 +252,26 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
     pT2 = []
     mTT = []
     weights = []
+    cutFlow = {'decays' : [],
+            'njets' : [], 
+            'FatJet' : [],
+            'FatJet Mass' : [],
+            'FatJet pT' : [],
+            'FatJet Eta' : [],
+            'FatJet hasB' : [],
+            'Lepton pT' : [],
+            'Lepton Eta' : [],
+            'Lepton dRb' : [],
+            'mlb' : [],
+            'mlj': [],
+            'MET cut' : []
+            }
     for ev in events:
         w = ev.eventinfo.weight/nevents        
-        passCuts = applyATLAScuts(ev,etamax,pTmin)
+        passCuts = applyATLAScuts2(ev,etamax,pTmin)
         if passCuts is False:
             continue
-        topHadronic,topLeptonic = passCuts
+        topHadronic,topLeptonic,cutFlowEv = passCuts
 
         pA = np.array([topHadronic.px,topHadronic.py,topHadronic.pz,topHadronic.e])
         pB = np.array([topLeptonic.px,topLeptonic.py,topLeptonic.pz,topLeptonic.e])
@@ -81,15 +280,19 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
         pT2.append(np.linalg.norm(pB[0:3]))
         mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
         weights.append(w)
+
+        for key in cutFlow:
+            cutFlow[key].append(cutFlowEv[key])
     
     dists = {'mTT' : mTT, 'pTh' : pT1, 'pTlep' : pT2, 
-             'weights' : np.array(weights), 'nevents' : nevents}
+             'weights' : np.array(weights), 'nevents' : nevents, 'cutFlow' : cutFlow}
 
     return dists
 
 
 
 def getInfo(f,labelsDict=None):
+
 
     if labelsDict is None:
         labelsDict = {'Top-FormFactorsOneLoop-UFO' : '1-loop', 'Top-EFTphysical_simple-UFO' : 'EFT', 
