@@ -245,7 +245,7 @@ def applyATLAScuts2(event,etamax=2.0,pTmin=355.0):
     
     return tops[topH],tops[topLep],cutFlow
 
-def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
+def getATLASdistributions(filename,etamax=2.0,pTmin=355.0,getCutFlow=False):
 
     nevents,events = getLHEevents(filename)
     pT1 = []
@@ -267,11 +267,17 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
             'MET cut' : []
             }
     for ev in events:
-        w = ev.eventinfo.weight/nevents        
-        passCuts = applyATLAScuts2(ev,etamax,pTmin)
+        w = ev.eventinfo.weight/nevents
+        if getCutFlow:
+            passCuts = applyATLAScuts2(ev,etamax,pTmin)
+        else:
+            passCuts = applyATLAScuts(ev,etamax,pTmin)
         if passCuts is False:
             continue
-        topHadronic,topLeptonic,cutFlowEv = passCuts
+        if getCutFlow:
+            topHadronic,topLeptonic,cutFlowEv = passCuts
+        else:
+            topHadronic,topLeptonic = passCuts
 
         pA = np.array([topHadronic.px,topHadronic.py,topHadronic.pz,topHadronic.e])
         pB = np.array([topLeptonic.px,topLeptonic.py,topLeptonic.pz,topLeptonic.e])
@@ -281,11 +287,14 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0):
         mTT.append(np.sqrt((pA[-1]+pB[-1])**2-np.linalg.norm(pA[0:3]+pB[0:3])**2))
         weights.append(w)
 
-        for key in cutFlow:
-            cutFlow[key].append(cutFlowEv[key])
-    
+        if getCutFlow:
+            for key in cutFlow:
+                cutFlow[key].append(cutFlowEv[key])
+        
     dists = {'mTT' : mTT, 'pTh' : pT1, 'pTlep' : pT2, 
-             'weights' : np.array(weights), 'nevents' : nevents, 'cutFlow' : cutFlow}
+             'weights' : np.array(weights), 'nevents' : nevents}
+    if getCutFlow:
+        dists['cutFlow'] = cutFlow
 
     return dists
 
@@ -349,15 +358,17 @@ def getInfo(f,labelsDict=None):
     
     return fileInfo
 
-def interpolateData(x,y,z,nx=200,ny=200,method='linear'):
+def interpolateData(x,y,z,nx=200,ny=200,method='linear',fill_value=0.0,xnew=None,ynew=None):
 
     if x.min() == x.max() or y.min() == y.max(): # Can not interpolate
         return None,None,None
-    else:
+    elif xnew is None or ynew is None:
         xnew = np.linspace(x.min(),x.max(),nx)
         ynew = np.linspace(y.min(),y.max(),ny)
-        xi = np.array([list(v) for v in itertools.product(xnew,ynew)])
-        znew = griddata(list(zip(x,y)),z,xi=xi, method=method)
+
+    xi = np.array([list(v) for v in itertools.product(xnew,ynew)])
+    znew = griddata(list(zip(x,y)),z,xi=xi, 
+                    method=method,fill_value=fill_value)
     znew = np.reshape(znew,(len(xnew),len(ynew)))
     xnew,ynew  = np.meshgrid(xnew,ynew,indexing='ij')
 
