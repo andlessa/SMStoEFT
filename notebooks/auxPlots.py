@@ -358,7 +358,7 @@ def getInfo(f,labelsDict=None):
     
     return fileInfo
 
-def interpolateData(x,y,z,nx=200,ny=200,method='linear',fill_value=0.0,xnew=None,ynew=None):
+def interpolateData(x,y,z,nx=200,ny=200,method='linear',fill_value=np.nan,xnew=None,ynew=None):
 
     if x.min() == x.max() or y.min() == y.max(): # Can not interpolate
         return None,None,None
