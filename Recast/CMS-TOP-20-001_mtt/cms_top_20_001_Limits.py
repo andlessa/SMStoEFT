@@ -67,11 +67,29 @@ def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
 
     return kfac
 
-def chi2(yDM,signal,sm,data,covmat):
+def chi2(yDM,signal,sm,data,covmat,deltas=0.0):
     theory = (sm + yDM**2*signal)
     diff = (theory - data)
-    Vinv = np.linalg.inv(covmat)
+    Vinv = np.linalg.inv(covmat) + np.diag((yDM**2*signal*deltas)**2)
     return ((diff).dot(Vinv)).dot(diff)
+
+def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
+
+    #First find minima of the chi profile, such that the delta chi2 can then be calculated
+    def func_to_solve_deltachi2(yDMval):
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas)
+
+    yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
+    chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
+
+    def func_to_solve_95(yDMval):
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
+
+    yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
+    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
+
+    return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
+            'yDM95' : yDM95, 'deltaChi95' : deltaChi95}
 
 
 def computeULs(inputFile,outputFile,full=False):
@@ -107,6 +125,7 @@ def computeULs(inputFile,outputFile,full=False):
     progressbar.start()
 
     yDM95list = []
+    yDM95expList = []
     deltaChi95list = []
     for ipt,pt in recastData.iterrows():
 
@@ -123,19 +142,13 @@ def computeULs(inputFile,outputFile,full=False):
             # Finally, divide by the bin widths
             signal = signal/bin_widths
             sm_bin = sm/bin_widths
+            resDict = getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0)
+            yDM95 = resDict['yDM95']
+            deltaChi95 = resDict['deltaChi95']       
 
-            #First find minima of the chi profile, such that the delta chi2 can then be calculated
-            def func_to_solve_deltachi2(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix)
-
-            yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-            chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix)
-
-            def func_to_solve_95(yDMval):
-                return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix) - chi2min - 3.84
-
-            yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-            deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix)-chi2min
+            # Expected
+            resDictExp = getUL(signal,xsecsObs,xsecsObs,covMatrix,deltas=0.0)
+            yDM95exp = resDictExp['yDM95']            
             
         else: # Use full CLs calculation
             import sys
@@ -163,9 +176,11 @@ def computeULs(inputFile,outputFile,full=False):
 
         # Store result
         yDM95list.append(yDM95)
+        yDM95expList.append(yDM95exp)
         deltaChi95list.append(deltaChi95)
 
     recastData['yDM (95% C.L.)'] = yDM95list
+    recastData['yDMexp (95% C.L.)'] = yDM95expList
     recastData['$\Delta \chi^2$ (95% C.L.)'] = deltaChi95list
     progressbar.finish()
     recastData.to_pickle(outputFile)
