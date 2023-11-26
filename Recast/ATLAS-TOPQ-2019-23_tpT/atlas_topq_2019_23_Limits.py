@@ -181,7 +181,7 @@ def computeULs(inputFile,outputFile,full=False,deltas=0.0):
             deltaChi95 = resDict['deltaChi95']     
 
             # Expected
-            resDictExp = getUL(signal,xsecsObs,xsecsObs,covMatrix,deltas=0.0)
+            resDictExp = getUL(signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
             yDM95exp = resDictExp['yDM95']  
                    
         else: # Use full CLs calculation
