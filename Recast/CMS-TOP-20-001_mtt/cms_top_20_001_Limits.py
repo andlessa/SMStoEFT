@@ -23,7 +23,7 @@ def csv_reader(filename):
 
     return output
 
-def read_CMSdata(dataDir='./data'):
+def read_CMSdata(dataDir='./data',bg="MATRIX"):
     '''
     Read data and covmat from hepdata
     '''
@@ -31,6 +31,19 @@ def read_CMSdata(dataDir='./data'):
     cms_data  = []
     for item in data[9:24]:
         cms_data.append(float(item[3]))
+
+    
+    if bg == "MATRIX":
+        bg_ratio = csv_reader(os.path.join(dataDir,'ratioMATRIX_Fig19a.csv'))
+    elif bg == "MG5":
+        bg_ratio = csv_reader(os.path.join(dataDir,'ratioMGPY8_Fig19a.csv'))
+    else:
+        print("Only MATRIX and MG5 backgrounds are available")
+    cms_bg = []
+    for i,item in enumerate(bg_ratio[2:]):
+        cms_bg.append(float(item[3])*cms_data[i])
+    # The digitized values are divided by the width
+    cms_bg = np.array(cms_bg)*bin_widths
 
     covdata = csv_reader(os.path.join(dataDir,'parton_abs_ttm_covariance.csv'))
     covmat = np.zeros(15*15).reshape(15,15)
@@ -45,25 +58,43 @@ def read_CMSdata(dataDir='./data'):
             covmat[i,j] = covmatlist[count]
             count+=1
 
-    return np.array(cms_data), np.array(covmat)
+    return np.array(cms_data), np.array(cms_bg), np.array(covmat)
 
-def getSMLO(filename='./sm/mtt_SM_ttbar_nnpdf4p0.txt'):
-    """
-    Use mtt computed at LO from arXiv:2303.17634
-    """
+def getSMLO(smFile='./sm/sm_tt_lo_cms_top_20_001.pcl'):
 
-    BR = 0.2877
-    sm = np.loadtxt(filename,usecols=(0,),dtype=float)
-    sm = BR*sm
-    return sm
+    # ### Load Recast Data
+    recastData = pd.read_pickle(smFile)
 
-def getKfactor(filename='./sm/kfac_nnlo_lo_highstats.txt'):
+    binCols = [c for c in recastData.columns 
+               if 'bin_' in c.lower() and not 'error' in c.lower()]
+    bins_left = np.array([eval(c.split('_')[1]) for c in binCols])
+    bins_right = np.array([eval(c.split('_')[2]) for c in binCols])
+    # Check that bins are consistent:
+    if not np.array_equal(bins_left,cms_bins[:-1]):
+        print('Bins from data do not match CMS')
+        return
+    if bins_right[-1] != cms_bins[-1]:
+        print('Bins from data do not match CMS')
+        return
+
+    if len(recastData) != 1:
+        print('SM LO file %s has multiple entries' %smFile)
+        return False
+    
+    pt = recastData.iloc[0]
+    smLO = list(zip(bins_left,pt[binCols].values))
+    smLO = np.array(sorted(smLO))[:,1]
+
+    return smLO
+
+
+def getKfactor(smNNLO,smLO):
     """
-    Use kfactors computed at NNLO from arXiv:2303.17634 (using HighTea)
+    Compute bin-by-bin kfactors using the CMS NNLO and the LO xsecs
     """
     
-    
-    kfac = np.loadtxt(filename,dtype=float,usecols=(0,))
+    # Get k-factor for each bin
+    kfac = np.divide(smNNLO,smLO)
 
     return kfac
 
@@ -94,14 +125,13 @@ def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
 
 def computeULs(inputFile,outputFile,full=False):
 
-    # ### Load CMS data
-    xsecsObs,covMatrix = read_CMSdata()
+    # ### Load CMS data and BG
+    xsecsObs,sm,covMatrix = read_CMSdata()
     
-    # ### Load SM prediction (LO)
+    # ### Load LO background from MG5
     smLO = getSMLO()
-    # ### Load k-factors
-    kfac = getKfactor()
-    sm = kfac*smLO
+    # Get k-factor for each bin
+    kfac = getKfactor(sm,smLO)
 
     # ### Load Recast Data
     recastData = pd.read_pickle(inputFile)
