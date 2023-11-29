@@ -98,26 +98,27 @@ def getKfactor(smNNLO,smLO):
 
     return kfac
 
-def chi2(yDM,signal,sm,data,covmat,deltas=0.0):
+def chi2(yDM,signal,sm,data,covmat,deltas=0.0, deltabg=0.0):
     theory = (sm + yDM**2*signal)
     diff = (theory - data)
-    Vinv = np.linalg.inv(covmat) + np.diag((yDM**2*signal*deltas)**2)
+    CovTotal = covmat + np.diag((yDM**2*signal*deltas)**2 + (sm*deltabg)**2) 
+    Vinv = np.linalg.inv(CovTotal)
     return ((diff).dot(Vinv)).dot(diff)
 
-def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
+def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0, deltabg=0.0):
 
     #First find minima of the chi profile, such that the delta chi2 can then be calculated
     def func_to_solve_deltachi2(yDMval):
-        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas)
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)
 
     yDMmin = minimize(func_to_solve_deltachi2, x0=20).x
-    chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
+    chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)
 
     def func_to_solve_95(yDMval):
-        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg) - chi2min - 3.84
 
     yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
+    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)-chi2min
 
     return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
             'yDM95' : yDM95, 'deltaChi95' : deltaChi95}
