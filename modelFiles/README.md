@@ -1,4 +1,5 @@
-# Model Files
+# FeynRules Model Files
+
 Hold the FeynRules files for distinct model implementations
 
 ## Files
