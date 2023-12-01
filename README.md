@@ -65,9 +65,9 @@ There are two UFO versions of this implementation:
  
 #### 
 
-### Top EFT physical (Top-EFTphysical)
+### Top EFT (Top-EFT)
 
- * The model is defined in [modelFiles/Top-EFTphysical_simple.fr](./modelFiles/Top-EFTphysical_simple.fr)
+ * The model is defined in [modelFiles/Top-EFT.fr](./modelFiles/Top-EFT.fr)
 
 The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $q q \to t \bar{t}$ production. The model lagrangian is:
 
@@ -116,8 +116,8 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
      * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb) : loads the UV simplified model
      * [SMS-stopNLO](./mathematicaNBs/loadModels/SMS-stopNLO.nb): loads the UV simplified model with QCD counter-terms (used for the loop induced DM production)
      * [Top-FormFactors](./mathematicaNBs/loadModels/Top-FormFactors.nb): loads the EFT on-shell model
-     * [Top-EFTphysical](./mathematicaNBs/loadModels/Top-EFTphysical.nb): loads the EFT model from MatchMaker in the physical (on-shell) basis
-     * [Top-EFTphysical_simple](./mathematicaNBs/loadModels/Top-EFTphysical_simple.nb): loads the EFT model in the physical basis after several simplifications
+     * [Top-EFT](./mathematicaNBs/loadModels/Top-EFT.nb): loads the EFT model from MatchMaker in the physical (on-shell) basis
+     * [Top-EFT](./mathematicaNBs/loadModels/Top-EFT.nb): loads the EFT model in the physical basis after several simplifications
      * [Top-EFToffshell](./mathematicaNBs/loadModels/Top-EFToffshell.nb): loads the EFT model in the off-shell model
    ***
    * [amplitudes](./mathematicaNBs/oneLoop): notebooks for computing the amplitudes both at 1-loop (UV models) or "tree level" (EFT models)
@@ -139,7 +139,7 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
 
          * [Top-FormFactors-ttG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttG-loop.nb): calculation of the t-t-g effective coupling within the FormFactors model (assumes on-shell tops), used for matching the **OnShell** UFO model.
 
-         * [Top-EFTphysical_simple-uutt-EFT](./mathematicaNBs/matching/Top-EFTphysical_simple-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation.
+         * [Top-EFT-uutt-EFT](./mathematicaNBs/matching/Top-EFT-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation.
 
          * [numericalLoops_Triangles](./mathematicaNBs/matching/numericalLoops_Triangles.nb): compute numerical values for the triangle loop integrals (for debugging) as well as the high mass limit
     

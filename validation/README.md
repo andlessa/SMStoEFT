@@ -7,7 +7,7 @@ Below we present the validation of the distinct implementations of the SMS model
  1. Top Couplings with Form Factors (Top-FormFactors):
     - OnShell: assumes on-shell tops (valid for $q + q \to \bar{t} + t$ production)
     - OneLoop: assumes off-shell tops for the $t-t-g$ vertex and the 1 loop calculation for the $t-t-g-g$ vertex with on-shell tops and gluons (valid for $g + g \to \bar{t} + t$ production)
-  1. Top EFT physical (Top-EFTphysical): EFT matched model in the physical Basis.
+  1. Top EFT (Top-EFT): EFT matched model in the physical Basis.
 
 
 ### Top Pair Production: q + q > t + t
@@ -17,7 +17,7 @@ Below we present the validation of the distinct implementations of the SMS model
 |-----------|-----------|
 | SMS-stop 1 loop | <img src="../mathematicaNBs/matching/SMS-stop-uutt-loop.png" width="300" height="150"> |
 | FormFactors | <img src="../mathematicaNBs/matching/Top-FormFactors-uutt-loop.png" width="150" height="150"> |
-| EFT | <img src="../mathematicaNBs/matching/Top-EFTphysical_simple-uutt-loop.png" width="300" height="150"> |
+| EFT | <img src="../mathematicaNBs/matching/Top-EFT-uutt-loop.png" width="300" height="150"> |
 
 #### Results
 
@@ -48,7 +48,7 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
 |-----------|-----------|
 | SMS-stop 1 loop | <img src="../mathematicaNBs/matching/SMS-stop-ggtt-loop.png" width="600" height="600"> |
 | FormFactors | <img src="../mathematicaNBs/matching/Top-FormFactors-ggtt-loop.png" width="600" height="150"> |
-| EFT | <img src="../mathematicaNBs/matching/Top-EFTphysical_simple-ggtt-loop.png" width="600" height="150"> |
+| EFT | <img src="../mathematicaNBs/matching/Top-EFT-ggtt-loop.png" width="600" height="150"> |
 
 #### Results
 

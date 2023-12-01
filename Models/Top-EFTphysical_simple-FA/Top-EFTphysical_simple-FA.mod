@@ -6,7 +6,7 @@
 
 
 FR$ModelInformation={
-  ModelName->"Top-EFTphysical_simple",
+  ModelName->"Top-EFT",
   Authors -> {"Andre Lessa"},
   Version -> "1.0",
   Date -> "28.08.2023"};
