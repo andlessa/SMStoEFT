@@ -46,6 +46,6 @@ The SModelS output can be obtained after installing SModelS and running
      ```
      runSModelS.py -f <slhaFolder> -o <outputFolder> -p <parameters file>
      ```
-     where \<slhaFolder\> is the folder containing the SLHA files (see [data](../data/)), \<outputFolder\> is the output folder and \<parameters file\> is the SModelS parameter file (see [scan_parameters_sms_smodels](../scan_parameters_sms_smodels.ini)).
+     where \<slhaFolder\> is the folder containing the SLHA files (see [data](../data/)), \<outputFolder\> is the output folder and \<parameters file\> is the SModelS parameter file (see [smodels_parameters](../smodels_parameters.ini)).
 
 Finally, the [getSModelSData](./getSModelSData.ipynb) can be used to store the results in a single Pandas dataframe.

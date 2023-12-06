@@ -1,104 +1,58 @@
 # SMStoEFT
-Repository for holding code and data for the [Beyond Top EFT paper](https://arxiv.org/abs/2312.00670).
+Holds the code and data for reproducing the results in the [Beyond Top EFT paper](https://arxiv.org/abs/2312.00670).
 
 ## Installation
 
-The following Mathematica packages must be installed (in <home folder>/.Mathematica/Applications)[^1]:
+The following external packages are needed.
+
+### Mathematica
+
+  The Mathematica notebooks assumes that the following packages are installed (in <home folder>/.Mathematica/Applications)[^1]:
 
   * [FeynArts,FormCalc,LoopTools](https://feynarts.de/)
   * [FeynRules](https://feynrules.irmp.ucl.ac.be/)
   * [FeynCalc](https://feyncalc.github.io/)
   * [FeynHelpers](https://github.com/FeynCalc/feynhelpers)
   * [Package-X](https://gitlab.com/mule-tools/package-x) (use this [tarball](./packageX.tar.gz))
-  * [MatchMakerEFT](https://ftae.ugr.es/matchmakereft/)
   * [Matchete](https://gitlab.com/matchete/matchete)
-  * [SModelS](https://smodels.github.io/)
 
-In addition [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/) must also be installed
-as well as [Form](https://launchpad.net/ubuntu/+source/form) and [QGraf](http://cfif.tecnico.ulisboa.pt/~paulo/qgraf.html).
+### Event Generation and Recasting
+
+  In order to reproduce the LHC constraints, the following external packages are needed:
+  
+  * [SModelS](https://smodels.github.io/)
+  * [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/)
+
 Running:
 
 ```
 ./installer.sh
 ```
 
-Should install the relevant (non-Mathematica) packages.
-
-## Models Description
-
-### UV Simplified Model (SMS-stop)
-
- * The model is defined in [modelFiles/SMS-stop.fr](./modelFiles/SMS-stop.fr)
-
-We consider the simple case of a scalar top partner ($\phi_T$), singlet under $SU(2)_L$, and a singlet fermion ($\chi$),
-which is a Dark Matter candidate. In addition we impose a $\mathcal{Z}_2$ symmetry, under which the BSM fields are odd and the SM are even. Under this assumptions the renormalizable (UV) BSM lagrangian is:
-
-```math
-    \mathcal{L}_{SMS} = \bar{\chi}\left( i \gamma^\mu \partial_\mu -\frac{1}{2} m_{\chi} \right) \chi + |D_\mu \phi_T|^2 - m_{T}^2 |\phi_T|^2 - y_{\mathrm{DM}} \phi_T^\dagger \bar{\chi} t_R + G_\mu^A \bar{t} \gamma^\mu T^A \left( P_L \delta_{CT,L} + P_R \delta_{CT,R} \right) t
-```
-
-where the terms $\delta_{CT,a}$ correspond to the counter-terms (in the on-shell renormalization scheme) for the $t-t-g$ coupling (computed using [NLOCT](https://arxiv.org/abs/1406.3030)) needed for the loop calculations and are functions of $m_T,m_{\chi},m_t$. Note that this is the only divergence which needs to be taken care of at 1-loop.
-In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
-
-### Top Couplings with Form Factors (Top-FormFactors)
-
- * The model is defined in [modelFiles/Top-FormFactors.fr](./modelFiles/Top-FormFactors.fr)
+Should install most of the relevant (non-Mathematica) packages.
 
 
-The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $q q \to t \bar{t}$ production.  and corresponds to the lagrangian:
-
-```math
-    \begin{aligned}
-      \mathcal{L}_{FF} = \mathcal{L}_{SMS} + & i A_1\ \bar{t}_R \gamma^\mu D_\mu t_R\\
-     + & \frac{i}{2} A_2\ \bar{t}_R \gamma^\mu \left( D^\nu D_\nu D_\mu + D_\mu D^\nu D_\nu \right)  t_R \\
-     + &A_3\ D^\nu G_{\mu \nu}^A \bar{t}_R T^A \gamma^\mu t_R \\
-     + & G_\mu^A \bar{t} \gamma^\mu T^A \left( P_L \delta_{CT,L} + P_R \delta_{CT,R} \right) t
-    \end{aligned}
-```
-
-The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced. The model
-
-There are two UFO versions of this implementation:
-
- 1. [**On-shell**](./Models/Top-FormFactors-UFO/lorentz_onshell.py): the tops appearing in the vertices are assumed to be on-shell. The $t-t-g-g$ vertex is related to the $t-t-g$ vertex as determined by the effective lagrangian. This version should give the full 1-loop result for $q \bar{q} \to \bar{t} t$ production.
- 2. [**OneLoop**](./Models/Top-FormFactors-UFO/lorentz_oneloop.py): the tops in the $t-t-g$ vertex are assumed to be off-shell and the $t-t-g-g$ vertex is given by the 1-loop diagrams (with on-shell tops ang gluons). This version should fully reproduce the results of the **on-shell** version for $q q \to t \bar{t}$ production. In addition it provides the full 1-loop results for $g g \to t \bar{t}$ production.
- 
-#### 
-
-### Top EFT (Top-EFT)
-
- * The model is defined in [modelFiles/Top-EFT.fr](./modelFiles/Top-EFT.fr)
-
-The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $q q \to t \bar{t}$ production. The model lagrangian is:
-
-```math
-    \mathcal{L}_{ttG} = \mathcal{L}_{SMS} + i A_0\ G_{\mu\nu} \bar{t} \Gamma^{\mu\nu} t + 6 B_0 \left( \bar{t}_R T^A \gamma^\mu t_R \bar{q} T^A \gamma_\mu q \right)
-```
-
-where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The coefficients $A_0$ and $B_0$ are defined as a function of the heavy BSM masses ($m_T,m_{\chi}$) in the EFT limit: $m_T,m_{\chi} \gg m_t,\hat{s}$.
-
-# Additional Information
 
 ## Folders and files
+
+Below we describe the main files and folders stored in this repository. Additional information about each folder can be found in their README files.
 
  * [convertModelToFA.py](./convertModelToFA.py): convert the FeynArts (generic) model file generated by FeynRules so they can be used with FeynCalc
  * [convert2SLHA.py](convert2SLHA.py): reads a LHE event file generate by MG5 and convert it to a SLHA file with cross-section blocks.
  * [fixForCollier.sh](fixForCollier.sh): script for making changes to a MG5 process folder in order for it to be compiled with Collier
- * [run_matchmaker.sh](run_matchmaker.sh): script for running MatchMakerEF over for a (compatible) BSM FeynRules file
  * [runScanMG5.py](runScanMG5.py): python code for running scans over the parameter space and generating events with MadGraph
- * scan_parameters_xx.ini: several parameter files for running 
- scans
+ * [setenv.sh](setenv.sh): bash script for setting the environment variables needed for running runScanMG5.py
+ * [configParserWrapper.py](configParserWrapper.py): auxiliary parser used by runScanMG5.py
+ * scan_parameters_xx.ini: several parameter files for running scans
  * [smodels_parameters.ini](smodels_parameters.ini): parameters for running SModelS
  ---
- * [Refs](./Refs): folder listing several relevant references
+ * [Recast](./Recast): folder to store the recasting codes
  ---
- * [Recast](./Recast): folder to store the recasting code for the [CMS-EXO-20-004](https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-20-004/) monojet search and the [ATLAS-SUSY-2018-042](https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/SUSY-2018-42/) HSCP search
+ * [data](./data): folder storing the required data for reproducing the results
  ---
- * [smodelsOutput](./smodelsOutput): stores the SModelS output for the UV simplified model (SMS-stop)
+ * [plotting](./plotting): folder storing Jupyter notebooks used for plotting
  ---
- * [slhaFiles](./slhaFiles): stores the SLHA files for the simplified model (SMS-stop) to be used as input for SModelS
- ---
- * [Cards](./Cards): stores several process and parameter cards for generating events with MadGraph
+  * [Cards](./Cards): stores several process and parameter cards for generating events with MadGraph
  ---
  * [auxFiles](./auxFiles): contain fixes for the MG5 makefiles required when compiling with Collier as well as the Higgs-G-G example.
  ---
@@ -106,73 +60,15 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
  ---
  * [Models](./Models): stores the UFO and FeynArts output for the models described above
  ---
- * [matchmakerModels](./matchmakerModels): stores models used for matching with MatchMaker
- ---
  * [notebooks](./notebooks): several jupyter notebooks for plotting and analyzing the data
  ---
  * [mathematicaNBs](./mathematicaNBs/): contains several mathematical notebooks for loading the models, calculating diagrams and loop integrals and checking the matching conditions.
-   ***
-   * [loadModels](./mathematicaNBs/loadModels): notebooks for loading the FeynRules models and exporting to FeynArts and UFO formats
-     * [SMS-stop](./mathematicaNBs/loadModels/SMS-stop.nb) : loads the UV simplified model
-     * [SMS-stopNLO](./mathematicaNBs/loadModels/SMS-stopNLO.nb): loads the UV simplified model with QCD counter-terms (used for the loop induced DM production)
-     * [Top-FormFactors](./mathematicaNBs/loadModels/Top-FormFactors.nb): loads the EFT on-shell model
-     * [Top-EFT](./mathematicaNBs/loadModels/Top-EFT.nb): loads the EFT model from MatchMaker in the physical (on-shell) basis
-     * [Top-EFT](./mathematicaNBs/loadModels/Top-EFT.nb): loads the EFT model in the physical basis after several simplifications
-     * [Top-EFToffshell](./mathematicaNBs/loadModels/Top-EFToffshell.nb): loads the EFT model in the off-shell model
-   ***
-   * [amplitudes](./mathematicaNBs/oneLoop): notebooks for computing the amplitudes both at 1-loop (UV models) or "tree level" (EFT models)
-        * [TopEFTonshell-effectiveCouplings](./mathematicaNBs/amplitudes/TopEFTonshell-effectiveCouplings.nb): computes the amplitudes for qq > ttbar using the on-shell EFT model
-        * [SMS-oneLoop-diagrams](./mathematicaNBs/amplitudes/SMS-oneLoop-diagrams.nb): all 1-loop diagrams relevant for top EFT
-        * [diagrams-SMEFT-stop](./mathematicaNBs/amplitudes/diagrams-SMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
-        * [diagrams-DMEFT-stop](./mathematicaNBs/amplitudes/diagrams-DMEFT-stop.nb): all 1-loop diagrams relevant for pp > ttbar
-    ***
-   * [nlo](./mathematicaNBs/nlo): notebooks for automated NLO calculations
-        * [SMS-stop-BSM-CTs.nb](./mathematicaNBs/nlo/SMS-stop-BSM-CTs.nb): uses NLOCT to compute the BSM counter-terms for the top couplings and self energy
-        * [SMS-stop-NLO.nb](./mathematicaNBs/nlo/SMS-stop-NLO.nb): creates a NLO version of the model (*only seems to work with loop-induced processes*)
-    ***
-    * [matching](./mathematicaNBs/matching): notebooks for computing and checking the matching between the UV and EFT models.
-    
-      $q + q \to \bar{t} + t$ :
-         * [SMS-stop-uutt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (u+u to top+top) form factors using the UV model as well as the EFT limit, used for matching the **OnShell** UFO model.
-
-         * [SMS-stop-ttG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttG-loop.nb): calculation of the full 1-loop t-t-g effective coupling assuming off-shell tops and gluon (used for the **OneLoop** UFO model).
-
-         * [Top-FormFactors-ttG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttG-loop.nb): calculation of the t-t-g effective coupling within the FormFactors model (assumes on-shell tops), used for matching the **OnShell** UFO model.
-
-         * [Top-EFT-uutt-EFT](./mathematicaNBs/matching/Top-EFT-uutt-EFT.nb): calculation of the tree-level amplitude (u+u to top+top) in the EFT limit and comparison to the results from the full 1-loop calculation.
-
-         * [numericalLoops_Triangles](./mathematicaNBs/matching/numericalLoops_Triangles.nb): compute numerical values for the triangle loop integrals (for debugging) as well as the high mass limit
-    
-      $g + g \to \bar{t} + t$ :
-         * [SMS-stop-ggtt-loop](./mathematicaNBs/matching/SMS-stop-uutt-loop.nb): calculation of the full 1-loop amplitude (g+g to top+top) form factors using the UV model as well as the EFT limit.
-
-         * [SMS-stop-ttGG-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGG-loop.nb): calculation of the full 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
-
-         * [SMS-stop-ttGGSelf-loop.nb](./mathematicaNBs/matching/SMS-stop-ttGGSelf-loop.nb): calculation of the self-energy diagrams to the 1-loop t-t-g-g effective coupling assuming on-shell tops and gluons (used for the **OneLoop** UFO model).
-
-         * [Top-FormFactors-ttGG-loop.nb](./mathematicaNBs/matching/Top-FormFactors-ttGG-loop.nb): calculation of the t-t-g-g effective coupling within the FormFactors model (assumes this vertex is fixed by the t-t-g matching).
-
-         * [numericalLoops_Boxes](./mathematicaNBs/matching/numericalLoops_Boxes.nb): compute numerical values for the box loop integrals (for debugging) as well as the high mass limit
-
-         * [testSignFFV.nb](./mathematicaNBs/matching/testSignFFV.nb): compares the amplitude generated with FeynCalc to the for the effective top-top-gluon vertex to the vertex generated by FeynRules for the UFO format. It is used to make sure that the ordering of the particles in the FeynCalc process are set consistently with the ones assumed by the UFO format
-
-         * [testSignFFVV.nb](./mathematicaNBs/matching/testSignFFV.nb): compares the amplitude generated with FeynCalc to the for the effective top-top-gluon-gluon vertex to the vertex generated by FeynRules for the UFO format. It is used to make sure that the ordering of the particles in the FeynCalc process are set consistently with the ones assumed by the UFO format
-
-
-      *EFT matching* :
-         * [matchMakerReader](./mathematicaNBs/matching/matchMakerReader.nb): reads the MatchMaker output
-
-         * [SMS-stop-Matchete](./mathematicaNBs/matching/SMS-stop-Matchete.nb): matching operators using Matchete.
-
-         
-
-
+ 
 ## Form Factors
 
 ### Computing Form Factors
 
 The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (through FeynHelpers).
-An example of the calculation of the Higgs-Gluon-Gluon form factor can be found [here](./auxFiles/Examples/feyncalc-HGG.nb).
 
 ### Creating Models with Form Factors
 
