@@ -60,7 +60,6 @@ def getDistributions(filename):
 
     return dists
 
-
 def applyATLAScuts2(event,etamax=2.0,pTmin=355.0):
     
     import fastjet
@@ -297,8 +296,6 @@ def getATLASdistributions(filename,etamax=2.0,pTmin=355.0,getCutFlow=False):
         dists['cutFlow'] = cutFlow
 
     return dists
-
-
 
 def getInfo(f,labelsDict=None):
 
