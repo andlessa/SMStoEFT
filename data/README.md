@@ -2,8 +2,9 @@
 
 Monte Carlo data (LHE events) and SLHA files used for [recasting](../Recast) and [plotting](../plotting/).
 The data can be downloaded from [Cern Box](https://cernbox.cern.ch/s/B63F7DJu1rbRbxT).
+A description of the data files is given below.
 
-## Folders and files
+## Files
 
 * [gg2tt_formFactors_scan.tar.gz](./gg2tt_formFactors_scan.tar.gz): LHE events for $g g \to t \bar{t}$ using the 1-loop form factors for several values of BSM masses.
 
