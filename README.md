@@ -1,5 +1,5 @@
 # SMStoEFT
-Repository for holding code and data for the SMS -> EFT project
+Repository for holding code and data for the [Beyond Top EFT paper](https://arxiv.org/abs/2312.00670).
 
 ## Installation
 
