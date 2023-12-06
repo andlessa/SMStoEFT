@@ -21,7 +21,7 @@ The following external packages are needed.
   In order to reproduce the LHC constraints, the following external packages are needed:
   
   * [SModelS](https://smodels.github.io/)
-  * [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/)
+  * [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/), [Pythia8](https://pythia.org/) and [Delphes](https://cp3.irmp.ucl.ac.be/projects/delphes)
 
 Running:
 
@@ -50,25 +50,25 @@ Below we describe the main files and folders stored in this repository. Addition
  ---
  * [data](./data): folder storing the required data for reproducing the results
  ---
- * [plotting](./plotting): folder storing Jupyter notebooks used for plotting
+ * [plotting](./plotting): folder storing Jupyter notebooks and code used for plotting
  ---
   * [Cards](./Cards): stores several process and parameter cards for generating events with MadGraph
  ---
- * [auxFiles](./auxFiles): contain fixes for the MG5 makefiles required when compiling with Collier as well as the Higgs-G-G example.
+ * [auxFiles](./auxFiles): contain fixes for the MG5 makefiles required when compiling with Collier
  ---
  * [modelFiles](./modelFiles): stores the FeynRules files for the models described above
  ---
  * [Models](./Models): stores the UFO and FeynArts output for the models described above
  ---
- * [notebooks](./notebooks): several jupyter notebooks for plotting and analyzing the data
- ---
  * [mathematicaNBs](./mathematicaNBs/): contains several mathematical notebooks for loading the models, calculating diagrams and loop integrals and checking the matching conditions.
  
 ## Form Factors
 
+The 1-loop form factors UFO model can be found [here](./Models/Top-FormFactorsOneLoop-UFO/).
+
 ### Computing Form Factors
 
-The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (through FeynHelpers).
+The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (see [formFactors](./mathematicaNBs/formFactors/)).
 
 ### Creating Models with Form Factors
 
@@ -78,7 +78,6 @@ These instructions are based on:
  * [MadGraph wiki](https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/FormFactors)
  * [MadGraph Tutorial](./Refs/Hands-onStartToMG.pdf)
  
-
    
 
 [^1]: Make sure to include the following lines to <home folder>/Mathematica/Kernel/init.m:
