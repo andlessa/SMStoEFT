@@ -4,10 +4,7 @@ Holds the code and data for reproducing the results in the [Beyond Top EFT paper
 ## Installation
 
 The following external packages are needed.
-
-### Mathematica
-
-  The Mathematica notebooks assumes that the following packages are installed (in <home folder>/.Mathematica/Applications)[^1]:
+The Mathematica notebooks assumes that the following packages are installed (in <home folder>/.Mathematica/Applications)[^1]:
 
   * [FeynArts,FormCalc,LoopTools](https://feynarts.de/)
   * [FeynRules](https://feynrules.irmp.ucl.ac.be/)
@@ -16,13 +13,11 @@ The following external packages are needed.
   * [Package-X](https://gitlab.com/mule-tools/package-x) (use this [tarball](./packageX.tar.gz))
   * [Matchete](https://gitlab.com/matchete/matchete)
 
-### Event Generation and Recasting
-
-  In order to reproduce the LHC constraints, the following external packages are needed:
+Furthermore, in order to reproduce the LHC constraints, the following external packages are needed:
   
   * [SModelS](https://smodels.github.io/)
   * [MadGraph5](https://launchpad.net/mg5amcnlo) with [Collier](https://collier.hepforge.org/), [Pythia8](https://pythia.org/) and [Delphes](https://cp3.irmp.ucl.ac.be/projects/delphes)
-
+  
 Running:
 
 ```
@@ -31,6 +26,27 @@ Running:
 
 Should install most of the relevant (non-Mathematica) packages.
 
+
+## Form Factors
+
+The 1-loop form factors UFO model can be found [here](./Models/Top-FormFactorsOneLoop-UFO/).
+
+### Computing Form Factors
+
+The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (see [formFactors](./mathematicaNBs/formFactors/)).
+
+### Creating Models with Form Factors
+
+Instruction for implementing form factors within MadGraph can be found [here](./InstructionsFormFactors.md). 
+These instructions are based on:
+
+ * [MadGraph wiki](https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/FormFactors)
+ * [MadGraph Tutorial](./Refs/Hands-onStartToMG.pdf)
+
+ 
+## Recasting and Limits
+
+Details about recasting and the calculation of limits can be found in the [Recast](./Recast) folder.
 
 
 ## Folders and files
@@ -61,22 +77,6 @@ Below we describe the main files and folders stored in this repository. Addition
  * [Models](./Models): stores the UFO and FeynArts output for the models described above
  ---
  * [mathematicaNBs](./mathematicaNBs/): contains several mathematical notebooks for loading the models, calculating diagrams and loop integrals and checking the matching conditions.
- 
-## Form Factors
-
-The 1-loop form factors UFO model can be found [here](./Models/Top-FormFactorsOneLoop-UFO/).
-
-### Computing Form Factors
-
-The calculation of form factors can be done using FeynArts, FeynCalc and Package-X (see [formFactors](./mathematicaNBs/formFactors/)).
-
-### Creating Models with Form Factors
-
-Instruction for implementing form factors within MadGraph can be found [here](./InstructionsFormFactors.md). 
-These instructions are based on:
-
- * [MadGraph wiki](https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/FormFactors)
- * [MadGraph Tutorial](./Refs/Hands-onStartToMG.pdf)
  
    
 

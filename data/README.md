@@ -1,7 +1,7 @@
 # Data
 
 Monte Carlo data (LHE events) and SLHA files used for [recasting](../Recast) and [plotting](../plotting/).
-The data can be downloaded from [Cern Box](https://cernbox.cern.ch/s/B63F7DJu1rbRbxT).
+The data can be downloaded from [Cern Box](https://cernbox.cern.ch/s/B63F7DJu1rbRbxT) or as individual files in Zenodo (10.5281/zenodo.10277973)
 A description of the data files is given below.
 
 ## Files
