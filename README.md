@@ -72,9 +72,9 @@ Below we describe the main files and folders stored in this repository. Addition
  ---
  * [auxFiles](./auxFiles): contain fixes for the MG5 makefiles required when compiling with Collier
  ---
- * [modelFiles](./modelFiles): stores the FeynRules files for the models described above
+ * [modelFiles](./modelFiles): stores the FeynRules files for the models
  ---
- * [Models](./Models): stores the UFO and FeynArts output for the models described above
+ * [Models](./Models): stores the UFO and FeynArts output for the models
  ---
  * [mathematicaNBs](./mathematicaNBs/): contains several mathematical notebooks for loading the models, calculating diagrams and loop integrals and checking the matching conditions.
  

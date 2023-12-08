@@ -2,27 +2,6 @@
 
 Hold the FeynRules files for distinct model implementations
 
-## Files
-
-
-* [DiagonalCKM](./DiagonalCKM.rst): restriction file for a diagonal CKM matrix
-
-* [LorentzTadpole](./LorentzTadpole.gen): generic model file for FeynArts needed for NLO calculations
-
-* [Massless](./Massless.rst): restriction file for massless quarks
-
-* [Massless](./Massless.rst): restriction file for massless quarks
-
-* [SM](./SM.fr): full SM model file
-
-* [SMQCD](./SMQCD.fr): simplified SM model file containing only QCD and quarks
-
-* [SMS-stop](./SMS-stop.fr): UV BSM model with a scalar top partner and a fermionic DM candidate
-
-* [Top-EFT](./Top-EFT.fr): model file with the relevant EFT operators and the coefficient values.
-
-* [Top-FormFactors](./Top-EFT.fr): model file with relevant counter-terms and some dim6 operators. This model is supposed to be used to generate a basic UFO model, which then can be modified to include form factors.
-
 
 ## Models Description
 
@@ -56,14 +35,9 @@ The model includes the dim-6 EFT operators in the *off-shell* (Green) basis rele
     \end{aligned}
 ```
 
-The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced. The model
+The operator coefficients ($A_i$) are supposed to be replaced by form factors, so the full one loop calculation is reproduced.
+The UFO version of this implementation can be found [here](./Models/Top-FormFactors-UFO/lorentz_oneloop.py), where the tops in the $t-t-g$ vertex are assumed to be off-shell and the $t-t-g-g$ vertex is given by the 1-loop diagrams (with on-shell tops ang gluons). It provides the full 1-loop results for $q \bar{q} \to t \bar{t}$ and  $g g \to t \bar{t}$ production.
 
-There are two UFO versions of this implementation:
-
- 1. [**On-shell**](./Models/Top-FormFactors-UFO/lorentz_onshell.py): the tops appearing in the vertices are assumed to be on-shell. The $t-t-g-g$ vertex is related to the $t-t-g$ vertex as determined by the effective lagrangian. This version should give the full 1-loop result for $q \bar{q} \to \bar{t} t$ production.
- 2. [**OneLoop**](./Models/Top-FormFactors-UFO/lorentz_oneloop.py): the tops in the $t-t-g$ vertex are assumed to be off-shell and the $t-t-g-g$ vertex is given by the 1-loop diagrams (with on-shell tops ang gluons). This version should fully reproduce the results of the **on-shell** version for $q q \to t \bar{t}$ production. In addition it provides the full 1-loop results for $g g \to t \bar{t}$ production.
- 
-#### 
 
 ### Top EFT (Top-EFT)
 
@@ -76,3 +50,25 @@ The model includes the dim-6 EFT operators in the *physical* (on-shell) basis re
 ```
 
 where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The coefficients $A_0$ and $B_0$ are defined as a function of the heavy BSM masses ($m_T,m_{\chi}$) in the EFT limit: $m_T,m_{\chi} \gg m_t,\hat{s}$.
+
+## Files
+
+* [DiagonalCKM](./DiagonalCKM.rst): restriction file for a diagonal CKM matrix
+
+* [LorentzTadpole](./LorentzTadpole.gen): generic model file for FeynArts needed for NLO calculations
+
+* [Massless](./Massless.rst): restriction file for massless quarks
+
+* [Massless](./Massless.rst): restriction file for massless quarks
+
+* [SM](./SM.fr): full SM model file
+
+* [SMQCD](./SMQCD.fr): simplified SM model file containing only QCD and quarks
+
+* [SMS-stop](./SMS-stop.fr): UV BSM model with a scalar top partner and a fermionic DM candidate
+
+* [Top-EFT](./Top-EFT.fr): model file with the relevant EFT operators and the coefficient values.
+
+* [Top-FormFactors](./Top-EFT.fr): model file with relevant counter-terms and some dim6 operators. This model is supposed to be used to generate a basic UFO model, which then can be modified to include form factors.
+
+
