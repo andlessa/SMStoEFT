@@ -34,14 +34,14 @@ fi
 
 cd $homeDIR
 
-#madgraph="MG5_aMC_v3.4.2.tar.gz"
-#URL=https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/$madgraph
-madgraph="MG5_aMC_v3.4.2_fix.tar.gz"
+madgraph="MG5_aMC_v3.4.2.tar.gz"
+URL=https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/$madgraph
+#madgraph="MG5_aMC_v3.4.2_fix.tar.gz"
 echo -n "Install MadGraph (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 	mkdir MG5;
-	#echo "[installer] getting MadGraph5"; wget $URL 2>/dev/null || curl -O $URL; 
+	echo "[installer] getting MadGraph5"; wget $URL 2>/dev/null || curl -O $URL; 
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
@@ -60,30 +60,6 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] getting SModelS"; git clone git@github.com:SModelS/smodels.git smodels;
 	echo "[installer] Done"
-fi
-
-qgraf="qgraf-3.6.6.tgz"
-URL=http://qgraf.tecnico.ulisboa.pt/v3.6/$qgraf
-echo -n "Install MatchMaker (y/n)? "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	path_to_executable=$(which qgraf)
-	if [ -x "$path_to_executable" ] ; then
-		echo "QGraf found at $path_to_executable"
-	else
-		echo "[installer] getting QGraf"; wget --user anonymous --password anonymous $URL 2>/dev/null || curl -O $URL; 
-		mkdir qgraf_tmp
-		mv $qgraf qgraf_tmp
-		cd qgraf_tmp		
-		tar -xzf $qgraf
-        mkdir fmodules
-		gfortran -o qgraf -Os -J fmodules qgraf-3.6.6.f08
-		mv qgraf ~/.local/bin/
-	fi
-	cd $homeDIR
-	rm -rf qgraf_tmp
-	pip3 install --user matchmakereft
-	echo "[installer] MatchMaker has been installed. Run it once (>matchmakereft) to set the path to FeynRules."
 fi
 
 
