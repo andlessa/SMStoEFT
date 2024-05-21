@@ -121,7 +121,7 @@ def getChi2(yDM,signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
     return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
             'yDM' : yDM, 'deltaChi2' : chi20-chi2min}
 
-def computeChi2s(inputFile,outputFile,full=False,deltas=0.0):
+def computeChi2s(inputFile,outputFile,full=True,deltas=0.0):
 
     # ### Load ATLAS data and BG
     xsecsObs,sm,covMatrix = read_ATLASdata()
@@ -154,6 +154,7 @@ def computeChi2s(inputFile,outputFile,full=False,deltas=0.0):
 
     deltaChi2list = []
     chi2minlist = []
+    clsList = []
     for ipt,pt in recastData.iterrows():
 
         progressbar.update(ipt)
@@ -175,14 +176,17 @@ def computeChi2s(inputFile,outputFile,full=False,deltas=0.0):
             chi2min = resDict['chi2min']
 
             # Expected
-            resDictExp = getChi2(yDM,signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
-            deltaChi2Exp = resDict['deltaChi2'] 
-            chi2minExp = resDict['chi2min']
-                   
+            # resDictExp = getChi2(yDM,signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
+            # deltaChi2Exp = resDict['deltaChi2'] 
+            # chi2minExp = resDict['chi2min']            
+            # Store result
+            deltaChi2list.append(deltaChi2)
+            chi2minlist.append(chi2min)
+
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
-            from simplifiedLikelihoods import Data,UpperLimitComputer,LikelihoodComputer
+            from simplifiedLikelihoods import Data,UpperLimitComputer
             ulComp = UpperLimitComputer()
 
             # ### Get number of observed and expected (BG) events
@@ -194,22 +198,18 @@ def computeChi2s(inputFile,outputFile,full=False,deltas=0.0):
             data = Data(observed=nobs, backgrounds=nbg, 
                         covariance=cov, 
                         nsignal=ns,deltas_rel=deltas)
-            ul = ulComp.getUpperLimitOnMu(data)
-            yDM95 = np.sqrt(ul)
-            ulExp = ulComp.getUpperLimitOnMu(data,expected=True)
-            yDM95exp = np.sqrt(ulExp)
-            # Signal for 95% C.L. limit:
-            data95 = Data(observed=nobs, backgrounds=nbg, 
-                          covariance=cov, 
-                          nsignal=ns*ul,deltas_rel=deltas)
-            computer = LikelihoodComputer(data95)
-            deltaChi95 = computer.chi2()            
-        # Store result
-        deltaChi2list.append(deltaChi2)
-        chi2minlist.append(chi2min)
+            CLs = ulComp.computeCLs(data)
+            clsList.append(CLs)
 
-    recastData['deltaChi2'] = deltaChi2list
-    recastData['chi2min'] = chi2minlist
+    if not full:
+        recastData['deltaChi2'] = deltaChi2list
+        recastData['chi2min'] = chi2minlist
+        recastData['CLs'] = [None]*len(deltaChi2list)
+    else:
+        recastData['deltaChi2'] =  [None]*len(clsList)
+        recastData['chi2min'] = [None]*len(clsList)
+        recastData['CLs'] = clsList
+
     progressbar.finish()
     recastData.to_pickle(outputFile)
 

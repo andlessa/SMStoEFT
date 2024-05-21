@@ -106,7 +106,7 @@ class Data:
         """
         if self.nsignal is None:
             return True
-        return len(self.nsignal[self.nsignal > 0.0]) == 0
+        return sum(abs(self.nsignal)) == 0
 
     def var_s(self, nsig=None):
         """
