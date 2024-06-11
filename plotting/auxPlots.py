@@ -302,7 +302,8 @@ def getInfo(f,labelsDict=None):
 
     if labelsDict is None:
         labelsDict = {'Top-FormFactorsOneLoop-UFO' : '1-loop', 'Top-EFT-UFO' : 'EFT', 
-              'SMS-stop-UFO' : 'SM', 'SMS-stop-NLO_SMQCD-UFO' : 'SM',
+                      'Top-EFTphysical_simple-UFO' : 'EFT',
+                      'SMS-stop-UFO' : 'SM', 'SMS-stop-NLO_SMQCD-UFO' : 'SM',
               'g g > t t~' : r'$g g \to \bar{t} t$', 'g g > t~ t' : r'$g g \to \bar{t} t$',
               'q q > t t~' : r'$q q \to \bar{t} t$', 'q q > t~ t' : r'$q q \to \bar{t} t$',
               'p p > t t~' : r'$p p \to \bar{t} t$', 'p p > t~ t' : r'$p p \to \bar{t} t$'
