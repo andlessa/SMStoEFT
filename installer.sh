@@ -30,6 +30,16 @@ if test $PKG_OK = "0" ; then
   echo "form not found. Install it with sudo apt-get install form."
   exit
 fi
+PKG_OK=$(dpkg-query -W -f='${Status}' sqlite3 2>/dev/null | grep -c "ok installed")
+if test $PKG_OK = "0" ; then
+  echo "sqlite3 not found. Install it with sudo apt-get install sqlite3."
+  exit
+fi
+PKG_OK=$(dpkg-query -W -f='${Status}' cython3 2>/dev/null | grep -c "ok installed")
+if test $PKG_OK = "0" ; then
+  echo "cython3 not found. Install it with sudo apt-get install cython3."
+  exit
+fi
 
 
 cd $homeDIR
@@ -45,7 +55,7 @@ if echo "$answer" | grep -iq "^y" ;then
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
-        echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall collier\ninstall contur\nexit\n" > mad_install.txt;
+        echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall collier\ninstall rivet\nexit\n" > mad_install.txt;
 	./mg5_aMC -f mad_install.txt
 
 	rm mad_install.txt;
@@ -61,6 +71,33 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] getting SModelS"; git clone git@github.com:SModelS/smodels.git smodels;
 	echo "[installer] Done"
 fi
+
+
+echo -n "Install Rivet (y/n)? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "[installer] Installing Contur using rivet-bootstrap";
+	mkdir rivet
+	INSTALL_PREFIX=$homeDIR/rivet  ./rivet-bootstrap
+fi
+
+echo -n "Install Contur (y/n)? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	VERSION=2.5.1
+	#echo "[installer] getting Contur version "$VERSION;
+	echo "[installer] Installing Contur using pip3";
+	pip3 install --user contur --break-system-packages;
+#        wget "https://gitlab.com/hepcedar/contur/-/archive/contur-$VERSION/contur-contur-$VERSION.tar.gz";
+#        mkdir contur;
+#        tar -zxf "contur-contur-$VERSION.tar.gz" -C contur --strip-components 1;
+#        cd contur;
+#        echo "[installer] installing Contur"
+#        python3 ./setup.py install --user;
+#        cd $homeDIR;
+#        rm "contur-contur-$VERSION.tar.gz";
+fi
+
 
 qgraf="qgraf-3.6.6.tgz"
 URL=http://qgraf.tecnico.ulisboa.pt/v3.6/$qgraf
