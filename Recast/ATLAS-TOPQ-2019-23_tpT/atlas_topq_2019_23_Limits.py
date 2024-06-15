@@ -42,6 +42,7 @@ def read_ATLASdata(dataDir='./data'):
         sysTot = np.sqrt(sysTot2)*eval(item[3])
         systematic_error.append(sysTot)
     systematic_error = np.array(systematic_error)
+    print(np.diag(systematic_error))
 
 
     atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))

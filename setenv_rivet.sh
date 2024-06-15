@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 currentDIR="$( pwd )"
 delphesDIR=$currentDIR/MG5/Delphes
@@ -22,11 +22,13 @@ export PYTHONPATH=$lhapdfDIR/local/lib/python3.12/dist-packages:$rivetDIR/lib/py
 export CONTUR_USER_DIR=$currentDIR/conturOutput
 #source ~/.local/bin/conturenv.sh
 #source $currentDIR/conturOutput/analysis-list
-export RIVET_ANALYSIS_PATH=$homeDIR/contur/data/Rivet:$homeDIR/conturOutput
-export RIVET_DATA_PATH=$homeDIR/contur/data/Rivet:$homeDIR/contur/data/Theory
-export CONTUR_DATA_PATH=$homeDIR/contur
-export CONTUR_USER_DIR=$homeDIR/conturOutput
-export PYTHONPATH=$homeDIR/contur:$PYTHONPATH
-export PATH=$homeDIR/contur/bin:$PATH
-source $homeDIR/conturOutput/analysis-list
+export RIVET_ANALYSIS_PATH=$currentDIR/contur/data/Rivet:$currentDIR/conturOutput
+export RIVET_DATA_PATH=$currentDIR/contur/data/Rivet:$currentDIR/contur/data/Theory
+export CONTUR_DATA_PATH=$currentDIR/contur
+export CONTUR_USER_DIR=$currentDIR/conturOutput
+export PYTHONPATH=$currentDIR/contur:$PYTHONPATH
+export PATH=$currentDIR/contur/bin:$PATH
+if [ -f $currentDIR/conturOutput/analysis-list ]; then
+  source $currentDIR/conturOutput/analysis-list
+fi
 
