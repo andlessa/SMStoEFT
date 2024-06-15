@@ -81,7 +81,8 @@ echo -n "Install Rivet (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] Installing Contur using myrivet-bootstrap";
-	mkdir rivet
+	test -d rivet || mkdir rivet
+	test -d tools-build || mkdir tools-build
 	./myrivet-bootstrap
 fi
 
