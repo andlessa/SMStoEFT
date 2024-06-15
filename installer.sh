@@ -40,7 +40,11 @@ if test $PKG_OK = "0" ; then
   echo "cython3 not found. Install it with sudo apt-get install cython3."
   exit
 fi
-
+PKG_OK=$(dpkg-query -W -f='${Status}' autoconf --version 2>/dev/null | grep -c "ok installed")
+if test $PKG_OK = "0" ; then
+  echo "autoconf not found. Install it with sudo apt-get install autotools-dev."
+  exit
+fi
 
 cd $homeDIR
 
@@ -76,26 +80,31 @@ fi
 echo -n "Install Rivet (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	echo "[installer] Installing Contur using rivet-bootstrap";
+	echo "[installer] Installing Contur using myrivet-bootstrap";
 	mkdir rivet
-	INSTALL_PREFIX=$homeDIR/rivet  ./rivet-bootstrap
+	./myrivet-bootstrap
 fi
 
 echo -n "Install Contur (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	VERSION=2.5.1
-	#echo "[installer] getting Contur version "$VERSION;
-	echo "[installer] Installing Contur using pip3";
-	pip3 install --user contur --break-system-packages;
-#        wget "https://gitlab.com/hepcedar/contur/-/archive/contur-$VERSION/contur-contur-$VERSION.tar.gz";
-#        mkdir contur;
-#        tar -zxf "contur-contur-$VERSION.tar.gz" -C contur --strip-components 1;
-#        cd contur;
-#        echo "[installer] installing Contur"
-#        python3 ./setup.py install --user;
-#        cd $homeDIR;
-#        rm "contur-contur-$VERSION.tar.gz";
+        cd $homeDIR
+        source setenv_rivet.sh
+        echo "[installer] Getting Contur from main branch";
+        wget "https://gitlab.com/hepcedar/contur/-/archive/main/contur-main.tar.gz";
+        mkdir contur;
+        tar -zxf "contur-main.tar.gz" -C contur --strip-components 1;
+        cd contur;
+        echo "[installer] installing Contur"
+        make;
+        cd $homeDIR;
+        rm "contur-main.tar.gz";
+	#echo "[installer] Installing Contur using pip3";
+	#pip3 install --user contur --break-system-packages;
+        #source ~/.local/bin/conturenv.sh
+        #cd $CONTUR_DATA_PATH
+        #make;
+        cd $homeDIR
 fi
 
 
