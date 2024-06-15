@@ -15,7 +15,7 @@ test -z "$INSTALL_FASTJET" && INSTALL_FASTJET="1"
 test -z "$INSTALL_FJCONTRIB" && INSTALL_FJCONTRIB="1"
 test -z "$INSTALL_HDF5" && INSTALL_HDF5="1"
 test -z "$INSTALL_HIGHFIVE" && INSTALL_HIGHFIVE="1"
-test -z "$INSTALL_YODA" && INSTALL_YODA="1"
+test -z "$INSTALL_YODA" && INSTALL_YODA="0"
 test -z "$INSTALL_RIVET" && INSTALL_RIVET="1"
 
 test -z "$RIVET_VERSION" && RIVET_VERSION="4.0.0"
@@ -50,6 +50,15 @@ test -z "$RIVET_CONFFLAGS" && RIVET_CONFFLAGS="" #--enable-unvalidated
 test -z "$YODA_CONFFLAGS" && YODA_CONFFLAGS=""
 
 
+echo "----------------------------------------------------------------------------------------------------------------"
+echo "IF CYTHON IS INSTALLED, BUT CAN NOT BE FOUND, TRY ADDING UP THE CYTHON PACKAGE FOLDER TO THE PYTHON PATH, e.g.:"
+echo
+echo
+echo "   export PYTHONPATH="/home/lessa/.local/lib/python3.12/site-packages":$PYTHONPATH   "
+echo
+echo
+echo "----------------------------------------------------------------------------------------------------------------" 
+export PYTHONPATH="/home/lessa/.local/lib/python3.12/site-packages":$PYTHONPATH
 ###############
 
 if [[ "$USE_CVMFS" -eq "1" ]]; then
@@ -282,6 +291,23 @@ if [[ "$INSTALL_YODA" = 1 ]]; then
     echo
 fi
 
+
+## Following block for dev mode only -- non-developers should ignore
+if [[ "$INSTALL_YODADEV" = 1 ]]; then
+    ## Install dev YODA
+    cd $BUILD_PREFIX
+    echo "INSTALLING YODA $YODA_VERSION"
+    test -d yoda || git clone https://gitlab.com/hepcedar/yoda.git yoda
+    cd yoda
+    git checkout $YODA_BRANCH
+    autoreconf -i
+    conf $YODA_CONFFLAGS
+    mmi
+    cp yodaenv.sh $INSTALL_PREFIX/yodaenv.sh
+    YODAPATH=$INSTALL_PREFIX
+    echo
+fi
+
 ## Install Rivet from tarball (dev mode is below)
 if [[ "$INSTALL_RIVET" = 1 ]]; then
     echo "INSTALLING RIVET $RIVET_VERSION"
@@ -297,24 +323,6 @@ if [[ "$INSTALL_RIVET" = 1 ]]; then
     echo
 fi
 
-
-## Following block for dev mode only -- non-developers should ignore
-if [[ "$INSTALL_YODADEV" = 1 ]]; then
-    ## Install dev YODA
-    cd $BUILD_PREFIX
-    echo "INSTALLING YODA $YODA_VERSION"
-    test -d yoda || git clone https://gitlab.com/hepcedar/yoda.git yoda
-    cd yoda
-    git pull
-    git fetch
-    git checkout $YODA_BRANCH
-    autoreconf -i
-    conf $YODA_CONFFLAGS
-    mmi
-    cp yodaenv.sh $INSTALL_PREFIX/yodaenv.sh
-    YODAPATH=$INSTALL_PREFIX
-    echo
-fi
 
 ## Following block for dev mode only -- non-developers should ignore
 if [[ "$INSTALL_RIVETDEV" = 1 ]]; then
