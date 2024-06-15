@@ -4,9 +4,6 @@ currentDIR="$( pwd )"
 delphesDIR=$currentDIR/MG5/Delphes
 pythiaDIR=$currentDIR/MG5/HEPTools/pythia8
 lhapdfDIR=$currentDIR/MG5/HEPTools/lhapdf6_py3
-hepmcDIR=$currentDIR/MG5/HEPTools/hepmc
-fastjetDIR=$currentDIR/MG5/HEPTools/fastjet
-yodaDIR=$currentDIR/MG5/HEPTools/yoda
 rivetDIR=$currentDIR/rivet
 conturDIR=$currentDIR/contur
 #Make sure pythia can be found by Delphes
@@ -27,7 +24,7 @@ export RIVET_DATA_PATH=$currentDIR/contur/data/Rivet:$currentDIR/contur/data/The
 export CONTUR_DATA_PATH=$currentDIR/contur
 export CONTUR_USER_DIR=$currentDIR/conturOutput
 export PYTHONPATH=$currentDIR/contur:$PYTHONPATH
-export PATH=$currentDIR/contur/bin:$PATH
+export PATH=$rivetDIR/bin:$currentDIR/contur/bin:$PATH
 if [ -f $currentDIR/conturOutput/analysis-list ]; then
   source $currentDIR/conturOutput/analysis-list
 fi
