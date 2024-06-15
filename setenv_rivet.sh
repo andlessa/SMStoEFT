@@ -24,8 +24,8 @@ export RIVET_DATA_PATH=$currentDIR/contur/data/Rivet:$currentDIR/contur/data/The
 export CONTUR_DATA_PATH=$currentDIR/contur
 export CONTUR_USER_DIR=$currentDIR/conturOutput
 export PYTHONPATH=$currentDIR/contur:$PYTHONPATH
-export PATH=$rivetDIR/bin:$currentDIR/contur/bin:$PATH
-if [ -f $currentDIR/conturOutput/analysis-list ]; then
-  source $currentDIR/conturOutput/analysis-list
-fi
+export PATH=$PATH:$rivetDIR/bin:$currentDIR/contur/bin
+#if [ -f $currentDIR/conturOutput/analysis-list ]; then
+#  source $currentDIR/conturOutput/analysis-list
+#fi
 

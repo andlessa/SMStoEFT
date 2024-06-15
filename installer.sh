@@ -91,15 +91,16 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
         cd $homeDIR
         source setenv_rivet.sh
-        echo "[installer] Getting Contur from main branch";
-        wget "https://gitlab.com/hepcedar/contur/-/archive/main/contur-main.tar.gz";
+        test ! -d contur || rm -rf contur;
         mkdir contur;
+        echo "[installer] Getting Contur from main branch";
+        test -f contur-main.tar.gz || wget "https://gitlab.com/hepcedar/contur/-/archive/main/contur-main.tar.gz";
         tar -zxf "contur-main.tar.gz" -C contur --strip-components 1;
         cd contur;
         echo "[installer] installing Contur"
         make;
+        test ! -f contur-main.tar.gz || rm contur-main.tar.gz;
         cd $homeDIR;
-        rm "contur-main.tar.gz";
 	#echo "[installer] Installing Contur using pip3";
 	#pip3 install --user contur --break-system-packages;
         #source ~/.local/bin/conturenv.sh

@@ -130,7 +130,7 @@ echo
 ## Immediate exit on a command (group) failure and optional debug mode
 set -e
 test -n "$DEBUG" && set -x
-export PATH=$INSTALL_PREFIX/bin:$PATH
+export PATH=$PATH:$INSTALL_PREFIX/bin
 
 if [[ -n $(which wget 2> /dev/null) ]]; then
     function wget_untar { wget --no-check-certificate --no-verbose $1 -O- | tar --no-same-owner -xz; }
