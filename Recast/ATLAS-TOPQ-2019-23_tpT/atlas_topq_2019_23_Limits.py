@@ -42,7 +42,7 @@ def read_ATLASdata(dataDir='./data'):
         sysTot = np.sqrt(sysTot2)*eval(item[3])
         systematic_error.append(sysTot)
     systematic_error = np.array(systematic_error)
-    # print(np.diag(systematic_error))
+    # print(systematic_error)
 
 
     atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))
@@ -56,6 +56,7 @@ def read_ATLASdata(dataDir='./data'):
         covmat_stat.append(float(item[-1]))
 
     covmat_stat = np.array(covmat_stat).reshape(8,8)
+    # print(covmat_stat)
 
     # Total covariance matrix
     covmat = covmat_stat + np.diag(systematic_error**2)
