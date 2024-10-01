@@ -58,7 +58,7 @@ echo "   export PYTHONPATH="/home/lessa/.local/lib/python3.12/site-packages":$PY
 echo
 echo
 echo "----------------------------------------------------------------------------------------------------------------" 
-export PYTHONPATH="/home/lessa/.local/lib/python3.12/site-packages":$PYTHONPATH
+export PYTHONPATH="/usr/lib/python3/dist-packages":$PYTHONPATH
 ###############
 
 if [[ "$USE_CVMFS" -eq "1" ]]; then

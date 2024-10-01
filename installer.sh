@@ -59,7 +59,7 @@ if echo "$answer" | grep -iq "^y" ;then
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
-        echo "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall collier\ninstall rivet\nexit\n" > mad_install.txt;
+        echo "install hepmc \n install lhapdf6 \n install pythia8 \n install Delphes\n install collier \n exit\n" > mad_install.txt;
 	./mg5_aMC -f mad_install.txt
 
 	rm mad_install.txt;
