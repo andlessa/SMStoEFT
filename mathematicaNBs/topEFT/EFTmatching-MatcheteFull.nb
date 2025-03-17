@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    217199,       6015]
-NotebookOptionsPosition[    210956,       5906]
-NotebookOutlinePosition[    211450,       5924]
-CellTagsIndexPosition[    211407,       5921]
+NotebookDataLength[    371884,      10164]
+NotebookOptionsPosition[    365096,      10048]
+NotebookOutlinePosition[    365590,      10066]
+CellTagsIndexPosition[    365547,      10063]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -159,8 +159,8 @@ A+xeoPtCwBLBDsBQ8DZvboOEDzD8wObnIfjo4QsARrGtpA==
  GeneratedCell->True,
  CellAutoOverwrite->True,
  CellChangeTimes->{
-  3.950968604035138*^9},ExpressionUUID->"685f71c7-de81-46e9-9586-\
-0ff491393f42"],
+  3.951202904602769*^9},ExpressionUUID->"350c8c9f-da30-4795-8149-\
+3336fc7ffabc"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -184,10 +184,12 @@ Julie Pag\[EGrave]s, Anders Eller Thomsen, and Felix Wilsch \\n\"\>",
     "https://gitlab.com/matchete/matchete"]],
   Editable->False]], "Print",
  CellChangeTimes->{3.9509681848330927`*^9, 3.9509682372917852`*^9, 
-  3.9509682848812037`*^9, 3.950968540293564*^9, 3.950968604058703*^9},
+  3.9509682848812037`*^9, 3.950968540293564*^9, 3.950968604058703*^9, 
+  3.951201065804748*^9, 3.951201721068468*^9, 3.951201893408277*^9, 
+  3.951202904885612*^9},
  CellLabel->
   "During evaluation of \
-In[1]:=",ExpressionUUID->"f0c80660-04fd-418e-be0d-0deb776a2b68"]
+In[1]:=",ExpressionUUID->"147fd730-884f-4533-a81b-d6f2730af00f"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -529,8 +531,9 @@ Cell[BoxData[
   3.950966438211342*^9, 3.9509673235521803`*^9, 3.9509676848943443`*^9, 
   3.9509678452854567`*^9, 3.950968005022923*^9, 3.950968189853039*^9, 
   3.9509682395711403`*^9, 3.950968286811099*^9, 3.950968542278467*^9, 
-  3.950968631164467*^9},
- CellLabel->"Out[22]=",ExpressionUUID->"0fabac2a-d9ae-447e-ac53-9720bbaa45e6"]
+  3.950968631164467*^9, 3.9512010673719397`*^9, 3.951201722914648*^9, 
+  3.951201895380432*^9, 3.951202906621478*^9},
+ CellLabel->"Out[22]=",ExpressionUUID->"7d52fd72-c7e1-41c2-89c6-9e6e4b7ab126"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -910,9 +913,10 @@ Cell[BoxData[
    3.950966399959751*^9, 3.9509664384450417`*^9, 3.95096732826245*^9, 
    3.950967685032247*^9, 3.9509678453462057`*^9, 3.950968005042107*^9, 
    3.950968189914032*^9, 3.950968239791545*^9, 3.950968286852355*^9, 
-   3.9509685423156357`*^9, 3.95096863120179*^9},
+   3.9509685423156357`*^9, 3.95096863120179*^9, 3.951201067402528*^9, 
+   3.951201722936707*^9, 3.95120189540121*^9, 3.951202906666099*^9},
  CellLabel->
-  "Out[23]//NiceForm=",ExpressionUUID->"144718af-7aaf-4c2a-8b56-341a30645657"]
+  "Out[23]//NiceForm=",ExpressionUUID->"240aa36e-c10a-4823-8e41-cd5205355714"]
 }, Open  ]]
 }, Open  ]],
 
@@ -958,7 +962,7 @@ Cell[BoxData[{
      RowBox[{
      "\"\<\[Chi]\>\"", ",", 
       "\"\<\!\(\*SubscriptBox[\(M\), \(\[Chi]\)]\)\>\""}], "}"}]}], ",", 
-   RowBox[{"SelfConjugate", "->", "True"}]}], "]"}]}], "Input",
+   RowBox[{"SelfConjugate", "->", "False"}]}], "]"}]}], "Input",
  CellChangeTimes->{{3.8456139304622927`*^9, 3.845613933603093*^9}, {
    3.845613976919673*^9, 3.845614052173386*^9}, {3.8456140934108887`*^9, 
    3.845614156888687*^9}, {3.8456142047242413`*^9, 3.8456142065033817`*^9}, 
@@ -975,7 +979,9 @@ Cell[BoxData[{
    3.950966386194654*^9}, {3.9509677812126503`*^9, 3.9509678064973583`*^9}, {
    3.950967947556756*^9, 3.950967980771393*^9}, {3.950968309432753*^9, 
    3.9509683653720093`*^9}, {3.950968481966117*^9, 3.9509685106077433`*^9}, 
-   3.950968571154121*^9},
+   3.950968571154121*^9, {3.951201697640438*^9, 3.9512016983818493`*^9}, {
+   3.9512018771727533`*^9, 3.9512018775701838`*^9}, {3.9512028885257483`*^9, 
+   3.951202889140279*^9}},
  CellLabel->"In[24]:=",ExpressionUUID->"32c0df16-5cd9-4b65-ba63-8abd5603836b"],
 
 Cell["Define coupling", "Text",
@@ -1048,7 +1054,7 @@ Cell[BoxData[
  RowBox[{"LBSM", "//", "NiceForm"}]], "Input",
  CellChangeTimes->{{3.950965825464794*^9, 3.950965830130727*^9}, {
    3.950965866710778*^9, 3.950965892146113*^9}, 3.950965933382154*^9},
- CellLabel->"In[29]:=",ExpressionUUID->"c65fbb1b-a71e-4843-b9b7-b849b42716b7"],
+ CellLabel->"In[28]:=",ExpressionUUID->"c65fbb1b-a71e-4843-b9b7-b849b42716b7"],
 
 Cell[BoxData[
  FormBox[
@@ -1081,30 +1087,51 @@ Cell[BoxData[
       SubscriptBox["\[Phi]", "T"], 
       StyleBox["a",
        FontSize->10]]}], "+", 
-    RowBox[{
-     FractionBox["\[ImaginaryI]", "2"], 
+    RowBox[{"\[ImaginaryI]", 
      FormBox[
       StyleBox[
        RowBox[{"(", 
         RowBox[{
-         SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", 
-         RowBox[{"C", 
-          SubscriptBox["\[Gamma]", 
-           StyleBox["\[Mu]",
-            FontSize->10]]}], "\[CenterDot]", 
+         OverscriptBox["\[Chi]", 
+          StyleBox["_",
+           FontWeight->Bold]], "\[CenterDot]", 
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], "\[CenterDot]", 
          TemplateBox[{
            SubscriptBox["D", "\[Mu]"], "\[Chi]"},
           "RowDefault"]}], ")"}],
        SpanSymmetric->False],
       StandardForm]}], "-", 
     RowBox[{
-     FractionBox["1", "2"], 
      SubscriptBox["M", "\[Chi]"], 
      FormBox[
       StyleBox[
        RowBox[{"(", 
-        SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", "C", "\[CenterDot]", 
-        "\[Chi]", ")"}],
+        OverscriptBox["\[Chi]", 
+         StyleBox["_",
+          FontWeight->Bold]], "\[CenterDot]", "\[Chi]", ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "-", 
+    RowBox[{
+     SubscriptBox["y", "DM"], 
+     SubscriptBox[
+      OverscriptBox[
+       SubscriptBox["\[Phi]", "T"], 
+       StyleBox["_",
+        FontWeight->Bold]], 
+      StyleBox["a",
+       FontSize->10]], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        OverscriptBox["\[Chi]", 
+         StyleBox["_",
+          FontWeight->Bold]], "\[CenterDot]", 
+        SubscriptBox["P", "R"], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
        SpanSymmetric->False],
       StandardForm]}], "-", 
     RowBox[{
@@ -1124,34 +1151,16 @@ Cell[BoxData[
           FontSize->10]], "\[CenterDot]", 
         SubscriptBox["P", "L"], "\[CenterDot]", "\[Chi]", ")"}],
        SpanSymmetric->False],
-      StandardForm]}], "-", 
-    RowBox[{
-     SubscriptBox["y", "DM"], 
-     SubscriptBox[
-      OverscriptBox[
-       SubscriptBox["\[Phi]", "T"], 
-       StyleBox["_",
-        FontWeight->Bold]], 
-      StyleBox["a",
-       FontSize->10]], 
-     FormBox[
-      StyleBox[
-       RowBox[{"(", 
-        SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", 
-        RowBox[{"C", 
-         SubscriptBox["P", "R"]}], "\[CenterDot]", 
-        SuperscriptBox["t", 
-         StyleBox["a",
-          FontSize->10]], ")"}],
-       SpanSymmetric->False],
       StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
  CellChangeTimes->{
   3.950965831061295*^9, {3.950965869660698*^9, 3.950965892545257*^9}, 
    3.950965934231395*^9, {3.950966130310314*^9, 3.950966150277006*^9}, 
    3.950967384682316*^9, 3.9509676854093513`*^9, 3.950967888879055*^9, 
-   3.95096839030792*^9, 3.9509685588856983`*^9, 3.9509686364007874`*^9},
+   3.95096839030792*^9, 3.9509685588856983`*^9, 3.9509686364007874`*^9, 
+   3.9512010675707483`*^9, 3.9512017230422783`*^9, 3.951201895510067*^9, 
+   3.951202906771592*^9},
  CellLabel->
-  "Out[29]//NiceForm=",ExpressionUUID->"8472cefb-962c-498b-b762-ff6ad56e3245"]
+  "Out[28]//NiceForm=",ExpressionUUID->"ad803180-f393-4487-a399-941c71aa5720"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1172,7 +1181,7 @@ Cell[BoxData[{
    3.950965900855856*^9, 3.950965909842724*^9}, {3.950965949140853*^9, 
    3.950965949321624*^9}, {3.95096598552633*^9, 3.950966023397849*^9}, {
    3.9509665485857687`*^9, 3.950966578122405*^9}, 3.950968658308*^9},
- CellLabel->"In[33]:=",ExpressionUUID->"f305916f-c60a-43fe-b7ae-6b7d85a449dc"],
+ CellLabel->"In[29]:=",ExpressionUUID->"f305916f-c60a-43fe-b7ae-6b7d85a449dc"],
 
 Cell[BoxData["True"], "Output",
  CellChangeTimes->{
@@ -1226,15 +1235,16 @@ Cell[BoxData["True"], "Output",
    3.918565489058034*^9, 3.918565618581913*^9, 3.9509659558682423`*^9, 
    3.950965987642351*^9, 3.950966023879834*^9, {3.95096655109083*^9, 
    3.950966579387656*^9}, 3.9509676854732447`*^9, {3.950968636516345*^9, 
-   3.9509686645266457`*^9}},
- CellLabel->"Out[34]=",ExpressionUUID->"10f863ea-e417-42d3-9e67-d9a7b7680849"]
+   3.9509686645266457`*^9}, 3.951201067747864*^9, 3.951201723252088*^9, 
+   3.9512018957148438`*^9, 3.95120290694803*^9},
+ CellLabel->"Out[30]=",ExpressionUUID->"a87d1d36-348f-4ca5-953a-bc67ec0bb183"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"LUV", "//", "NiceForm"}]], "Input",
- CellLabel->"In[35]:=",ExpressionUUID->"ec314e3e-d364-4584-8a07-69c654a88107"],
+ CellLabel->"In[31]:=",ExpressionUUID->"ec314e3e-d364-4584-8a07-69c654a88107"],
 
 Cell[BoxData[
  FormBox[
@@ -1345,6 +1355,32 @@ Cell[BoxData[
            SuperscriptBox["b", 
             StyleBox["a", FontSize -> 10]]},
           "RowDefault"]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{"\[ImaginaryI]", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         OverscriptBox["\[Chi]", 
+          StyleBox["_",
+           FontWeight->Bold]], "\[CenterDot]", 
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], "\[CenterDot]", 
+         TemplateBox[{
+           SubscriptBox["D", "\[Mu]"], "\[Chi]"},
+          "RowDefault"]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "-", 
+    RowBox[{
+     SubscriptBox["M", "\[Chi]"], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        OverscriptBox["\[Chi]", 
+         StyleBox["_",
+          FontWeight->Bold]], "\[CenterDot]", "\[Chi]", ")"}],
        SpanSymmetric->False],
       StandardForm]}], "+", 
     RowBox[{"\[ImaginaryI]", 
@@ -1551,32 +1587,6 @@ Cell[BoxData[
        SpanSymmetric->False],
       StandardForm]}], "+", 
     RowBox[{
-     FractionBox["\[ImaginaryI]", "2"], 
-     FormBox[
-      StyleBox[
-       RowBox[{"(", 
-        RowBox[{
-         SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", 
-         RowBox[{"C", 
-          SubscriptBox["\[Gamma]", 
-           StyleBox["\[Mu]",
-            FontSize->10]]}], "\[CenterDot]", 
-         TemplateBox[{
-           SubscriptBox["D", "\[Mu]"], "\[Chi]"},
-          "RowDefault"]}], ")"}],
-       SpanSymmetric->False],
-      StandardForm]}], "-", 
-    RowBox[{
-     FractionBox["1", "2"], 
-     SubscriptBox["M", "\[Chi]"], 
-     FormBox[
-      StyleBox[
-       RowBox[{"(", 
-        SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", "C", "\[CenterDot]", 
-        "\[Chi]", ")"}],
-       SpanSymmetric->False],
-      StandardForm]}], "+", 
-    RowBox[{
      FractionBox["1", "2"], "\[Lambda]", 
      SubscriptBox[
       OverscriptBox["H", 
@@ -1658,6 +1668,27 @@ Cell[BoxData[
        FontSize->10]]}], "-", 
     RowBox[{
      SubscriptBox["y", "DM"], 
+     SubscriptBox[
+      OverscriptBox[
+       SubscriptBox["\[Phi]", "T"], 
+       StyleBox["_",
+        FontWeight->Bold]], 
+      StyleBox["a",
+       FontSize->10]], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        OverscriptBox["\[Chi]", 
+         StyleBox["_",
+          FontWeight->Bold]], "\[CenterDot]", 
+        SubscriptBox["P", "R"], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "-", 
+    RowBox[{
+     SubscriptBox["y", "DM"], 
      SuperscriptBox[
       SubscriptBox["\[Phi]", "T"], 
       StyleBox["a",
@@ -1673,31 +1704,12 @@ Cell[BoxData[
           FontSize->10]], "\[CenterDot]", 
         SubscriptBox["P", "L"], "\[CenterDot]", "\[Chi]", ")"}],
        SpanSymmetric->False],
-      StandardForm]}], "-", 
-    RowBox[{
-     SubscriptBox["y", "DM"], 
-     SubscriptBox[
-      OverscriptBox[
-       SubscriptBox["\[Phi]", "T"], 
-       StyleBox["_",
-        FontWeight->Bold]], 
-      StyleBox["a",
-       FontSize->10]], 
-     FormBox[
-      StyleBox[
-       RowBox[{"(", 
-        SuperscriptBox["\[Chi]", "T"], "\[CenterDot]", 
-        RowBox[{"C", 
-         SubscriptBox["P", "R"]}], "\[CenterDot]", 
-        SuperscriptBox["t", 
-         StyleBox["a",
-          FontSize->10]], ")"}],
-       SpanSymmetric->False],
       StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
  CellChangeTimes->{3.950966581921811*^9, 3.950967685527923*^9, 
-  3.950968636568714*^9, 3.950968667009136*^9},
+  3.950968636568714*^9, 3.950968667009136*^9, 3.9512010677767887`*^9, 
+  3.951201723333362*^9, 3.9512018957392178`*^9, 3.951202906992161*^9},
  CellLabel->
-  "Out[35]//NiceForm=",ExpressionUUID->"4092d87a-1446-4551-8adb-588c9c14915f"]
+  "Out[31]//NiceForm=",ExpressionUUID->"dabab553-bce2-485f-a42c-a5ad045aaa18"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -1759,7 +1771,7 @@ Cell[BoxData[{
    3.9509687948990183`*^9, {3.950968864755011*^9, 3.95096888476248*^9}, {
    3.950968927165427*^9, 3.9509689305699453`*^9}, {3.950969054156788*^9, 
    3.950969059801416*^9}},
- CellLabel->"In[49]:=",ExpressionUUID->"9b93d35d-f0c9-4810-a623-f5428ddb5814"]
+ CellLabel->"In[32]:=",ExpressionUUID->"9b93d35d-f0c9-4810-a623-f5428ddb5814"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1783,7 +1795,7 @@ Cell[BoxData[
    ";"}]], "Input",
  CellChangeTimes->{{3.9509689508961*^9, 3.9509689602901983`*^9}, {
   3.950969014931703*^9, 3.9509690168041477`*^9}},
- CellLabel->"In[51]:=",ExpressionUUID->"854fdcd7-a4d7-4dd7-97f5-8827d7bd5006"],
+ CellLabel->"In[34]:=",ExpressionUUID->"854fdcd7-a4d7-4dd7-97f5-8827d7bd5006"],
 
 Cell[BoxData[
  InterpretationBox["\<\"Added new CG \\!\\(\\*RowBox[{\\\"cg1\\\"}]\\) with \
@@ -1800,8 +1812,8 @@ RowBox[{\\\"SU2L\\\", \\\"[\\\", \\\"fund\\\", \\\"]\\\"}], \\\"]\\\"}], \
      $CellContext`SU2L[Matchete`fund]]}],
   Editable->False]], "Echo",
  CellChangeTimes->{
-  3.950969071126791*^9},ExpressionUUID->"05d26f02-13da-430c-a8c4-\
-3abd08dfa098"]
+  3.951202920284149*^9},ExpressionUUID->"53d7e646-3e14-42b4-a0f2-\
+fe45249c2b5a"]
 }, Open  ]],
 
 Cell["\<\
@@ -1849,7 +1861,7 @@ Cell[BoxData[
         RowBox[{"FieldStrength", "[", 
          RowBox[{"G", ",", "a"}], "]"}]}]}]}], "}"}]}], ";"}]}]], "Input",
  CellChangeTimes->{{3.950970253439818*^9, 3.950970319780334*^9}},
- CellLabel->"In[95]:=",ExpressionUUID->"0d7f98be-af74-418b-87a8-2f6828a81b7b"],
+ CellLabel->"In[35]:=",ExpressionUUID->"0d7f98be-af74-418b-87a8-2f6828a81b7b"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1917,8 +1929,7 @@ Cell[BoxData[{
    3.950970331542512*^9}, {3.95097040350381*^9, 3.95097040535771*^9}, 
    3.950970486420639*^9, {3.950970801046749*^9, 3.950970802388267*^9}, {
    3.95097309191261*^9, 3.950973098580027*^9}},
- CellLabel->
-  "In[160]:=",ExpressionUUID->"91df6be6-4287-453b-8b09-e766609d0aeb"],
+ CellLabel->"In[36]:=",ExpressionUUID->"91df6be6-4287-453b-8b09-e766609d0aeb"],
 
 Cell[CellGroupData[{
 
@@ -1931,8 +1942,7 @@ Cell[BoxData[
   3.950971678261551*^9}, {3.950971720255972*^9, 3.950971799802203*^9}, {
   3.950971831912676*^9, 3.950971832569809*^9}, {3.950971865622755*^9, 
   3.95097188560728*^9}, {3.950971960870432*^9, 3.9509719667855043`*^9}},
- CellLabel->
-  "In[163]:=",ExpressionUUID->"40db289f-b646-462c-b6ab-c70c933dddbd"],
+ CellLabel->"In[39]:=",ExpressionUUID->"40db289f-b646-462c-b6ab-c70c933dddbd"],
 
 Cell[BoxData[
  FormBox[
@@ -2860,27 +2870,13 @@ Cell[BoxData[
      FractionBox["1", 
       SuperscriptBox["\[Pi]", "2"]], 
      SuperscriptBox[
-      SubscriptBox["y", "DM"], "4"], " ", 
-     FormBox[
-      StyleBox[
-       RowBox[{"(", 
-        RowBox[{
-         RowBox[{
-          SubscriptBox["LF", 
-           RowBox[{"2", ",", "2", ",", 
-            RowBox[{"-", "1"}]}]], "[", 
-          SubscriptBox["M", "\[Chi]"], ",", 
-          SubscriptBox["M", "\[Phi]"], "]"}], "+", 
-         RowBox[{"2", 
-          SuperscriptBox[
-           SubscriptBox["M", "\[Chi]"], "2"], 
-          RowBox[{
-           SubscriptBox["LF", 
-            RowBox[{"2", ",", "2", ",", "0"}]], "[", 
-           SubscriptBox["M", "\[Chi]"], ",", 
-           SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
-       SpanSymmetric->False],
-      StandardForm], 
+      SubscriptBox["y", "DM"], "4"], 
+     RowBox[{
+      SubscriptBox["LF", 
+       RowBox[{"2", ",", "2", ",", 
+        RowBox[{"-", "1"}]}]], "[", 
+      SubscriptBox["M", "\[Chi]"], ",", 
+      SubscriptBox["M", "\[Phi]"], "]"}], 
      FormBox[
       StyleBox[
        RowBox[{"(", 
@@ -2924,10 +2920,10 @@ Cell[BoxData[
    3.950971682348497*^9, {3.950971737200821*^9, 3.950971751625477*^9}, {
    3.950971782496642*^9, 3.950971800585149*^9}, 3.950971833510503*^9, {
    3.9509718723880653`*^9, 3.9509718861603727`*^9}, {3.950971961756856*^9, 
-   3.950971967351902*^9}, 3.950973105491569*^9},
+   3.950971967351902*^9}, 3.950973105491569*^9, 3.951201088621441*^9, 
+   3.9512017437192698`*^9, 3.951201916771244*^9, 3.951202928450144*^9},
  CellLabel->
-  "Out[163]//NiceForm=",ExpressionUUID->"ca90d8ea-f3cb-44c4-9a8e-\
-08a04af42bb0"]
+  "Out[39]//NiceForm=",ExpressionUUID->"7417ac6c-0ee3-487a-94eb-ed94d4d138ff"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2946,8 +2942,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.950972000699184*^9, 3.9509721005853777`*^9}, {
   3.9509721545268373`*^9, 3.9509721592175007`*^9}, {3.9509722035004587`*^9, 
   3.9509722810694103`*^9}, {3.950972325563871*^9, 3.950972352959227*^9}},
- CellLabel->
-  "In[164]:=",ExpressionUUID->"4dcf9171-5e46-40b9-8d5b-34e210d9d7f4"],
+ CellLabel->"In[40]:=",ExpressionUUID->"4dcf9171-5e46-40b9-8d5b-34e210d9d7f4"],
 
 Cell[BoxData[
  FormBox[
@@ -4060,6 +4055,2060 @@ Cell[BoxData[
      FractionBox["1", 
       SuperscriptBox["\[Pi]", "2"]], 
      SuperscriptBox[
+      SubscriptBox["y", "DM"], "4"], 
+     RowBox[{
+      SubscriptBox["LF", 
+       RowBox[{"2", ",", "2", ",", 
+        RowBox[{"-", "1"}]}]], "[", 
+      SubscriptBox["M", "\[Chi]"], ",", 
+      SubscriptBox["M", "\[Phi]"], "]"}], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["a",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["b",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["b",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
+ CellChangeTimes->{{3.9509720358695383`*^9, 3.950972066379722*^9}, 
+   3.950972101502795*^9, 3.950972159862193*^9, {3.950972204649502*^9, 
+   3.950972281751149*^9}, {3.950972328469367*^9, 3.950972353790856*^9}, 
+   3.950973108563064*^9, 3.951201088826665*^9, 3.951201743901845*^9, 
+   3.951201916964542*^9, 3.9512029286339493`*^9},
+ CellLabel->
+  "Out[40]//NiceForm=",ExpressionUUID->"8edc851b-ef1a-4a42-ada3-924873118221"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", "LEFTon3", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"yDM", "[", "]"}], ",", 
+      RowBox[{"gs", "[", "]"}]}], "}"}], ",", "FullSimplify"}], "]"}], "//", 
+  "NiceForm"}]], "Input",
+ CellChangeTimes->{{3.95097241023349*^9, 3.9509724398604603`*^9}, 
+   3.950972496723303*^9, {3.950972527251224*^9, 3.950972528072495*^9}},
+ CellLabel->"In[41]:=",ExpressionUUID->"fd13c97d-b188-43e3-9df3-365c2728db89"],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "t"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox[
+           OverscriptBox["H", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox["i",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["Q", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox[
+               TemplateBox[{"a", "j"},
+                "RowDefault"],
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "R"], "\[CenterDot]", 
+             SuperscriptBox["t", 
+              StyleBox["a",
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["\[CurlyEpsilon]", 
+           StyleBox[
+            TemplateBox[{"j", "i"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          SuperscriptBox["H", 
+           StyleBox["j",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["t", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox["a",
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "L"], "\[CenterDot]", 
+             SuperscriptBox["Q", 
+              StyleBox[
+               TemplateBox[{"a", "i"},
+                "RowDefault"],
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SubscriptBox[
+           OverscriptBox["\[CurlyEpsilon]", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox[
+            TemplateBox[{"i", "j"},
+             "RowDefault"],
+            FontSize->10]]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "2"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "128"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          FractionBox["1", "\[Epsilon]"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", " ", 
+             RowBox[{
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  SubscriptBox["P", "L"], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", " ", 
+                  RowBox[{
+                   RowBox[{
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                    RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"j", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                    RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox[
+                    OverscriptBox["H", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "k"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"k", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                    RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["k",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "L"], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SubscriptBox[
+                    OverscriptBox["\[CurlyEpsilon]", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"j", "k"},
+                    "RowDefault"],
+                    FontSize->10]]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "+", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["j", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["i", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]]}], "-", 
+              RowBox[{
+               RowBox[{"4", " ", "\[ImaginaryI]"}], "\[Epsilon]", 
+               SubscriptBox["Y", "t"], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                   RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               TemplateBox[{
+                 SubscriptBox["D", "\[Mu]"], 
+                 SubscriptBox[
+                  OverscriptBox["H", 
+                   StyleBox["_", FontWeight -> Bold]], 
+                  StyleBox["i", FontSize -> 10]]},
+                "RowDefault"]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}], "-", 
+         RowBox[{
+          FractionBox["\[ImaginaryI]", "64"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SubscriptBox["g", "s"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["\[CurlyEpsilon]", 
+                StyleBox[
+                 TemplateBox[{"j", "i"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", 
+              RowBox[{
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["G", 
+           StyleBox[
+            TemplateBox[{"\[Mu]", "\[Nu]", "A"},
+             "RowDefault"],
+            FontSize->10]], 
+          SubsuperscriptBox["T", 
+           StyleBox["b",
+            FontSize->10], 
+           StyleBox[
+            TemplateBox[{"A", "a"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          FractionBox["1", "576"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SuperscriptBox[
+           SubscriptBox["g", "s"], "2"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "2", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                SubscriptBox["M", "\[Phi]"], ",", 
+                SubscriptBox["M", "\[Chi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"3", ",", "1", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Phi]"], ",", 
+               SubscriptBox["M", "\[Chi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "+", 
+              RowBox[{"3", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     FractionBox["1", "128"], 
+     FractionBox["1", 
+      SuperscriptBox["\[Pi]", "2"]], 
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "4"], 
+     RowBox[{
+      SubscriptBox["LF", 
+       RowBox[{"2", ",", "2", ",", 
+        RowBox[{"-", "1"}]}]], "[", 
+      SubscriptBox["M", "\[Chi]"], ",", 
+      SubscriptBox["M", "\[Phi]"], "]"}], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["a",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["b",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["b",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.9509724181237783`*^9, 3.950972440539982*^9}, 
+   3.950972497734148*^9, 3.9509725290823317`*^9, 3.950973111161132*^9, 
+   3.950973896302408*^9, 3.951201089417873*^9, 3.951201744485833*^9, 
+   3.951201917724297*^9, 3.951202929211988*^9},
+ CellLabel->
+  "Out[41]//NiceForm=",ExpressionUUID->"000aee37-a97a-47df-a531-39bc3681b4d1"],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "t"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox[
+           OverscriptBox["H", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox["i",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["Q", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox[
+               TemplateBox[{"a", "j"},
+                "RowDefault"],
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "R"], "\[CenterDot]", 
+             SuperscriptBox["t", 
+              StyleBox["a",
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["\[CurlyEpsilon]", 
+           StyleBox[
+            TemplateBox[{"j", "i"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          SuperscriptBox["H", 
+           StyleBox["j",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["t", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox["a",
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "L"], "\[CenterDot]", 
+             SuperscriptBox["Q", 
+              StyleBox[
+               TemplateBox[{"a", "i"},
+                "RowDefault"],
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SubscriptBox[
+           OverscriptBox["\[CurlyEpsilon]", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox[
+            TemplateBox[{"i", "j"},
+             "RowDefault"],
+            FontSize->10]]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "2"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "128"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          FractionBox["1", "\[Epsilon]"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", " ", 
+             RowBox[{
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  SubscriptBox["P", "L"], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", " ", 
+                  RowBox[{
+                   RowBox[{
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                    RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"j", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                    RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox[
+                    OverscriptBox["H", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "k"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"k", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                    RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["k",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "L"], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SubscriptBox[
+                    OverscriptBox["\[CurlyEpsilon]", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"j", "k"},
+                    "RowDefault"],
+                    FontSize->10]]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "+", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["j", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["i", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]]}], "-", 
+              RowBox[{
+               RowBox[{"4", " ", "\[ImaginaryI]"}], "\[Epsilon]", 
+               SubscriptBox["Y", "t"], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                   RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               TemplateBox[{
+                 SubscriptBox["D", "\[Mu]"], 
+                 SubscriptBox[
+                  OverscriptBox["H", 
+                   StyleBox["_", FontWeight -> Bold]], 
+                  StyleBox["i", FontSize -> 10]]},
+                "RowDefault"]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}], "-", 
+         RowBox[{
+          FractionBox["\[ImaginaryI]", "64"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SubscriptBox["g", "s"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["\[CurlyEpsilon]", 
+                StyleBox[
+                 TemplateBox[{"j", "i"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", 
+              RowBox[{
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["G", 
+           StyleBox[
+            TemplateBox[{"\[Mu]", "\[Nu]", "A"},
+             "RowDefault"],
+            FontSize->10]], 
+          SubsuperscriptBox["T", 
+           StyleBox["b",
+            FontSize->10], 
+           StyleBox[
+            TemplateBox[{"A", "a"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          FractionBox["1", "576"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SuperscriptBox[
+           SubscriptBox["g", "s"], "2"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "2", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                SubscriptBox["M", "\[Phi]"], ",", 
+                SubscriptBox["M", "\[Chi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"3", ",", "1", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Phi]"], ",", 
+               SubscriptBox["M", "\[Chi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "+", 
+              RowBox[{"3", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     FractionBox["1", "128"], 
+     FractionBox["1", 
+      SuperscriptBox["\[Pi]", "2"]], 
+     SuperscriptBox[
       SubscriptBox["y", "DM"], "4"], " ", 
      FormBox[
       StyleBox[
@@ -4119,31 +6168,2064 @@ Cell[BoxData[
           FontSize->10]], ")"}],
        SpanSymmetric->False],
       StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
- CellChangeTimes->{{3.9509720358695383`*^9, 3.950972066379722*^9}, 
-   3.950972101502795*^9, 3.950972159862193*^9, {3.950972204649502*^9, 
-   3.950972281751149*^9}, {3.950972328469367*^9, 3.950972353790856*^9}, 
-   3.950973108563064*^9},
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.9509724181237783`*^9, 3.950972440539982*^9}, 
+   3.950972497734148*^9, 3.9509725290823317`*^9, 3.950973111161132*^9, 
+   3.950973896302408*^9, 3.951201089417873*^9, 3.951201744485833*^9, 
+   3.951201917724297*^9},
  CellLabel->
-  "Out[164]//NiceForm=",ExpressionUUID->"92a020bb-e395-43ae-8c44-\
-14654b39a733"]
-}, Open  ]],
-
-Cell[CellGroupData[{
+  "Out[41]//NiceForm=",ExpressionUUID->"2cd2948b-a0e3-46f6-b60c-ec00d3a71e36"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"Collect", "[", 
+ FormBox[
+  StyleBox[
    RowBox[{
-    RowBox[{"Expand", "[", "LEFTon3", "]"}], ",", 
-    RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["Y", "t"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox[
+           OverscriptBox["H", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox["i",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["Q", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox[
+               TemplateBox[{"a", "j"},
+                "RowDefault"],
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "R"], "\[CenterDot]", 
+             SuperscriptBox["t", 
+              StyleBox["a",
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["\[CurlyEpsilon]", 
+           StyleBox[
+            TemplateBox[{"j", "i"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          SuperscriptBox["H", 
+           StyleBox["j",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["t", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox["a",
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "L"], "\[CenterDot]", 
+             SuperscriptBox["Q", 
+              StyleBox[
+               TemplateBox[{"a", "i"},
+                "RowDefault"],
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SubscriptBox[
+           OverscriptBox["\[CurlyEpsilon]", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox[
+            TemplateBox[{"i", "j"},
+             "RowDefault"],
+            FontSize->10]]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "2"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "128"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          FractionBox["1", "\[Epsilon]"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", " ", 
+             RowBox[{
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  SubscriptBox["P", "L"], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", " ", 
+                  RowBox[{
+                   RowBox[{
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                    RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"j", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                    RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox[
+                    OverscriptBox["H", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "k"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"k", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                    RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["k",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "L"], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SubscriptBox[
+                    OverscriptBox["\[CurlyEpsilon]", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"j", "k"},
+                    "RowDefault"],
+                    FontSize->10]]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "+", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["j", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["i", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]]}], "-", 
+              RowBox[{
+               RowBox[{"4", " ", "\[ImaginaryI]"}], "\[Epsilon]", 
+               SubscriptBox["Y", "t"], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                   RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               TemplateBox[{
+                 SubscriptBox["D", "\[Mu]"], 
+                 SubscriptBox[
+                  OverscriptBox["H", 
+                   StyleBox["_", FontWeight -> Bold]], 
+                  StyleBox["i", FontSize -> 10]]},
+                "RowDefault"]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}], "-", 
+         RowBox[{
+          FractionBox["\[ImaginaryI]", "64"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SubscriptBox["g", "s"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["\[CurlyEpsilon]", 
+                StyleBox[
+                 TemplateBox[{"j", "i"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", 
+              RowBox[{
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["G", 
+           StyleBox[
+            TemplateBox[{"\[Mu]", "\[Nu]", "A"},
+             "RowDefault"],
+            FontSize->10]], 
+          SubsuperscriptBox["T", 
+           StyleBox["b",
+            FontSize->10], 
+           StyleBox[
+            TemplateBox[{"A", "a"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          FractionBox["1", "576"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SuperscriptBox[
+           SubscriptBox["g", "s"], "2"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "2", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                SubscriptBox["M", "\[Phi]"], ",", 
+                SubscriptBox["M", "\[Chi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"3", ",", "1", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Phi]"], ",", 
+               SubscriptBox["M", "\[Chi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "+", 
+              RowBox[{"3", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     FractionBox["1", "128"], 
+     FractionBox["1", 
+      SuperscriptBox["\[Pi]", "2"]], 
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "4"], 
      RowBox[{
-      RowBox[{"yDM", "[", "]"}], ",", 
-      RowBox[{"gs", "[", "]"}]}], "}"}], ",", "FullSimplify"}], "]"}], "//", 
-  "NiceForm"}]], "Input",
- CellChangeTimes->{{3.95097241023349*^9, 3.9509724398604603`*^9}, 
-   3.950972496723303*^9, {3.950972527251224*^9, 3.950972528072495*^9}},
+      SubscriptBox["LF", 
+       RowBox[{"2", ",", "2", ",", 
+        RowBox[{"-", "1"}]}]], "[", 
+      SubscriptBox["M", "\[Chi]"], ",", 
+      SubscriptBox["M", "\[Phi]"], "]"}], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["a",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["b",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["b",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.9509724181237783`*^9, 3.950972440539982*^9}, 
+   3.950972497734148*^9, 3.9509725290823317`*^9, 3.950973111161132*^9, 
+   3.950973896302408*^9, 3.951201089417873*^9, 3.951201744485833*^9},
  CellLabel->
-  "In[165]:=",ExpressionUUID->"fd13c97d-b188-43e3-9df3-365c2728db89"],
+  "Out[41]//NiceForm=",ExpressionUUID->"4c993f01-b4c7-49d7-98fa-27e4e3f7405f"],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "t"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox[
+           OverscriptBox["H", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox["i",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["Q", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox[
+               TemplateBox[{"a", "j"},
+                "RowDefault"],
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "R"], "\[CenterDot]", 
+             SuperscriptBox["t", 
+              StyleBox["a",
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["\[CurlyEpsilon]", 
+           StyleBox[
+            TemplateBox[{"j", "i"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          SuperscriptBox["H", 
+           StyleBox["j",
+            FontSize->10]], 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             SubscriptBox[
+              OverscriptBox["t", 
+               StyleBox["_",
+                FontWeight->Bold]], 
+              StyleBox["a",
+               FontSize->10]], "\[CenterDot]", 
+             SubscriptBox["P", "L"], "\[CenterDot]", 
+             SuperscriptBox["Q", 
+              StyleBox[
+               TemplateBox[{"a", "i"},
+                "RowDefault"],
+               FontSize->10]], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SubscriptBox[
+           OverscriptBox["\[CurlyEpsilon]", 
+            StyleBox["_",
+             FontWeight->Bold]], 
+           StyleBox[
+            TemplateBox[{"i", "j"},
+             "RowDefault"],
+            FontSize->10]]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "2"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "128"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          FractionBox["1", "\[Epsilon]"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", " ", 
+             RowBox[{
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  SubscriptBox["P", "L"], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", " ", 
+                  RowBox[{
+                   RowBox[{
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", "2"}], "+", "\[Epsilon]", "-", 
+                    RowBox[{"4", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"1", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{"2", "\[Epsilon]", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"j", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                   RowBox[{"4", "\[Epsilon]", 
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                    RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["Y", "t"], " ", 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox[
+                    OverscriptBox["H", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "k"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "R"], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SuperscriptBox["\[CurlyEpsilon]", 
+                    StyleBox[
+                    TemplateBox[{"k", "i"},
+                    "RowDefault"],
+                    FontSize->10]]}], "+", 
+                    RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    SuperscriptBox["H", 
+                    StyleBox["k",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    SubscriptBox["P", "L"], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], 
+                    SubscriptBox[
+                    OverscriptBox["\[CurlyEpsilon]", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"j", "k"},
+                    "RowDefault"],
+                    FontSize->10]]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "+", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["j", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                    RowBox[{"\[ImaginaryI]", 
+                    TemplateBox[{
+                    SubscriptBox["D", "\[Mu]"], 
+                    SuperscriptBox["H", 
+                    StyleBox["i", FontSize -> 10]]},
+                    "RowDefault"], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]]}], "-", 
+              RowBox[{
+               RowBox[{"4", " ", "\[ImaginaryI]"}], "\[Epsilon]", 
+               SubscriptBox["Y", "t"], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+                   RowBox[{"2", 
+                    RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"3", ",", "1", ",", 
+                    RowBox[{"-", "1"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+                   RowBox[{
+                    SubscriptBox["LF", 
+                    RowBox[{"4", ",", "1", ",", 
+                    RowBox[{"-", "2"}]}]], "[", 
+                    SubscriptBox["M", "\[Chi]"], ",", 
+                    SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["j",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], "-", 
+                   RowBox[{
+                    SuperscriptBox["H", 
+                    StyleBox["i",
+                    FontSize->10]], 
+                    FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               TemplateBox[{
+                 SubscriptBox["D", "\[Mu]"], 
+                 SubscriptBox[
+                  OverscriptBox["H", 
+                   StyleBox["_", FontWeight -> Bold]], 
+                  StyleBox["i", FontSize -> 10]]},
+                "RowDefault"]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}], "-", 
+         RowBox[{
+          FractionBox["\[ImaginaryI]", "64"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SubscriptBox["g", "s"], 
+          SubscriptBox["Y", "t"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                OverscriptBox["H", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox["i",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox[
+                    TemplateBox[{"a", "j"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SuperscriptBox["\[CurlyEpsilon]", 
+                StyleBox[
+                 TemplateBox[{"j", "i"},
+                  "RowDefault"],
+                 FontSize->10]]}], "+", 
+              RowBox[{
+               SuperscriptBox["H", 
+                StyleBox["j",
+                 FontSize->10]], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[CapitalGamma]", 
+                    StyleBox[
+                    TemplateBox[{"\[Mu]", "\[Nu]"},
+                    "RowDefault"],
+                    FontSize->10]], 
+                   SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                  SuperscriptBox["Q", 
+                   StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               SubscriptBox[
+                OverscriptBox["\[CurlyEpsilon]", 
+                 StyleBox["_",
+                  FontWeight->Bold]], 
+                StyleBox[
+                 TemplateBox[{"i", "j"},
+                  "RowDefault"],
+                 FontSize->10]]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], 
+          SuperscriptBox["G", 
+           StyleBox[
+            TemplateBox[{"\[Mu]", "\[Nu]", "A"},
+             "RowDefault"],
+            FontSize->10]], 
+          SubsuperscriptBox["T", 
+           StyleBox["b",
+            FontSize->10], 
+           StyleBox[
+            TemplateBox[{"A", "a"},
+             "RowDefault"],
+            FontSize->10]]}], "+", 
+         RowBox[{
+          FractionBox["1", "576"], 
+          FractionBox["1", 
+           SuperscriptBox["\[Pi]", "2"]], 
+          SuperscriptBox[
+           SubscriptBox["g", "s"], "2"], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"2", ",", "2", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"3", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}]], "[", 
+                SubscriptBox["M", "\[Chi]"], ",", 
+                SubscriptBox["M", "\[Phi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"4", ",", "1", ",", 
+                 RowBox[{"-", "2"}]}]], "[", 
+               SubscriptBox["M", "\[Chi]"], ",", 
+               SubscriptBox["M", "\[Phi]"], "]"}], "-", 
+              RowBox[{"2", 
+               RowBox[{
+                SubscriptBox["LF", 
+                 RowBox[{"2", ",", "1", ",", "0"}]], "[", 
+                SubscriptBox["M", "\[Phi]"], ",", 
+                SubscriptBox["M", "\[Chi]"], "]"}]}], "+", 
+              RowBox[{
+               SubscriptBox["LF", 
+                RowBox[{"3", ",", "1", ",", 
+                 RowBox[{"-", "1"}]}]], "[", 
+               SubscriptBox["M", "\[Phi]"], ",", 
+               SubscriptBox["M", "\[Chi]"], "]"}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm], " ", 
+          FormBox[
+           StyleBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", " ", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"b", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["b",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", " ", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["b", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["b", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["d", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["d", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["Q", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "L"]}], "\[CenterDot]", 
+                    SuperscriptBox["Q", 
+                    StyleBox[
+                    TemplateBox[{"a", "i"},
+                    "RowDefault"],
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm], "+", 
+                   FormBox[
+                    StyleBox[
+                    RowBox[{"(", 
+                    SubscriptBox[
+                    OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                    StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                    RowBox[{
+                    SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                    SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                    SuperscriptBox["t", 
+                    StyleBox["a",
+                    FontSize->10]], ")"}],
+                    SpanSymmetric->False],
+                    StandardForm]}], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "+", 
+              RowBox[{"3", 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}], "-", 
+              RowBox[{
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["t", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["a",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["t", 
+                   StyleBox["a",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm], 
+               FormBox[
+                StyleBox[
+                 RowBox[{"(", 
+                  SubscriptBox[
+                   OverscriptBox["u", 
+                    StyleBox["_",
+                    FontWeight->Bold]], 
+                   StyleBox["b",
+                    FontSize->10]], "\[CenterDot]", 
+                  RowBox[{
+                   SubscriptBox["\[Gamma]", 
+                    StyleBox["\[Mu]",
+                    FontSize->10]], 
+                   SubscriptBox["P", "R"]}], "\[CenterDot]", 
+                  SuperscriptBox["u", 
+                   StyleBox["b",
+                    FontSize->10]], ")"}],
+                 SpanSymmetric->False],
+                StandardForm]}]}], ")"}],
+            SpanSymmetric->False],
+           StandardForm]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}], "+", 
+    RowBox[{
+     FractionBox["1", "128"], 
+     FractionBox["1", 
+      SuperscriptBox["\[Pi]", "2"]], 
+     SuperscriptBox[
+      SubscriptBox["y", "DM"], "4"], " ", 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["LF", 
+           RowBox[{"2", ",", "2", ",", 
+            RowBox[{"-", "1"}]}]], "[", 
+          SubscriptBox["M", "\[Chi]"], ",", 
+          SubscriptBox["M", "\[Phi]"], "]"}], "+", 
+         RowBox[{"2", 
+          SuperscriptBox[
+           SubscriptBox["M", "\[Chi]"], "2"], 
+          RowBox[{
+           SubscriptBox["LF", 
+            RowBox[{"2", ",", "2", ",", "0"}]], "[", 
+           SubscriptBox["M", "\[Chi]"], ",", 
+           SubscriptBox["M", "\[Phi]"], "]"}]}]}], ")"}],
+       SpanSymmetric->False],
+      StandardForm], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["a",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["a",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm], 
+     FormBox[
+      StyleBox[
+       RowBox[{"(", 
+        SubscriptBox[
+         OverscriptBox["t", 
+          StyleBox["_",
+           FontWeight->Bold]], 
+         StyleBox["b",
+          FontSize->10]], "\[CenterDot]", 
+        RowBox[{
+         SubscriptBox["\[Gamma]", 
+          StyleBox["\[Mu]",
+           FontSize->10]], 
+         SubscriptBox["P", "R"]}], "\[CenterDot]", 
+        SuperscriptBox["t", 
+         StyleBox["b",
+          FontSize->10]], ")"}],
+       SpanSymmetric->False],
+      StandardForm]}]}], "StandardForm"], Matchete`NiceForm]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.9509724181237783`*^9, 3.950972440539982*^9}, 
+   3.950972497734148*^9, 3.9509725290823317`*^9, 3.950973111161132*^9, 
+   3.950973896302408*^9, 3.951201089417873*^9},
+ CellLabel->
+  "Out[41]//NiceForm=",ExpressionUUID->"2e08d66c-94d4-4bb3-882b-4a92b8da055f"],
 
 Cell[BoxData[
  FormBox[
@@ -5204,8 +9286,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.950972910293271*^9, 3.9509730340988503`*^9}, {
   3.950973072210463*^9, 3.950973074792138*^9}, {3.950973172643718*^9, 
   3.950973173400147*^9}, {3.950973664632248*^9, 3.95097368987843*^9}},
- CellLabel->
-  "In[179]:=",ExpressionUUID->"d064d3e8-2931-4370-8788-328f94669042"],
+ CellLabel->"In[42]:=",ExpressionUUID->"d064d3e8-2931-4370-8788-328f94669042"],
 
 Cell[BoxData[
  FormBox[
@@ -5730,10 +9811,10 @@ Cell[BoxData[
  CellChangeTimes->{{3.950972943566736*^9, 3.950972990704423*^9}, {
    3.950973022812065*^9, 3.950973034838237*^9}, 3.95097307583911*^9, 
    3.950973112642974*^9, 3.950973173940007*^9, {3.950973668682949*^9, 
-   3.950973690624076*^9}},
+   3.950973690624076*^9}, 3.951201089567487*^9, 3.951201744615262*^9, 
+   3.9512019178602753`*^9, 3.95120292935859*^9},
  CellLabel->
-  "Out[179]//NiceForm=",ExpressionUUID->"27e460db-ec6a-4b3e-b6a0-\
-3f103919030f"]
+  "Out[42]//NiceForm=",ExpressionUUID->"4a1a4bda-0abc-4262-9673-1426013a6ba7"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -5760,13 +9841,12 @@ Cell[BoxData[
    "]"}], "//", "NiceForm"}]], "Input",
  CellChangeTimes->{{3.9509732811239967`*^9, 3.950973283722227*^9}, {
   3.950973338636982*^9, 3.9509733629756927`*^9}},
- CellLabel->
-  "In[172]:=",ExpressionUUID->"1b5d3efc-a9cf-4e9d-afb1-41dbb14a6a11"],
+ CellLabel->"In[43]:=",ExpressionUUID->"1b5d3efc-a9cf-4e9d-afb1-41dbb14a6a11"],
 
 Cell[BoxData[
  FormBox[
   StyleBox[
-   RowBox[{
+   RowBox[{"-", 
     FractionBox["1", "128"], 
     FractionBox["1", 
      SuperscriptBox["\[Pi]", "2"]], 
@@ -5776,17 +9856,10 @@ Cell[BoxData[
     FormBox[
      StyleBox[
       RowBox[{"(", 
-       RowBox[{"1", "+", 
-        RowBox[{"4", "x"}], "-", 
-        RowBox[{"5", 
-         SuperscriptBox["x", "2"]}], "+", 
-        RowBox[{"2", "x", " ", 
-         FormBox[
-          StyleBox[
-           RowBox[{"(", 
-            RowBox[{"2", "+", "x"}], ")"}],
-           SpanSymmetric->False],
-          StandardForm], 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        SuperscriptBox["x", "2"], "-", 
+        RowBox[{"2", "x", 
          RowBox[{"Log", "[", "x", "]"}]}]}], ")"}],
       SpanSymmetric->False],
      StandardForm], 
@@ -5835,47 +9908,120 @@ Cell[BoxData[
         RowBox[{"-", "1"}], "+", "x"}], ")"}], "3"]]}], "StandardForm"], 
   Matchete`NiceForm]], "Output",
  CellChangeTimes->{
-  3.950973285214287*^9, {3.950973342024942*^9, 3.950973363764193*^9}},
+  3.950973285214287*^9, {3.950973342024942*^9, 3.950973363764193*^9}, 
+   3.951201089626174*^9, 3.951201744642555*^9, 3.951201917943315*^9, 
+   3.9512029293887987`*^9},
  CellLabel->
-  "Out[172]//NiceForm=",ExpressionUUID->"d8d2ed89-1433-4904-9ec8-\
-886a60913a4e"]
+  "Out[43]//NiceForm=",ExpressionUUID->"73248b2b-4acb-4a58-951d-03fd5b775116"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Collect", "[", 
-  RowBox[{
-   RowBox[{"Expand", "[", 
-    StyleBox[" ", "StandardForm"], 
-    StyleBox[
-     FormBox[
-      StyleBox[
+ StyleBox[
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     RowBox[{"(", 
+      RowBox[{
        RowBox[{
-        RowBox[{"(", 
-         RowBox[{"1", "+", 
-          RowBox[{"4", "x"}], "-", 
-          RowBox[{"5", 
-           SuperscriptBox["x", "2"]}], "+", 
-          RowBox[{"2", "x", " ", 
-           FormBox[
-            StyleBox[
-             RowBox[{"(", 
-              RowBox[{"2", "+", "x"}], ")"}],
-             SpanSymmetric->False],
-            StandardForm], 
-           RowBox[{"Log", "[", "x", "]"}]}]}], ")"}], 
-        RowBox[{"(", 
-         RowBox[{"1", "-", "x"}], ")"}]}],
-       SpanSymmetric->False],
-      StandardForm], "StandardForm"], "]"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"Log", "[", "a_", "]"}], "}"}], ",", "Simplify"}], "]"}]], "Input",\
+        RowBox[{"-", " ", 
+         FormBox[
+          StyleBox[
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", "x"}], ")"}],
+           SpanSymmetric->False],
+          StandardForm]}], " ", 
+        FormBox[
+         StyleBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "7"}], "+", 
+            RowBox[{"x", " ", 
+             FormBox[
+              StyleBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"-", "43"}], "+", 
+                 RowBox[{"56", "x"}]}], ")"}],
+               SpanSymmetric->False],
+              StandardForm]}]}], ")"}],
+          SpanSymmetric->False],
+         StandardForm]}], "+", 
+       RowBox[{"6", "x", " ", 
+        FormBox[
+         StyleBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "6"}], "+", 
+            RowBox[{"x", " ", 
+             FormBox[
+              StyleBox[
+               RowBox[{"(", 
+                RowBox[{"3", "+", 
+                 RowBox[{"4", "x"}]}], ")"}],
+               SpanSymmetric->False],
+              StandardForm]}]}], ")"}],
+          SpanSymmetric->False],
+         StandardForm], 
+        RowBox[{"Log", "[", "x", "]"}]}]}], ")"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"Log", "[", "a_", "]"}], "}"}], ",", "Simplify"}], "]"}],
+  SpanSymmetric->False]], "Input",
+ CellChangeTimes->{{3.951202154841401*^9, 3.9512021570024757`*^9}, {
+  3.9512021923097677`*^9, 3.9512022125156107`*^9}},
+ CellLabel->"In[44]:=",ExpressionUUID->"f8bb437f-7932-41fa-938f-4842928b8ed3"],
 
- CellChangeTimes->{{3.950973383280436*^9, 3.9509733925417347`*^9}, {
-  3.950973507231861*^9, 3.9509735365022793`*^9}},
- CellLabel->
-  "In[177]:=",ExpressionUUID->"e0ee2630-2d08-4b6a-acaf-97472ab1c5fe"],
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "7"}], "-", 
+  RowBox[{"36", " ", "x"}], "+", 
+  RowBox[{"99", " ", 
+   SuperscriptBox["x", "2"]}], "-", 
+  RowBox[{"56", " ", 
+   SuperscriptBox["x", "3"]}], "+", 
+  RowBox[{"6", " ", "x", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", "6"}], "+", 
+     RowBox[{"3", " ", "x"}], "+", 
+     RowBox[{"4", " ", 
+      SuperscriptBox["x", "2"]}]}], ")"}], " ", 
+   RowBox[{"Log", "[", "x", "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.951202174165886*^9, 3.951202213019393*^9}, 
+   3.9512029293970137`*^9},
+ CellLabel->"Out[44]=",ExpressionUUID->"3919d511-c8fb-4353-af55-d9f7df2313e7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"Collect", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", 
+        RowBox[{"4", "x"}], "-", 
+        RowBox[{"5", 
+         SuperscriptBox["x", "2"]}], "+", 
+        RowBox[{"2", "x", " ", 
+         FormBox[
+          StyleBox[
+           RowBox[{"(", 
+            RowBox[{"2", "+", "x"}], ")"}],
+           SpanSymmetric->False],
+          StandardForm], 
+         RowBox[{"Log", "[", "x", "]"}]}]}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{"1", "-", "x"}], ")"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"Log", "[", "a_", "]"}], "}"}], ",", "Simplify"}], "]"}],
+  SpanSymmetric->False]], "Input",
+ CellChangeTimes->{{3.951202225301928*^9, 3.951202228297739*^9}},
+ CellLabel->"In[45]:=",ExpressionUUID->"ef9032e6-3ad3-4b1a-af9e-afb4bc94dd97"],
 
 Cell[BoxData[
  RowBox[{
@@ -5893,13 +10039,9 @@ Cell[BoxData[
      RowBox[{"-", "2"}], "+", "x", "+", 
      SuperscriptBox["x", "2"]}], ")"}], " ", 
    RowBox[{"Log", "[", "x", "]"}]}]}]], "Output",
- CellChangeTimes->{
-  3.9509733929221563`*^9, {3.950973511691987*^9, 3.950973536964202*^9}},
- CellLabel->
-  "Out[177]=",ExpressionUUID->"748aaba8-4fd5-4bc4-b9dc-c9eebef2f935"]
-}, Open  ]],
-
-Cell[BoxData["\.b4"], "Input",ExpressionUUID->"4d2c712e-4b09-4709-96d2-fe1d4833746c"]
+ CellChangeTimes->{3.9512022305982122`*^9, 3.951202929404056*^9},
+ CellLabel->"Out[45]=",ExpressionUUID->"20598728-2bae-455b-bba6-520373291515"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -5926,94 +10068,101 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 158, 3, 65, "Section",ExpressionUUID->"63e7d9bf-906f-4794-a583-b0f0b0d2ba8e"],
 Cell[741, 27, 240, 4, 29, "Input",ExpressionUUID->"4444d9d7-624e-4e8c-bbcd-da2de5e439a2"],
-Cell[984, 33, 8124, 129, 51, InheritFromParent,ExpressionUUID->"685f71c7-de81-46e9-9586-0ff491393f42"],
-Cell[9111, 164, 1224, 25, 60, "Print",ExpressionUUID->"f0c80660-04fd-418e-be0d-0deb776a2b68"]
+Cell[984, 33, 8124, 129, 51, InheritFromParent,ExpressionUUID->"350c8c9f-da30-4795-8149-3336fc7ffabc"],
+Cell[9111, 164, 1318, 27, 60, "Print",ExpressionUUID->"147fd730-884f-4533-a81b-d6f2730af00f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[10372, 194, 315, 5, 65, "Section",ExpressionUUID->"3b2e93b4-e5ae-4774-93e6-ef7268cde36a"],
-Cell[10690, 201, 83, 0, 33, "Text",ExpressionUUID->"d24e4319-a457-4f1c-adcf-5e7bbe751e8f"],
-Cell[10776, 203, 1821, 44, 142, "Input",ExpressionUUID->"7e134d47-4a9d-4e26-8bc2-bdd62d311698"],
-Cell[12600, 249, 84, 0, 33, "Text",ExpressionUUID->"2eebaffd-45b6-4a25-8a38-817c3bca937f"],
-Cell[12687, 251, 5344, 141, 254, "Input",ExpressionUUID->"4ae1b992-e7ac-40a7-9623-4d4edaa92419"],
-Cell[18034, 394, 80, 0, 33, "Text",ExpressionUUID->"7180e3b9-f75e-478c-a549-8d9725deb2fb"],
-Cell[18117, 396, 1201, 29, 95, "Input",ExpressionUUID->"cca2c209-5700-49ed-ad34-8fec199ec31a"],
-Cell[19321, 427, 81, 0, 33, "Text",ExpressionUUID->"6c594a1b-96a8-466c-8384-ece2d3abfbc1"],
-Cell[19405, 429, 1477, 42, 69, "Input",ExpressionUUID->"8f3e3a60-68d3-4712-9ff7-3f148b8e9cde"],
+Cell[10466, 196, 315, 5, 65, "Section",ExpressionUUID->"3b2e93b4-e5ae-4774-93e6-ef7268cde36a"],
+Cell[10784, 203, 83, 0, 33, "Text",ExpressionUUID->"d24e4319-a457-4f1c-adcf-5e7bbe751e8f"],
+Cell[10870, 205, 1821, 44, 142, "Input",ExpressionUUID->"7e134d47-4a9d-4e26-8bc2-bdd62d311698"],
+Cell[12694, 251, 84, 0, 33, "Text",ExpressionUUID->"2eebaffd-45b6-4a25-8a38-817c3bca937f"],
+Cell[12781, 253, 5344, 141, 254, "Input",ExpressionUUID->"4ae1b992-e7ac-40a7-9623-4d4edaa92419"],
+Cell[18128, 396, 80, 0, 33, "Text",ExpressionUUID->"7180e3b9-f75e-478c-a549-8d9725deb2fb"],
+Cell[18211, 398, 1201, 29, 95, "Input",ExpressionUUID->"cca2c209-5700-49ed-ad34-8fec199ec31a"],
+Cell[19415, 429, 81, 0, 33, "Text",ExpressionUUID->"6c594a1b-96a8-466c-8384-ece2d3abfbc1"],
+Cell[19499, 431, 1477, 42, 69, "Input",ExpressionUUID->"8f3e3a60-68d3-4712-9ff7-3f148b8e9cde"],
 Cell[CellGroupData[{
-Cell[20907, 475, 279, 5, 29, "Input",ExpressionUUID->"8cea245e-41d4-4447-905c-d8277ec32650"],
-Cell[21189, 482, 2135, 50, 73, "Output",ExpressionUUID->"0fabac2a-d9ae-447e-ac53-9720bbaa45e6"]
+Cell[21001, 477, 279, 5, 29, "Input",ExpressionUUID->"8cea245e-41d4-4447-905c-d8277ec32650"],
+Cell[21283, 484, 2228, 51, 73, "Output",ExpressionUUID->"7d52fd72-c7e1-41c2-89c6-9e6e4b7ab126"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23361, 537, 138, 2, 29, "Input",ExpressionUUID->"86907970-d130-4b07-b927-20c3b5cbe8e7"],
-Cell[23502, 541, 10801, 373, 100, "Output",ExpressionUUID->"144718af-7aaf-4c2a-8b56-341a30645657"]
+Cell[23548, 540, 138, 2, 29, "Input",ExpressionUUID->"86907970-d130-4b07-b927-20c3b5cbe8e7"],
+Cell[23689, 544, 10892, 374, 100, "Output",ExpressionUUID->"240aa36e-c10a-4823-8e41-cd5205355714"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34352, 920, 165, 3, 65, "Section",ExpressionUUID->"4dcbadef-ddcf-48e4-841f-746be981d3a0"],
-Cell[34520, 925, 208, 4, 33, "Text",ExpressionUUID->"b43ba9cc-f808-4a79-aaca-bb25d0a7a8f0"],
-Cell[34731, 931, 2352, 47, 53, "Input",ExpressionUUID->"32c0df16-5cd9-4b65-ba63-8abd5603836b"],
-Cell[37086, 980, 157, 3, 33, "Text",ExpressionUUID->"5bc6fa2b-5c37-417f-936a-603d3acb209c"],
-Cell[37246, 985, 755, 14, 30, "Input",ExpressionUUID->"d164cb5f-611c-47c5-ad40-10847e8bb80f"],
+Cell[34630, 924, 165, 3, 65, "Section",ExpressionUUID->"4dcbadef-ddcf-48e4-841f-746be981d3a0"],
+Cell[34798, 929, 208, 4, 33, "Text",ExpressionUUID->"b43ba9cc-f808-4a79-aaca-bb25d0a7a8f0"],
+Cell[35009, 935, 2507, 49, 53, "Input",ExpressionUUID->"32c0df16-5cd9-4b65-ba63-8abd5603836b"],
+Cell[37519, 986, 157, 3, 33, "Text",ExpressionUUID->"5bc6fa2b-5c37-417f-936a-603d3acb209c"],
+Cell[37679, 991, 755, 14, 30, "Input",ExpressionUUID->"d164cb5f-611c-47c5-ad40-10847e8bb80f"],
 Cell[CellGroupData[{
-Cell[38026, 1003, 210, 4, 53, "Subsection",ExpressionUUID->"ac941412-d810-4930-9f67-8b244d359272"],
-Cell[38239, 1009, 209, 4, 33, "Text",ExpressionUUID->"f1b38bdd-4213-4a75-8fef-270b0b9786c6"],
-Cell[38451, 1015, 1404, 27, 30, "Input",ExpressionUUID->"118bbe5f-54a9-474f-818a-6edf1e4b0c39"],
+Cell[38459, 1009, 210, 4, 53, "Subsection",ExpressionUUID->"ac941412-d810-4930-9f67-8b244d359272"],
+Cell[38672, 1015, 209, 4, 33, "Text",ExpressionUUID->"f1b38bdd-4213-4a75-8fef-270b0b9786c6"],
+Cell[38884, 1021, 1404, 27, 30, "Input",ExpressionUUID->"118bbe5f-54a9-474f-818a-6edf1e4b0c39"],
 Cell[CellGroupData[{
-Cell[39880, 1046, 277, 4, 29, "Input",ExpressionUUID->"c65fbb1b-a71e-4843-b9b7-b849b42716b7"],
-Cell[40160, 1052, 3103, 101, 60, "Output",ExpressionUUID->"8472cefb-962c-498b-b762-ff6ad56e3245"]
+Cell[40313, 1052, 277, 4, 29, "Input",ExpressionUUID->"c65fbb1b-a71e-4843-b9b7-b849b42716b7"],
+Cell[40593, 1058, 3210, 104, 50, "Output",ExpressionUUID->"ad803180-f393-4487-a399-941c71aa5720"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43300, 1158, 1049, 16, 49, "Input",ExpressionUUID->"f305916f-c60a-43fe-b7ae-6b7d85a449dc"],
-Cell[44352, 1176, 3732, 53, 33, "Output",ExpressionUUID->"10f863ea-e417-42d3-9e67-d9a7b7680849"]
+Cell[43840, 1167, 1049, 16, 49, "Input",ExpressionUUID->"f305916f-c60a-43fe-b7ae-6b7d85a449dc"],
+Cell[44892, 1185, 3825, 54, 33, "Output",ExpressionUUID->"a87d1d36-348f-4ca5-953a-bc67ec0bb183"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[48121, 1234, 138, 2, 29, "Input",ExpressionUUID->"ec314e3e-d364-4584-8a07-69c654a88107"],
-Cell[48262, 1238, 13194, 461, 121, "Output",ExpressionUUID->"4092d87a-1446-4551-8adb-588c9c14915f"]
+Cell[48754, 1244, 138, 2, 29, "Input",ExpressionUUID->"ec314e3e-d364-4584-8a07-69c654a88107"],
+Cell[48895, 1248, 13296, 463, 121, "Output",ExpressionUUID->"dabab553-bce2-485f-a42c-a5ad045aaa18"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[61517, 1706, 327, 5, 65, "Section",ExpressionUUID->"a49ed43d-a4ab-4a7a-a2e3-836bd40d9378"],
+Cell[62252, 1718, 327, 5, 65, "Section",ExpressionUUID->"a49ed43d-a4ab-4a7a-a2e3-836bd40d9378"],
 Cell[CellGroupData[{
-Cell[61869, 1715, 182, 3, 53, "Subsection",ExpressionUUID->"99dbeabd-cd8f-4d7c-afc3-47158ad974d1"],
+Cell[62604, 1727, 182, 3, 53, "Subsection",ExpressionUUID->"99dbeabd-cd8f-4d7c-afc3-47158ad974d1"],
 Cell[CellGroupData[{
-Cell[62076, 1722, 161, 3, 43, "Subsubsection",ExpressionUUID->"07151077-eff1-4f1a-849b-a3cc294940e6"],
-Cell[62240, 1727, 1834, 34, 69, "Input",ExpressionUUID->"9b93d35d-f0c9-4810-a623-f5428ddb5814"]
+Cell[62811, 1734, 161, 3, 43, "Subsubsection",ExpressionUUID->"07151077-eff1-4f1a-849b-a3cc294940e6"],
+Cell[62975, 1739, 1834, 34, 69, "Input",ExpressionUUID->"9b93d35d-f0c9-4810-a623-f5428ddb5814"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[64111, 1766, 236, 4, 43, "Subsubsection",ExpressionUUID->"ab65a6ea-e8a4-42dc-8168-f30b92c22ae2"],
+Cell[64846, 1778, 236, 4, 43, "Subsubsection",ExpressionUUID->"ab65a6ea-e8a4-42dc-8168-f30b92c22ae2"],
 Cell[CellGroupData[{
-Cell[64372, 1774, 497, 11, 29, "Input",ExpressionUUID->"854fdcd7-a4d7-4dd7-97f5-8827d7bd5006"],
-Cell[64872, 1787, 815, 16, 24, "Echo",ExpressionUUID->"05d26f02-13da-430c-a8c4-3abd08dfa098"]
+Cell[65107, 1786, 497, 11, 29, "Input",ExpressionUUID->"854fdcd7-a4d7-4dd7-97f5-8827d7bd5006"],
+Cell[65607, 1799, 815, 16, 24, "Echo",ExpressionUUID->"53d7e646-3e14-42b4-a0f2-fe45249c2b5a"]
 }, Open  ]],
-Cell[65702, 1806, 402, 8, 33, "Text",ExpressionUUID->"aa074b99-947e-4e2a-a02a-2a3394aa6696"],
-Cell[66107, 1816, 1277, 35, 49, "Input",ExpressionUUID->"0d7f98be-af74-418b-87a8-2f6828a81b7b"],
-Cell[67387, 1853, 2634, 67, 95, "Input",ExpressionUUID->"91df6be6-4287-453b-8b09-e766609d0aeb"],
+Cell[66437, 1818, 402, 8, 33, "Text",ExpressionUUID->"aa074b99-947e-4e2a-a02a-2a3394aa6696"],
+Cell[66842, 1828, 1277, 35, 49, "Input",ExpressionUUID->"0d7f98be-af74-418b-87a8-2f6828a81b7b"],
+Cell[68122, 1865, 2630, 66, 95, "Input",ExpressionUUID->"91df6be6-4287-453b-8b09-e766609d0aeb"],
 Cell[CellGroupData[{
-Cell[70046, 1924, 544, 10, 29, "Input",ExpressionUUID->"40db289f-b646-462c-b6ab-c70c933dddbd"],
-Cell[70593, 1936, 36451, 993, 244, "Output",ExpressionUUID->"ca90d8ea-f3cb-44c4-9a8e-08a04af42bb0"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[107081, 2934, 625, 15, 29, "Input",ExpressionUUID->"4dcf9171-5e46-40b9-8d5b-34e210d9d7f4"],
-Cell[107709, 2951, 42418, 1176, 289, "Output",ExpressionUUID->"92a020bb-e395-43ae-8c44-14654b39a733"]
+Cell[70777, 1935, 540, 9, 29, "Input",ExpressionUUID->"40db289f-b646-462c-b6ab-c70c933dddbd"],
+Cell[71320, 1946, 36084, 979, 238, "Output",ExpressionUUID->"7417ac6c-0ee3-487a-94eb-ed94d4d138ff"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[150164, 4132, 510, 13, 29, "Input",ExpressionUUID->"fd13c97d-b188-43e3-9df3-365c2728db89"],
-Cell[150677, 4147, 38163, 1029, 294, "Output",ExpressionUUID->"382bb553-0e1f-4bbc-98b5-16770f94ac04"]
+Cell[107441, 2930, 621, 14, 29, "Input",ExpressionUUID->"4dcf9171-5e46-40b9-8d5b-34e210d9d7f4"],
+Cell[108065, 2946, 42051, 1162, 289, "Output",ExpressionUUID->"8edc851b-ef1a-4a42-ada3-924873118221"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[188877, 5181, 919, 26, 34, "Input",ExpressionUUID->"d064d3e8-2931-4370-8788-328f94669042"],
-Cell[189799, 5209, 16424, 526, 167, "Output",ExpressionUUID->"27e460db-ec6a-4b3e-b6a0-3f103919030f"]
+Cell[150153, 4113, 506, 12, 29, "Input",ExpressionUUID->"fd13c97d-b188-43e3-9df3-365c2728db89"],
+Cell[150662, 4127, 37832, 1017, 293, "Output",ExpressionUUID->"000aee37-a97a-47df-a531-39bc3681b4d1"],
+Cell[188497, 5146, 38268, 1031, 308, "Output",ExpressionUUID->"2cd2948b-a0e3-46f6-b60c-ec00d3a71e36"],
+Cell[226768, 6179, 37784, 1016, 293, "Output",ExpressionUUID->"4c993f01-b4c7-49d7-98fa-27e4e3f7405f"],
+Cell[264555, 7197, 38220, 1030, 308, "Output",ExpressionUUID->"2e08d66c-94d4-4bb3-882b-4a92b8da055f"],
+Cell[302778, 8229, 38163, 1029, 294, "Output",ExpressionUUID->"382bb553-0e1f-4bbc-98b5-16770f94ac04"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[206260, 5740, 790, 23, 34, "Input",ExpressionUUID->"1b5d3efc-a9cf-4e9d-afb1-41dbb14a6a11"],
-Cell[207053, 5765, 2077, 75, 65, "Output",ExpressionUUID->"d8d2ed89-1433-4904-9ec8-886a60913a4e"]
+Cell[340978, 9263, 915, 25, 34, "Input",ExpressionUUID->"d064d3e8-2931-4370-8788-328f94669042"],
+Cell[341896, 9290, 16514, 526, 148, "Output",ExpressionUUID->"4a1a4bda-0abc-4262-9673-1426013a6ba7"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[209167, 5845, 1043, 32, 30, "Input",ExpressionUUID->"e0ee2630-2d08-4b6a-acaf-97472ab1c5fe"],
-Cell[210213, 5879, 603, 19, 34, "Output",ExpressionUUID->"748aaba8-4fd5-4bc4-b9dc-c9eebef2f935"]
+Cell[358447, 9821, 786, 22, 34, "Input",ExpressionUUID->"1b5d3efc-a9cf-4e9d-afb1-41dbb14a6a11"],
+Cell[359236, 9845, 1970, 69, 65, "Output",ExpressionUUID->"73248b2b-4acb-4a58-951d-03fd5b775116"]
 }, Open  ]],
-Cell[210831, 5901, 85, 0, 29, "Input",ExpressionUUID->"4d2c712e-4b09-4709-96d2-fe1d4833746c"]
+Cell[CellGroupData[{
+Cell[361243, 9919, 1714, 54, 29, "Input",ExpressionUUID->"f8bb437f-7932-41fa-938f-4842928b8ed3"],
+Cell[362960, 9975, 627, 18, 34, "Output",ExpressionUUID->"3919d511-c8fb-4353-af55-d9f7df2313e7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[363624, 9998, 845, 25, 29, "Input",ExpressionUUID->"ef9032e6-3ad3-4b1a-af9e-afb4bc94dd97"],
+Cell[364472, 10025, 572, 17, 34, "Output",ExpressionUUID->"20598728-2bae-455b-bba6-520373291515"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
