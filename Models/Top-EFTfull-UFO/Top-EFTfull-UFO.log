@@ -1,0 +1,100 @@
+# This file was automatically created by FeynRules 2.3.49
+# Mathematica version: 14.2.0 for Linux x86 (64-bit) (December 26, 2024)
+# Date: Thu 20 Mar 2025 15:52:09
+
+
+# 
+# This is the logfile for the model Top-EFTfull
+
+# Authors: Andre Lessa
+# Model version: 1.0
+# Checking the Quantum numbers
+   * Electric charge defined.
+# Checking the Lagrangians
+   * All Lagrangians are ok.
+#
+# Particle definitions
+#
+
+   * No particles removed. All particles correspond to GenInt setup.
+
+# Automatically assigned PDG numbers
+   * Assigned PDG number 9000001 to particle ghA
+   * Assigned PDG number 9000002 to particle ghZ
+   * Assigned PDG number 9000003 to particle ghWp
+   * Assigned PDG number 9000004 to particle ghWm
+
+
+# Compulsory PDG codes:
+   * Class SM leptons complete.
+   * Class SM neutrinos complete.
+   * Class SM quarks complete.
+   * Class SM gauge bosons complete.
+#
+# Parameter definitions
+#
+
+   * Parameter cuuc has no value. Default value 1 assigned.
+   * Parameter cqu8b has no value. Default value 1 assigned.
+   * Parameter cud8b has no value. Default value 1 assigned.
+   * Parameter cuub has no value. Default value 1 assigned.
+   * Parameter cHq1 has no value. Default value 1 assigned.
+   * Parameter cHq3 has no value. Default value 1 assigned.
+   * Parameter cuH has no value. Default value 1 assigned.
+   * Parameter cuG has no value. Default value 1 assigned.
+
+
+# Vertices
+   * Calling FeynmanRules for 1 Lagrangians.
+   * Number of classes vertices: 54
+   * Number of flavored vertices: 97
+   * Saved vertices in InterfaceRun[ 1 ].
+   * Checked QNumber conservation.
+      - Quantum number GhostNumber conserved in all vertices.
+      - Quantum number LeptonNumber conserved in all vertices.
+      - Quantum number Q conserved in all vertices.
+      - Quantum number Y conserved in all vertices.
+   * particles.py written.
+   * parameters.py written.
+#
+# Vertex definitions
+#
+
+   * 124 vertices written.
+   * vertices.py written.
+#
+# Lorentz structure definitions
+#
+
+   * 68 lorentz structures written.
+   * lorentz.py written.
+#
+# Coupling definitions
+#
+
+   >>>> Non positive interaction order QED found for coupling GC_53.
+   >>>> Non positive interaction order QED found for coupling GC_54.
+   >>>> Non positive interaction order QED found for coupling GC_55.
+   >>>> Non positive interaction order QED found for coupling GC_59.
+   >>>> Non positive interaction order QED found for coupling GC_60.
+   >>>> Non positive interaction order QED found for coupling GC_63.
+   * 66 couplings written.
+   * couplings.py written.
+#
+# Coupling order definitions
+#
+
+   * 0 couplings orders written.
+   * coupling_orders.py written.
+#
+# Decay definitions
+#
+
+   * 6 decays written.
+   * decay.py not written
+#
+# CTCoupling definitions
+#
+
+   * 0 CTcouplings written.
+   * CT_couplings.py written.
