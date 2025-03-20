@@ -32,6 +32,7 @@ LF22m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^4 + M^4 + 2*m^2*M^2*Lo
 LF31m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), -1/2*(m^4 - 4*m^2*M^2 + 3*M^4 + 2*M^4*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/60*(33*m^2 - 96*m*M + 83*M^2)/M^4];
 LF41m2[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-2*m^6 + 9*m^4*M^2 - 18*m^2*M^4 + 11*M^6 + 6*M^6*Log[m^2/M^2])/(6*(m^2 - M^2)^4),-1/60*(28*m^2 - 80*m*M + 67*M^2)/M^4];
 
+hbar = 1.0/((4*Pi)^2)
 
 (* Auxiliary Functions *)
 
@@ -55,18 +56,153 @@ M$Parameters = {
 
   mChi  == { TeX->Subscript[M,c],  ComplexParameter -> False, ParameterType->External, Value->500.0, Description->"Dark fermion mass"},
 
+  mu  == { TeX->Subscript[M,c],  ComplexParameter -> False, ParameterType->External, Value->1000.0, Description->"Matching scale"},
+
+
 
 cdd == {
     ParameterType     -> Internal,
-    Indices           -> {Index[Generation], Index[Generation],Index[Generation], Index[Generation]},
-    Definitions       -> {
-          cdd[i1_?NumericQ, i2_?NumericQ, i3_?NumericQ, j4_?NumericQ] :> (If[(i1 == i2 && i3 == i4), 16*g1^4 - 9*gs^4,0] - If[(i1 == i4 && i2 == i3),9*gs^4,0])*(-1/(4*Pi)^2)*(1/6480)*(1/mST^2)}
+    Value       -> (-1/720)*hbar*gs^4/mST^2,
     InteractionOrder  -> {{NP,1},{NPcdd,1}},
     ComplexParameter  -> True,
     Hermitian         -> True,
     TeX               -> Subscript[c,dd]
+  },  
+
+cG == {
+    ParameterType     -> Internal,
+    Value       -> (1/360)*hbar*gs^3/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcG,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,G]
+  }, 
+
+cHq1 == {
+    ParameterType     -> Internal,
+    Value       -> (-1/4)*hbar*Yt^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,1},{NPcHq1,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,Hq1]
+  },   
+
+cHq3 == {
+    ParameterType     -> Internal,
+    Value       -> (1/4)*hbar*Yt^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,1},{NPcHq3,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,Hq3]
+  }, 
+
+cqd8 == {
+    ParameterType     -> Internal,
+    Value       -> (-1/60)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcqd8,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,qd8]
   },
 
+cqq1 == {
+    ParameterType     -> Internal,
+    Value       -> (-1/1440)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcqq1,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,qq1]
+  },
+
+cqq3 == {
+    ParameterType     -> Internal,
+    Value       -> (-1/480)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcqq3,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,qq3]
+  },  
+
+cqu8_a == {
+    ParameterType     -> Internal,
+    Value       -> (-1/60)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcqu8,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,qu8a]
+  }, 
+
+cqu8_b == {
+    ParameterType     -> Internal,
+    Value       -> (1/6)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
+    InteractionOrder  -> {{NP,1},{NPcqu8,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,qu8b]
+  },
+
+cud8_a == {
+    ParameterType     -> Internal,
+    Value       -> (-1/60)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcud8,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,ud8a]
+  },   
+
+cud8_b == {
+    ParameterType     -> Internal,
+    Value       -> (1/6)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
+    InteractionOrder  -> {{NP,1},{NPcud8,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,ud8b]
+  },  
+
+cuG == {
+    ParameterType     -> Internal,
+    Value       -> (1/4)*hbar*gs*Yt*yDM^2*(LF210[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,1},{NPcuG,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,uG]
+  },   
+
+cuH == {
+    ParameterType     -> Internal,
+    Value       -> (-1/2)*hbar*Yt^3*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,1},{NPcuH,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,uH]
+  },     
+
+cuu_a == {
+    ParameterType     -> Internal,
+    Value       -> (-1/720)*hbar*gs^4/mST^2,
+    InteractionOrder  -> {{NP,1},{NPcuu,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,uua]
+  },
+
+cuu_b == {
+    ParameterType     -> Internal,
+    Value       -> (-1/36)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
+    InteractionOrder  -> {{NP,1},{NPcuu,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,uub]
+  },
+
+cuu_c == {
+    ParameterType     -> Internal,
+    Value       -> (1/8)*hbar*yDM^4*LF22m1[mChi,mST,mu],
+    InteractionOrder  -> {{NP,1},{NPcuu,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,uuc]
+  },     
   
 };
 
@@ -80,9 +216,70 @@ Odd[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,cc1,cc2},
 	 dRbar[sp3,ff3,cc2].dR[sp4,ff4,cc2] Ga[mu,sp3,sp4]
 	];
 
-L6cl8b:= Block[{ff1,ff2,ff3,ff4},
-         cdd[ff1,ff2,ff3,ff4] Odd[ff1,ff2,ff3,ff4]
+OG:= operator[{mu,nu,ro,aa,bb,cc},
+	f[aa,bb,cc] FS[G,mu,nu,aa] FS[G,nu,ro,bb] FS[G,ro,mu,cc]
+      ];
+
+OHq1[ff1_,ff2_]:= operator[{sp1,sp2,mu,ii,cc},
+	HDH[mu] QLbar[sp1,ii,ff1,cc].QL[sp2,ii,ff2,cc] Ga[mu,sp1,sp2]
+	];
+
+OHq3[ff1_,ff2_]:= operator[{sp1,sp2,mu,ii,jj,kk,jj1,jj2,cc},
+	 I( Phibar[jj1] DC[Phi[jj2],mu] - DC[Phibar[jj1],mu] Phi[jj2])
+         QLbar[sp1,ii,ff1,cc].QL[sp2,jj,ff2,cc] Ga[mu,sp1,sp2]
+         PauliSigma[kk,jj1,jj2]  PauliSigma[kk,ii,jj]
+     ];
+
+Oqd8[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,ii,cc1,cc2,cc3,cc4,aa},
+	QLbar[sp1,ii,ff1,cc1].QL[sp2,ii,ff2,cc2] Ga[mu,sp1,sp2]
+	dRbar[sp3,ff3,cc3].dR[sp4,ff4,cc4] Ga[mu,sp3,sp4]
+	T[aa,cc1,cc2] T[aa,cc3,cc4]
+	];
+
+Oqq1[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,ii,jj,cc1,cc2},
+	QLbar[sp1,ii,ff1,cc1].QL[sp2,ii,ff2,cc1] Ga[mu,sp1,sp2]
+	QLbar[sp3,jj,ff3,cc2].QL[sp4,jj,ff4,cc2] Ga[mu,sp3,sp4]
+	];
+
+Oqq3[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,cc1,cc2,ii1,jj1,ii2,jj2,kk},
+	QLbar[sp1,ii1,ff1,cc1].QL[sp2,jj1,ff2,cc1] Ga[mu,sp1,sp2]
+	QLbar[sp3,ii2,ff3,cc2].QL[sp4,jj2,ff4,cc2] Ga[mu,sp3,sp4]
+	PauliSigma[kk,ii1,jj1] PauliSigma[kk,ii2,jj2]
+	];
+  
+Oqu8[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,ii,cc1,cc2,cc3,cc4,aa},
+	QLbar[sp1,ii,ff1,cc1].QL[sp2,ii,ff2,cc2] Ga[mu,sp1,sp2]
+	uRbar[sp3,ff3,cc3].uR[sp4,ff4,cc4] Ga[mu,sp3,sp4]
+	T[aa,cc1,cc2] T[aa,cc3,cc4]
+	];
+
+Oud8[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,cc1,cc2,cc3,cc4,aa},
+	 uRbar[sp1,ff1,cc1].uR[sp2,ff2,cc2] Ga[mu,sp1,sp2]
+	 dRbar[sp3,ff3,cc3].dR[sp4,ff4,cc4] Ga[mu,sp3,sp4]
+	 T[aa,cc1,cc2] T[aa,cc3,cc4]
+	];
+
+OuG[ff1_,ff2_]:= operator[{sp1,sp2,mu,nu,ii,jj,aa,bb,cc},
+	QLbar[sp1,ii,ff1,aa].uR[sp2,ff2,bb] sigmaT[mu,nu,sp1,sp2] Phibar[jj] FS[G,mu,nu,cc]
+	T[cc,aa,bb] Eps[ii,jj]
+	];
+
+OuH[ff1_,ff2_]:= operator[{sp1,ii,jj,kk,cc},
+	 Phibar[kk] Phi[kk] QLbar[sp1,ii,ff1,cc].uR[sp1,ff2,cc] Eps[ii,jj] Phibar[jj]
+	];
+
+Ouu[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,cc1,cc2},
+	 uRbar[sp1,ff1,cc1].uR[sp2,ff2,cc1] Ga[mu,sp1,sp2]
+	 uRbar[sp3,ff3,cc2].uR[sp4,ff4,cc2] Ga[mu,sp3,sp4]
+	];
+  
+     
+
+L6cl8b:= Block[{ff1,ff2},
+         cdd*(3*Odd[ff1,ff2,ff2,ff1] - cdd_b*Odd[ff1,ff1,ff2,ff2])
          ]//OptimizeIndex
+
+LOG := cG*OG;
 
 (* Total EFT lagrangian *)
 
