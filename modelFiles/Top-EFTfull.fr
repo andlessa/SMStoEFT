@@ -1,0 +1,89 @@
+(***************************************************************)
+(***************************************************************)
+(** FeynRules model file for top EFT couplings induced  ********)
+(** by a scalar top partner and a fermion singlet (DM).  *******)
+(** All the dim6 operators are included. ****)
+(** The on-shell (physical) basis is assumed with the         **)
+(** coefficients in the heavy mass limit (mST,mChi >> mTop,s) **)
+(** computed using Matchete 0.3.0                           ****)
+(******                                                        *)
+(****** A. Lessa                                               *)
+(******                                                        *)
+(****** Feel free to use this model file!                      *)
+(***************************************************************)
+(***************************************************************)
+
+M$ModelName = "Top-EFTfull";
+
+M$Information = {Authors -> {"Andre Lessa"}, 
+                 Version -> "1.0",
+                 Date -> "28.08.2023"};
+
+FeynmanGauge = True;
+
+M$InteractionOrderHierarchy = {  {NP, 1}, {QCD, 2}, {QED,3} };
+
+(* Loop Functions *)
+
+LF110[m_, M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (m^2 - M^2 + m^2*Log[mu^2/m^2] - M^2*Log[mu^2/M^2])/(m^2 - M^2), ((m - 7*M)*(m - M))/(6*M^2) + Log[mu^2/M^2]];
+LF21m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-(m^2*M^2) + M^4 + (m^4 - 2*m^2*M^2)*Log[mu^2/m^2] + M^4*Log[mu^2/M^2])/(m^2 - M^2)^2,  7/6 + (m*(m - 6*M))/(3*M^2) + Log[mu^2/M^2]];
+LF210[m_, M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^2 + M^2 + M^2*Log[m^2/M^2])/(m^2 - M^2)^2, -1/6*(4*m^2 - 12*m*M + 11*M^2)/M^4];
+LF22m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^4 + M^4 + 2*m^2*M^2*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/30*(7*m^2 - 24*m*M + 27*M^2)/M^4];
+LF31m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), -1/2*(m^4 - 4*m^2*M^2 + 3*M^4 + 2*M^4*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/60*(33*m^2 - 96*m*M + 83*M^2)/M^4];
+LF41m2[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-2*m^6 + 9*m^4*M^2 - 18*m^2*M^4 + 11*M^6 + 6*M^6*Log[m^2/M^2])/(6*(m^2 - M^2)^4),-1/60*(28*m^2 - 80*m*M + 67*M^2)/M^4];
+
+
+(* Auxiliary Functions *)
+
+feynmangaugerules := If[Not[FeynmanGauge], {G0|GP|GPbar ->0}, {}];
+operator[ind_, expr_]:= Block[ind,
+                          ExpandIndices[ expr,
+                          FlavorExpand->{SU2D,SU2W}]/.feynmangaugerules
+                        ]//OptimizeIndex;
+
+
+(* ************************** *)
+(* *****   Parameters   ***** *)
+(* ************************** *)
+
+M$Parameters = {
+
+(* New Physics (UV) Parameters *)
+  yDM  == { TeX->Subscript[y,DM],  ComplexParameter -> False, ParameterType->External, Value->1.0, InteractionOrder->{NP ,1}, Description->"Dark fermion - heavy stop - SM RH top Yukawa"},
+
+  mST  == { TeX->Subscript[M,st],  ComplexParameter -> False, ParameterType->External, Value->1000.0, Description->"Top scalar mass"},
+
+  mChi  == { TeX->Subscript[M,c],  ComplexParameter -> False, ParameterType->External, Value->500.0, Description->"Dark fermion mass"},
+
+
+cdd == {
+    ParameterType     -> Internal,
+    Indices           -> {Index[Generation], Index[Generation],Index[Generation], Index[Generation]},
+    Definitions       -> {
+          cdd[i1_?NumericQ, i2_?NumericQ, i3_?NumericQ, j4_?NumericQ] :> (If[(i1 == i2 && i3 == i4), 16*g1^4 - 9*gs^4,0] - If[(i1 == i4 && i2 == i3),9*gs^4,0])*(-1/(4*Pi)^2)*(1/6480)*(1/mST^2)}
+    InteractionOrder  -> {{NP,1},{NPcdd,1}},
+    ComplexParameter  -> True,
+    Hermitian         -> True,
+    TeX               -> Subscript[c,dd]
+  },
+
+  
+};
+
+
+(* ************************** *)
+(* *****   Lagrangian   ***** *)
+(* ************************** *)
+
+Odd[ff1_,ff2_,ff3_,ff4_]:= operator[{mu,sp1,sp2,sp3,sp4,cc1,cc2},
+	 dRbar[sp1,ff1,cc1].dR[sp2,ff2,cc1] Ga[mu,sp1,sp2]
+	 dRbar[sp3,ff3,cc2].dR[sp4,ff4,cc2] Ga[mu,sp3,sp4]
+	];
+
+L6cl8b:= Block[{ff1,ff2,ff3,ff4},
+         cdd[ff1,ff2,ff3,ff4] Odd[ff1,ff2,ff3,ff4]
+         ]//OptimizeIndex
+
+(* Total EFT lagrangian *)
+
+LNP := L6cl8b;
