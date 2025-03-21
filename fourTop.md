@@ -18,9 +18,9 @@
 
  ```math
  \begin{split}
- C_{uu}^{(3,3,3,3)} = & -\frac{y_{\text{DM}}^4}{128 \pi ^2} \frac{\left(x^2+2 x \log \left(\frac{1}{x}\right)-1\right)}{ M^2
+ C_{uu}^{(3,3,3,3)} = & -\frac{y_{\text{DM}}^4}{128 \pi ^2} \frac{\left(x^2-2 x \log \left(x\right)-1\right)}{ M^2
    (x-1)^3}\\
- & -\frac{y_{\text{DM}}^2 g_s^2}{1728 \pi ^2} \frac{\left(11 x^3+6 x^3 \log \left(\frac{1}{x}\right)-18 x^2+9 x-2\right) }{M^2 (x-1)^4} \\
+ & -\frac{y_{\text{DM}}^2 g_s^2}{1728 \pi ^2} \frac{\left(11 x^3-6 x^3 \log \left(x\right)-18 x^2+9 x-2\right) }{M^2 (x-1)^4} \\
  & -\frac{g_s^4}{5760 \pi ^2 M^2}
 \end{split}
  ```
@@ -39,3 +39,4 @@ For large $y_{\text{DM}}$, the EFT contribution is dominated by term proportiona
 
 -------------------------
 
+From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expansion breaks down, since the EFT $`^{2}`$ term, which is of $`\mathcal{O}(1/\Lambda^4)`$ is larger than the interference term ($`\mathcal{O}(1/\Lambda^2)`$).
