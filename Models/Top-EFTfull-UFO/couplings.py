@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 14.2.0 for Linux x86 (64-bit) (December 26, 2024)
-# Date: Thu 20 Mar 2025 16:10:33
+# Date: Fri 21 Mar 2025 08:23:20
 
 
 from object_library import all_couplings, Coupling
@@ -71,11 +71,11 @@ GC_15 = Coupling(name = 'GC_15',
 
 GC_16 = Coupling(name = 'GC_16',
                  value = '(cuG*complex(0,1))/cmath.sqrt(2)',
-                 order = {'NP':2,'NPcuG':1,'QCD':1})
+                 order = {'NP':2,'NPcuG':1,'QCD':1,'QED':1})
 
 GC_17 = Coupling(name = 'GC_17',
                  value = '(3*cuH*complex(0,1))/cmath.sqrt(2)',
-                 order = {'NP':2,'NPcuH':1})
+                 order = {'NP':2,'NPcuH':1,'QED':3})
 
 GC_18 = Coupling(name = 'GC_18',
                  value = '-2*cuua*complex(0,1)',
@@ -135,7 +135,7 @@ GC_31 = Coupling(name = 'GC_31',
 
 GC_32 = Coupling(name = 'GC_32',
                  value = '-((cuG*G)/cmath.sqrt(2))',
-                 order = {'NP':2,'NPcuG':1,'QCD':2})
+                 order = {'NP':2,'NPcuG':1,'QCD':2,'QED':1})
 
 GC_33 = Coupling(name = 'GC_33',
                  value = 'complex(0,1)*G**2',
@@ -179,7 +179,7 @@ GC_42 = Coupling(name = 'GC_42',
 
 GC_43 = Coupling(name = 'GC_43',
                  value = '(cHq1*ee*complex(0,1)*cmath.sqrt(2))/sw',
-                 order = {'NP':2,'NPcHq1':1,'QED':1})
+                 order = {'NP':2,'NPcHq1':1,'QED':3})
 
 GC_44 = Coupling(name = 'GC_44',
                  value = '-0.5*(cw*ee*complex(0,1))/sw',
@@ -211,7 +211,7 @@ GC_50 = Coupling(name = 'GC_50',
 
 GC_51 = Coupling(name = 'GC_51',
                  value = '(-2*cHq1*cw*ee*complex(0,1))/sw - (2*cHq1*ee*complex(0,1)*sw)/cw',
-                 order = {'NP':2,'NPcHq1':1,'QED':1})
+                 order = {'NP':2,'NPcHq1':1,'QED':3})
 
 GC_52 = Coupling(name = 'GC_52',
                  value = 'ee**2*complex(0,1) + (cw**2*ee**2*complex(0,1))/(2.*sw**2) + (ee**2*complex(0,1)*sw**2)/(2.*cw**2)',
@@ -219,15 +219,15 @@ GC_52 = Coupling(name = 'GC_52',
 
 GC_53 = Coupling(name = 'GC_53',
                  value = '(cuG*complex(0,1)*vev)/cmath.sqrt(2)',
-                 order = {'NP':2,'NPcuG':1,'QCD':1,'QED':-1})
+                 order = {'NP':2,'NPcuG':1,'QCD':1})
 
 GC_54 = Coupling(name = 'GC_54',
                  value = '(3*cuH*complex(0,1)*vev)/cmath.sqrt(2)',
-                 order = {'NP':2,'NPcuH':1,'QED':-1})
+                 order = {'NP':2,'NPcuH':1,'QED':2})
 
 GC_55 = Coupling(name = 'GC_55',
                  value = '-((cuG*G*vev)/cmath.sqrt(2))',
-                 order = {'NP':2,'NPcuG':1,'QCD':2,'QED':-1})
+                 order = {'NP':2,'NPcuG':1,'QCD':2})
 
 GC_56 = Coupling(name = 'GC_56',
                  value = '-6*complex(0,1)*lam*vev',
@@ -239,19 +239,19 @@ GC_57 = Coupling(name = 'GC_57',
 
 GC_58 = Coupling(name = 'GC_58',
                  value = '(cHq1*ee*complex(0,1)*vev*cmath.sqrt(2))/sw',
-                 order = {'NP':2,'NPcHq1':1})
+                 order = {'NP':2,'NPcHq1':1,'QED':2})
 
 GC_59 = Coupling(name = 'GC_59',
                  value = '(3*cuH*complex(0,1)*vev**2)/(2.*cmath.sqrt(2))',
-                 order = {'NP':2,'NPcuH':1,'QED':-2})
+                 order = {'NP':2,'NPcuH':1,'QED':1})
 
 GC_60 = Coupling(name = 'GC_60',
                  value = '(cHq1*ee*complex(0,1)*vev**2)/(sw*cmath.sqrt(2))',
-                 order = {'NP':2,'NPcHq1':1,'QED':-1})
+                 order = {'NP':2,'NPcHq1':1,'QED':1})
 
 GC_61 = Coupling(name = 'GC_61',
                  value = '(-2*cHq1*cw*ee*complex(0,1)*vev)/sw - (2*cHq1*ee*complex(0,1)*sw*vev)/cw',
-                 order = {'NP':2,'NPcHq1':1})
+                 order = {'NP':2,'NPcHq1':1,'QED':2})
 
 GC_62 = Coupling(name = 'GC_62',
                  value = 'ee**2*complex(0,1)*vev + (cw**2*ee**2*complex(0,1)*vev)/(2.*sw**2) + (ee**2*complex(0,1)*sw**2*vev)/(2.*cw**2)',
@@ -259,7 +259,7 @@ GC_62 = Coupling(name = 'GC_62',
 
 GC_63 = Coupling(name = 'GC_63',
                  value = '-((cHq1*cw*ee*complex(0,1)*vev**2)/sw) - (cHq1*ee*complex(0,1)*sw*vev**2)/cw',
-                 order = {'NP':2,'NPcHq1':1,'QED':-1})
+                 order = {'NP':2,'NPcHq1':1,'QED':1})
 
 GC_64 = Coupling(name = 'GC_64',
                  value = '-((complex(0,1)*yb)/cmath.sqrt(2))',

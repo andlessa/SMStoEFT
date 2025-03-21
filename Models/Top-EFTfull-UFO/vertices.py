@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 14.2.0 for Linux x86 (64-bit) (December 26, 2024)
-# Date: Thu 20 Mar 2025 16:10:33
+# Date: Fri 21 Mar 2025 08:23:20
 
 
 from object_library import all_vertices, Vertex

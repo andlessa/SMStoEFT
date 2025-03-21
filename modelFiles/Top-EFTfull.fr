@@ -32,7 +32,7 @@ LF22m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^4 + M^4 + 2*m^2*M^2*Lo
 LF31m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), -1/2*(m^4 - 4*m^2*M^2 + 3*M^4 + 2*M^4*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/60*(33*m^2 - 96*m*M + 83*M^2)/M^4];
 LF41m2[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-2*m^6 + 9*m^4*M^2 - 18*m^2*M^4 + 11*M^6 + 6*M^6*Log[m^2/M^2])/(6*(m^2 - M^2)^4),-1/60*(28*m^2 - 80*m*M + 67*M^2)/M^4];
 
-hbar = 1.0/((4*Pi)^2)
+hbar = 1/((4*Pi)^2)
 
 (* Auxiliary Functions *)
 
@@ -87,16 +87,16 @@ cG == {
 
 cHq1 == {
     ParameterType     -> Internal,
-    Value       -> (-1/4)*hbar*yt^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{NPcHq1,1}},
+    Value       -> (-1/4)*hbar*(Sqrt[2]*ymt/vev)^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,2},{NPcHq1,1},{QED,2}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,Hq1]
   },   
 
 cHq3 == {
     ParameterType     -> Internal,
-    Value       -> (1/4)*hbar*yt^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{NPcHq3,1}},
+    Value       -> (1/4)*hbar*(Sqrt[2]*ymt/vev)^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,2},{NPcHq3,1},{QED,2}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,Hq3]
   }, 
@@ -159,16 +159,16 @@ cud8b == {
 
 cuG == {
     ParameterType     -> Internal,
-    Value       -> (1/4)*hbar*gs*yt*yDM^2*(LF210[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{QCD,1},{NPcuG,1}},
+    Value       -> (1/4)*hbar*gs*(Sqrt[2]*ymt/vev)*yDM^2*(LF210[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,2},{QCD,1},{NPcuG,1},{QED,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uG]
   },   
 
 cuH == {
     ParameterType     -> Internal,
-    Value       -> (-1/2)*hbar*yt^3*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{NPcuH,1}},
+    Value       -> (-1/2)*hbar*(Sqrt[2]*ymt/vev)^3*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
+    InteractionOrder  -> {{NP,2},{NPcuH,1},{QED,3}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uH]
   },     

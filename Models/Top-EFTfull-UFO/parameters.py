@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 14.2.0 for Linux x86 (64-bit) (December 26, 2024)
-# Date: Thu 20 Mar 2025 16:10:33
+# Date: Fri 21 Mar 2025 08:23:20
 
 
 
@@ -325,33 +325,33 @@ ytau = Parameter(name = 'ytau',
                  value = '(ymtau*cmath.sqrt(2))/vev',
                  texname = '\\text{ytau}')
 
-muH = Parameter(name = 'muH',
-                nature = 'internal',
-                type = 'real',
-                value = 'cmath.sqrt(lam*vev**2)',
-                texname = '\\mu')
-
 cHq1 = Parameter(name = 'cHq1',
                  nature = 'internal',
                  type = 'real',
-                 value = '-0.0015831434944115277*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*yt**2',
+                 value = '(-0.0031662869888230555*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*ymt**2)/vev**2',
                  texname = 'c_{\\text{Hq1}}')
 
 cHq3 = Parameter(name = 'cHq3',
                  nature = 'internal',
                  type = 'real',
-                 value = '0.0015831434944115277*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*yt**2',
+                 value = '(0.0031662869888230555*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*ymt**2)/vev**2',
                  texname = 'c_{\\text{Hq3}}')
 
 cuH = Parameter(name = 'cuH',
                 nature = 'internal',
                 type = 'real',
-                value = '-0.0031662869888230555*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*yt**3',
+                value = '(-0.008955612003918067*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*yDM**2*ymt**3)/vev**3',
                 texname = 'c_{\\text{uH}}')
 
 cuG = Parameter(name = 'cuG',
                 nature = 'internal',
                 type = 'real',
-                value = '0.0015831434944115277*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*G*yDM**2*yt',
+                value = '(0.002238903000979517*(-2*( -0.5*(mChi**4 - 4*mChi**2*mST**2 + 3*mST**4 + 2*mST**4*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(33*mChi**2 - 96*mChi*mST + 83*mST**2)/mST**4 ) + ( (-2*mChi**6 + 9*mChi**4*mST**2 - 18*mChi**2*mST**4 + 11*mST**6 + 6*mST**6*cmath.log(mChi**2/mST**2))/(6.*(mChi**2 - mST**2)**4) if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.016666666666666666*(28*mChi**2 - 80*mChi*mST + 67*mST**2)/mST**4 ) + ( (-mChi**2 + mST**2 + mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**2 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.16666666666666666*(4*mChi**2 - 12*mChi*mST + 11*mST**2)/mST**4 ))*G*yDM**2*ymt)/vev',
                 texname = 'c_{\\text{uG}}')
+
+muH = Parameter(name = 'muH',
+                nature = 'internal',
+                type = 'real',
+                value = 'cmath.sqrt(lam*vev**2)',
+                texname = '\\mu')
 
