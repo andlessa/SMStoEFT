@@ -20,8 +20,8 @@ BLOCK MASS #
       15 1.777000e+00 # mta
       23 9.118760e+01 # mz
       25 1.250000e+02 # mh
-      5000002 4.000000e+02 # mst
-      5000012 1.000000e+02 # mchi
+      5000002 5.000000e+02 # mst
+      5000012 4.000000e+02 # mchi
       1 0.000000e+00 # d : 0.0
       2 0.000000e+00 # u : 0.0
       3 0.000000e+00 # s : 0.0
@@ -45,7 +45,7 @@ BLOCK MASS #
 BLOCK SMINPUTS # 
       1 1.279000e+02 # aewm1
       2 1.166370e-05 # gf
-      3 1.190000e-01 # as (note: this parameter is not used if you use a pdf set)
+      3 1.300000e-01 # as (note that parameter not used if you use a pdf set)
 ###################################
 ## INFORMATION FOR YUKAWA
 ###################################
