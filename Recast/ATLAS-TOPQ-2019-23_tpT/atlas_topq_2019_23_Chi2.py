@@ -42,7 +42,6 @@ def read_ATLASdata(dataDir='./data'):
         sysTot = np.sqrt(sysTot2)*eval(item[3])
         systematic_error.append(sysTot)
     systematic_error = np.array(systematic_error)
-    # print(systematic_error)
 
 
     atlas_bg = np.loadtxt(os.path.join(dataDir,'../sm/nnlo_from_fig11_digitized.txt'),dtype=float,usecols=(0,))
@@ -56,7 +55,6 @@ def read_ATLASdata(dataDir='./data'):
         covmat_stat.append(float(item[-1]))
 
     covmat_stat = np.array(covmat_stat).reshape(8,8)
-    # print(covmat_stat)
 
     # Total covariance matrix
     covmat = covmat_stat + np.diag(systematic_error**2)
@@ -108,7 +106,7 @@ def chi2(yDM,signal,sm,data,covmat,deltas=0.0):
     return ((diff).dot(Vinv)).dot(diff)
 
 
-def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
+def getChi2(yDM,signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
 
     #First find minima of the chi profile, such that the delta chi2 can then be calculated
     def func_to_solve_deltachi2(yDMval):
@@ -117,18 +115,13 @@ def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0):
     yDMmin = minimize(func_to_solve_deltachi2, x0=0).x
     chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas)
 
-    def func_to_solve_95(yDMval):
-        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas) - chi2min - 3.84
-
-    yDMmax = 1000.0
     
-    yDM95 = brentq(func_to_solve_95, a=yDMmax,b=yDMmin)
-    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas)-chi2min
+    chi20 = chi2(yDM, signal, sm_bin, xsecsObs, covMatrix, deltas)
 
     return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
-            'yDM95' : yDM95, 'deltaChi95' : deltaChi95}
+            'yDM' : yDM, 'deltaChi2' : chi20-chi2min}
 
-def computeULs(inputFile,outputFile,full=False,deltas=0.0):
+def computeChi2s(inputFile,outputFile,full=True,deltas=0.0):
 
     # ### Load ATLAS data and BG
     xsecsObs,sm,covMatrix = read_ATLASdata()
@@ -154,14 +147,14 @@ def computeULs(inputFile,outputFile,full=False,deltas=0.0):
         return
 
 
-    progressbar = P.ProgressBar(widgets=["Computing upper limits: ", P.Percentage(),
+    progressbar = P.ProgressBar(widgets=["Computing chi-squares: ", P.Percentage(),
                                 P.Bar(marker=P.RotatingMarker()), P.ETA()])
     progressbar.maxval = len(recastData)
     progressbar.start()
 
-    yDM95list = []
-    yDM95expList = []
-    deltaChi95list = []
+    deltaChi2list = []
+    chi2minlist = []
+    clsList = []
     for ipt,pt in recastData.iterrows():
 
         progressbar.update(ipt)
@@ -178,18 +171,22 @@ def computeULs(inputFile,outputFile,full=False,deltas=0.0):
             signal = signal/bin_widths
             sm_bin = sm/bin_widths
         
-            resDict = getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0)
-            yDM95 = resDict['yDM95']
-            deltaChi95 = resDict['deltaChi95']     
+            resDict = getChi2(yDM,signal,sm_bin,xsecsObs,covMatrix,deltas=0.0)
+            deltaChi2 = resDict['deltaChi2']
+            chi2min = resDict['chi2min']
 
             # Expected
-            resDictExp = getUL(signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
-            yDM95exp = resDictExp['yDM95']  
-                   
+            # resDictExp = getChi2(yDM,signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
+            # deltaChi2Exp = resDict['deltaChi2'] 
+            # chi2minExp = resDict['chi2min']            
+            # Store result
+            deltaChi2list.append(deltaChi2)
+            chi2minlist.append(chi2min)
+
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
-            from simplifiedLikelihoods import Data,UpperLimitComputer,LikelihoodComputer
+            from simplifiedLikelihoods import Data,UpperLimitComputer
             ulComp = UpperLimitComputer()
 
             # ### Get number of observed and expected (BG) events
@@ -201,24 +198,18 @@ def computeULs(inputFile,outputFile,full=False,deltas=0.0):
             data = Data(observed=nobs, backgrounds=nbg, 
                         covariance=cov, 
                         nsignal=ns,deltas_rel=deltas)
-            ul = ulComp.getUpperLimitOnMu(data)
-            yDM95 = np.sqrt(ul)
-            ulExp = ulComp.getUpperLimitOnMu(data,expected=True)
-            yDM95exp = np.sqrt(ulExp)
-            # Signal for 95% C.L. limit:
-            data95 = Data(observed=nobs, backgrounds=nbg, 
-                          covariance=cov, 
-                          nsignal=ns*ul,deltas_rel=deltas)
-            computer = LikelihoodComputer(data95)
-            deltaChi95 = computer.chi2()            
-        # Store result
-        yDM95list.append(yDM95)
-        yDM95expList.append(yDM95exp)
-        deltaChi95list.append(deltaChi95)
+            CLs = ulComp.computeCLs(data)
+            clsList.append(CLs)
 
-    recastData['yDM (95% C.L.)'] = yDM95list
-    recastData['yDMexp (95% C.L.)'] = yDM95expList
-    recastData['$\Delta \chi^2$ (95% C.L.)'] = deltaChi95list
+    if not full:
+        recastData['deltaChi2'] = deltaChi2list
+        recastData['chi2min'] = chi2minlist
+        recastData['CLs'] = [None]*len(deltaChi2list)
+    else:
+        recastData['deltaChi2'] =  [None]*len(clsList)
+        recastData['chi2min'] = [None]*len(clsList)
+        recastData['CLs'] = clsList
+
     progressbar.finish()
     recastData.to_pickle(outputFile)
 
@@ -247,7 +238,8 @@ if __name__ == "__main__":
     if outputFile is None:
         outputFile = inputFile
 
-    computeULs(inputFile,outputFile)
+
+    computeChi2s(inputFile,outputFile)
 
     print("\n\nDone in %3.2f min" %((time.time()-t0)/60.))
 

@@ -48,7 +48,12 @@ Cell[BoxData[{
     "]"}], "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"LoadModel", "[", 
   RowBox[{
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
   "\"\<../modelFiles/SM.fr\>\"", ",", "\"\<../modelFiles/Top-EFT4.fr\>\""}], 
+========
+  "\"\<../modelFiles/SM.fr\>\"", ",", 
+   "\"\<../modelFiles/Top-EFT.fr\>\""}], 
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
   "]"}], "\[IndentingNewLine]", 
  RowBox[{"LoadRestriction", "[", 
   RowBox[{
@@ -2197,11 +2202,21 @@ Cell[BoxData["\<\"   - Loading parameter classes.\"\>"], "Print",
 In[5]:=",ExpressionUUID->"63614e1a-a7f4-4072-bcf3-2cd392856880"],
 
 Cell[BoxData[
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
  InterpretationBox[
   RowBox[{"\<\"\\nModel \"\>", "\[InvisibleSpace]", "\<\"Top-EFT\"\>", 
    "\[InvisibleSpace]", "\<\" loaded.\"\>"}],
   SequenceForm["\nModel ", "Top-EFT", " loaded."],
   Editable->False]], "Print",
+========
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"\\nModel \"\>", 
+    "\[InvisibleSpace]", "\<\"Top-EFT\"\>", 
+    "\[InvisibleSpace]", "\<\" loaded.\"\>"}],
+   SequenceForm["\nModel ", "Top-EFT", " loaded."],
+   Editable->False], TraditionalForm]], "Print",
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
  CellChangeTimes->{
   3.8915884649816923`*^9, 3.893181992218133*^9, 3.893192469617872*^9, 
    3.897103784357904*^9, 3.897103918169469*^9, 3.897104034385352*^9, 
@@ -4451,8 +4466,13 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"LSM", "+", "LNP"}], ",", 
     RowBox[{"GenericFile", "\[Rule]", "True"}], ",", 
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
     RowBox[{"Output", "\[Rule]", " ", "\"\<Top-EFT4-FA\>\""}]}], "]"}], 
   ";"}], "\[IndentingNewLine]", 
+========
+    RowBox[{"Output", "\[Rule]", " ", "\"\<Top-EFT-FA\>\""}]}],
+    "]"}], ";"}], "\[IndentingNewLine]", 
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
  RowBox[{"Print", "[", 
   "\"\<Before using FeynCalc you must run ./convertModel2FA.py!\>\"", 
   "]"}]}], "Input",
@@ -5528,7 +5548,12 @@ Cell[BoxData[
   InterpretationBox[
    RowBox[{"\<\"Writing FeynArts model file into directory \"\>", 
     "\[InvisibleSpace]", "\<\"Top-EFT-FA\"\>"}],
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
    SequenceForm["Writing FeynArts model file into directory ", "Top-EFT-FA"],
+========
+   SequenceForm[
+   "Writing FeynArts model file into directory ", "Top-EFT-FA"],
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
    Editable->False], TraditionalForm]], "Print",
  CellChangeTimes->{
   3.897201677745228*^9, 3.897201872318823*^9, 3.897202084793715*^9, 
@@ -5567,7 +5592,13 @@ Cell[BoxData[
    RowBox[{"\<\"Writing FeynArts generic file on \"\>", 
     "\[InvisibleSpace]", "\<\"Top-EFT-FA.gen\"\>", 
     "\[InvisibleSpace]", "\<\".\"\>"}],
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
    SequenceForm["Writing FeynArts generic file on ", "Top-EFT-FA.gen", "."],
+========
+   SequenceForm[
+   "Writing FeynArts generic file on ", "Top-EFT-FA.gen", "."],
+   
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
    Editable->False], TraditionalForm]], "Print",
  CellChangeTimes->{
   3.897201677745228*^9, 3.897201872318823*^9, 3.897202084793715*^9, 
@@ -5650,8 +5681,13 @@ Cell[BoxData[
  RowBox[{"WriteUFO", "[", 
   RowBox[{
    RowBox[{"LSM", "+", "LNP"}], ",", 
+<<<<<<<< HEAD:mathematicaNBs/loadModels/Top-EFT4.nb
    RowBox[{"Output", "\[Rule]", " ", "\"\<Top-EFT-UFO\>\""}]}], 
   "]"}]], "Input",
+========
+   RowBox[{"Output", "\[Rule]", " ", "\"\<Top-EFT-UFO\>\""}]}],
+   "]"}]], "Input",
+>>>>>>>> contur:mathematicaNBs/loadModels/Top-EFT.nb
  CellChangeTimes->{{3.8975684197995987`*^9, 3.897568442553918*^9}, {
    3.8975685368571367`*^9, 3.897568539020647*^9}, {3.8980547149917727`*^9, 
    3.8980547157216387`*^9}, {3.8982478285429087`*^9, 3.898247850150229*^9}, {

@@ -8,8 +8,6 @@ import tempfile
 import pylhe
 import gzip
 import sys
-sys.path.append('../../Recast/ATLAS-TOPQ-2019-23_tpT/')
-from atlas_topq_2019_23_Recast import applyATLAScuts
 
 
 def getLHEevents(fpath):
