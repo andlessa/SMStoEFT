@@ -2085,6 +2085,10 @@ class aMCatNLOCmd(CmdExtended, HelpToCmd, CompleteForCmd, common_run.CommonRunCm
             npoints = self.run_card['npoints_FO_grid']
             niters = self.run_card['niters_FO_grid']
             n_jobs = self.run_card['n_jobs']
+            if n_jobs%len(p_dirs) != 0:
+            	n_jobs = int(n_jobs/len(p_dirs))+1
+            else:
+                n_jobs = int(n_jobs/len(p_dirs))
             for p_dir in p_dirs:
                 try:
                     with open(pjoin(self.me_dir,'SubProcesses',p_dir,'channels.txt')) as chan_file:
