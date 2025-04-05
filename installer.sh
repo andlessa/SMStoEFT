@@ -64,6 +64,7 @@ if echo "$answer" | grep -iq "^y" ;then
 	cd $homeDIR;
 	echo "[installer] copying bias folder"
 	cp -r auxFiles/mtt_bias ./MG5/Template/LO/Source/BIAS
+        cp auxFiles/amcatnlo_run_interface.py ./MG5/madgraph/interface/amcatnlo_run_interface.py
 #    rm $madgraph;
 fi
 
