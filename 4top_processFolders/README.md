@@ -54,8 +54,12 @@ From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expan
  * $`\left(M,M_{\chi}\right) = \left(500,400\right) `$ GeV:
 
  ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left(-1.6 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.63 \times 10^{-3}\text{ fb} \right) +  \left( -0.73 \times 10^{-3}\text{ fb} \right)
+ \begin{split}
+ \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(-1.60 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.63 \times 10^{-3}\text{ fb} \right) +  \left( -0.73 \times 10^{-3}\text{ fb} \right)\\
+ \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-0.29 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.18 \times 10^{-3}\text{ fb} \right) +  \left( -1.4 \text{ fb} \right)
+ \end{split}
  ```
+
 
 where the last term comes from pure BSM QCD ($`\mathcal{O}(g_s^{10})`$) contributions.
 
