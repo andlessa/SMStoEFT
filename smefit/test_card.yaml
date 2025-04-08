@@ -1,0 +1,674 @@
+# Input YAML configurations for SMEFiT code
+
+result_ID: test
+
+# absolute path where results are stored
+result_path: ./results
+
+# path to common data
+data_path: /Users/luca/Applications/smefit_database/commondata
+
+# path to theory tables, default same as data path
+theory_path: /Users/luca/Applications/smefit_database/theory
+
+# pQCD order (LO or NLO)
+# default_order: NLO
+
+use_theory_covmat: True
+
+use_t0: True
+float64: False
+
+# SMEFT Expansion Order (NHO = Lambda^-2 , HO = Lambda^-4)
+use_quad: False
+
+# Set parameter bounds to previous SCAN result
+bounds: Null
+
+# NS settings
+n_samples: 10000
+
+# # RGE settings
+# rge:
+#   init_scale: 250.0
+#   obs_scale: dynamic # float or "dynamic"
+#   smeft_accuracy: integrate # options: integrate, leadinglog
+#   yukawa: top # options: top, full or none
+#   adm_QCD: False # if true, the EW couplings are set to zero
+
+# Datasets to include
+datasets:
+
+  - {name: ATLAS_CMS_SSinc_RunI, order: NLO_QCD }
+  - {name: ATLAS_CMS_tt_AC_8TeV, order: NLO_QCD }
+  - {name: ATLAS_SSinc_RunII, order: NLO_QCD }
+  - {name: ATLAS_STXS_runII_13TeV, order: NLO_QCD }
+  - {name: ATLAS_WH_Hbb_13TeV, order: NLO_QCD }
+  - {name: ATLAS_WW_13TeV_2016_memu, order: NLO_QCD }
+  - {name: ATLAS_WZ_13TeV_2016_mTWZ, order: NLO_QCD }
+  - {name: ATLAS_WhelF_8TeV, order: NLO_QCD }
+  - {name: ATLAS_Whel_13TeV, order: NLO_QCD }
+  - {name: ATLAS_ZH_Hbb_13TeV, order: NLO_QCD }
+  - {name: ATLAS_ggF_13TeV_2015, order: NLO_QCD }
+  - {name: ATLAS_ggF_ZZ_13TeV, order: NLO_QCD }
+  - {name: ATLAS_tW_13TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_tW_8TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_tW_slep_8TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_tZ_13TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_tZ_13TeV_run2_inc, order: NLO_QCD }
+  - {name: ATLAS_t_sch_13TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_t_sch_8TeV, order: NLO_QCD }
+  - {name: ATLAS_t_tch_13TeV_inc, order: NLO_QCD }
+  - {name: ATLAS_t_tch_8TeV_diff_Yt, order: NLO_QCD }
+  - {name: ATLAS_ttW_13TeV, order: NLO_QCD }
+  - {name: ATLAS_ttW_13TeV_2016, order: NLO_QCD }
+  - {name: ATLAS_ttW_8TeV, order: NLO_QCD }
+  - {name: ATLAS_ttZ_13TeV, order: NLO_QCD }
+  - {name: ATLAS_ttZ_13TeV_2016, order: NLO_QCD }
+  - {name: ATLAS_ttZ_13TeV_pTZ, order: NLO_QCD }
+  - {name: ATLAS_ttZ_8TeV, order: NLO_QCD }
+  - {name: ATLAS_tt_13TeV_asy_2022, order: NLO_QCD }
+  - {name: ATLAS_tt_13TeV_ljets_2016_Mtt, order: NLO_QCD }
+  - {name: ATLAS_tt_8TeV_dilep_Mtt, order: NLO_QCD }
+  - {name: ATLAS_tt_8TeV_ljets_Mtt, order: NLO_QCD }
+  - {name: ATLAS_tta_8TeV, order: NLO_QCD }
+  - {name: ATLAS_ttbb_13TeV_2016, order: NLO_QCD }
+  - {name: ATLAS_tttt_13TeV_run2, order: NLO_QCD }
+  - {name: ATLAS_tttt_13TeV_slep_inc, order: NLO_QCD }
+  - {name: ATLAS_tttt_13TeV_2023, order: NLO_QCD }
+  - {name: ATLAS_hh_runII_13TeV, order: LO }
+  - {name: CMS_H_13TeV_2015_pTH, order: NLO_QCD }
+  - {name: CMS_SSinc_RunII, order: NLO_QCD }
+  - {name: CMS_WZ_13TeV_2016_pTZ, order: NLO_QCD }
+  - {name: CMS_WZ_13TeV_2022_pTZ, order: NLO_QCD }
+  - {name: CMS_WhelF_8TeV, order: NLO_QCD }
+  - {name: CMS_ggF_aa_13TeV, order: NLO_QCD }
+  - {name: CMS_tW_13TeV_inc, order: NLO_QCD }
+  - {name: CMS_tW_13TeV_slep_inc, order: NLO_QCD }
+  - {name: CMS_tW_8TeV_inc, order: NLO_QCD }
+  - {name: CMS_tZ_13TeV_2016_inc, order: NLO_QCD }
+  - {name: CMS_tZ_13TeV_inc, order: NLO_QCD }
+  - {name: CMS_tZ_13TeV_pTt, order: NLO_QCD }
+  - {name: CMS_t_sch_8TeV, order: NLO_QCD }
+  - {name: CMS_t_tch_13TeV_2016_diff_Yt, order: NLO_QCD }
+  - {name: CMS_t_tch_13TeV_2019_diff_Yt, order: NLO_QCD }
+  - {name: CMS_t_tch_13TeV_inc, order: NLO_QCD }
+  - {name: CMS_t_tch_8TeV_diff_Yt, order: NLO_QCD }
+  - {name: CMS_t_tch_8TeV_inc, order: NLO_QCD }
+  - {name: CMS_tt2D_8TeV_dilep_MttYtt, order: NLO_QCD }
+  - {name: CMS_ttW_13TeV, order: NLO_QCD }
+  - {name: CMS_ttW_8TeV, order: NLO_QCD }
+  - {name: CMS_ttZ_13TeV, order: NLO_QCD }
+  - {name: CMS_ttZ_13TeV_pTZ, order: NLO_QCD }
+  - {name: CMS_ttZ_8TeV, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_Mtt, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_asy, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_dilep_2015_Mtt, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_dilep_2016_Mtt, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_ljets_2015_Mtt, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_ljets_2016_Mtt, order: NLO_QCD }
+  - {name: CMS_tt_13TeV_ljets_inc, order: NLO_QCD }
+  - {name: CMS_tt_8TeV_ljets_Ytt, order: NLO_QCD }
+  - {name: CMS_tta_8TeV, order: NLO_QCD }
+  - {name: CMS_ttbb_13TeV, order: NLO_QCD }
+  - {name: CMS_ttbb_13TeV_2016, order: NLO_QCD }
+  - {name: CMS_ttbb_13TeV_dilepton_inc, order: NLO_QCD }
+  - {name: CMS_ttbb_13TeV_ljets_inc, order: NLO_QCD }
+  - {name: CMS_tttt_13TeV, order: NLO_QCD }
+  - {name: CMS_tttt_13TeV_run2, order: NLO_QCD }
+  - {name: CMS_tttt_13TeV_slep_inc, order: NLO_QCD }
+  - {name: CMS_tttt_13TeV_2023, order: NLO_QCD }
+  - {name: LEP1_EWPOs_2006, order: LO }
+  - {name: LEP_alphaEW, order: LO }
+  - {name: LEP_Bhabha_2013, order: LO }
+  - {name: LEP_Brw_2013, order: LO }
+  - {name: LEP_eeWW_182GeV, order: LO }
+  - {name: LEP_eeWW_189GeV, order: LO }
+  - {name: LEP_eeWW_198GeV, order: LO }
+  - {name: LEP_eeWW_206GeV, order: LO }
+
+
+
+
+# Coefficients to fit
+coefficients:
+  O11qq:
+    constrain:
+    - yDM:
+      - -2.3666666666665912e-07
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O13qq:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1dt:
+    constrain:
+    - yDM:
+      - 4.113e-06
+      - 0
+    - yDM:
+      - -3.255e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qd:
+    constrain:
+    - yDM:
+      - 1.0280000000000002e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qt:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 1.627e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qu:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1ut:
+    constrain:
+    - yDM:
+      - -4.120000000000007e-06
+      - 0
+    - yDM:
+      - -0.0002459
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O3pQ:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - -0.0006072
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O81qq:
+    constrain:
+    - yDM:
+      - -0.0005632
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O83qq:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8dt:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qd:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qt:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qu:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8ut:
+    constrain:
+    - yDM:
+      - -0.0005634
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQQ1:
+    constrain:
+    - yDM:
+      - -5.333333333333418e-07
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQQ8:
+    constrain:
+    - yDM:
+      - -0.0011264
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQe:
+    constrain:
+    - yDM:
+      - 3.0849999999999997e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQlM1:
+    constrain:
+    - yDM:
+      - 1.542e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQt1:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 1.627e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQt8:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Oll1111:
+    constrain:
+    - yDM:
+      - -2.314e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpD:
+    constrain:
+    - yDM:
+      - -9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpQM:
+    constrain:
+    - yDM:
+      - -1.542e-06
+      - 0
+    - yDM:
+      - 0.0012144
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opd:
+    constrain:
+    - yDM:
+      - -2.314e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opdi:
+    constrain:
+    - yDM:
+      - 3.0849999999999997e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ope:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl1:
+    constrain:
+    - yDM:
+      - 4.627000000000001e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl2:
+    constrain:
+    - yDM:
+      - 4.627000000000001e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl3:
+    constrain:
+    - yDM:
+      - 4.627000000000001e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opmu:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpqMi:
+    constrain:
+    - yDM:
+      - -1.542e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opt:
+    constrain:
+    - yDM:
+      - -6.169999999999999e-06
+      - 0
+    - yDM:
+      - 4.882e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opta:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opu:
+    constrain:
+    - yDM:
+      - -6.169999999999999e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OtG:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - -0.0007130289981372154
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OtZ:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 6.920677685954081e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ote:
+    constrain:
+    - yDM:
+      - 1.2339999999999999e-05
+      - 0
+    - yDM:
+      - -9.764e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Otl1:
+    constrain:
+    - yDM:
+      - 6.169999999999999e-06
+      - 0
+    - yDM:
+      - -4.882e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Otp:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.001201
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ott1:
+    constrain:
+    - yDM:
+      - -0.0001919
+      - 0
+    - yDM:
+      - 0.0006871000000000001
+      - 2
+    - yDM:
+      - -0.0013000000000000002
+      - 4
+    max: 10.0
+    min: -10.0
+  yDM:
+    max: 10.0
+    min: -10.0
+
+
+uv_couplings: True
+rot_to_fit_basis: null

@@ -1,0 +1,550 @@
+coefficients:
+  O11qq:
+    constrain:
+    - yDM:
+      - -2.3667e-07
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O13qq:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1dt:
+    constrain:
+    - yDM:
+      - 4.113e-06
+      - 0
+    - yDM:
+      - -3.255e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qd:
+    constrain:
+    - yDM:
+      - 1.028e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qt:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 1.627e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1qu:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O1ut:
+    constrain:
+    - yDM:
+      - -4.12e-06
+      - 0
+    - yDM:
+      - -0.0002459
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O3pQ:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - -0.0006072
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O81qq:
+    constrain:
+    - yDM:
+      - -0.0005632
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O83qq:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8dt:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qd:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qt:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8qu:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  O8ut:
+    constrain:
+    - yDM:
+      - -0.0005634
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQQ1:
+    constrain:
+    - yDM:
+      - -5.3333e-07
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQQ8:
+    constrain:
+    - yDM:
+      - -0.0011264
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQe:
+    constrain:
+    - yDM:
+      - 3.085e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQlM1:
+    constrain:
+    - yDM:
+      - 1.542e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQt1:
+    constrain:
+    - yDM:
+      - -2.057e-06
+      - 0
+    - yDM:
+      - 1.627e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OQt8:
+    constrain:
+    - yDM:
+      - -0.001127
+      - 0
+    - yDM:
+      - 0.001866
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Oll:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Oll1111:
+    constrain:
+    - yDM:
+      - -2.314e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpD:
+    constrain:
+    - yDM:
+      - -9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpQM:
+    constrain:
+    - yDM:
+      - -1.542e-06
+      - 0
+    - yDM:
+      - 0.0012144
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opd:
+    constrain:
+    - yDM:
+      - -2.314e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opdi:
+    constrain:
+    - yDM:
+      - 3.085e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ope:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl1:
+    constrain:
+    - yDM:
+      - 4.627e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl2:
+    constrain:
+    - yDM:
+      - 4.627e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opl3:
+    constrain:
+    - yDM:
+      - 4.627e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opmu:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OpqMi:
+    constrain:
+    - yDM:
+      - -1.542e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opt:
+    constrain:
+    - yDM:
+      - -6.17e-06
+      - 0
+    - yDM:
+      - 4.882e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opta:
+    constrain:
+    - yDM:
+      - 9.255e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Opu:
+    constrain:
+    - yDM:
+      - -6.17e-06
+      - 0
+    - yDM:
+      - 0.0
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OtG:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - -0.00071303
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  OtZ:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 6.9207e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ote:
+    constrain:
+    - yDM:
+      - 1.234e-05
+      - 0
+    - yDM:
+      - -9.764e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Otl1:
+    constrain:
+    - yDM:
+      - 6.17e-06
+      - 0
+    - yDM:
+      - -4.882e-05
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Otp:
+    constrain:
+    - yDM:
+      - 0.0
+      - 0
+    - yDM:
+      - 0.001201
+      - 2
+    - yDM:
+      - 0.0
+      - 4
+    max: 10.0
+    min: -10.0
+  Ott1:
+    constrain:
+    - yDM:
+      - -0.0001919
+      - 0
+    - yDM:
+      - 0.0006871
+      - 2
+    - yDM:
+      - -0.0013
+      - 4
+    max: 10.0
+    min: -10.0
+  yDM:
+    max: 10.0
+    min: -10.0

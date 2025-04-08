@@ -78,7 +78,10 @@ where the last term comes from pure BSM QCD ($`\mathcal{O}(g_s^{10})`$) contribu
   * $`\left(M,M_{\chi}\right) = \left(10,9.9\right) `$ TeV:
 
  ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( -3.3 \times 10^{-6}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.3 \times 10^{-6}\text{ fb} \right) +  \left( -1.8 \times 10^{-6}\text{ fb} \right)
+ \begin{split}
+ \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left( -3.3 \times 10^{-6}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.3 \times 10^{-6}\text{ fb} \right) +  \left( -1.8 \times 10^{-6}\text{ fb} \right)\\
+ \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-1.63 \times 10^{-6}\text{ fb} \right) + y_{\text{DM}}^4 \left( -1.21 \times 10^{-8}\text{ fb} \right) +  \left( -1.13 \text{ fb} \right)
+ \end{split} 
  ```
 
 ## 1-Loop Results
