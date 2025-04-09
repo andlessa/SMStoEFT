@@ -1,0 +1,55 @@
+### Aloha definitions
+
+Momenta of particle N = P(mu,N)
+This includes the momenta P(x,y). The first index is the lorentz index which should be contracted, while the second index refers to the particle ordering of the vertex.
+E.g: P(-2,1)*P(-2,1) = p1(mu)*p1(mu)
+       ^
+       dummy index for sum
+Gamma(a,b,c) -> a = Lorentz index, b,c-> spinor indices
+
+The couplings matrix contracts the color with the lorentz fields:
+
+coupling = (a,b):C.GC_xx -> color[a]*lorentz[b]*C.GC_xx
+
+V_39 = CTVertex(name = 'V_39',
+                type = 'UV',
+                particles = [ P.t__tilde__, P.t ],
+                color = [ 'Identity(1,2)' ],
+                lorentz = [ L.FF2, L.FF3, L.FF4, L.FF5 ],
+                loop_particles = [ [ [P.g, P.t] ], [ [P.P__tilde__chi, P.P__tilde__ST] ] ],
+                couplings = {(0,0,1):C.UVGC_131_76,(0,0,0):C.UVGC_131_77,(0,2,1):C.UVGC_131_76,(0,2,0):C.UVGC_131_77,(0,1,1):C.UVGC_129_72,(0,1,0):C.UVGC_129_73,(0,3,1):C.UVGC_132_78,(0,3,0):C.UVGC_129_73})
+
+
+UVGC_131_76 = Coupling(name = 'UVGC_131_76',
+                       value = {0:'( ( -(complex(0,1)*MT**3*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...))},
+                       order = {'NP':2})
+
+UVGC_129_72 = Coupling(name = 'UVGC_129_72',
+                       value = {0:'( ( -(complex(0,1)*MT**2*yDM**2)/(8.*cmath.pi**2*mChi**2) + ...))},
+                       order = {'NP':2})                      
+
+UVGC_132_78 = Coupling(name = 'UVGC_132_78',
+                       value = {-1:'(complex(0,1)*yDM**2)/(32.*cmath.pi**2)',0:'(((complex(0,1)*yDM**2)/(8.*cmath.pi**2) - ...))},   
+                       order = {'NP':2})
+
+FF2 = Lorentz(name = 'FF2',
+              spins = [ 2, 2 ],
+              structure = 'ProjM(2,1)')
+
+FF3 = Lorentz(name = 'FF3',
+              spins = [ 2, 2 ],
+              structure = 'P(-1,1)*Gamma(-1,2,-2)*ProjM(-2,1)')
+
+FF4 = Lorentz(name = 'FF4',
+              spins = [ 2, 2 ],
+              structure = 'ProjP(2,1)')
+
+FF5 = Lorentz(name = 'FF5',
+              spins = [ 2, 2 ],
+              structure = 'P(-1,1)*Gamma(-1,2,-2)*ProjP(-2,1)')
+
+
+tt_BSM =    'Identity(1,2)'*(  (-(I*MT**3*yDM**2)/(8.*Pi^2*mChi^2) + ...)*(ProjM(2,1) + ProjP(2,1))
+                             + (-(I*MT**2*yDM**2)/(8.*Pi^2*mChi^2) + ...)*P(-1,1)*Gamma(-1,2,-2)*ProjM(-2,1)
+                             + ( (I*yDM^2)/(32.*Pi^2*Epsilon)      + ...)*P(-1,1)*Gamma(-1,2,-2)*ProjP(-2,1)
+                            )
