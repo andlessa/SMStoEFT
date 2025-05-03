@@ -6,7 +6,6 @@
 from __future__ import print_function
 import sys,os,glob
 from configParserWrapper import ConfigParserExt
-from convert2SLHA import getSLHAFile
 import logging,shutil
 import subprocess
 import multiprocessing
@@ -190,13 +189,16 @@ def generateEvents(parser):
     if 'runcard' in pars and os.path.isfile(pars['runcard']):    
         shutil.copyfile(pars['runcard'],os.path.join(runFolder,'Cards/run_card.dat'))
     if 'paramcard' in pars and os.path.isfile(pars['paramcard']):
-        shutil.copyfile(pars['paramcard'],os.path.join(runFolder,'Cards/param_card.dat'))    
+        shutil.copyfile(pars['paramcard'],os.path.join(runFolder,'Cards/param_card.dat'))
+    if 'fkscard' in pars and os.path.isfile(pars['fkscard']):
+        shutil.copyfile(pars['fkscard'],os.path.join(runFolder,'Cards/FKS_params.dat'))
+    if 'foanacard' in pars and os.path.isfile(pars['foanacard']):
+        shutil.copyfile(pars['foanacard'],os.path.join(runFolder,'Cards/FO_analyse_card.dat'))    
 
 
     # By default do not run Pythia or Delphes
     runPythia = parser['options']['runPythia']
     runDelphes = parser['options']['runDelphes']
-    runConvert = parser['options']['runConvertSLHA']
     runMadSpin = False
     if 'runMadSpin' in parser['options']:
         runMadSpin = parser['options']['runMadSpin']
@@ -250,8 +252,12 @@ def generateEvents(parser):
     else:
         commandsFileF.write('madspin=OFF\n')
 
-    commandsFileF.write('done\n')
     comms = parser["MadGraphSet"]
+    if 'order' in comms:
+         commandsFileF.write('%s=%s\n' %('order',comms.pop('order')))
+    if 'fixed_order' in comms:
+         commandsFileF.write('%s=%s\n' %('fixed_order',comms.pop('fixed_order')))
+    commandsFileF.write('done\n')
     # Set the MadGraph parameters defined in the ini file
     for key,val in comms.items():
         commandsFileF.write('set %s %s\n' %(key,val))
@@ -284,14 +290,6 @@ def generateEvents(parser):
 
     logger.debug(f'MG5 event error:\n %s \n' %errorMsg.decode("utf-8"))
     logger.debug(f'MG5 event output:\n %s \n' %output.decode("utf-8"))
-      
-    if runConvert:
-        if 'run number' in runInfo:
-            lheFile = os.path.join(runFolder,'Events',runInfo['run number'],'unweighted_events.lhe.gz')
-            logger.debug('Converting file %s' %lheFile)
-            getSLHAFile(lheFile)
-        else:
-            logger.warning("Could not generate SLHA file for %s" %(runFolder))
 
     # When running MadSpin for the top decays, the proc_card has to be replaced
     # so the top decay is computed using only the SM

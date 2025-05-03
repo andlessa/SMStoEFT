@@ -48,7 +48,7 @@ fi
 
 cd $homeDIR
 
-madgraph="MG5_aMC_v3.5.4.tar.gz"
+madgraph="MG5_aMC_v3.6.2.tar.gz"
 URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/$madgraph
 #madgraph="auxFiles/MG5_aMC_v3.4.2_fix.tar.gz"
 echo -n "Install MadGraph (y/n)? "
@@ -58,79 +58,15 @@ if echo "$answer" | grep -iq "^y" ;then
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
+	echo -e "install hepmc\ninstall lhapdf6\ninstall pythia8\ninstall Delphes\ninstall collier\ninstall oneloop\ninstall ninja\ninstall cuttools\nexit\n" > mad_install.txt
 	./mg5_aMC -f mad_install.txt
-
-	rm mad_install.txt;
+	# rm mad_install.txt;
 	cd $homeDIR;
 	echo "[installer] copying bias folder"
 	cp -r auxFiles/mtt_bias ./MG5/Template/LO/Source/BIAS
         cp auxFiles/amcatnlo_run_interface.py ./MG5/madgraph/interface/amcatnlo_run_interface.py
+        cp auxFiles/mg5_configuration.txt MG5/input/
 #    rm $madgraph;
-fi
-
-echo -n "Install SModelS (y/n)? "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	echo "[installer] getting SModelS"; git clone git@github.com:SModelS/smodels.git smodels;
-	echo "[installer] Done"
-fi
-
-
-echo -n "Install Rivet (y/n)? "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	echo "[installer] Installing Contur using myrivet-bootstrap";
-	test -d rivet || mkdir rivet
-	test -d tools-build || mkdir tools-build
-	./myrivet-bootstrap
-fi
-
-echo -n "Install Contur (y/n)? "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-        cd $homeDIR
-        source setenv_rivet.sh
-        test ! -d contur || rm -rf contur;
-        mkdir contur;
-        echo "[installer] Getting Contur from main branch";
-        test -f contur-main.tar.gz || wget "https://gitlab.com/hepcedar/contur/-/archive/main/contur-main.tar.gz";
-        tar -zxf "contur-main.tar.gz" -C contur --strip-components 1;
-        cd contur;
-        echo "[installer] installing Contur"
-        make;
-        test ! -f contur-main.tar.gz || rm contur-main.tar.gz;
-        cd $homeDIR;
-	#echo "[installer] Installing Contur using pip3";
-	#pip3 install --user contur --break-system-packages;
-        #source ~/.local/bin/conturenv.sh
-        #cd $CONTUR_DATA_PATH
-        #make;
-        cd $homeDIR
-fi
-
-
-qgraf="qgraf-3.6.6.tgz"
-URL=http://qgraf.tecnico.ulisboa.pt/v3.6/$qgraf
-echo -n "Install MatchMaker (y/n)? "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	path_to_executable=$(which qgraf)
-	if [ -x "$path_to_executable" ] ; then
-		echo "QGraf found at $path_to_executable"
-	else
-		echo "[installer] getting QGraf"; wget --user anonymous --password anonymous $URL 2>/dev/null || curl -O $URL; 
-		mkdir qgraf_tmp
-		mv $qgraf qgraf_tmp
-		cd qgraf_tmp		
-		tar -xzf $qgraf
-        mkdir fmodules
-		gfortran -o qgraf -Os -J fmodules qgraf-3.6.6.f08
-		mv qgraf ~/.local/bin/
-	fi
-	cd $homeDIR
-	rm -rf qgraf_tmp
-	pip3 install --user matchmakereft
-	echo "[installer] MatchMaker has been installed. Run it once (>matchmakereft) to set the path to FeynRules."
 fi
 
 
