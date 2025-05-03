@@ -7,7 +7,7 @@ Hold the FeynRules files for distinct model implementations
 
 ### UV Simplified Model (SMS-stop)
 
- * The model is defined in [modelFiles/SMS-stop.fr](./modelFiles/SMS-stop.fr)
+ * The model is defined in [modelFiles/SMS-stop.fr](./SMS-stop.fr)
 
 We consider the simple case of a scalar top partner ($\phi_T$), singlet under $SU(2)_L$, and a singlet fermion ($\chi$),
 which is a Dark Matter candidate. In addition we impose a $\mathcal{Z}_2$ symmetry, under which the BSM fields are odd and the SM are even. Under this assumptions the renormalizable (UV) BSM lagrangian is:
@@ -21,7 +21,7 @@ In addition we assume $m_T > m_{\chi}$, so the DM candidate is stable.
 
 ### Top Couplings with Form Factors (Top-FormFactors)
 
- * The model is defined in [modelFiles/Top-FormFactors.fr](./modelFiles/Top-FormFactors.fr)
+ * The model is defined in [modelFiles/Top-FormFactors.fr](./Top-FormFactors.fr)
 
 
 The model includes the dim-6 EFT operators in the *off-shell* (Green) basis relevant for $q q \to t \bar{t}$ production.  and corresponds to the lagrangian:
@@ -41,15 +41,9 @@ The UFO version of this implementation can be found [here](./Models/Top-FormFact
 
 ### Top EFT (Top-EFT)
 
- * The model is defined in [modelFiles/Top-EFT.fr](./modelFiles/Top-EFT.fr)
+ * The model is defined in [modelFiles/Top-EFTfull.fr](./Top-EFTfill.fr)
 
-The model includes the dim-6 EFT operators in the *physical* (on-shell) basis relevant for $q q \to t \bar{t}$ production. The model lagrangian is:
-
-```math
-    \mathcal{L}_{ttG} = \mathcal{L}_{SMS} + i A_0\ G_{\mu\nu} \bar{t} \Gamma^{\mu\nu} t + 6 B_0 \left( \bar{t}_R T^A \gamma^\mu t_R \bar{q} T^A \gamma_\mu q \right)
-```
-
-where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The coefficients $A_0$ and $B_0$ are defined as a function of the heavy BSM masses ($m_T,m_{\chi}$) in the EFT limit: $m_T,m_{\chi} \gg m_t,\hat{s}$.
+The model includes all the dim-6 EFT operators in the *physical* (on-shell).
 
 ## Files
 
@@ -67,8 +61,8 @@ where $\Gamma^{\mu\nu} = \frac{1}{2} \left[ \gamma^\mu, \gamma^\nu \right]$ The 
 
 * [SMS-stop](./SMS-stop.fr): UV BSM model with a scalar top partner and a fermionic DM candidate
 
-* [Top-EFT](./Top-EFT.fr): model file with the relevant EFT operators and the coefficient values.
+* [Top-EFTfull](./Top-EFTfull.fr): model file with the all the EFT operators and the coefficient values.
 
-* [Top-FormFactors](./Top-EFT.fr): model file with relevant counter-terms and some dim6 operators. This model is supposed to be used to generate a basic UFO model, which then can be modified to include form factors.
+* [Top-FormFactors](./Top-FormFactors.fr): model file with relevant counter-terms and some dim6 operators. This model is supposed to be used to generate a basic UFO model, which then can be modified to include form factors.
 
 
