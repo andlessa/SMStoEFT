@@ -128,7 +128,7 @@
 #***********************************************************************
 #  Customization of the code. List of files containing user hook function 
 #***********************************************************************
-  ../Source/mtt_bias_NLO.f = custom_fcts ! List of files containing user hook function
+  ./Source/mtt_bias_NLO.f = custom_fcts ! List of files containing user hook function
 #***********************************************************************
 # ickkw parameter:                                                     *
 #   0: No merging                                                      *

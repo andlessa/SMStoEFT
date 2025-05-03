@@ -404,7 +404,7 @@ def main(parfile,verbose):
         eventsFolder = os.path.join(processFolder,'Events')
         if os.path.isdir(eventsFolder):
             for runF in glob.glob(os.path.join(eventsFolder,'run*')):
-                run0 = max(run0,int(os.path.basename(runF).replace('run_',''))+1)
+                run0 = max(run0,int(os.path.basename(runF).split('_')[1])+1)
 
         # Create temporary folder names if running in parallel
         if ncpus > 1:

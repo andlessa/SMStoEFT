@@ -100,14 +100,14 @@
 !
 ! Example:
 ! #SelectedContributionTypes
-3
-2 14 15
+!3
+!2 14 15
 !
 ! Would select only the finite part of the virtual and the Born contribution, and
 !
-#VetoedContributionTypes
-1
-2
+!#VetoedContributionTypes
+!1
+!2
 !
 ! Would remove the Born contribution, effectively computing only the NLO contribs.
 !
@@ -120,9 +120,9 @@
 ! 0
 ! -1
 !
-#SelectedContributionTypes
-0
--1
+!#SelectedContributionTypes
+!0
+!-1
 ! Default :: .true.
 ! 0
 ! -1
