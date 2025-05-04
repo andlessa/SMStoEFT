@@ -393,8 +393,6 @@ def main(parfile,verbose):
     for irun,newParser in enumerate(parserList):
         processFolder = newParser.get('MadGraphPars','processFolder')
         processFolder = os.path.abspath(processFolder)
-        if processFolder[-1] == '/':
-            processFolder = processFolder[:-1]
         if not os.path.isdir(processFolder):
             logger.info('Folder %s not found. Running MG5 to create folder.' %processFolder)
             generateProcess(newParser)

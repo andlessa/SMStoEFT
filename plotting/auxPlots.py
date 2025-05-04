@@ -299,15 +299,25 @@ def getInfo(f,labelsDict=None):
 
 
     if labelsDict is None:
-        labelsDict = {'Top-FormFactorsOneLoop-UFO' : '1-loop', 'Top-EFT-UFO' : 'EFT', 
-                      'Top-EFTphysical_simple-UFO' : 'EFT',
-                      'SMS-stop-UFO' : 'SM', 'SMS-stop-NLO_SMQCD-UFO' : 'SM',
+        labelsDict = {
+                      'Top-FormFactorsOneLoop-UFO' : '1-loop (FormFactor)', 'Top-EFTfull-UFO' : 'EFT',
+                       'sm' : 'SM',
+                       'loop_sm' : 'SM',
+                      'SMS-stop_NLO-UFO' : '1-loop',
               'g g > t t~' : r'$g g \to \bar{t} t$', 'g g > t~ t' : r'$g g \to \bar{t} t$',
               'q q > t t~' : r'$q q \to \bar{t} t$', 'q q > t~ t' : r'$q q \to \bar{t} t$',
-              'p p > t t~' : r'$p p \to \bar{t} t$', 'p p > t~ t' : r'$p p \to \bar{t} t$'
+              'p p > t t~' : r'$p p \to \bar{t} t$', 'p p > t~ t' : r'$p p \to \bar{t} t$',
              }
     
-    banner = list(glob.glob(os.path.join(os.path.dirname(f),'*banner*')))[0]
+    runDir = os.path.dirname(f)
+    if not os.path.isdir(runDir):
+        print(f'Folder {runDir} not found')
+        return None
+    banners = list(glob.glob(os.path.join(runDir,'*banner*txt')))
+    if len(banners) != 1:
+        print(f'{len(banners)} found (can only deal with 1 banner).')
+        return None
+    banner = banners[0]
     with open(banner,'r') as bannerF:
         bannerData = bannerF.read()
     
@@ -317,17 +327,31 @@ def getInfo(f,labelsDict=None):
         # Get model
         model = processData.split('Begin MODEL')[1].split('End   MODEL')[0]
         model = model.split('\n')[1].strip()
-        if model in labelsDict:
-            model = labelsDict[model]
         # Get process
         proc = processData.split('Begin PROCESS')[1].split('End PROCESS')[0]
         proc = proc.split('\n')[1].split('#')[0].strip()
-        if proc in labelsDict:
-            proc = labelsDict[proc]
+        
+    elif os.path.isfile(os.path.join(runDir,'../../Cards/proc_card_mg5.dat')):
+        procCard = os.path.join(runDir,'../../Cards/proc_card_mg5.dat')
+        with open(procCard,'r') as f:
+            processData = f.readlines()
+        modelLine = [l for l in processData if 'import model' in l][-1]
+        model = modelLine.strip().split(' ')[-1]
+        model = os.path.basename(model)
+        procLine = [l for l in processData if 'generate' in l][-1]
+        proc = procLine.strip().split('generate ')[-1]
     else:
-        proc = labelsDict['p p > t t~']
-        model = labelsDict['SMS-stop-NLO_SMQCD-UFO']
-    
+        model = None
+        proc = None
+
+    if '[' in proc and ']' in proc:
+        proc = proc.split('[')[0].strip()
+
+    if proc in labelsDict:
+        proc = labelsDict[proc]
+    if model in labelsDict:
+        model = labelsDict[model]
+
     # Get parameters data:
     parsData = bannerData.split('<slha>')[1].split('</slha>')[0]
     parsSLHA = pyslha.readSLHA(parsData)
@@ -344,14 +368,25 @@ def getInfo(f,labelsDict=None):
 
     if yDM == 0.0:
         model = 'SM'
-
-
     
     # Get event data:
     if '<MGGenerationInfo>' in bannerData:
         eventData = bannerData.split('<MGGenerationInfo>')[1].split('</MGGenerationInfo>')[0]
         nEvents = eval(eventData.split('\n')[1].split(':')[1].strip())
         xsec = eval(eventData.split('\n')[2].split(':')[1].strip())
+    elif os.path.isfile(os.path.join(runDir,'summary.txt')):
+        with open(os.path.join(runDir,'summary.txt'),'r') as f:
+            summaryLines = f.readlines()
+        totalXsecLine = [l for l in summaryLines if 'Total cross section' in l][0]
+        if 'DO NOT USE' in totalXsecLine:
+            totalXsecLine = [i for i,l in enumerate(summaryLines) if 'Scale variation' in l][0]
+            totalXsecLine = summaryLines[totalXsecLine+2]
+        if 'Total cross section' in totalXsecLine:
+            totalXsecLine = totalXsecLine.split(':')[1].strip()
+        totalXsecLine = totalXsecLine.split(' +')[0].strip()
+        totalXsecLine = totalXsecLine.replace('pb','')
+        xsec = float(totalXsecLine)
+        nEvents = -1
     else:
         nEvents = -1
         xsec = -1.0
