@@ -139,7 +139,7 @@ S[5] == {
 (* ************************** *)
 (* gauge kinetic and mass terms *)
 
-Lkin := I*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
+Lkin := (I/2)*chibar.Ga[mu].DC[chi, mu] - (mChi/2) chibar.chi  + DC[STbar[aa],mu] DC[ST[aa],mu] -  mST^2 STbar[aa] ST[aa];
 
 (* DM-Scalar-Top coupling *)
 LYDM := -yDM*(STbar[cc] ProjP[sp1,sp2] chibar[sp1].uq[sp2,3,cc]);

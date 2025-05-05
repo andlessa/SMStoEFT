@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
-# Mathematica version: 12.1.0 for Linux x86 (64-bit) (March 18, 2020)
-# Date: Mon 28 Aug 2023 17:12:03
+# Mathematica version: 14.1.0 for Linux x86 (64-bit) (July 16, 2024)
+# Date: Mon 5 May 2025 14:49:42
 
 
 from object_library import all_decays, Decay
@@ -44,7 +44,7 @@ Decay_W__plus__ = Decay(name = 'Decay_W__plus__',
                                           (P.u,P.d__tilde__):'(ee**2*MW**4)/(16.*cmath.pi*sw**2*abs(MW)**3)',
                                           (P.ve,P.e__plus__):'(ee**2*MW**4)/(48.*cmath.pi*sw**2*abs(MW)**3)',
                                           (P.vm,P.mu__plus__):'(ee**2*MW**4)/(48.*cmath.pi*sw**2*abs(MW)**3)',
-                                          (P.vt,P.ta__plus__):'((-MTA**2 + MW**2)*(-(ee**2*MTA**2)/(2.*sw**2) - (ee**2*MTA**4)/(2.*MW**2*sw**2) + (ee**2*MW**2)/sw**2))/(48.*cmath.pi*abs(MW)**3)'})
+                                          (P.vt,P.ta__plus__):'((-MTA**2 + MW**2)*(-0.5*(ee**2*MTA**2)/sw**2 - (ee**2*MTA**4)/(2.*MW**2*sw**2) + (ee**2*MW**2)/sw**2))/(48.*cmath.pi*abs(MW)**3)'})
 
 Decay_Z = Decay(name = 'Decay_Z',
                 particle = P.Z,
