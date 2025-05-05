@@ -30,11 +30,10 @@ Should install most of the relevant (non-Mathematica) packages.
 
 The UFO model containing the counter-terms and vertices needed for computing both QCD and NP
 loops can be found in [./Models/SMS-stop_NLO-UFO](./Models/SMS-stop_NLO-UFO).
-It has been generated using the the [SMQCD.fr](./modelFiles/SMQCD.fr) and [SMS-stop.fr](./modelFiles/SMS-stop.fr)
-model files to compute the renormalization conditions and counter terms.
+It has been generated using the [SMS-stop_nlo_UFO.n](./mathematicaNBs/nlo/SMS-stop_nlo_UFO.nb) notebook and the [SMQCD.fr](./modelFiles/SMQCD.fr), [SMS-stop.fr](./modelFiles/SMS-stop.fr)
+model files to compute the renormalization conditions and counter terms for the BSM and QCD interactions.
 The final NLO model is then generated using the full SM ([SM.fr](./modelFiles/SMQCD.fr)) plus the BSM ([SMS-stop.fr](./modelFiles/SMS-stop.fr)) model files with the counter terms computed previously.
 
-Note that the final result contais
 
 ## 1-Loop Event Generation
 
