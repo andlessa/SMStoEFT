@@ -188,6 +188,19 @@ def generateEvents(parser):
 
     if 'runcard' in pars and os.path.isfile(pars['runcard']):    
         shutil.copyfile(pars['runcard'],os.path.join(runFolder,'Cards/run_card.dat'))
+        if 'n_jobs' in pars:
+            njobs = pars['n_jobs']
+            with open(os.path.join(runFolder,'Cards/run_card.dat'),'r') as f:
+                lines = f.readlines()
+            for i,l in enumerate(lines):
+                if 'n_jobs' in l:
+                    lines[i] = f'   {njobs} = n_jobs\n'
+            if not any('n_jobs' in l for l in lines):
+                lines.append(f'   {njobs} = n_jobs\n')
+            with open(os.path.join(runFolder,'Cards/run_card.dat'),'w') as f:
+                for l in lines:
+                    f.write(l)
+
     if 'paramcard' in pars and os.path.isfile(pars['paramcard']):
         shutil.copyfile(pars['paramcard'],os.path.join(runFolder,'Cards/param_card.dat'))
     if 'fkscard' in pars and os.path.isfile(pars['fkscard']):
