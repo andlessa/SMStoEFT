@@ -40,11 +40,11 @@ For large $y_{\text{DM}}$, the EFT contribution is dominated by term proportiona
 
 |$M$ | $\Delta m$ | $y_{\text{DM}}$ | $C_{uu}^{(3,3,3,3)}$  | $\sigma_{\text{SM}\times\text{EFT}}$ | $\sigma_{\text{EFT}\times\text{EFT}}$ |
 -------|--------|---|-------|----|----|
-|0.5 TeV | 10 GeV | 3  | -0.08 TeV $^{-2}$  | -0.04 fb  | 0.03 fb |
-|0.5 TeV | 10 GeV | 5  | -0.66 TeV $^{-2}$  | -0.33 fb  | 1.79 fb |
-|0.5 TeV | 10 GeV | 7  | -2.56 TeV $^{-2}$  | -1.26 fb  | 26.5 fb |
-|1.1 TeV | 10 GeV | 5  | -0.16 TeV $^{-2}$  | -0.07 fb  | 0.08 fb |
-|1.1 TeV | 10 GeV | 10 | -2.65 TeV $^{-2}$  | -1.06 fb  | 19.1 fb |
+|0.5 TeV | 10 GeV | 3  |  TeV $^{-2}$  |  fb  |  fb |
+|0.5 TeV | 10 GeV | 5  |  TeV $^{-2}$  |  fb  |  fb |
+|0.5 TeV | 10 GeV | 7  |  TeV $^{-2}$  |  fb  |  fb |
+|1.1 TeV | 10 GeV | 5  |  TeV $^{-2}$  |  fb  |  fb |
+|1.1 TeV | 10 GeV | 10 |  TeV $^{-2}$  |  fb  |  fb |
 -------------------------
 
 From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expansion breaks down, since the EFT $`^{2}`$ term, which is of $`\mathcal{O}(1/\Lambda^4)`$ is larger than the interference term ($`\mathcal{O}(1/\Lambda^2)`$).
@@ -55,7 +55,7 @@ From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expan
 
  ```math
  \begin{split}
- \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(-1.60 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.63 \times 10^{-3}\text{ fb} \right) +  \left( -0.73 \times 10^{-3}\text{ fb} \right)\\
+ \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left( \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( 3 \times 10^{-3}\text{ fb} \right) +  \left(  \times 10^{-3}\text{ fb} \right)\\
  \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-0.29 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.18 \times 10^{-3}\text{ fb} \right) +  \left( -1.4 \text{ fb} \right)
  \end{split}
  ```
@@ -66,20 +66,20 @@ where the last term comes from pure BSM QCD ($`\mathcal{O}(g_s^{10})`$) contribu
  * $`\left(M,M_{\chi}\right) = \left(500,490\right) `$ GeV:
 
  ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left(-1.4 \times 10^{-3}\text{ fb} \right) +y_{\text{DM}}^4 \left( -0.53 \times 10^{-3}\text{ fb} \right) +  \left( -0.73 \times 10^{-3}\text{ fb} \right)
+ \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( \times 10^{-3}\text{ fb} \right) +y_{\text{DM}}^4 \left(  \times 10^{-3}\text{ fb} \right) +  \left(  \times 10^{-3}\text{ fb} \right)
  ```
 
  * $`\left(M,M_{\chi}\right) = \left(1,0.9\right) `$ TeV:
 
  ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( -3.6 \times 10^{-4}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.5 \times 10^{-4}\text{ fb} \right) +  \left( -1.8 \times 10^{-4}\text{ fb} \right)
+ \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left(  \times 10^{-4}\text{ fb} \right) +y_{\text{DM}}^4 \left(  \times 10^{-4}\text{ fb} \right) +  \left(  \times 10^{-4}\text{ fb} \right)
  ```
 
   * $`\left(M,M_{\chi}\right) = \left(10,9.9\right) `$ TeV:
 
  ```math
  \begin{split}
- \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left( -3.3 \times 10^{-6}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.3 \times 10^{-6}\text{ fb} \right) +  \left( -1.8 \times 10^{-6}\text{ fb} \right)\\
+ \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(  \times 10^{-6}\text{ fb} \right) +y_{\text{DM}}^4 \left(  \times 10^{-6}\text{ fb} \right) +  \left(  \times 10^{-6}\text{ fb} \right)\\
  \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-1.63 \times 10^{-6}\text{ fb} \right) + y_{\text{DM}}^4 \left( -1.21 \times 10^{-8}\text{ fb} \right) +  \left( -1.13 \text{ fb} \right)
  \end{split} 
  ```
