@@ -2084,11 +2084,13 @@ class aMCatNLOCmd(CmdExtended, HelpToCmd, CompleteForCmd, common_run.CommonRunCm
             # jobs using the default inputs.
             npoints = self.run_card['npoints_FO_grid']
             niters = self.run_card['niters_FO_grid']
-            n_jobs = self.run_card['n_jobs']
-            if n_jobs%len(p_dirs) != 0:
-            	n_jobs = int(n_jobs/len(p_dirs))+1
-            else:
-                n_jobs = int(n_jobs/len(p_dirs))
+            n_jobs = None
+            if 'n_jobs' in self.run_card:
+                n_jobs = self.run_card['n_jobs']
+                if n_jobs%len(p_dirs) != 0:
+                    n_jobs = int(n_jobs/len(p_dirs))+1
+                else:
+                    n_jobs = int(n_jobs/len(p_dirs))
             for p_dir in p_dirs:
                 try:
                     with open(pjoin(self.me_dir,'SubProcesses',p_dir,'channels.txt')) as chan_file:
@@ -2098,10 +2100,11 @@ class aMCatNLOCmd(CmdExtended, HelpToCmd, CompleteForCmd, common_run.CommonRunCm
                     continue
                 if fixed_order:
                     lch=len(channels)
-                    #maxchannels=20    # combine up to 20 channels in a single job
-                    #njobs=(int(lch/maxchannels)+1 if lch%maxchannels!= 0 \
-                    #       else int(lch/maxchannels))
-                    njobs = min(n_jobs,lch)
+                    if n_jobs is None:
+                        maxchannels=20    # combine up to 20 channels in a single job
+                        njobs=(int(lch/maxchannels)+1 if lch%maxchannels!= 0 else int(lch/maxchannels))
+                    else:
+                        njobs = min(n_jobs,lch)
                     for nj in range(1,njobs+1):
                         job={}
                         job['p_dir']=p_dir
