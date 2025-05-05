@@ -41,5 +41,5 @@ define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 import model /home/lessa/SMStoEFT/Models/Top-EFTfull-UFO
-generate p p > t t~ t t~ NP^2==0 QED^2==0 QCD^2==10
-output ../../4top_processFolders/pp2tttt_EFT_QCD
+generate g g > t t~ t t~ NP^2==2 QED^2==0 QCD^2==8
+output ../../4top_processFolders/gg2tttt_EFT_NP2
