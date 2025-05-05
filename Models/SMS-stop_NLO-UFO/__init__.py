@@ -1,4 +1,3 @@
-import object_library 
 
 import particles
 import couplings
@@ -6,9 +5,9 @@ import lorentz
 import parameters
 import vertices
 import coupling_orders
-import write_param_card
+#import write_param_card
 import propagators
-
+import object_library
 import function_library
 
 
@@ -41,15 +40,6 @@ except ImportError:
    pass
 else:
    all_CTvertices = CT_vertices.all_CTvertices
-
-try:
-   import CT_parameters
-except ImportError:
-   pass
-else:
-   all_CTparameters = CT_parameters.all_CTparameters
-
-
 
 
 gauge = [0, 1]
