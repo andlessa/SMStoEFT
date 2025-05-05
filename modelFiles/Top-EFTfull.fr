@@ -28,6 +28,7 @@ M$InteractionOrderHierarchy = {  {NP,1}, {QCD,2}, {QED,3} };
 LF110[m_, M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (m^2 - M^2 + m^2*Log[mu^2/m^2] - M^2*Log[mu^2/M^2])/(m^2 - M^2), ((m - 7*M)*(m - M))/(6*M^2) + Log[mu^2/M^2]];
 LF21m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-(m^2*M^2) + M^4 + (m^4 - 2*m^2*M^2)*Log[mu^2/m^2] + M^4*Log[mu^2/M^2])/(m^2 - M^2)^2,  7/6 + (m*(m - 6*M))/(3*M^2) + Log[mu^2/M^2]];
 LF210[m_, M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^2 + M^2 + M^2*Log[m^2/M^2])/(m^2 - M^2)^2, -1/6*(4*m^2 - 12*m*M + 11*M^2)/M^4];
+LF220[m_, M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-2*m^2 + 2*M^2 + (m^2 + M^2)*Log[m^2/M^2])/(m^2 - M^2)^3, (13*m^2 - 36*m*M + 28*M^2)/(30*M^6)];                                                      
 LF22m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-m^4 + M^4 + 2*m^2*M^2*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/30*(7*m^2 - 24*m*M + 27*M^2)/M^4];
 LF31m1[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), -1/2*(m^4 - 4*m^2*M^2 + 3*M^4 + 2*M^4*Log[m^2/M^2])/(m^2 - M^2)^3,  -1/60*(33*m^2 - 96*m*M + 83*M^2)/M^4];
 LF41m2[m_,M_, mu_] := If[(m-M)^2/((m+M)^2) > 10^(-3), (-2*m^6 + 9*m^4*M^2 - 18*m^2*M^4 + 11*M^6 + 6*M^6*Log[m^2/M^2])/(6*(m^2 - M^2)^4),-1/60*(28*m^2 - 80*m*M + 67*M^2)/M^4];
@@ -191,7 +192,7 @@ cuub == {
 
 cuuc == {
     ParameterType     -> Internal,
-    Value       -> (1/8)*hbar*yDM^4*LF22m1[mChi,mST,mu],
+    Value       -> (1/8)*hbar*yDM^4*(LF22m1[mChi,mST,mu] + 2*(mChi^2)*LF220[mChi,mST,mu]),
     InteractionOrder  -> {{NP,4},{NPcuu,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uuc]
