@@ -151,7 +151,7 @@ C[ V[1, {e1x2}] , V[1, {e2x2}] ] == {{0, I*FR$deltaZ[{G, G}, {{}}]*IndexDelta[e1
 
 C[ S[1, {e1x1}] , -S[1, {e2x1}] ] == {{0, (-I)*FR$deltaZ[{ST, ST}, {{}}]*IndexDelta[e1x1, e2x1]}, {0, (-I)*mST*(2*FR$delta[{mST}, {}] + mST*FR$deltaZ[{ST, ST}, {{}}])*IndexDelta[e1x1, e2x1]}},
 
-C[ F[7] , F[7] ] == {{0, (-1/2*I)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (I/2)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (-1/2*I)*(2*FR$delta[{mChi}, {}] + mChi*FR$deltaZ[{chi, chi}, {{}}, "L"])}, {0, (-1/2*I)*(2*FR$delta[{mChi}, {}] + mChi*FR$deltaZ[{chi, chi}, {{}}, "R"])}},
+C[ F[7] , F[7] ] == {{0, (-1/4*I)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (I/4)*(FR$deltaZ[{chi, chi}, {{}}, "L"] + FR$deltaZ[{chi, chi}, {{}}, "R"])}, {0, (-1/2*I)*(2*FR$delta[{mChi}, {}] + mChi*FR$deltaZ[{chi, chi}, {{}}, "L"])}, {0, (-1/2*I)*(2*FR$delta[{mChi}, {}] + mChi*FR$deltaZ[{chi, chi}, {{}}, "R"])}},
 
 C[ -F[3, {e1x2}] , F[3, {e2x2}] ] == {{0, (-I)*FR$deltaZ[{t, t}, {{}}, "L"]*IndexDelta[e1x2, e2x2]}, {0, I*FR$deltaZ[{t, t}, {{}}, "R"]*IndexDelta[e1x2, e2x2]}, {0, (-1/2*I)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}, {0, (-1/2*I)*(2*FR$delta[{MT}, {}] + MT*FR$deltaZ[{t, t}, {{}}, "L"] + MT*FR$deltaZ[{t, t}, {{}}, "R"])*IndexDelta[e1x2, e2x2]}},
 
