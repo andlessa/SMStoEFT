@@ -67,6 +67,7 @@ if echo "$answer" | grep -iq "^y" ;then
 	cp auxFiles/mtt_bias/mtt_bias_NLO.f ./MG5/Template/NLO/Source/
 	cp auxFiles/analysis_ttx.f ./MG5/Template/NLO/FixedOrderAnalysis/
 	cp auxFiles/analysis_ttx_8tev.f ./MG5/Template/NLO/FixedOrderAnalysis/
+	cp auxFiles/analysis_4top_split_xsecs.f ./MG5/Template/NLO/FixedOrderAnalysis/
         cp auxFiles/amcatnlo_run_interface.py ./MG5/madgraph/interface/amcatnlo_run_interface.py
         cp auxFiles/mg5_configuration.txt MG5/input/
         
