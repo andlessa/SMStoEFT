@@ -1,6 +1,6 @@
 # This file was automatically created by FeynRules 2.3.49
 # Mathematica version: 14.1.0 for Linux x86 (64-bit) (July 16, 2024)
-# Date: Mon 5 May 2025 18:50:11
+# Date: Wed 7 May 2025 17:05:48
 
 
 
@@ -175,29 +175,23 @@ aEW = Parameter(name = 'aEW',
                 value = '1/aEWM1',
                 texname = '\\alpha _{\\text{EW}}')
 
-G = Parameter(name = 'G',
-              nature = 'internal',
-              type = 'real',
-              value = '2*cmath.sqrt(aS)*cmath.sqrt(cmath.pi)',
-              texname = 'G')
-
 cuuc = Parameter(name = 'cuuc',
                  nature = 'internal',
                  type = 'real',
                  value = '((( (-mChi**4 + mST**4 + 2*mChi**2*mST**2*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else -0.03333333333333333*(7*mChi**2 - 24*mChi*mST + 27*mST**2)/mST**4 ) + 2*( (-2*mChi**2 + 2*mST**2 + (mChi**2 + mST**2)*cmath.log(mChi**2/mST**2))/(mChi**2 - mST**2)**3 if (mChi - mST)**2/(mChi + mST)**2>0.001 else (13*mChi**2 - 36*mChi*mST + 28*mST**2)/(30.*mST**6) )*mChi**2)*yDM**4)/(128.*cmath.pi**2)',
                  texname = 'c_{\\text{uuc}}')
 
+G = Parameter(name = 'G',
+              nature = 'internal',
+              type = 'real',
+              value = '2*cmath.sqrt(aS)*cmath.sqrt(cmath.pi)',
+              texname = 'G')
+
 MW = Parameter(name = 'MW',
                nature = 'internal',
                type = 'real',
                value = 'cmath.sqrt(MZ**2/2. + cmath.sqrt(MZ**4/4. - (aEW*cmath.pi*MZ**2)/(Gf*cmath.sqrt(2))))',
                texname = 'M_W')
-
-ee = Parameter(name = 'ee',
-               nature = 'internal',
-               type = 'real',
-               value = '2*cmath.sqrt(aEW)*cmath.sqrt(cmath.pi)',
-               texname = 'e')
 
 cdd = Parameter(name = 'cdd',
                 nature = 'internal',
@@ -246,6 +240,12 @@ cuua = Parameter(name = 'cuua',
                  type = 'real',
                  value = '-0.00008680555555555556*G**4/(cmath.pi**2*mST**2)',
                  texname = 'c_{\\text{uua}}')
+
+ee = Parameter(name = 'ee',
+               nature = 'internal',
+               type = 'real',
+               value = '2*cmath.sqrt(aEW)*cmath.sqrt(cmath.pi)',
+               texname = 'e')
 
 cqu8b = Parameter(name = 'cqu8b',
                   nature = 'internal',
