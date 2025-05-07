@@ -21,7 +21,7 @@ M$Information = {Authors -> {"Andre Lessa"},
 
 FeynmanGauge = False;
 
-M$InteractionOrderHierarchy = { {NP,1}, {QCD,2}, {QED,3} };
+M$InteractionOrderHierarchy = { {NPcdd,1}, {NPcG,1}, {NPcHq1,1}, {NPcHq3,1}, {NPcqd8,1}, {NPcqq1,1}, {NPcqq3,1}, {NPcqu8,1}, {NPcud8,1}, {NPcuG,1}, {NPcuH,1}, {NPcuu,1}, {NP,1}, {QCD,2}, {QED,3} };
 
 (* Loop Functions *)
 
@@ -73,7 +73,7 @@ M$Parameters = {
 cdd == {
     ParameterType     -> Internal,
     Value       -> (-1/720)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcdd,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,dd]
   },  
@@ -81,7 +81,7 @@ cdd == {
 cG == {
     ParameterType     -> Internal,
     Value       -> (1/360)*hbar*gs^3/mST^2,
-    InteractionOrder  -> {{QCD,3}},
+    InteractionOrder  -> {{QCD,3},{NPcG,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,G]
   }, 
@@ -89,7 +89,7 @@ cG == {
 cHq1 == {
     ParameterType     -> Internal,
     Value       -> (-1/4)*hbar*(Sqrt[2]*ymt/vev)^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{QED,2}},
+    InteractionOrder  -> {{NP,2},{NPcHq1,1},{QED,2}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,Hq1]
   },   
@@ -97,7 +97,7 @@ cHq1 == {
 cHq3 == {
     ParameterType     -> Internal,
     Value       -> (1/4)*hbar*(Sqrt[2]*ymt/vev)^2*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{QED,2}},
+    InteractionOrder  -> {{NP,2},{NPcHq3,1},{QED,2}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,Hq3]
   }, 
@@ -105,7 +105,7 @@ cHq3 == {
 cqd8 == {
     ParameterType     -> Internal,
     Value       -> (-1/60)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcqd8,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,qd8]
   },
@@ -113,7 +113,7 @@ cqd8 == {
 cqq1 == {
     ParameterType     -> Internal,
     Value       -> (-1/1440)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcqq1,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,qq1]
   },
@@ -121,7 +121,7 @@ cqq1 == {
 cqq3 == {
     ParameterType     -> Internal,
     Value       -> (-1/480)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcqq3,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,qq3]
   },  
@@ -129,7 +129,7 @@ cqq3 == {
 cqu8a == {
     ParameterType     -> Internal,
     Value       -> (-1/60)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcqu8,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,qu8a]
   }, 
@@ -137,7 +137,7 @@ cqu8a == {
 cqu8b == {
     ParameterType     -> Internal,
     Value       -> (1/6)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
-    InteractionOrder  -> {{NP,2},{QCD,2}},
+    InteractionOrder  -> {{NP,2},{QCD,2},{NPcqu8,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,qu8b]
   },
@@ -145,7 +145,7 @@ cqu8b == {
 cud8a == {
     ParameterType     -> Internal,
     Value       -> (-1/60)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcud8,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,ud8a]
   },   
@@ -153,7 +153,7 @@ cud8a == {
 cud8b == {
     ParameterType     -> Internal,
     Value       -> (1/6)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
-    InteractionOrder  -> {{NP,2},{QCD,2}},
+    InteractionOrder  -> {{NP,2},{QCD,2},{NPcud8,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,ud8b]
   },  
@@ -161,7 +161,7 @@ cud8b == {
 cuG == {
     ParameterType     -> Internal,
     Value       -> (1/4)*hbar*gs*(Sqrt[2]*ymt/vev)*yDM^2*(LF210[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{QCD,1},{QED,1}},
+    InteractionOrder  -> {{NP,2},{QCD,1},{NPcuG,1},{QED,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uG]
   },   
@@ -169,7 +169,7 @@ cuG == {
 cuH == {
     ParameterType     -> Internal,
     Value       -> (-1/2)*hbar*(Sqrt[2]*ymt/vev)^3*yDM^2*(LF210[mChi,mST,mu]-2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,2},{QED,3}},
+    InteractionOrder  -> {{NP,2},{NPcuH,1},{QED,3}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uH]
   },     
@@ -177,7 +177,7 @@ cuH == {
 cuua == {
     ParameterType     -> Internal,
     Value       -> (-1/720)*hbar*gs^4/mST^2,
-    InteractionOrder  -> {{QCD,4}},
+    InteractionOrder  -> {{QCD,4},{NPcuu,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uua]
   },
@@ -185,7 +185,7 @@ cuua == {
 cuub == {
     ParameterType     -> Internal,
     Value       -> (-1/36)*hbar*gs^2*yDM^2*(LF210[mChi,mST,mu] + LF22m1[mChi,mST,mu] - 2*LF31m1[mChi,mST,mu] + LF41m2[mChi,mST,mu] - 2*LF210[mST,mChi,mu] + LF31m1[mST,mChi,mu]),
-    InteractionOrder  -> {{NP,2},{QCD,2}},
+    InteractionOrder  -> {{NP,2},{NPcuu,1},{QCD,2}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uub]
   },
@@ -193,7 +193,7 @@ cuub == {
 cuuc == {
     ParameterType     -> Internal,
     Value       -> (1/8)*hbar*yDM^4*(LF22m1[mChi,mST,mu] + 2*(mChi^2)*LF220[mChi,mST,mu]),
-    InteractionOrder  -> {{NP,4}},
+    InteractionOrder  -> {{NP,4},{NPcuu,1}},
     ComplexParameter  -> False,    
     TeX               -> Subscript[c,uuc]
   }    
