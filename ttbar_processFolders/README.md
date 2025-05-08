@@ -20,19 +20,13 @@
 
 #### Results
 
-All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
+All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV and are proportional to $`y_{DM}^2`$.
 
   | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | 1 Loop (pb) | EFT (pb)    |
   | ----------- | ------------- | ---------------- | -------------------------- | ----------- | 
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 500   | 400  | $(1.756 \pm 0.009)\times10^{-2}$ | $(1.101 \pm 0.006)\times10^{-2}$ | 
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$         | 500   | 400  | $(3.785 \pm 0.013)\times10^{-5}$ | $(1.431 \pm 0.005)\times10^{-5}$ | 
-  |  |  |  |  |   |   |
-  |  |  |  |  |   |   |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 1000  | 900 | $(9.245 \pm 0.01)\times10^{-5}$   | $(9.212 \pm 0.01)\times10^{-5}$  |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$         | 1000  | 900 | $(4.31 \pm 0.005)\times10^{-10}$  | $(4.236 \pm 0.006)\times10^{-10}$| 
-  |  |  |  |  |   |   |
-  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 10000  | 9900 | $(9.31 \pm 0.03)\times10^{-5}$   | $(9.346 \pm 0.03)\times10^{-5}$   |
-  |$\lvert \mathcal{M}_1^{NP} \rvert^2$         | 10000  | 9900 | $(3.782 \pm 0.008)\times10^{-10}$| $(3.725 \pm 0.01)\times10^{-10}$  | 
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 500   | 400  | $(1.23 \pm 0.7)\times10^{-2}$ | $( 0.919 \pm 0.002)\times10^{-2}$ | 
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 1000  | 900 | $(2.14 \pm 0.2)\times10^{-3}$   | $(2.325 \pm 0.004)\times10^{-3}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 10000  | 9900 | $(2.26 \pm 0.16)\times10^{-5}$   | $( 2.322 \pm 0.004)\times10^{-5}$   |
 
 
 
@@ -47,16 +41,11 @@ All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
   
 #### Results
   
-All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV.
+All the results below take $y_{DM} =1$ and $m_{t} = 172$ GeV  and are proportional to $`y_{DM}^2`$.
   
-    | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | 1 Loop (pb) |   EFT (pb) |
-    | ----------- | ------------- | ---------------- | -------------------------- | ----------- |
-    |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ | 500   | 400  | $(-1.815 \pm 0.004 )\times10^{-1}$ | $(-2.188 \pm 0.004)\times10^{-1}$| 
-    |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 500   | 400  | $(15.24 \pm 0.04)\times10^{-5}$    | $(6.005 \pm 0.01)\times10^{-5}$  | 
-    |  |  |  |  |   |   |  |
-    |  |  |  |  |   |   |  |
-    |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ | 1000  | 900 | $(-7.79 \pm 0.01)\times10^{-4}$    | $(-7.81 \pm 0.01)\times10^{-4}$  |
-    |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 1000  | 900 | $( 7.67 \pm 0.02)\times10^{-10}$   | $(7.65 \pm 0.01)\times10^{-10}$  |  
-    |  |  |  |  |   |   |  |
-    |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$ | 10000 | 9900 | $(-2.082 \pm 0.003 )\times10^{-4}$ | $(-2.083 \pm 0.02)\times10^{-4}$  | 
-    |$\lvert \mathcal{M}_1^{NP} \rvert^2$          | 10000 | 9900 | $(5.442  \pm  0.009)\times10^{-11}$| $(5.441 \pm 0.009)\times10^{-11}$ |  
+   
+  | Term        | $m_{T}$ (GeV) | $m_{\chi}$ (GeV) | 1 Loop (pb) | EFT (pb)    |
+  | ----------- | ------------- | ---------------- | -------------------------- | ----------- | 
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 500   | 400  | $(-8.4 \pm 0.3)\times10^{-2}$ | $(-9.05 \pm 0.01)\times10^{-2}$ | 
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 1000  | 900 | $(-22.8 \pm 2)\times10^{-3}$   | $(-20.78 \pm 0.03)\times10^{-3}$  |
+  |$\mathcal{M}^*_{\rm born} \mathcal{M}_1^{NP}$| 10000  | 9900 | $( -18.7\pm 0.5)\times10^{-5}$   | $(-19.35 \pm 0.03)\times10^{-5}$   |

@@ -41,7 +41,7 @@ define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-import model ../../Models/Top-EFT-UFO
+import model ../../Models/Top-EFTfull-UFO
 define q = u c d s u~ c~ d~ s~
-generate q q > t t~ QCD^2<=4 NP^2<=4 QED^2<=0
-output ../../qq2tt_EFT_all
+generate q q > t t~ QCD^2==4 NP^2==2 QED^2<=0
+output ../../qq2tt_EFT_interOnly
