@@ -49,46 +49,32 @@ For large $y_{\text{DM}}$, the EFT contribution is dominated by term proportiona
 
 From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expansion breaks down, since the EFT $`^{2}`$ term, which is of $`\mathcal{O}(1/\Lambda^4)`$ is larger than the interference term ($`\mathcal{O}(1/\Lambda^2)`$).
 
+
+## 1-Loop Results vs EFT
+
 ### Benchmarks
 
- * $`\left(M,M_{\chi}\right) = \left(500,400\right) `$ GeV:
+ * $`\left(M,M_{\chi}\right) = \left(10,9.9\right) `$ TeV:
 
- ```math
- \begin{split}
- \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(-1.6 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.13 \times 10^{-3}\text{ fb} \right) +  \left( -7.5 \times 10^{-4}\text{ fb} \right)\\
- \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-0.29 \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left( -0.18 \times 10^{-3}\text{ fb} \right) +  \left( -1.4 \text{ fb} \right)
- \end{split}
- ```
+   * $`q \bar{q} \rightarrow t \bar{t} t \bar{t}`$ :
 
+    ```math
+    \begin{split}
+    \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(9.76 \pm 0.06 \times 10^{-10}\text{ pb} \right) + y_{\text{DM}}^4 \left( 2.7 \pm 0.2 \times 10^{-14}\text{ pb} \right) +  \left( -1.47 \pm 0.006 \times 10^{-9}\text{ pb} \right)\\
+    \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left( 9.97 \pm 0.03  \times 10^{-10}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.2 \pm 0.3  \times 10^{-15}\text{ pb} \right) +  \left(6.8  \pm 0.1  \times 10^{-3}\text{ pb} \right)
+    \end{split}
+    ```
+   * $`g g \rightarrow t \bar{t} t \bar{t}`$ :
 
-where the last term comes from pure BSM QCD ($`\mathcal{O}(g_s^{10})`$) contributions.
-
- * $`\left(M,M_{\chi}\right) = \left(500,490\right) `$ GeV:
-
- ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( -1.3 \times 10^{-3}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.07 \times 10^{-5}\text{ fb} \right) +  \left( -7.4 \times 10^{-4}\text{ fb} \right)
- ```
-
- * $`\left(M,M_{\chi}\right) = \left(1,0.9\right) `$ TeV:
-
- ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( -3.6 \times 10^{-4}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.5 \times 10^{-5}\text{ fb} \right) +  \left( -1.85 \times 10^{-4}\text{ fb} \right)
- ```
-
-  * $`\left(M,M_{\chi}\right) = \left(10,9.9\right) `$ TeV:
-
- ```math
- \begin{split}
- \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left( -3.3 \times 10^{-6}\text{ fb} \right) +y_{\text{DM}}^4 \left( -1.3 \times 10^{-8}\text{ fb} \right) +  \left( -1.83 \times 10^{-6}\text{ fb} \right)\\
- \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left(-1.63 \times 10^{-6}\text{ fb} \right) + y_{\text{DM}}^4 \left( -1.21 \times 10^{-8}\text{ fb} \right) +  \left( -1.13 \text{ fb} \right)
- \end{split} 
- ```
-
-## 1-Loop Results
+    ```math
+    \begin{split}
+    \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(-4.29 \pm 0.02 \times 10^{-9}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.30 \pm 0.02 \times 10^{-11}\text{ pb} \right) +  \left( -3.6 
+    \pm 0.1 \times 10^{-10}\text{ pb} \right)\\
+    \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left( -2.85 \pm 0.07  \times 10^{-9}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.33  \pm 0.06  \times 10^{-11}\text{ pb} \right) +  \left( 5.82
+    \pm 0.03 \times 10^{-3}\text{ pb} \right)
+    \end{split}
+    ```
 
 
- * $`\left(M,M_{\chi}\right) = \left(500,400\right) `$ GeV:
 
- ```math
- \sigma_{\text{SM}\times\text{EFT}} = y_{\text{DM}}^2\left( \times 10^{-3}\text{ fb} \right) + y_{\text{DM}}^4 \left(  \times 10^{-3}\text{ fb} \right) +  \left(  \times 10^{-3}\text{ fb} \right)
- ```
+Note that for the EFT results the last term comes from pure BSM QCD ($`\mathcal{O}(g_s^{10})`$) contributions, while the 1-loop result includes pure BSM and SM QCD contributions.
