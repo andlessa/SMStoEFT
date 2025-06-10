@@ -58,22 +58,22 @@ From the results above we see that for $`y_{\text{DM}} \gtrsim 5`$ the EFT expan
 
    * $`q \bar{q} \rightarrow t \bar{t} t \bar{t}`$ :
 
-    ```math
+ ```math
     \begin{split}
     \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(9.76 \pm 0.06 \times 10^{-10}\text{ pb} \right) + y_{\text{DM}}^4 \left( 2.7 \pm 0.2 \times 10^{-14}\text{ pb} \right) +  \left( -1.47 \pm 0.006 \times 10^{-9}\text{ pb} \right)\\
     \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left( 9.97 \pm 0.03  \times 10^{-10}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.2 \pm 0.3  \times 10^{-15}\text{ pb} \right) +  \left(6.8  \pm 0.1  \times 10^{-3}\text{ pb} \right)
     \end{split}
-    ```
+ ```
    * $`g g \rightarrow t \bar{t} t \bar{t}`$ :
 
-    ```math
+ ```math
     \begin{split}
     \sigma_{\text{SM}\times\text{EFT}} & = y_{\text{DM}}^2\left(-4.29 \pm 0.02 \times 10^{-9}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.30 \pm 0.02 \times 10^{-11}\text{ pb} \right) +  \left( -3.6 
     \pm 0.1 \times 10^{-10}\text{ pb} \right)\\
     \sigma_{\text{SM}\times\text{BSM(1-loop)}} & = y_{\text{DM}}^2\left( -2.85 \pm 0.07  \times 10^{-9}\text{ pb} \right) + y_{\text{DM}}^4 \left( -1.33  \pm 0.06  \times 10^{-11}\text{ pb} \right) +  \left( 5.82
     \pm 0.03 \times 10^{-3}\text{ pb} \right)
     \end{split}
-    ```
+ ```
 
 
 
