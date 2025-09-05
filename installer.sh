@@ -69,9 +69,9 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo "[installer] copying bias folder"
 	cp -r auxFiles/mtt_bias ./MG5/Template/LO/Source/BIAS
 	cp auxFiles/mtt_bias/mtt_bias_NLO.f ./MG5/Template/NLO/Source/
-	cp auxFiles/analysis_ttx.f ./MG5/Template/NLO/FixedOrderAnalysis/
-	cp auxFiles/analysis_ttx_8tev.f ./MG5/Template/NLO/FixedOrderAnalysis/
-	cp auxFiles/analysis_4top_split_xsecs.f ./MG5/Template/NLO/FixedOrderAnalysis/
+	echo "[installer] adding fixes for new fortran compiler"
+	cp auxFiles/FixedOrderAnalysis/* ./MG5/Template/NLO/FixedOrderAnalysis/
+	cp auxFiles/SubProcesses/* ./MG5/Template/NLO/SubProcesses/
         cp auxFiles/amcatnlo_run_interface.py ./MG5/madgraph/interface/amcatnlo_run_interface.py
         cp auxFiles/mg5_configuration.txt MG5/input/
         
