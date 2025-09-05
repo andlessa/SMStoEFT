@@ -25,7 +25,7 @@
 #***********************************************************************
 # Tag name for the run (one word)                                      *
 #***********************************************************************
-  mST500_mChi400_yDM5_interference	= run_tag ! name of the run 
+  pp2ttbar_500_400_Interference	= run_tag ! name of the run 
 #***********************************************************************
 # Number of LHE events (and their normalization) and the required      *
 # (relative) accuracy on the Xsec.                                     *
@@ -43,7 +43,7 @@
 #***********************************************************************
 # Number of points per itegration channel (ignored for aMC@NLO runs)   *
 #***********************************************************************
-  0.01	= req_acc_fo ! Required accuracy (-1=ignored, and use the 
+  0.001	= req_acc_fo ! Required accuracy (-1=ignored, and use the 
  	                   ! number of points and iter. below)
 # These numbers are ignored except if req_acc_FO is equal to -1
   5000	= npoints_fo_grid ! number of points to setup grids
