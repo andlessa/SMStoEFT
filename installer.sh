@@ -48,13 +48,17 @@ fi
 
 cd $homeDIR
 
-madgraph="MG5_aMC_v3.6.2.tar.gz"
-URL=https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/$madgraph
+madgraph="MG5_aMC_v3.6.3.tar.gz"
+URL=https://launchpad.net/mg5amcnlo/3.0/3.6.x/+download/$madgraph
 #madgraph="auxFiles/MG5_aMC_v3.4.2_fix.tar.gz"
 echo -n "Install MadGraph (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
+        if [ -d "MG5" ]; then
+           rm -rf MG5
+        fi
 	mkdir MG5;
+        echo "[installer] getting MadGraph5"; wget $URL 2>/dev/null || curl -O $URL;
 	tar -zxf $madgraph -C MG5 --strip-components 1;
 	cd ./MG5/bin;
 	echo "[installer] installing HepMC under MadGraph5"
