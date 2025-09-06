@@ -8,6 +8,7 @@ import numpy as np
 import csv 
 import pandas as pd
 from scipy.optimize import minimize, brentq
+from scipy import stats
 
 cms_bins = np.array([250.,400.,480.,560.,640.,720.,800.,900.,1000.,
                 1150.,1300.,1500.,1700.,2000.,2300.,3500.])
@@ -105,7 +106,10 @@ def chi2(yDM,signal,sm,data,covmat,deltas=0.0, deltabg=0.0):
     Vinv = np.linalg.inv(CovTotal)
     return ((diff).dot(Vinv)).dot(diff)
 
-def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0, deltabg=0.0):
+def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0, deltabg=0.0,cl=0.95):
+
+    # Delta chi for 1 degree of freedom
+    deltaChi = stats.chi2.ppf(cl,1)
 
     #First find minima of the chi profile, such that the delta chi2 can then be calculated
     def func_to_solve_deltachi2(yDMval):
@@ -115,16 +119,16 @@ def getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0, deltabg=0.0):
     chi2min = chi2(yDMmin, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)
 
     def func_to_solve_95(yDMval):
-        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg) - chi2min - 3.84
+        return chi2(yDMval, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg) - chi2min - deltaChi
 
-    yDM95 = brentq(func_to_solve_95, a=1000,b=yDMmin)
-    deltaChi95 = chi2(yDM95, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)-chi2min
+    yDMul = brentq(func_to_solve_95, a=1000,b=yDMmin)
+    deltaChi = chi2(yDMul, signal, sm_bin, xsecsObs, covMatrix, deltas, deltabg)-chi2min
 
     return {'yDMmin' : yDMmin, 'chi2min' : chi2min, 
-            'yDM95' : yDM95, 'deltaChi95' : deltaChi95}
+            f'yDM{int(cl*100)}' : yDMul, f'deltaChi{int(cl*100)}' : deltaChi}
 
 
-def computeULs(inputFile,outputFile,full=False):
+def computeULs(inputFile,outputFile,full=False,cl=0.95):
 
     # ### Load CMS data and BG
     xsecsObs,sm,covMatrix = read_CMSdata()
@@ -155,9 +159,9 @@ def computeULs(inputFile,outputFile,full=False):
     progressbar.maxval = len(recastData)
     progressbar.start()
 
-    yDM95list = []
-    yDM95expList = []
-    deltaChi95list = []
+    yDM_ul_list = []
+    yDM_ul_exp_list = []
+    deltaChi_list = []
     for ipt,pt in recastData.iterrows():
 
         progressbar.update(ipt)
@@ -173,19 +177,19 @@ def computeULs(inputFile,outputFile,full=False):
             # Finally, divide by the bin widths
             signal = signal/bin_widths
             sm_bin = sm/bin_widths
-            resDict = getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0)
-            yDM95 = resDict['yDM95']
-            deltaChi95 = resDict['deltaChi95']       
+            resDict = getUL(signal,sm_bin,xsecsObs,covMatrix,deltas=0.0,cl=cl)
+            yDM95 = resDict[f'yDM{int(cl*100)}']
+            deltaChi95 = resDict[f'deltaChi{int(cl*100)}']       
 
             # Expected
-            resDictExp = getUL(signal,sm_bin,sm_bin,covMatrix,deltas=0.0)
-            yDM95exp = resDictExp['yDM95']            
+            resDictExp = getUL(signal,sm_bin,sm_bin,covMatrix,deltas=0.0,cl=cl)
+            yDM95exp = resDictExp[f'yDM{int(cl*100)}']            
             
         else: # Use full CLs calculation
             import sys
             sys.path.append('../statisticalTools')
             from simplifiedLikelihoods import Data,UpperLimitComputer,LikelihoodComputer
-            ulComp = UpperLimitComputer()
+            ulComp = UpperLimitComputer(cl=cl)
 
             # ### Get number of observed and expected (BG) events
             lumi = 137*1e3
@@ -204,15 +208,16 @@ def computeULs(inputFile,outputFile,full=False):
                           nsignal=ns*ul,deltas_rel=0.0)
             computer = LikelihoodComputer(data95)
             deltaChi95 = computer.chi2()
+            yDM95exp = None
 
         # Store result
-        yDM95list.append(yDM95)
-        yDM95expList.append(yDM95exp)
-        deltaChi95list.append(deltaChi95)
+        yDM_ul_list.append(yDM95)
+        yDM_ul_exp_list.append(yDM95exp)
+        deltaChi_list.append(deltaChi95)
 
-    recastData['yDM (95% C.L.)'] = yDM95list
-    recastData['yDMexp (95% C.L.)'] = yDM95expList
-    recastData['$\Delta \chi^2$ (95% C.L.)'] = deltaChi95list
+    recastData[f'yDM ({int(100*cl)}% C.L.)'] = yDM_ul_list
+    recastData[f'yDMexp ({int(100*cl)}% C.L.)'] = yDM_ul_exp_list
+    recastData[f'$\\Delta \\chi^2$ ({int(100*cl)}% C.L.)'] = deltaChi_list
     progressbar.finish()
     recastData.to_pickle(outputFile)
 
