@@ -16,7 +16,7 @@ from typing import Text, Optional, Union
 __all__ = [ "CLsfromNLL", "determineBrentBracket", "chi2FromLmax" ]
 
 def CLsfromNLL(
-    nllA: float, nll0A: float, nll: float, nll0: float,
+    nllA: float, nll0A: float, nll: float, nll0: float, cl: float = 0.95,
     return_type: Text = "CLs-alpha" ) -> float:
     """
     compute the CLs - alpha from the NLLs
@@ -52,7 +52,7 @@ def CLsfromNLL(
     elif return_type == "CLs":
         return CLs
 
-    return CLs - 0.05
+    return CLs - (1-cl)
 
 def determineBrentBracket(mu_hat, sigma_mu, rootfinder,
          allowNegative = True ):

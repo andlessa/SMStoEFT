@@ -984,7 +984,7 @@ class UpperLimitComputer:
             """
             nll = computer.likelihood(mu, return_nll=True)
             nllA = compA.likelihood(mu, return_nll=True)
-            return CLsfromNLL(nllA, nll0A, nll, nll0, return_type=return_type)
+            return CLsfromNLL(nllA, nll0A, nll, nll0, return_type=return_type,cl=self.cl)
 
         return mu_hat, sigma_mu, clsRoot
 
