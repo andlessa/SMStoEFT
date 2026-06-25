@@ -5,8 +5,8 @@
 
 from __future__ import print_function
 import sys,os,glob
+sys.path.append('../')
 from configParserWrapper import ConfigParserExt
-from convert2SLHA import getSLHAFile
 import logging,shutil
 import subprocess
 import multiprocessing
